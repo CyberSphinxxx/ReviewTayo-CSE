@@ -1,0 +1,644 @@
+/* ==================================================
+   ReviewTayo: CSE — Home Screen
+   Concept C Editorial Direction
+   ================================================== */
+
+/* 1. Hero Reset & Editorial Container */
+#todayHero.hero {
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 14px 4px 0;
+  margin-bottom: 0;
+  overflow: visible;
+  color: var(--ink);
+  position: relative;
+  min-height: 195px;
+}
+
+#todayHero.hero:before,
+#todayHero.hero:after {
+  display: none !important;
+}
+
+/* Content wrapper with right padding so text breathes around mascot */
+.hero-normal-wrap,
+.hero-done-wrap {
+  position: relative;
+  z-index: 2;
+  padding-right: 120px;
+}
+
+/* 2. Hero Eyebrow (Contextual Greeting) */
+.hero-eyebrow {
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--maroon);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 8px;
+  line-height: 1;
+}
+
+.hero-eyebrow-done {
+  color: var(--green);
+}
+
+/* 3. Large Editorial Serif Headline */
+.hero-editorial-title {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(32px, 8.4vw, 40px);
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  color: #36101D;
+  margin: 0 0 10px 0;
+}
+
+/* 4. Supporting Copy (Max 2 short lines) */
+.hero-focus-sub {
+  font-size: 14px;
+  line-height: 1.42;
+  color: #66545A;
+  margin: 0 0 16px 0;
+  max-width: 250px;
+}
+
+.hero-done-lead {
+  font-size: 14px;
+  line-height: 1.42;
+  color: #66545A;
+  margin: 0 0 18px 0;
+  max-width: 240px;
+}
+
+/* 5. Primary CTA (Start Smart Drill) */
+.hero-cta-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.cta.cta-editorial {
+  background: var(--maroon);
+  color: #FFFFFF;
+  border: 0;
+  border-radius: 99px;
+  height: 50px;
+  padding: 0 24px;
+  font-size: 14.5px;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 8px 24px rgba(114, 29, 52, 0.24);
+  cursor: pointer;
+  transition: transform 0.16s ease, box-shadow 0.16s ease, background-color 0.16s ease;
+  -webkit-tap-highlight-color: transparent;
+  text-decoration: none;
+}
+
+.cta.cta-editorial:hover {
+  background: var(--maroon-2);
+}
+
+.cta.cta-editorial:active {
+  transform: scale(0.98);
+  box-shadow: 0 4px 14px rgba(114, 29, 52, 0.2);
+}
+
+.cta-editorial .cta-arrow {
+  font-size: 16px;
+  transition: transform 0.16s ease;
+}
+
+.cta.cta-editorial:hover .cta-arrow {
+  transform: translateX(2px);
+}
+
+/* 6. Exam Context Metadata Line beneath CTA */
+.hero-phase-meta {
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #9A848B;
+  margin-top: 10px;
+  line-height: 1.2;
+}
+
+/* Done State Quiet Secondary Action */
+.hero-extra-btn {
+  border: 1.5px solid rgba(114, 29, 52, 0.2);
+  background: #FFFFFF;
+  color: var(--maroon);
+  border-radius: 99px;
+  height: 42px;
+  padding: 0 18px;
+  font-size: 12.5px;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 3px 10px rgba(77, 29, 42, 0.05);
+  cursor: pointer;
+  transition: transform 0.16s ease, background 0.16s ease, border-color 0.16s ease;
+}
+
+.hero-extra-btn:active {
+  transform: scale(0.97);
+  background: #FAF0F2;
+  border-color: var(--maroon);
+}
+
+/* 7. Integrated Owl Mascot Composition */
+.hero-mascot-composition {
+  position: absolute;
+  right: -2px;
+  top: 4px;
+  width: 124px;
+  height: 168px;
+  pointer-events: none;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* Faint Decorative Academic Backdrop */
+.hero-mascot-backdrop {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  width: 144px;
+  height: 144px;
+  z-index: 0;
+  opacity: 0.85;
+}
+
+.hero-backdrop-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Owl SVG Box */
+.owl-hero-box {
+  position: relative;
+  width: 110px;
+  height: 126px;
+  z-index: 2;
+  margin-bottom: -16px;
+  filter: drop-shadow(0 6px 14px rgba(77, 29, 42, 0.13));
+}
+
+.owl-hero-box .owl-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Pedestal Academic Books beneath Owl */
+.hero-pedestal {
+  position: relative;
+  width: 112px;
+  height: 28px;
+  z-index: 1;
+  filter: drop-shadow(0 4px 8px rgba(77, 29, 42, 0.08));
+}
+
+.hero-pedestal .pedestal-books-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* 8. Today Section & Heading */
+.today-section-wrap {
+  margin-top: 22px;
+}
+
+.today-head-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding: 0 2px;
+}
+
+.today-title {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #36101D;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.today-date-badge {
+  font-size: 11px;
+  font-weight: 850;
+  color: #8C6F77;
+  background: rgba(114, 29, 52, 0.06);
+  padding: 3px 9px;
+  border-radius: 99px;
+  letter-spacing: 0.02em;
+}
+
+/* 9. Three Compact Activity Cards */
+.today-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 9px;
+}
+
+.today-card {
+  border-radius: 18px;
+  padding: 12px 10px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 106px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-align: left;
+  position: relative;
+  text-decoration: none;
+  font-family: inherit;
+  transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease, background-color 0.16s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.today-card:focus-visible {
+  outline: 2.5px solid var(--maroon);
+  outline-offset: 2px;
+}
+
+.today-card:active {
+  transform: scale(0.97);
+}
+
+/* Pastel Surfaces */
+.today-card-daily {
+  background: #FAF0F2;
+  border-color: #EEDCE1;
+}
+
+.today-card-daily .today-card-icon {
+  background: #F3DFE4;
+  color: #8C2944;
+}
+
+.today-card-smart {
+  background: #F7EFF5;
+  border-color: #EBDBE8;
+}
+
+.today-card-smart .today-card-icon {
+  background: #EFE3ED;
+  color: #721D34;
+}
+
+.today-card-review {
+  background: #FCF7EC;
+  border-color: #EFE4CD;
+}
+
+.today-card-review .today-card-icon {
+  background: #F4EBD8;
+  color: #9E7228;
+}
+
+/* Card Elements */
+.today-card-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 13px;
+  font-weight: 900;
+  margin-bottom: 8px;
+  transition: background 0.16s ease, color 0.16s ease;
+}
+
+.today-card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.today-card-name {
+  font-size: 12px;
+  font-weight: 750;
+  color: #2D1D22;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.today-card-time {
+  font-size: 10px;
+  font-weight: 700;
+  color: #78676C;
+  margin-top: 3px;
+}
+
+.today-card-arrow {
+  align-self: flex-end;
+  font-size: 13px;
+  font-weight: 800;
+  color: rgba(114, 29, 52, 0.45);
+  transition: transform 0.16s ease, color 0.16s ease;
+  margin-top: 2px;
+}
+
+.today-card:hover .today-card-arrow {
+  transform: translateX(2px);
+  color: var(--maroon);
+}
+
+/* Card Done State */
+.today-card.done {
+  background: #F4F8F5 !important;
+  border-color: #D3E6DA !important;
+}
+
+.today-card.done .today-card-icon {
+  background: #E4F2E8 !important;
+  color: var(--green) !important;
+}
+
+.today-card.done .today-card-name {
+  color: #556B5D;
+}
+
+.today-card.done .today-card-arrow {
+  color: var(--green);
+}
+
+/* 10. Streak / Weekly Consistency Block */
+.streak-editorial-card {
+  margin-top: 18px;
+  background: #FFFFFF;
+  border: 1px solid rgba(235, 221, 217, 0.9);
+  border-radius: 18px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  box-shadow: 0 4px 14px rgba(77, 29, 42, 0.04);
+}
+
+.streak-editorial-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.streak-tag {
+  font-size: 12.5px;
+  font-weight: 850;
+  color: var(--maroon);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  line-height: 1.2;
+}
+
+.streak-sub-note {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--muted);
+  line-height: 1.2;
+}
+
+.streak-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 3.5px;
+  height: 30px;
+  padding: 2px 0;
+  flex: 0 0 auto;
+}
+
+.streak-bar {
+  width: 5px;
+  border-radius: 99px;
+  background: rgba(114, 29, 52, 0.18);
+  transition: background-color 0.2s ease, height 0.2s ease;
+}
+
+.streak-bar.active {
+  background: var(--maroon);
+}
+
+/* 11. Continue Mock Exam Card (Contextual) */
+.continuity-card.continuity-editorial {
+  margin-top: 14px;
+  background: linear-gradient(135deg, #7A1E35 0%, #591325 100%);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  box-shadow: 0 8px 22px rgba(89, 19, 37, 0.2);
+}
+
+.continuity-left {
+  flex: 1;
+  min-width: 0;
+}
+
+.continuity-kicker {
+  font-size: 8.5px;
+  font-weight: 850;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #F4D3DC;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.continuity-score {
+  font-size: 14.5px;
+  font-weight: 850;
+  color: #FFFFFF;
+  display: block;
+  line-height: 1.2;
+}
+
+.continuity-source {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.82);
+  display: block;
+  margin-top: 2px;
+}
+
+.continuity-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 0 0 auto;
+}
+
+.continuity-art {
+  width: 34px;
+  height: 34px;
+  opacity: 0.85;
+}
+
+.continuity-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.continuity-resume-btn {
+  border: 0;
+  background: #FFFFFF;
+  color: var(--maroon);
+  border-radius: 99px;
+  padding: 6px 14px;
+  font-size: 11px;
+  font-weight: 850;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+.continuity-resume-btn:active {
+  transform: scale(0.96);
+  background: #FAF0F2;
+}
+
+.continuity-dismiss-btn {
+  width: 24px;
+  height: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 11px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.continuity-dismiss-btn:active {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+/* 12. Responsive Breakpoints */
+@media (max-width: 380px) {
+  .hero-normal-wrap,
+  .hero-done-wrap {
+    padding-right: 104px;
+  }
+
+  .hero-mascot-composition {
+    width: 110px;
+    height: 150px;
+  }
+
+  .owl-hero-box {
+    width: 98px;
+    height: 112px;
+  }
+
+  .hero-pedestal {
+    width: 98px;
+  }
+
+  .today-card {
+    padding: 10px 8px 8px;
+    min-height: 100px;
+  }
+
+  .today-card-name {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 330px) {
+  .hero-normal-wrap,
+  .hero-done-wrap {
+    padding-right: 88px;
+  }
+
+  .hero-editorial-title {
+    font-size: 28px;
+  }
+
+  .hero-mascot-composition {
+    width: 92px;
+    height: 130px;
+  }
+
+  .owl-hero-box {
+    width: 82px;
+    height: 94px;
+    margin-bottom: -12px;
+  }
+
+  .hero-pedestal {
+    width: 84px;
+    height: 22px;
+  }
+
+  .today-cards-grid {
+    gap: 6px;
+  }
+
+  .today-card {
+    padding: 8px 6px 6px;
+    border-radius: 14px;
+    min-height: 94px;
+  }
+
+  .today-card-icon {
+    width: 26px;
+    height: 26px;
+    font-size: 11px;
+    margin-bottom: 5px;
+  }
+
+  .today-card-icon svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .today-card-name {
+    font-size: 10px;
+  }
+
+  .today-card-time {
+    font-size: 9px;
+  }
+
+  .today-card-arrow {
+    font-size: 11px;
+  }
+}
+
+/* 13. Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .cta.cta-editorial,
+  .today-card,
+  .continuity-resume-btn,
+  .hero-extra-btn,
+  .streak-bar {
+    transition: none !important;
+    animation: none !important;
+  }
+}

@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#721D34" />
+<title>ReviewTayo: CSE — Polished Mobile Prototype V4.2</title>
+
+<link rel="stylesheet" href="css/tokens.css" />
+<link rel="stylesheet" href="css/foundation.css" />
+<link rel="stylesheet" href="css/screens/today.css" />
+<link rel="stylesheet" href="css/screens/learn.css" />
+<link rel="stylesheet" href="css/screens/practice.css" />
+<link rel="stylesheet" href="css/screens/review.css" />
+<link rel="stylesheet" href="css/screens/progress.css" />
+<link rel="stylesheet" href="css/components/navigation.css" />
+<link rel="stylesheet" href="css/components/interactions.css" />
+</head>
+<body>
+<div class="shell">
+<main class="phone">
+  <div class="safe"></div>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">
+        <img src="assets/mascot/owl-mark.svg" width="24" height="24" alt="" />
+      </div>
+      <div class="brandcopy"><small>Civil Service Exam</small><strong>ReviewTayo: CSE</strong></div>
+    </div>
+    <button class="iconbtn" id="settingsBtn" aria-label="Exam settings">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 13.5a7.6 7.6 0 0 0 0-3l2-1.6-2-3.4-2.4 1a7.7 7.7 0 0 0-2.6-1.5L14 2.5h-4l-.4 2.5a7.7 7.7 0 0 0-2.6 1.5l-2.4-1-2 3.4 2 1.6a7.6 7.6 0 0 0 0 3l-2 1.6 2 3.4 2.4-1c.75.65 1.63 1.17 2.6 1.5l.4 2.5h4l.4-2.5a7.7 7.7 0 0 0 2.6-1.5l2.4 1 2-3.4Z"/></svg>
+    </button>
+  </header>
+
+  <div class="scroll" id="scroll">
+    <!-- LEARN -->
+    <section class="screen" id="learnScreen">
+      <!-- CONTINUE LEARNING HERO CARD -->
+      <div class="learn-card">
+        <div class="learn-card-head">
+          <span class="learn-kicker">Continue Learning</span>
+          <span class="learn-badge">Lesson</span>
+        </div>
+        <h3>Sentence Completion</h3>
+        <p>6 min</p>
+        <button class="learn-btn" id="lessonBtn">Continue <span>→</span></button>
+      </div>
+
+      <!-- DISCLOSURES -->
+      <div class="disclosure-group">
+        <!-- Subjects > -->
+        <button class="disclosure-row" id="subjectsDisclosureBtn" aria-expanded="false" aria-controls="subjectsDisclosurePanel">
+          <span>Subjects</span>
+          <span class="disclosure-arrow">›</span>
+        </button>
+        <div class="disclosure-panel" id="subjectsDisclosurePanel">
+          <button class="disclosure-subrow" data-learn-subject="Verbal Ability">
+            <div><strong>Verbal Ability</strong><br><small>7 lessons · 64% mastery</small></div>
+            <span class="disclosure-arrow">›</span>
+          </button>
+          <button class="disclosure-subrow" data-learn-subject="Numerical Ability">
+            <div><strong>Numerical Ability</strong><br><small>6 lessons · 73% mastery</small></div>
+            <span class="disclosure-arrow">›</span>
+          </button>
+          <button class="disclosure-subrow" data-learn-subject="Analytical Ability">
+            <div><strong id="trackLearnTitle">Analytical Ability</strong><br><small id="trackLearnSub">5 lessons · 78% mastery</small></div>
+            <span class="disclosure-arrow">›</span>
+          </button>
+          <button class="disclosure-subrow" data-learn-subject="General Information">
+            <div><strong>General Information</strong><br><small>Constitution, RA 6713 & laws</small></div>
+            <span class="disclosure-arrow">›</span>
+          </button>
+        </div>
+
+        <!-- Quick Sheets > -->
+        <button class="disclosure-row" id="quickSheetsBtn">
+          <div>
+            <strong>Quick Sheets</strong><br>
+            <small style="font-size:10px;color:var(--muted)">Math shortcuts, grammar rules & Constitution</small>
+          </div>
+          <span class="disclosure-arrow">›</span>
+        </button>
+
+        <!-- More learning resources > -->
+        <button class="disclosure-row" id="resourcesDisclosureBtn" aria-expanded="false" aria-controls="resourcesDisclosurePanel">
+          <span>More learning resources</span>
+          <span class="disclosure-arrow">›</span>
+        </button>
+        <div class="disclosure-panel" id="resourcesDisclosurePanel">
+          <button class="disclosure-subrow" id="formulaBtn">
+            <div><strong>Formula Cheat Sheet</strong><br><small>Speed math, ratios, proportions</small></div>
+            <span class="disclosure-arrow">›</span>
+          </button>
+          <button class="disclosure-subrow" id="constitutionSummaryBtn">
+            <div><strong>Philippine Constitution Summary</strong><br><small>Preamble, Bill of Rights & citizenship</small></div>
+            <span class="disclosure-arrow">›</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRACTICE -->
+    <section class="screen" id="practiceScreen">
+      <!-- DOMINANT SMART DRILL CARD -->
+      <div class="smart-card">
+        <div class="smart-card-head">
+          <span class="learn-kicker">Recommended</span>
+          <span class="learn-badge">10 items</span>
+        </div>
+        <h3>Smart Drill</h3>
+        <p>10 personalized questions</p>
+        <button class="start-btn" id="startSmartPracticeBtn" data-quiz="smart">Start Smart Drill <span>→</span></button>
+
+        <!-- Subtle "How this drill was chosen" disclosure -->
+        <div style="margin-top:10px;text-align:center;">
+          <button class="subtle-link" id="adaptiveDisclosureBtn" aria-expanded="false" aria-controls="adaptiveDisclosurePanel" style="background:none;border:none;color:var(--muted);font-size:10.5px;cursor:pointer;font-family:inherit;">How this drill was chosen ▾</button>
+        </div>
+        <div class="disclosure-panel" id="adaptiveDisclosurePanel" style="margin-top:8px;">
+          <div style="font-size:10.5px;color:var(--muted);line-height:1.4;">
+            <p style="margin:0 0 4px;">Selected from your active weak concepts, recent lessons, and items due for review.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TARGETED PRACTICE (Grouped container - Weakest Area & Timed) -->
+      <div class="sectionhead">
+        <h2>Targeted practice</h2>
+      </div>
+      <div class="targeted-group">
+        <button class="targeted-row" data-quiz="weak">
+          <div class="targeted-row-left">
+            <strong>Weakest area</strong>
+            <small>Verbal Ability</small>
+          </div>
+          <div class="targeted-row-right">
+            <span class="disclosure-arrow">›</span>
+          </div>
+        </button>
+        <button class="targeted-row" data-quiz="timed">
+          <div class="targeted-row-left">
+            <strong>Timed practice</strong>
+            <small>5-minute sprint</small>
+          </div>
+          <div class="targeted-row-right">
+            <span class="pill">5m</span>
+            <span class="disclosure-arrow">›</span>
+          </div>
+        </button>
+      </div>
+
+      <!-- DISCLOSURES -->
+      <div class="disclosure-group">
+        <!-- More practice options > -->
+        <button class="disclosure-row" id="morePracticeBtn" aria-expanded="false" aria-controls="morePracticePanel">
+          <span>More practice options</span>
+          <span class="disclosure-arrow">›</span>
+        </button>
+        <div class="disclosure-panel" id="morePracticePanel">
+          <button class="disclosure-subrow" data-quiz="quick">
+            <div><strong>Random 10</strong><br><small>Mixed set without adaptive weighting</small></div>
+            <span class="disclosure-arrow">›</span>
+          </button>
+          <button class="disclosure-subrow" id="customBtn">
+            <div><strong>Build a Quiz</strong><br><small>Choose subjects, count and timing</small></div>
+            <span class="disclosure-arrow">›</span>
+          </button>
+          <button class="disclosure-subrow" id="levelBtn">
+            <div><strong>Mastery Rounds</strong><br><small>Short progressive difficulty rounds</small></div>
+            <span class="disclosure-arrow">›</span>
+          </button>
+        </div>
+
+        <!-- Mock Exam > -->
+        <button class="disclosure-row" id="mockPracticeRow">
+          <div>
+            <strong>Mock Exam</strong><br>
+            <small id="practiceMockSub" style="color:var(--muted);font-size:10px;">170 items · 3h 10m</small>
+          </div>
+          <span class="disclosure-arrow">›</span>
+        </button>
+
+        <!-- Practice by subject > -->
+        <button class="disclosure-row" id="subjectPracticeBtn" aria-expanded="false" aria-controls="subjectPracticePanel">
+          <span>Practice by subject</span>
+          <span class="disclosure-arrow">›</span>
+        </button>
+        <div class="disclosure-panel" id="subjectPracticePanel">
+          <button class="disclosure-subrow" data-practice-subject="verbal">
+            <div><strong>Verbal Ability</strong><br><small>64% mastery</small></div>
+            <span class="disclosure-arrow">›</span>
+          </button>
+          <button class="disclosure-subrow" data-practice-subject="numerical">
+            <div><strong>Numerical Ability</strong><br><small>73% mastery</small></div>
+            <span class="disclosure-arrow">›</span>
+          </button>
+          <button class="disclosure-subrow" data-practice-subject="analytical">
+            <div><strong id="trackPracticeTitle">Analytical Ability</strong><br><small id="trackPracticeSub">78% mastery</small></div>
+            <span class="disclosure-arrow">›</span>
+          </button>
+          <button class="disclosure-subrow" data-practice-subject="general">
+            <div><strong>General Information</strong><br><small>76% mastery</small></div>
+            <span class="disclosure-arrow">›</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOME (CENTER TAB ANCHOR) -->
+    <section class="screen active" id="homeScreen">
+      <!-- EDITORIAL HERO (CONCEPT C: OPEN COMPOSITION BLENDING INTO CANVAS) -->
+      <div class="hero hero-editorial" id="todayHero">
+        <!-- Normal State Content -->
+        <div class="hero-normal-wrap" id="todayHeroNormal">
+          <div class="hero-eyebrow" id="homeEyebrow" aria-label="Greeting">☀ GOOD MORNING</div>
+          <h1 class="hero-editorial-title" id="homeHeroHeadline">Small steps today,<br>big results later.</h1>
+          <p class="hero-focus-sub" id="todayHeroFocus">Your next 10 questions are ready for Verbal Ability.</p>
+          <div class="hero-cta-wrapper">
+            <button class="cta cta-editorial" id="heroQuizBtn">Start Smart Drill <span class="cta-arrow" aria-hidden="true">→</span></button>
+            <div class="hero-phase-meta" id="todayHeroPhaseLine">Accuracy Phase · 44 days left</div>
+          </div>
+        </div>
+
+        <!-- Done For Today State Content (Editorial Version) -->
+        <div class="hero-done-wrap" id="todayHeroDone" style="display:none">
+          <div class="hero-eyebrow hero-eyebrow-done">TODAY COMPLETE ✓</div>
+          <h1 class="hero-editorial-title">Nice work.<br>You’re done for today.</h1>
+          <p class="hero-done-lead">
+            Come back tomorrow for your next plan.
+          </p>
+          <button class="hero-extra-btn" id="heroExtraPracticeBtn">Extra practice <span>→</span></button>
+        </div>
+
+        <!-- Integrated Owl Mascot Composition with Pedestal & Academic Aura -->
+        <div class="hero-mascot-composition" aria-hidden="true">
+          <div class="hero-mascot-backdrop">
+            <svg class="hero-backdrop-svg" viewBox="0 0 160 160" fill="none">
+              <circle cx="80" cy="80" r="70" fill="rgba(114, 29, 52, 0.04)" />
+              <circle cx="80" cy="80" r="66" stroke="rgba(114, 29, 52, 0.08)" stroke-width="1" stroke-dasharray="3 4"/>
+              <path d="M24 122 C 45 106, 75 138, 120 114" stroke="rgba(210, 163, 77, 0.35)" stroke-width="1.2" fill="none"/>
+              <path d="M125 36 L137 24 M132 42 L144 30" stroke="rgba(114, 29, 52, 0.2)" stroke-width="1"/>
+            </svg>
+          </div>
+          <div class="owl-hero-box" id="heroOwlContainer"></div>
+          <div class="hero-pedestal">
+            <svg class="pedestal-books-svg" viewBox="0 0 120 30" fill="none">
+              <!-- Top Book (Gold) -->
+              <rect x="22" y="5" width="76" height="8" rx="2" fill="#D2A34D"/>
+              <rect x="25" y="7" width="70" height="4" fill="#FFF9F5" opacity="0.85"/>
+              <line x1="22" y1="9" x2="98" y2="9" stroke="#B38532" stroke-width="0.8"/>
+              <!-- Bottom Book (Maroon) -->
+              <rect x="14" y="13" width="92" height="12" rx="3" fill="#721D34"/>
+              <rect x="18" y="16" width="84" height="6" fill="#F8EEEA" opacity="0.75"/>
+              <line x1="14" y1="19" x2="106" y2="19" stroke="#4F1020" stroke-width="1"/>
+              <circle cx="22" cy="19" r="1.5" fill="#D2A34D"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- TODAY'S PLAN (CONCEPT C: 3 COMPACT VISUAL ACTION CARDS) -->
+      <div class="today-section-wrap">
+        <div class="today-head-row">
+          <h2 class="today-title">Today</h2>
+          <span class="today-date-badge" id="todayDateBadge">Oct 3</span>
+        </div>
+        <div class="today-cards-grid" role="group" aria-label="Today's study plan">
+          <!-- Daily Question Card (Soft Rose) -->
+          <button class="today-card today-card-daily" id="planDaily" data-quiz="qotd" aria-label="Daily Question, 1 minute">
+            <div class="today-card-icon" id="planDailyCheck" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="4"/>
+                <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+              </svg>
+            </div>
+            <div class="today-card-body">
+              <strong class="today-card-name">Daily Question</strong>
+              <span class="today-card-time">1 min</span>
+            </div>
+            <div class="today-card-arrow" aria-hidden="true">→</div>
+          </button>
+
+          <!-- Smart Drill Card (Soft Lavender-Maroon) -->
+          <button class="today-card today-card-smart" id="planSmart" data-quiz="smart" aria-label="Smart Drill, 10 minutes">
+            <div class="today-card-icon" id="planSmartCheck" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+              </svg>
+            </div>
+            <div class="today-card-body">
+              <strong class="today-card-name">Smart Drill</strong>
+              <span class="today-card-time">10 min</span>
+            </div>
+            <div class="today-card-arrow" aria-hidden="true">→</div>
+          </button>
+
+          <!-- Review Due Card (Soft Warm Cream/Gold) -->
+          <button class="today-card today-card-review" id="planReview" aria-label="Review Due, 6 minutes">
+            <div class="today-card-icon" id="planReviewCheck" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 12a9 9 0 0 1 15-6.7L21 8"/>
+                <path d="M21 3v5h-5"/>
+                <path d="M21 12a9 9 0 0 1-15 6.7L3 16"/>
+                <path d="M3 21v-5h5"/>
+              </svg>
+            </div>
+            <div class="today-card-body">
+              <strong class="today-card-name">Review Due</strong>
+              <span class="today-card-time">6 min</span>
+            </div>
+            <div class="today-card-arrow" aria-hidden="true">→</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- STREAK / CONSISTENCY BLOCK (CONCEPT C: COMPACT HORIZONTAL WITH MINI VISUAL BARS) -->
+      <div class="streak-editorial-card">
+        <div class="streak-editorial-left">
+          <span class="streak-tag" id="streakLineText">🔥 12 day streak</span>
+          <span class="streak-sub-note" id="streakLineSub">Keep it up.</span>
+        </div>
+        <div class="streak-bars" id="streakVisualBars" aria-hidden="true">
+          <span class="streak-bar" style="height: 10px;"></span>
+          <span class="streak-bar" style="height: 16px;"></span>
+          <span class="streak-bar" style="height: 20px;"></span>
+          <span class="streak-bar" style="height: 25px;"></span>
+          <span class="streak-bar" style="height: 18px;"></span>
+          <span class="streak-bar active" style="height: 28px;"></span>
+          <span class="streak-bar active" style="height: 22px;"></span>
+        </div>
+      </div>
+
+      <!-- CONTINUE MOCK EXAM (CONCEPT C: RICHER COMPACT VISUAL CARD) -->
+      <div class="continuity-card continuity-editorial" id="continuityCard">
+        <div class="continuity-left">
+          <span class="continuity-kicker">Continue Mock Exam</span>
+          <strong class="continuity-score">83 / 170</strong>
+          <small class="continuity-source">Started on desktop</small>
+        </div>
+        <div class="continuity-right">
+          <svg class="continuity-art" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+            <rect x="6" y="3" width="22" height="28" rx="3" fill="#FFFFFF" fill-opacity="0.14" stroke="#FFFFFF" stroke-opacity="0.32" stroke-width="1.2"/>
+            <line x1="11" y1="10" x2="21" y2="10" stroke="#FFFFFF" stroke-opacity="0.5" stroke-width="1.2" stroke-linecap="round"/>
+            <line x1="11" y1="15" x2="23" y2="15" stroke="#FFFFFF" stroke-opacity="0.5" stroke-width="1.2" stroke-linecap="round"/>
+            <line x1="11" y1="20" x2="19" y2="20" stroke="#FFFFFF" stroke-opacity="0.5" stroke-width="1.2" stroke-linecap="round"/>
+            <circle cx="21" cy="22" r="2.5" fill="#D2A34D"/>
+          </svg>
+          <div class="continuity-actions">
+            <button class="continuity-resume-btn" id="resumeContinuityBtn">Resume</button>
+            <button class="continuity-dismiss-btn" id="dismissContinuityBtn" aria-label="Dismiss continuity card">✕</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REVIEW -->
+    <section class="screen" id="reviewScreen">
+      <!-- HERO: NORMAL REVIEW DUE CARD -->
+      <div class="review-card" id="reviewHeroNormal">
+        <div class="review-card-head">
+          <span class="review-kicker">Review</span>
+          <span class="review-badge">12 due</span>
+        </div>
+        <h3>12 due today</h3>
+        <p>~6 min</p>
+        <button class="review-btn" id="startReviewNowBtn">Review now <span>→</span></button>
+      </div>
+
+      <!-- HERO: EMPTY STATE (WHEN CAUGHT UP) -->
+      <div class="review-empty-box" id="reviewHeroEmpty" style="display:none">
+        <div class="review-empty-icon">✓</div>
+        <h3>You’re caught up.</h3>
+        <p>Nothing needs review right now.</p>
+        <button class="review-empty-btn" id="reviewBrowseSavedBtn">Browse saved questions <span>→</span></button>
+      </div>
+
+      <!-- GROUPED RECOVERY ACTIONS -->
+      <div class="sectionhead">
+        <h2>Revisit</h2>
+      </div>
+      <div class="review-group">
+        <button class="review-row" id="reviewMistakesRow">
+          <div class="review-row-left">
+            <strong>Mistakes</strong>
+            <small>Questions previously missed</small>
+          </div>
+          <div class="review-row-right">
+            <span class="pill">23</span>
+            <span class="disclosure-arrow">›</span>
+          </div>
+        </button>
+        <button class="review-row" id="reviewSavedRow">
+          <div class="review-row-left">
+            <strong>Saved</strong>
+            <small>Bookmarked items & questions</small>
+          </div>
+          <div class="review-row-right">
+            <span class="pill">8</span>
+            <span class="disclosure-arrow">›</span>
+          </div>
+        </button>
+        <button class="review-row" id="reviewConceptsRow">
+          <div class="review-row-left">
+            <strong>Concepts to revisit</strong>
+            <small>Flagged for active reinforcement</small>
+          </div>
+          <div class="review-row-right">
+            <span class="pill">3</span>
+            <span class="disclosure-arrow">›</span>
+          </div>
+        </button>
+      </div>
+
+      <!-- SECONDARY DISCLOSURE: REVIEW HISTORY -->
+      <div class="disclosure-group">
+        <button class="disclosure-row" id="reviewHistoryRow">
+          <div>
+            <strong>Review history</strong><br>
+            <small style="color:var(--muted);font-size:10px;">48 concepts completed this week</small>
+          </div>
+          <span class="disclosure-arrow">›</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- PROGRESS -->
+    <section class="screen" id="progressScreen">
+      <!-- STREAMLINED STUDY SCORE -->
+      <div class="score-card">
+        <div class="ring-compact">
+          <strong>72%</strong>
+        </div>
+        <div class="score-copy">
+          <div class="score-copy-head">
+            <strong>Study Score</strong>
+            <button class="info-btn" id="scoreInfoBtn" aria-label="About Study Score">ⓘ</button>
+          </div>
+          <p>Improving this week</p>
+        </div>
+      </div>
+
+      <!-- NEEDS ATTENTION PRIMARY CARD -->
+      <div class="attention-card">
+        <div class="attention-left">
+          <div class="attention-kicker">Needs attention</div>
+          <strong>Verbal Ability</strong>
+          <small>64% accuracy</small>
+        </div>
+        <button class="attention-btn" id="needsAttentionBtn">Practice</button>
+      </div>
+
+      <!-- SUBJECTS (4 Visible Rows) -->
+      <div class="sectionhead">
+        <h2>Subjects</h2>
+      </div>
+      <div class="subjects-group" id="progressSubjectsGroup"></div>
+
+      <!-- DISCLOSURES -->
+      <div class="disclosure-group">
+        <!-- CSE Journey > -->
+        <button class="disclosure-row" id="progressJourneyToggle" aria-expanded="false" aria-controls="progressJourneyPanel">
+          <div>
+            <strong>CSE Journey</strong><br>
+            <small id="progressJourneySubLabel" style="color:var(--muted);font-size:10px;">Accuracy Phase · 44 days left</small>
+          </div>
+          <span class="disclosure-arrow">›</span>
+        </button>
+        <div class="disclosure-panel" id="progressJourneyPanel"></div>
+
+        <!-- This week > -->
+        <button class="disclosure-row" id="progressWeekToggle" aria-expanded="false" aria-controls="progressWeekPanel">
+          <div>
+            <strong>This week</strong><br>
+            <small id="progressWeekSubLabel" style="color:var(--muted);font-size:10px;">74 questions · 4 study days</small>
+          </div>
+          <span class="disclosure-arrow">›</span>
+        </button>
+        <div class="disclosure-panel" id="progressWeekPanel"></div>
+
+        <!-- Recent mock > -->
+        <button class="disclosure-row" id="progressMockToggle" aria-expanded="false" aria-controls="progressMockPanel">
+          <div>
+            <strong>Recent mock</strong><br>
+            <small id="progressMockSubLabel" style="color:var(--muted);font-size:10px;">82% · Last attempt</small>
+          </div>
+          <span class="disclosure-arrow">›</span>
+        </button>
+        <div class="disclosure-panel" id="progressMockPanel"></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- BOTTOM NAVIGATION (5 TABS - HOME CENTERED) -->
+  <div class="navwrap">
+    <nav class="nav" aria-label="Main navigation">
+      <button class="navbtn" data-tab="learn">
+        <div class="nav-icon-slot">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/>
+            <path d="M6 2v20"/>
+            <path d="M10 6h6"/>
+            <path d="M10 10h6"/>
+          </svg>
+        </div>
+        <span class="nav-label">Learn</span>
+      </button>
+
+      <button class="navbtn" data-tab="practice">
+        <div class="nav-icon-slot">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="9"/>
+            <path d="m8.5 12 2.5 2.5 4.5-5"/>
+          </svg>
+        </div>
+        <span class="nav-label">Practice</span>
+      </button>
+
+      <button class="navbtn home-navbtn active" data-tab="home" aria-current="page">
+        <div class="home-icon-slot">
+          <svg class="owl-nav-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path class="owl-cap" d="M12 3L4 7l8 4 8-4-8-4Z" fill="currentColor"/>
+            <path class="owl-tassel" d="M18.5 7.5v3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+            <path class="owl-body" d="M5.5 10c0-.8.3-1.5.8-2L12 10.2l5.7-2.2c.5.5.8 1.2.8 2 0 5-3 9.8-6.5 9.8S5.5 15 5.5 10Z" fill="currentColor" fill-opacity="0.16" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+            <circle class="owl-eye-bg" cx="9.2" cy="13" r="2.5" fill="#FFFFFF" stroke="currentColor" stroke-width="1.2"/>
+            <circle class="owl-pupil" cx="9.2" cy="13" r="1.1" fill="currentColor"/>
+            <circle class="owl-eye-bg" cx="14.8" cy="13" r="2.5" fill="#FFFFFF" stroke="currentColor" stroke-width="1.2"/>
+            <circle class="owl-pupil" cx="14.8" cy="13" r="1.1" fill="currentColor"/>
+            <path class="owl-beak" d="M11 14.6h2l-1 2-1-2Z" fill="#F6B93B"/>
+          </svg>
+        </div>
+        <span class="nav-label">Home</span>
+      </button>
+
+      <button class="navbtn" data-tab="review">
+        <div class="nav-icon-slot">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 12a9 9 0 0 1 15-6.7L21 8"/>
+            <path d="M21 3v5h-5"/>
+            <path d="M21 12a9 9 0 0 1-15 6.7L3 16"/>
+            <path d="M3 21v-5h5"/>
+          </svg>
+          <i class="countbadge" id="reviewDueBadge" aria-label="12 items due">12</i>
+        </div>
+        <span class="nav-label">Review</span>
+      </button>
+
+      <button class="navbtn" data-tab="progress">
+        <div class="nav-icon-slot">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M18 20V10"/>
+            <path d="M12 20V4"/>
+            <path d="M6 20v-6"/>
+          </svg>
+        </div>
+        <span class="nav-label">Progress</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- SETTINGS OVERLAY -->
+  <div class="overlay" id="settingsOverlay" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+    <div class="sheet">
+      <div class="grabber"></div>
+      <div class="sheethead">
+        <div>
+          <h3 id="settingsTitle">Exam settings</h3>
+          <p>Target date, exam level, and study preferences.</p>
+        </div>
+        <button class="sheetclose" data-close-overlay="settingsOverlay" aria-label="Close exam settings">×</button>
+      </div>
+
+      <label class="label">CSE level</label>
+      <div class="seg" id="levelSegment">
+        <button class="segbtn active" data-level="professional">Professional</button>
+        <button class="segbtn" data-level="subprofessional">Sub-Professional</button>
+      </div>
+
+      <label class="label" for="targetExamDate">Target exam date</label>
+      <input class="input" id="targetExamDate" type="date" value="2026-11-15"/>
+
+      <label class="label">Daily study goal</label>
+      <div class="seg three">
+        <button class="segbtn">10 min</button>
+        <button class="segbtn active">20 min</button>
+        <button class="segbtn">30 min</button>
+      </div>
+
+      <div class="offlinerow">
+        <div class="offlinecopy">
+          <strong>Offline study pack</strong>
+          <small>Keep questions available without internet.</small>
+        </div>
+        <label class="switch">
+          <span class="sr-only">Enable offline study pack</span>
+          <input id="offlineToggle" type="checkbox" checked/>
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <button class="save" id="saveSettings">Save settings</button>
+    </div>
+  </div>
+
+  <!-- STUDY SCORE INFO OVERLAY -->
+  <div class="overlay" id="scoreInfoOverlay" role="dialog" aria-modal="true" aria-labelledby="scoreInfoTitle">
+    <div class="sheet">
+      <div class="grabber"></div>
+      <div class="sheethead">
+        <div>
+          <h3 id="scoreInfoTitle">About Study Score</h3>
+          <p>Your ReviewTayo progress indicator.</p>
+        </div>
+        <button class="sheetclose" data-close-overlay="scoreInfoOverlay" aria-label="Close Study Score information">×</button>
+      </div>
+      <div style="font-size:12px;color:var(--ink);line-height:1.5;margin-bottom:16px;">
+        <p style="margin:0 0 8px;"><strong>Based on your ReviewTayo practice activity.</strong></p>
+        <p style="margin:0;color:var(--muted);">Study Score reflects your recent drill accuracy and consistency in the prototype. It is not an official prediction of your Civil Service Exam result.</p>
+      </div>
+      <button class="save" data-close-overlay="scoreInfoOverlay">Got it</button>
+    </div>
+  </div>
+
+  <!-- CONCEPT MASTERY OVERLAY (ONE LAYER DEEPER) -->
+  <div class="overlay" id="masteryOverlay" role="dialog" aria-modal="true" aria-labelledby="masterySheetTitle">
+    <div class="sheet mastery-sheet">
+      <div class="grabber"></div>
+      <div class="sheethead">
+        <div>
+          <h3 id="masterySheetTitle">Verbal Ability</h3>
+          <p>Concept mastery breakdown</p>
+        </div>
+        <button class="sheetclose" data-close-overlay="masteryOverlay" aria-label="Close concept mastery">×</button>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+        <span style="font-size:11px;color:var(--muted)">Overall subject mastery</span>
+        <span class="pill" id="masterySheetScore">64%</span>
+      </div>
+      <div class="mastery-concept-list" id="masterySheetList"></div>
+      <button class="secondarybtn" data-close-overlay="masteryOverlay" style="margin-top:14px">Close</button>
+    </div>
+  </div>
+
+  <!-- CUSTOM QUIZ OVERLAY -->
+  <div class="overlay" id="customOverlay" role="dialog" aria-modal="true" aria-labelledby="customTitle">
+    <div class="sheet">
+      <div class="grabber"></div>
+      <div class="sheethead">
+        <div>
+          <h3 id="customTitle">Build a Quiz</h3>
+          <p>Configure custom practice sets.</p>
+        </div>
+        <button class="sheetclose" data-close-overlay="customOverlay" aria-label="Close custom quiz setup">×</button>
+      </div>
+      <label class="label">Question count</label>
+      <div class="customrow">
+        <strong>Questions</strong>
+        <div class="counterctrl">
+          <button id="minusQ">−</button>
+          <b id="customCount">20</b>
+          <button id="plusQ">+</button>
+        </div>
+      </div>
+      <label class="label">Subjects</label>
+      <div class="seg"><button class="segbtn active">Mixed</button><button class="segbtn">Choose topics</button></div>
+      <label class="label">Timing</label>
+      <div class="seg"><button class="segbtn active">Untimed</button><button class="segbtn">Timed</button></div>
+      <button class="save" id="startCustom">Start custom quiz</button>
+    </div>
+  </div>
+
+  <!-- MOCK SETUP OVERLAY -->
+  <div class="overlay" id="mockOverlay" role="dialog" aria-modal="true" aria-labelledby="mockTitle">
+    <div class="sheet">
+      <div class="grabber"></div>
+      <div class="sheethead">
+        <div>
+          <h3 id="mockTitle">Full Mock Exam</h3>
+          <p id="mockSheetLead">Professional simulation using exam-style pacing.</p>
+        </div>
+        <button class="sheetclose" data-close-overlay="mockOverlay" aria-label="Close mock exam setup">×</button>
+      </div>
+      <div class="mockfacts">
+        <div class="mockfact"><b id="mockFactItems">170</b><span>Total items in the Professional exam setup.</span></div>
+        <div class="mockfact"><b id="mockFactTime">3:10</b><span>Timed session. Explanations stay hidden until the end.</span></div>
+        <div class="mockfact"><b>Review</b><span>Mark items and revisit them before submitting.</span></div>
+      </div>
+      <button class="save" id="startMock">Start sample mock</button>
+      <button class="secondarybtn" data-close-overlay="mockOverlay">Not now</button>
+    </div>
+  </div>
+
+  <!-- MOCK RESULT OVERLAY -->
+  <div class="overlay" id="mockResultOverlay" role="dialog" aria-modal="true" aria-labelledby="mockResultTitle">
+    <div class="sheet mock-modal-sheet">
+      <div class="grabber"></div>
+      <div class="sheethead">
+        <div>
+          <h3 id="mockResultTitle">Mock Exam Complete</h3>
+          <p>Full simulation performance and generated 7-day schedule.</p>
+        </div>
+        <button class="sheetclose" data-close-overlay="mockResultOverlay" aria-label="Close mock results">×</button>
+      </div>
+
+      <div class="mock-modal-score">
+        <span class="mms-number" id="mockResultScore">139 / 170 (82%)</span>
+        <span class="mms-sub">Passing grade benchmark: 80.00%</span>
+      </div>
+
+      <label class="label">Subject breakdown</label>
+      <div class="mrc-breakdown" id="mockResultBreakdown"></div>
+
+      <label class="label">Recommended next 7 days</label>
+      <div class="seven-day-plan" id="mockResult7DayPlan"></div>
+
+      <button class="save" id="mockResultPrimaryBtn">Start Today’s plan</button>
+      <button class="secondarybtn" id="mockResultSecondaryBtn">See detailed progress</button>
+    </div>
+  </div>
+
+  <!-- SPACED REVIEW FLASHCARD OVERLAY -->
+  <div class="overlay" id="flashcardOverlay" role="dialog" aria-modal="true" aria-labelledby="flashcardTag">
+    <div class="sheet flashcard-sheet">
+      <div class="grabber"></div>
+      <div class="flashcard-top">
+        <button class="sheetclose" id="closeFlashcard" aria-label="Close flashcard review">×</button>
+        <div class="fc-prog-wrap">
+          <div class="fc-prog-bar" id="flashcardProgress" style="width: 10%"></div>
+        </div>
+        <div class="qcount" id="flashcardCount">1 / 12</div>
+      </div>
+
+      <div class="flashcard-card" id="flashcardCard">
+        <div class="flashcard-kicker" id="flashcardTag">Constitution · Article III</div>
+        <h3 class="flashcard-prompt" id="flashcardPrompt">What does Article III of the 1987 Constitution cover?</h3>
+
+        <div class="flashcard-reveal-hint" id="flashcardReveal">
+          Tap card to reveal answer
+        </div>
+
+        <div class="flashcard-answer-box" id="flashcardAnswerBox">
+          <strong>Key Recall</strong>
+          <p class="flashcard-answer-text" id="flashcardAnswer">Bill of Rights</p>
+        </div>
+      </div>
+
+      <!-- CONFIDENCE FEEDBACK BUTTONS -->
+      <div class="confidence-actions" id="flashcardActions">
+        <button class="conf-btn conf-again" id="flashcardAgainBtn">
+          <span>↺</span> Again
+        </button>
+        <button class="conf-btn conf-gotit" id="flashcardGotItBtn">
+          <span>✓</span> Got it
+        </button>
+      </div>
+
+      <button class="secondarybtn" id="flashcardRevealBtn" style="margin-top:10px">Reveal answer</button>
+    </div>
+  </div>
+
+  <!-- SESSION RESULT OVERLAY -->
+  <div class="overlay" id="resultOverlay" role="dialog" aria-modal="true" aria-labelledby="resultTitle">
+    <div class="sheet result-center">
+      <div class="grabber"></div>
+      <div class="resultscore" id="resultScore">4/5</div>
+      <h3 id="resultTitle">Good session.</h3>
+      <p id="resultText">You missed one item. Reviewing it now is the highest-value next step.</p>
+      <div class="resultinsight" id="resultInsight">
+        <strong>Next focus: Verbal Ability</strong>
+        <small>Most of your recent misses come from vocabulary and sentence completion.</small>
+      </div>
+      <button class="save" id="resultPrimary">Review missed question</button>
+      <button class="secondarybtn" id="resultSecondary">See progress</button>
+    </div>
+  </div>
+
+  <!-- QUIZ INTERFACE -->
+  <section class="quiz" id="quiz">
+    <div class="quiztop">
+      <button class="back" id="closeQuiz" aria-label="Pause and return">←</button>
+      <div class="qprog"><span id="qProgress"></span></div>
+      <div class="qcount"><span id="qNum">1</span>/<span id="qTotal">5</span></div>
+    </div>
+
+    <!-- CONTEXTUAL OWL COACH PILL -->
+    <div class="quiz-coach-pill">
+      <div class="quiz-coach-owl" id="quizOwlContainer"></div>
+      <span class="quiz-coach-note" id="quizCoachNote">Take your time. Read context clues carefully.</span>
+    </div>
+
+    <div class="quizbody">
+      <div class="qmeta">
+        <div class="qtag" id="qTag">Verbal Ability</div>
+        <button class="bookmark" id="bookmarkBtn" title="Save question">☆</button>
+      </div>
+      <h2 class="question" id="qText"></h2>
+      <div class="choices" id="choices"></div>
+      <div class="explain" id="explain"></div>
+    </div>
+    <div class="quizfooter">
+      <button class="next" id="nextBtn">Check answer</button>
+    </div>
+  </section>
+
+  <!-- TOAST NOTIFICATION -->
+  <div class="toast" id="toast" role="status" aria-live="polite">Saved</div>
+</main>
+</div>
+
+<!-- SCRIPTS (REGULAR JAVASCRIPT FOR ZERO-BUILD FILE:// COMPATIBILITY) -->
+<script defer src="js/core/namespace.js"></script>
+<script defer src="js/core/dom.js"></script>
+<script defer src="js/data/journey.js"></script>
+<script defer src="js/data/concepts.js"></script>
+<script defer src="js/data/review-due.js"></script>
+<script defer src="js/data/study-plan.js"></script>
+<script defer src="js/data/mock-results.js"></script>
+<script defer src="js/data/questions.js"></script>
+<script defer src="js/state/store.js"></script>
+<script defer src="js/ui/toast.js"></script>
+<script defer src="js/ui/overlays.js"></script>
+<script defer src="js/features/owl.js"></script>
+<script defer src="js/features/navigation.js"></script>
+<script defer src="js/features/journey.js"></script>
+<script defer src="js/features/streak.js"></script>
+<script defer src="js/features/study-plan.js"></script>
+<script defer src="js/features/review-due.js"></script>
+<script defer src="js/features/review.js"></script>
+<script defer src="js/features/mastery.js"></script>
+<script defer src="js/features/weekly-goal.js"></script>
+<script defer src="js/features/mock-results.js"></script>
+<script defer src="js/features/settings.js"></script>
+<script defer src="js/features/study.js"></script>
+<script defer src="js/features/practice.js"></script>
+<script defer src="js/features/quiz.js"></script>
+<script defer src="js/app.js"></script>
+</body>
+</html>

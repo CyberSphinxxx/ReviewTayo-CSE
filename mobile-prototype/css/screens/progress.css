@@ -1,0 +1,302 @@
+/* Progress Screen — V4.1 Simplification */
+
+/* Streamlined Study Score Card */
+.score-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 6px 20px rgba(77, 29, 42, 0.04);
+}
+
+.ring-compact {
+  --p: 72;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: conic-gradient(var(--maroon) calc(var(--p)*1%), #F0E3DF 0);
+  position: relative;
+  flex: 0 0 76px;
+}
+
+.ring-compact:after {
+  content: "";
+  position: absolute;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.ring-compact strong {
+  position: relative;
+  z-index: 2;
+  font-size: 19px;
+  letter-spacing: -0.02em;
+}
+
+.score-copy {
+  flex: 1;
+  min-width: 0;
+}
+
+.score-copy-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.score-copy strong {
+  display: block;
+  font-size: 14px;
+}
+
+.score-copy p {
+  margin: 2px 0 0;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.info-btn {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--soft);
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 850;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  flex: 0 0 22px;
+}
+
+/* Needs Attention Primary Card */
+.attention-card {
+  background: #FFFDFC;
+  border: 1px solid #ECCCD3;
+  border-radius: 19px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+  box-shadow: 0 4px 16px rgba(114, 29, 52, 0.04);
+}
+
+.attention-left {
+  flex: 1;
+  min-width: 0;
+}
+
+.attention-kicker {
+  font-size: 9px;
+  font-weight: 850;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--maroon);
+  margin-bottom: 2px;
+}
+
+.attention-left strong {
+  display: block;
+  font-size: 13.5px;
+}
+
+.attention-left small {
+  display: block;
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 1px;
+}
+
+.attention-btn {
+  border: 0;
+  background: var(--maroon);
+  color: #fff;
+  border-radius: 11px;
+  padding: 8px 14px;
+  font-size: 11px;
+  font-weight: 850;
+  cursor: pointer;
+  flex: 0 0 auto;
+}
+
+/* Grouped Subjects List */
+.subjects-group {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 4px 14px;
+  margin-bottom: 12px;
+  box-shadow: 0 6px 20px rgba(77, 29, 42, 0.04);
+}
+
+.subject-item-row {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  padding: 12px 2px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #F3EAE8;
+  font: inherit;
+  color: var(--ink);
+  cursor: pointer;
+  text-align: left;
+}
+
+.subject-item-row:last-child {
+  border-bottom: 0;
+}
+
+.subject-item-row strong {
+  font-size: 12.5px;
+  font-weight: 750;
+}
+
+.subject-row-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Concept Mastery Modal / Drawer (One Layer Deeper) */
+.mastery-sheet {
+  max-height: 80%;
+}
+
+.mastery-sheet-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.mastery-sheet-title h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.mastery-concept-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.concept-card-item {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 10px 13px;
+}
+
+.cci-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 3px;
+}
+
+.cci-name {
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.cci-note {
+  font-size: 10px;
+  color: var(--muted);
+  line-height: 1.35;
+}
+
+/* Mastery Pills */
+.mastery-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 8.5px;
+  font-weight: 850;
+  padding: 2.5px 7px;
+  border-radius: 99px;
+  white-space: nowrap;
+}
+
+.mastery-pill.mastery-mastered {
+  background: #E8F5EE;
+  color: #1F6E48;
+  border: 1px solid #B7E4CA;
+}
+
+.mastery-pill.mastery-strong {
+  background: #EBF3F9;
+  color: #27618D;
+  border: 1px solid #C1DBEE;
+}
+
+.mastery-pill.mastery-developing {
+  background: #FFF6EA;
+  color: #9E611A;
+  border: 1px solid #F5D9B3;
+}
+
+.mastery-pill.mastery-learning {
+  background: #FDF0F3;
+  color: var(--maroon);
+  border: 1px solid #F2CCD6;
+}
+
+/* Collapsible Content Details (Journey, Week, Mock) */
+.panel-box {
+  padding: 10px 0 6px;
+}
+
+.panel-sub-lead {
+  font-size: 10.5px;
+  color: var(--muted);
+  margin: 0 0 10px;
+  line-height: 1.4;
+}
+
+.compact-journey-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cjs-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 10px;
+  border-radius: 11px;
+  background: #FAF6F5;
+  font-size: 11px;
+}
+
+.cjs-item.current {
+  background: #FFF;
+  border: 1px solid #DDAAB6;
+}
+
+.cjs-item strong {
+  font-size: 11.5px;
+}
+
+.cjs-item small {
+  font-size: 9.5px;
+  font-weight: 800;
+  color: var(--muted);
+}
+
+.cjs-item.current small {
+  color: var(--maroon);
+}

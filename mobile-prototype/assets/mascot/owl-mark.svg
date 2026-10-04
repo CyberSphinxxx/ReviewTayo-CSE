@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 236" width="200" height="236" fill="none">
+  <!-- Feet -->
+  <rect x="66" y="208" width="30" height="14" rx="7" fill="#F6B93B"/>
+  <rect x="104" y="208" width="30" height="14" rx="7" fill="#F6B93B"/>
+  <!-- Body -->
+  <path d="M100 34C152 34 180 74 180 132C180 188 150 214 100 214C50 214 20 188 20 132C20 74 48 34 100 34Z" fill="#8A1630"/>
+  <!-- Ear tufts -->
+  <path d="M34 56L54 18L88 44Z" fill="#6B0F25"/>
+  <path d="M166 56L146 18L112 44Z" fill="#6B0F25"/>
+  <!-- Wings -->
+  <path d="M22 118C2 150 10 192 44 200C42 172 38 146 22 118Z" fill="#6B0F25"/>
+  <path d="M178 118C198 150 190 192 156 200C158 172 162 146 178 118Z" fill="#6B0F25"/>
+  <!-- Belly -->
+  <ellipse cx="100" cy="162" rx="48" ry="50" fill="#F8DDE2"/>
+  <!-- Feathers -->
+  <path d="M74 142q13 11 26 0q13 11 26 0M70 166q15 11 30 0q15 11 30 0M78 190q11 9 22 0q11 9 22 0" fill="none" stroke="#DDA3AF" stroke-width="3.5" stroke-linecap="round"/>
+  <!-- Head -->
+  <ellipse cx="100" cy="94" rx="68" ry="48" fill="#A81B3B"/>
+  <!-- Graduation Cap -->
+  <g id="graduation-cap">
+    <path d="M60 34L100 14L140 34L100 54Z" fill="#221219"/>
+    <path d="M80 44V58Q100 68 120 58V44" fill="#33202A"/>
+    <path d="M140 34V58" stroke="#F6B93B" stroke-width="3.5" stroke-linecap="round"/>
+    <circle cx="140" cy="61" r="5" fill="#F6B93B"/>
+  </g>
+  <!-- Eyes (Idle) -->
+  <g class="eye left-eye">
+    <circle cx="74" cy="94" r="26" fill="#fff" stroke="#F8DDE2" stroke-width="4"/>
+    <g class="pupil">
+      <circle cx="74" cy="94" r="12" fill="#1B0A10"/>
+      <circle cx="78" cy="89" r="4" fill="#fff"/>
+    </g>
+  </g>
+  <g class="eye right-eye">
+    <circle cx="126" cy="94" r="26" fill="#fff" stroke="#F8DDE2" stroke-width="4"/>
+    <g class="pupil">
+      <circle cx="126" cy="94" r="12" fill="#1B0A10"/>
+      <circle cx="130" cy="89" r="4" fill="#fff"/>
+    </g>
+  </g>
+  <!-- Beak -->
+  <path d="M91 108L109 108L100 127Z" fill="#F6B93B" stroke="#F6B93B" stroke-width="4" stroke-linejoin="round"/>
+</svg>

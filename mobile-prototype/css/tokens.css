@@ -1,0 +1,18 @@
+:root{
+  --maroon:#721D34;
+  --maroon-2:#8C2944;
+  --maroon-3:#A94360;
+  --maroon-dark:#4D1022;
+  --cream:#FFF9F5;
+  --paper:#FFFFFF;
+  --ink:#2D1D22;
+  --muted:#78676C;
+  --line:#EBDDD9;
+  --soft:#F8EEEA;
+  --soft-2:#F2E2DE;
+  --gold:#D2A34D;
+  --green:#2E7A59;
+  --red:#B94B54;
+  --shadow:0 15px 34px rgba(77,29,42,.09);
+  --shadow-heavy:0 18px 50px rgba(76,27,41,.17);
+}
