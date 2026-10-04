@@ -1,0 +1,111 @@
+import { View, type StyleProp, type ViewStyle } from 'react-native';
+
+import { useTheme } from '@/theme';
+
+import { RTText } from './RTText';
+
+/**
+ * Badge primitive.
+ *
+ * Used for mastery status, counts and metadata pills. Mastery badges are the
+ * canonical example of a selected/correct state that must not rely on colour
+ * alone — the label always carries the meaning.
+ */
+
+export type BadgeTone = 'neutral' | 'success' | 'danger' | 'gold' | 'inverse' | 'accent';
+export type MasteryLevel = 'Learning' | 'Developing' | 'Strong' | 'Mastered';
+
+export interface RTBadgeProps {
+  readonly label: string;
+  readonly tone?: BadgeTone;
+  readonly mastery?: MasteryLevel;
+  readonly style?: StyleProp<ViewStyle>;
+  readonly testID?: string;
+}
+
+export const masteryToneKey = (
+  level: MasteryLevel,
+): 'learning' | 'developing' | 'strong' | 'mastered' => {
+  switch (level) {
+    case 'Developing':
+      return 'developing';
+    case 'Strong':
+      return 'strong';
+    case 'Mastered':
+      return 'mastered';
+    case 'Learning':
+    default:
+      return 'learning';
+  }
+};
+
+export const RTBadge = ({ label, tone = 'neutral', mastery, style, testID }: RTBadgeProps) => {
+  const theme = useTheme();
+
+  const palette = (() => {
+    if (mastery !== undefined) {
+      const colors = theme.colors.mastery[masteryToneKey(mastery)];
+      return { background: colors.background, text: colors.text, border: colors.border };
+    }
+    switch (tone) {
+      case 'success':
+        return {
+          background: theme.colors.successSoft,
+          text: theme.colors.successText,
+          border: 'transparent',
+        };
+      case 'danger':
+        return {
+          background: theme.colors.dangerSoft,
+          text: theme.colors.dangerText,
+          border: 'transparent',
+        };
+      case 'gold':
+        return { background: theme.colors.gold, text: theme.colors.onGold, border: 'transparent' };
+      case 'inverse':
+        return {
+          background: 'rgba(255,255,255,0.18)',
+          text: theme.colors.textInverse,
+          border: 'transparent',
+        };
+      case 'accent':
+        return {
+          background: theme.colors.accentSoft,
+          text: theme.colors.onAccentSoft,
+          border: 'transparent',
+        };
+      case 'neutral':
+      default:
+        return {
+          background: theme.colors.neutralSoft,
+          text: theme.colors.onNeutralSoft,
+          border: 'transparent',
+        };
+    }
+  })();
+
+  return (
+    <View
+      testID={testID}
+      style={[
+        {
+          alignSelf: 'flex-start',
+          borderRadius: theme.radius.pill,
+          paddingVertical: 3,
+          paddingHorizontal: theme.spacing.sm,
+          backgroundColor: palette.background,
+          borderWidth: palette.border === 'transparent' ? 0 : theme.borderWidth.hairline,
+          borderColor: palette.border,
+        },
+        style,
+      ]}
+    >
+      <RTText
+        role="meta"
+        style={{ color: palette.text, fontSize: 11, fontWeight: '700', lineHeight: 15 }}
+      >
+        {label}
+      </RTText>
+    </View>
+  );
+};

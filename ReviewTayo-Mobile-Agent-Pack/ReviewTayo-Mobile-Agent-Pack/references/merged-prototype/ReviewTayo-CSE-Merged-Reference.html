@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ReviewTayo: CSE</title>
+<style>
+:root{--mar:#8A1630;--deep:#5A0F23;--cream:#FBF4EC;--paper:#fff;--rose:#F8DDE2;--gold:#F6B93B;--ink:#221219;--mute:#7d6a70;--line:#e9dcd8;--bg:#e8dcd6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--cream:#1d1015;--paper:#2a1920;--rose:#4a1f2c;--ink:#f6e9ea;--mute:#b79ea5;--line:#3c2830;--bg:#0f080b}}
+:root[data-theme="dark"]{--cream:#1d1015;--paper:#2a1920;--rose:#4a1f2c;--ink:#f6e9ea;--mute:#b79ea5;--line:#3c2830;--bg:#0f080b}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;height:100dvh;overflow:hidden}
+body{background:var(--bg);font:16px/1.4 system-ui,-apple-system,"Segoe UI",Inter,sans-serif;color:var(--ink);display:flex;justify-content:center;align-items:center}
+.serif{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.02em}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+#app{position:relative;padding-top:env(safe-area-inset-top,0px);width:100%;max-width:410px;height:100%;max-height:860px;background:var(--cream);overflow:hidden;display:flex;flex-direction:column}
+@media(min-width:500px){#app{height:min(860px,96vh);border-radius:38px;box-shadow:0 30px 80px #0004}}
+#screen{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding-bottom:28px;scrollbar-width:none}
+#screen::-webkit-scrollbar{display:none}
+.owl{display:block}
+.pupil{animation:blink 5s infinite;transform-box:fill-box;transform-origin:center}
+@keyframes blink{0%,94%,100%{transform:scaleY(1)}97%{transform:scaleY(.1)}}
+.hero{background:var(--mar);color:#fff;border-radius:0 0 44px 44px;padding:26px 24px 30px;position:relative;overflow:hidden;background-image:radial-gradient(circle at 85% 20%,#b02a4a 0,transparent 55%)}
+.pill{display:inline-flex;gap:8px;align-items:center;background:#ffffff1f;border-radius:99px;padding:6px 12px;font-size:13px}
+.hero h1{font-size:36px;line-height:1.04;margin:18px 0 10px;max-width:60%;font-weight:400}
+.hero p{opacity:.8;font-size:14px;max-width:55%}
+.hero .owl{position:absolute;right:-2px;bottom:-26px;transform:rotate(6deg)}
+.cta{display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:#2b1408;font-weight:700;border-radius:99px;padding:15px 24px;margin-top:22px;box-shadow:0 8px 20px #0003;transition:transform .15s}
+.cta:active{transform:scale(.96)}
+.cta.mar{background:var(--mar);color:#fff}
+.sec{padding:26px 24px 0}
+.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);font-weight:600}
+h2{font-size:26px;font-weight:400;margin:4px 0 14px}
+.tl{position:relative;margin-left:8px;border-left:2px dashed var(--line)}
+.tl>button{display:flex;width:100%;text-align:left;align-items:center;gap:14px;padding:12px 0 12px 22px;position:relative}
+.tl>button:before{content:"";position:absolute;left:-7px;width:12px;height:12px;border-radius:50%;background:var(--cream);border:2px solid var(--mar)}
+.tl>button.ok:before{background:var(--mar)}
+.tl b{display:block;font-size:16px}.tl small{color:var(--mute)}
+.tl .go{margin-left:auto;color:var(--mar);font-weight:700;font-size:13px}
+.ring{display:flex;align-items:center;gap:16px;margin-top:22px}
+.stat{display:flex;gap:26px;margin-top:6px}
+.stat div{font-size:12px;color:var(--mute)}.stat b{display:block;font-size:30px;color:var(--ink);font-family:Georgia,serif;font-weight:400}
+.row{display:flex;align-items:center;justify-content:space-between;width:100%;padding:16px 0;border-bottom:1px solid var(--line);text-align:left}
+.row small{display:block;color:var(--mute)}
+.chev{color:var(--mute);font-size:20px}
+.big{background:var(--mar);color:#fff;border-radius:30px;margin:18px 20px 0;padding:26px;position:relative;overflow:hidden}
+.big h1{font-size:34px;font-weight:400}.big p{opacity:.8;margin-top:4px}
+.big .owl{position:absolute;right:14px;top:14px;width:78px}
+.bar{height:8px;background:var(--rose);border-radius:9px;overflow:hidden;margin-top:8px}
+.bar i{display:block;height:100%;background:var(--mar);border-radius:9px}
+.chips{display:flex;gap:10px;overflow-x:auto;padding:4px 24px 4px;scrollbar-width:none}
+.chip{flex:none;background:var(--rose);border-radius:18px;padding:14px 16px;min-width:130px;text-align:left;font-weight:600;font-size:14px}
+.chip small{display:block;font-weight:400;color:var(--mute)}
+.badge{font-size:11px;font-weight:700;border-radius:99px;padding:3px 9px;background:var(--rose);color:var(--mar)}
+.lv-Strong,.lv-Mastered{background:#d9efdc;color:#1f6a35}
+nav{flex:none;position:relative;z-index:2;display:flex;background:var(--paper);border-top:1px solid var(--line);padding:8px 6px calc(8px + env(safe-area-inset-bottom,0px))}
+nav button{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;font-weight:600;color:var(--mute)}
+nav .ico{width:52px;height:30px;border-radius:15px;display:grid;place-items:center;transition:.2s}
+nav button.on{color:var(--mar)}nav button.on .ico{background:var(--rose)}
+nav .home .ico{background:var(--mar);color:#fff}nav .home.on{color:var(--mar)}nav .home.on .ico{box-shadow:0 0 0 3px var(--rose)}
+svg.i{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#sheet{position:absolute;inset:0;background:var(--cream);z-index:10;display:none;flex-direction:column;padding:calc(20px + env(safe-area-inset-top,0px)) 24px 20px;overflow-y:auto;animation:up .3s}
+#sheet.on{display:flex}
+@keyframes up{from{transform:translateY(40px);opacity:0}}
+.top{display:flex;align-items:center;gap:14px}
+.x{width:36px;height:36px;border-radius:50%;background:var(--rose);font-size:18px}
+.seg{flex:1;display:flex;gap:4px}.seg i{flex:1;height:6px;border-radius:9px;background:var(--line)}.seg i.f{background:var(--mar)}
+.q{font-size:28px;line-height:1.15;margin:34px 0 22px;font-weight:400}
+.opt{display:flex;gap:14px;align-items:center;width:100%;text-align:left;padding:16px 4px;border-bottom:1px solid var(--line);font-size:17px;transition:.2s}
+.opt span{width:30px;height:30px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;font-size:13px;font-weight:700;flex:none}
+.opt.right{color:#1f6a35;font-weight:700}.opt.right span{background:#1f6a35;color:#fff;border-color:#1f6a35}
+.opt.wrong{color:var(--mar)}.opt.wrong span{background:var(--mar);color:#fff;border-color:var(--mar)}
+.fb{margin:auto -24px -20px;background:var(--paper);border-radius:30px 30px 0 0;padding:22px 24px calc(24px + env(safe-area-inset-bottom,0px));box-shadow:0 -10px 30px #0002;animation:up .25s}
+.fb h3{font-size:24px;font-weight:400}.fb.good h3{color:#1f6a35}.fb.bad h3{color:var(--mar)}
+.fb p{color:var(--mute);margin:6px 0 12px}
+.ghost{display:block;width:100%;text-align:center;padding:12px;color:var(--mar);font-weight:600}
+.opt-big{display:flex;align-items:center;gap:14px;width:100%;text-align:left;padding:18px;border-radius:20px;border:2px solid var(--line);margin-bottom:10px;font-size:17px;font-weight:600;background:var(--paper)}
+.opt-big small{display:block;font-weight:400;color:var(--mute)}
+.opt-big.sel{border-color:var(--mar);background:var(--rose)}
+.opt-big:after{content:"";margin-left:auto;width:20px;height:20px;border-radius:50%;border:2px solid var(--line);flex:none}
+.opt-big.sel:after{background:var(--mar);border-color:var(--mar);box-shadow:inset 0 0 0 4px var(--rose)}
+.flash{margin:30px 0;height:300px;border-radius:32px;background:var(--mar);color:#fff;display:grid;place-items:center;padding:30px;text-align:center;font-size:30px;cursor:pointer}
+.flash.back{background:var(--paper);color:var(--ink);font-size:18px;border:2px solid var(--mar)}
+.two{display:flex;gap:12px}.two button{flex:1;padding:16px;border-radius:99px;font-weight:700}
+.again{background:var(--rose);color:var(--mar)}.got{background:var(--mar);color:#fff}
+.center{text-align:center;margin:auto 0}
+.bounce{animation:bn 1.6s infinite}@keyframes bn{50%{transform:translateY(-8px)}}
+#toast{position:absolute;left:50%;bottom:84px;transform:translateX(-50%);background:var(--ink);color:var(--cream);padding:10px 16px;border-radius:99px;font-size:13px;opacity:0;transition:.3s;z-index:20;pointer-events:none;white-space:nowrap}
+#toast.on{opacity:1}
+.jr{display:flex;justify-content:space-between;margin-top:14px;position:relative}
+.jr:before{content:"";position:absolute;left:8px;right:8px;top:8px;height:2px;background:var(--line)}
+.jr div{position:relative;font-size:10px;color:var(--mute);text-align:center;width:20%}
+.jr div:before{content:"";display:block;width:18px;height:18px;border-radius:50%;background:var(--cream);border:2px solid var(--line);margin:0 auto 6px}
+.jr .p:before{background:var(--mar);border-color:var(--mar)}.jr .n{color:var(--mar);font-weight:700}.jr .n:before{border-color:var(--mar);box-shadow:0 0 0 4px var(--rose)}
+
+/* --- ReviewTayo merged reference additions --- */
+:root{
+  --success:#2e7a59;--danger:#b94b54;--surface-soft:#fff8f5;--navbg:#fffdfb;
+}
+:root[data-theme="light"]{
+  --mar:#8A1630;--deep:#5A0F23;--cream:#FFF9F5;--paper:#FFFFFF;--rose:#F7E8EA;--gold:#F6B93B;
+  --ink:#28171D;--mute:#806C72;--line:#EBDDD9;--bg:#E8DFDB;--surface-soft:#FFF4F1;--navbg:#FFFFFF;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--surface-soft:#24141a;--navbg:#2a1920}}
+:root[data-theme="dark"]{--surface-soft:#24141a;--navbg:#2a1920}
+.settings-fab{position:absolute;right:16px;top:16px;z-index:4;width:42px;height:42px;border-radius:15px;background:#ffffff18;color:#fff;border:1px solid #ffffff28;display:grid;place-items:center;font-size:18px;backdrop-filter:blur(10px)}
+.settings-fab:focus-visible,.navrow:focus-visible,.mini-card:focus-visible,.settings-row:focus-visible{outline:3px solid color-mix(in srgb,var(--mar) 30%,transparent);outline-offset:2px}
+.hero .meta-under{display:block;margin-top:10px;font-size:11px;letter-spacing:.09em;text-transform:uppercase;opacity:.72;font-weight:700}
+.resume{margin:20px 24px 0;background:var(--deep);color:#fff;border-radius:22px;padding:15px 16px;display:flex;align-items:center;gap:12px;box-shadow:0 10px 24px #0002}
+.resume .grow{flex:1}.resume small{display:block;opacity:.72}.resume b{font-size:17px}.resume .resume-btn{background:#fff;color:var(--deep);border-radius:99px;padding:9px 14px;font-weight:800}.resume .dismiss{opacity:.65;font-size:20px;padding:4px}
+.navrow{display:flex;align-items:center;justify-content:space-between;width:100%;padding:16px 0;border-bottom:1px solid var(--line);text-align:left}
+.navgroup{border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:8px}.navgroup .navrow:last-child{border-bottom:0}
+.mini-card{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:15px;text-align:left;min-width:0}
+.mini-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
+.mini-card b{display:block}.mini-card small{display:block;color:var(--mute);margin-top:3px}.mini-card .badge{float:right}
+.info-btn{width:28px;height:28px;border-radius:50%;background:var(--rose);color:var(--mar);font-weight:800}
+.settings-panel{padding:18px 0 10px}.settings-row{display:flex;align-items:center;justify-content:space-between;width:100%;padding:15px 0;border-bottom:1px solid var(--line);text-align:left}.settings-row small{display:block;color:var(--mute)}
+.theme-seg{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;background:var(--rose);padding:4px;border-radius:16px;margin-top:10px}.theme-seg button{padding:10px 6px;border-radius:12px;font-weight:700;font-size:13px}.theme-seg button.sel{background:var(--paper);color:var(--mar);box-shadow:0 3px 10px #0001}
+.form-label{font-size:12px;text-transform:uppercase;letter-spacing:.1em;font-weight:800;color:var(--mute);display:block;margin:18px 0 7px}.field{width:100%;padding:13px 14px;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:15px;font:inherit}
+.subject-menu .row{padding:14px 0}.morebox{margin-top:4px;padding-left:10px;border-left:2px solid var(--line)}
+.mock-hero{background:var(--mar);color:#fff;border-radius:26px;padding:22px;margin:22px 0}.mock-hero .serif{font-size:32px}.mock-facts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}.mock-fact{background:#ffffff12;border:1px solid #ffffff1d;border-radius:14px;padding:10px;text-align:center}.mock-fact b{display:block;font-size:18px}.mock-fact small{opacity:.75}
+.onboard-shell{display:flex;flex-direction:column;min-height:100%;padding:0 0 8px}.ob-brand{display:flex;align-items:center;justify-content:space-between;gap:10px}.ob-brand strong{font-size:15px}.ob-close{width:38px;height:38px;border-radius:14px;border:1px solid var(--line);background:var(--paper)}.ob-step{font-size:10px;letter-spacing:.13em;text-transform:uppercase;font-weight:800;color:var(--mar);text-align:center;margin:10px 0 7px}.ob-progress{display:grid;grid-template-columns:repeat(8,1fr);gap:5px}.ob-progress i{height:5px;border-radius:99px;background:var(--line)}.ob-progress i.on{background:var(--mar)}.ob-body{padding-top:18px}.ob-title{font-size:30px;line-height:1.02;font-weight:400;margin:0 0 8px}.ob-copy{color:var(--mute);margin-bottom:20px}.ob-footer{margin-top:auto;padding-top:20px}.ob-footer .cta{width:100%;justify-content:center;margin:0}.ob-back{font-weight:700;color:var(--mute);padding:8px 0}.ob-choice{display:flex;align-items:center;gap:13px;width:100%;text-align:left;padding:16px;border:1.5px solid var(--line);border-radius:20px;background:var(--paper);margin:10px 0}.ob-choice.sel{border-color:var(--mar);background:var(--surface-soft)}.ob-choice .lead{font-size:16px;font-weight:800}.ob-choice small{display:block;color:var(--mute);margin-top:2px}.ob-choice .mark{margin-left:auto;width:24px;height:24px;border:2px solid var(--line);border-radius:50%;display:grid;place-items:center}.ob-choice.sel .mark{background:var(--mar);border-color:var(--mar);color:#fff}.daygrid{display:grid;grid-template-columns:repeat(7,1fr);gap:7px;margin:10px 0 18px}.day{aspect-ratio:1;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;font-weight:800;background:var(--paper)}.day.sel{background:var(--mar);border-color:var(--mar);color:#fff}.goalgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.goal{border:1px solid var(--line);background:var(--paper);border-radius:18px;padding:15px 8px;text-align:center}.goal.sel{border-color:var(--mar);background:var(--surface-soft)}.goal b{font:34px Georgia,serif;color:var(--mar);display:block}.goal small{color:var(--mute)}.plan-card{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:16px}.planline{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}.planline:last-child{border-bottom:0}.planline span{color:var(--mute)}.ob-stats{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:16px 0}.ob-stat{background:var(--rose);color:var(--mar);border-radius:99px;padding:7px 11px;font-size:12px;font-weight:800}.first-card{background:var(--mar);color:#fff;border-radius:22px;padding:17px;margin-top:14px;display:flex;gap:12px;align-items:center}.first-card small{opacity:.72}.first-card b{display:block;font-size:18px}
+.theme-note{font-size:12px;color:var(--mute);margin-top:8px}
+@media(max-width:340px){.goalgrid{grid-template-columns:1fr}.mini-grid{grid-template-columns:1fr}.hero h1{font-size:32px;max-width:68%}.hero p{max-width:65%}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.pupil{animation:none!important}}
+
+</style></head><body>
+<svg width="0" height="0" style="position:absolute"><defs><g id="owl">
+<rect x="66" y="208" width="30" height="14" rx="7" fill="#F6B93B"/><rect x="104" y="208" width="30" height="14" rx="7" fill="#F6B93B"/>
+<path d="M100 34C152 34 180 74 180 132C180 188 150 214 100 214C50 214 20 188 20 132C20 74 48 34 100 34Z" fill="#8A1630"/>
+<path d="M34 56L54 18L88 44Z" fill="#6B0F25"/><path d="M166 56L146 18L112 44Z" fill="#6B0F25"/>
+<path d="M22 118C2 150 10 192 44 200C42 172 38 146 22 118Z" fill="#6B0F25"/><path d="M178 118C198 150 190 192 156 200C158 172 162 146 178 118Z" fill="#6B0F25"/>
+<ellipse cx="100" cy="162" rx="48" ry="50" fill="#F8DDE2"/>
+<path d="M74 142q13 11 26 0q13 11 26 0M70 166q15 11 30 0q15 11 30 0M78 190q11 9 22 0q11 9 22 0" fill="none" stroke="#DDA3AF" stroke-width="3.5" stroke-linecap="round"/>
+<ellipse cx="100" cy="94" rx="68" ry="48" fill="#A81B3B"/>
+<path d="M60 34L100 14L140 34L100 54Z" fill="#221219"/><path d="M80 44V58Q100 68 120 58V44" fill="#33202A"/><path d="M140 34V58" stroke="#F6B93B" stroke-width="3.5" stroke-linecap="round"/><circle cx="140" cy="61" r="5" fill="#F6B93B"/>
+<circle cx="74" cy="94" r="26" fill="#fff" stroke="#F8DDE2" stroke-width="4"/><g class="pupil"><circle cx="74" cy="94" r="12" fill="#1B0A10"/><circle cx="78" cy="89" r="4" fill="#fff"/></g>
+<circle cx="126" cy="94" r="26" fill="#fff" stroke="#F8DDE2" stroke-width="4"/><g class="pupil"><circle cx="126" cy="94" r="12" fill="#1B0A10"/><circle cx="130" cy="89" r="4" fill="#fff"/></g>
+<path d="M91 108L109 108L100 127Z" fill="#F6B93B" stroke="#F6B93B" stroke-width="4" stroke-linejoin="round"/></g></defs></svg>
+<div id="app"><div id="screen"></div>
+<nav id="nav"></nav><div id="sheet"></div><div id="toast"></div></div>
+<script>
+const $=s=>document.querySelector(s),N=8,LV=['Learning','Developing','Strong','Mastered'];
+const owl=(w,vb='0 0 200 236',cls='')=>`<svg class="owl ${cls}" viewBox="${vb}" style="width:${w}px"><use href="#owl"/></svg>`;
+const ICON={learn:'<path d="M4 4h12a4 4 0 0 1 4 4v12H8a4 4 0 0 1-4-4z"/>',practice:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/>',home:'<path d="M3 11l9-8 9 8v10h-6v-6H9v6H3z"/>',review:'<path d="M20 12a8 8 0 1 1-3-6.2M20 4v5h-5"/>',progress:'<path d="M5 20V10M12 20V4M19 20v-7"/>'};
+const ic=n=>`<svg class="i" viewBox="0 0 24 24">${ICON[n]}</svg>`;
+const S={level:'Professional',goal:10,days:43,done:4,streak:6,tab:'home',dailyDone:false,streakDone:false,rev:12,start:'Reviewing',sched:'Mon · Wed · Fri · Sat',theme:'device',examDate:'2026-11-15',resumeMock:true,mockProgress:83,saved:8,mistakes:23,concepts:3,session:'Regular',reminders:false};
+const M={Vocabulary:2,'Sentence Completion':1,Percentages:1,Grammar:2,Constitution:0};
+const BANK=[
+{c:'Vocabulary',q:'Choose the word closest in meaning to “ephemeral”.',o:['Lasting','Brief','Ancient','Fragile'],a:1,e:'Ephemeral describes something that lasts only a short time.'},
+{c:'Vocabulary',q:'“Meticulous” most nearly means:',o:['Careless','Hasty','Very careful','Boastful'],a:2,e:'Meticulous means showing great attention to detail.'},
+{c:'Sentence Completion',q:'The new policy was ___ by employees, who welcomed the shorter queues.',o:['lamented','embraced','ignored','contested'],a:1,e:'They welcomed it, so the blank needs a positive word: embraced.'},
+{c:'Sentence Completion',q:'Despite her ___ manner, she was a fierce negotiator.',o:['aggressive','mild','hostile','arrogant'],a:1,e:'“Despite” signals contrast with “fierce”, so the blank is gentle: mild.'},
+{c:'Percentages',q:'What is 15% of 240?',o:['24','30','36','40'],a:2,e:'10% is 24 and 5% is 12, so 15% is 36.'},
+{c:'Percentages',q:'A ₱500 item is discounted 20%. What is the sale price?',o:['₱380','₱400','₱420','₱450'],a:1,e:'20% of 500 is 100, so 500 − 100 = 400.'},
+{c:'Grammar',q:'Which sentence is correct?',o:['Neither of the clerks are ready.','Neither of the clerks is ready.','Neither of the clerks were ready.','Neither of the clerks be ready.'],a:1,e:'“Neither” is singular, so it takes “is”.'},
+{c:'Constitution',q:'Under the 1987 Constitution, the Civil Service Commission is a:',o:['Executive department','Constitutional commission','Government corporation','Judicial body'],a:1,e:'The CSC is one of the independent constitutional commissions.'}];
+const CARDS=[['Ephemeral','Lasting a very short time'],['Quorum','Minimum members needed to conduct business'],['Ad hoc','Created for a specific purpose'],['Prudent','Acting with care and good judgment'],['Concur','To agree']];
+const subs=()=>[['Verbal Ability',64],['Numerical Ability',71],[S.level=='Professional'?'Analytical Ability':'Clerical Ability',78],['General Information',82]];
+const shuf=a=>[...a].sort(()=>Math.random()-.5);
+const toast=t=>{const e=$('#toast');e.textContent=t;e.className='on';setTimeout(()=>e.className='',1800)};
+const sheet=h=>{const s=$('#sheet');s.innerHTML=h;s.className=h?'on':''};
+
+/* ---------- screens ---------- */
+const V={
+home(){const d=S.done,g=S.goal,p=Math.min(1,d/g),c=2*Math.PI*26;
+return `<div class="hero"><button class="settings-fab" onclick="settings()" aria-label="Settings">⚙</button><span class="pill">Accuracy Phase · ${S.days} days left</span>
+<h1 class="serif">Your next ${N} are ready.</h1><p>Verbal Ability needs a little love today.</p>${owl(124)}
+<button class="cta" onclick="drill()">Start Smart Drill →</button><span class="meta-under">Personalized from your recent practice</span></div>
+<div class="sec"><div class="eyebrow">Today</div><h2 class="serif">Three small things</h2>
+<div class="tl"><button class="${S.dailyDone?'ok':''}" onclick="daily()"><div><b>Daily Question</b><small>1 minute</small></div><span class="go">${S.dailyDone?'Done':'Open'}</span></button>
+<button onclick="drill()"><div><b>Smart Drill</b><small>${N} questions · ~8 min</small></div><span class="go">Start</span></button>
+<button onclick="go('review')"><div><b>Review Due</b><small>${S.rev} items · ~6 min</small></div><span class="go">Open</span></button></div>
+<div class="ring"><svg width="64" height="64" viewBox="0 0 64 64"><circle cx="32" cy="32" r="26" fill="none" stroke="var(--rose)" stroke-width="8"/><circle cx="32" cy="32" r="26" fill="none" stroke="var(--mar)" stroke-width="8" stroke-linecap="round" stroke-dasharray="${c}" stroke-dashoffset="${c*(1-p)}" transform="rotate(-90 32 32)"/></svg>
+<div><b class="serif" style="font-size:22px">${Math.min(d,g)} of ${g} questions</b><br><small style="color:var(--mute)">${S.streak}-day streak · small steps count</small></div></div></div>
+${S.resumeMock?`<div class="resume"><div class="grow"><small>CONTINUE MOCK EXAM</small><b>${S.mockProgress} / ${S.level==='Professional'?170:165}</b><small>Started on desktop</small></div><button class="resume-btn" onclick="mockExam(true)">Resume</button><button class="dismiss" onclick="S.resumeMock=false;go('home')" aria-label="Dismiss">×</button></div>`:''}`},
+learn(){return `<div class="sec"><div class="eyebrow">Learn</div><h2 class="serif" style="font-size:34px">Understand it first.</h2>
+<button class="row" onclick="toast('Opening Sentence Completion…')"><div><small>Continue learning</small><b style="font-size:19px">Sentence Completion</b><small>Lesson 3 of 8</small></div><span class="chev">›</span></button></div>
+<div class="sec"><div class="eyebrow">Quick sheets</div></div><div class="chips" style="margin-top:8px">${['Grammar rules','Percent tricks','Constitution','Analogy types'].map(t=>`<button class="chip" onclick="toast('${t}')">${t}<small>2 min read</small></button>`).join('')}</div>
+<div class="sec"><div class="eyebrow">Subjects</div>${subs().map(([n,p])=>`<button class="row" onclick="toast('${n}')"><div style="flex:1;margin-right:16px"><b>${n}</b><div class="bar"><i style="width:${Math.max(16,p-20)}%"></i></div></div><span class="chev">›</span></button>`).join('')}
+<button class="row" onclick="toast('Study Guides')"><b>Study Guides</b><span class="chev">›</span></button></div>`},
+practice(){return `<div class="sec"><div class="eyebrow">Practice</div></div><div class="big" style="margin-top:8px"><h1 class="serif">Smart Drill</h1><p>${N} personalized questions</p>${owl(78,'20 8 160 140')}<button class="cta" onclick="drill()">Start</button></div>
+<div class="sec"><div class="eyebrow">Targeted practice</div>
+<button class="row" onclick="drill()"><div><b>Weakest Area</b><small>Verbal Ability · 64%</small></div><span class="chev">›</span></button>
+<button class="row" onclick="timedPractice()"><div><b>Timed Practice</b><small>10 questions · 8 min</small></div><span class="chev">›</span></button>
+<div class="navgroup">
+<button class="navrow" onclick="mockExam(false)"><div><b>Mock Exam</b><small>${S.level==='Professional'?'170 items · 3h 10m':'165 items · 2h 40m'}</small></div><span class="chev">›</span></button>
+<button class="navrow" onclick="subjectPractice()"><b>Practice by subject</b><span class="chev">›</span></button>
+<button class="navrow" onclick="morePractice()"><b>More practice</b><span class="chev">›</span></button>
+</div></div>`},
+review(){return `<div class="sec" style="text-align:center;padding-top:34px"><div class="eyebrow">Review due today</div><div class="serif" style="font-size:120px;line-height:1;color:var(--mar)">${S.rev}</div><p style="color:var(--mute)">about 6 minutes</p>
+<button class="cta mar" onclick="flash()">Review now</button></div>
+<div class="sec" style="margin-top:20px">${[['Mistakes',S.mistakes],['Saved',S.saved],['Concepts to revisit',S.concepts]].map(([a,n])=>`<button class="row" onclick="toast('${a}')"><b>${a}</b><span><span class="badge">${n}</span> <span class="chev">›</span></span></button>`).join('')}
+<button class="row" onclick="toast('Review history')"><div><b>Review history</b><small>48 concepts this week</small></div><span class="chev">›</span></button></div>`},
+progress(){return `<div class="sec"><div class="eyebrow">Progress</div><div style="display:flex;align-items:flex-end;gap:14px"><div class="serif" style="font-size:96px;line-height:1;color:var(--mar)">72</div><div style="padding-bottom:14px"><b>Study Score</b><br><small style="color:#3a9c61;font-weight:600">↑ Improving this week</small></div></div>
+<svg viewBox="0 0 300 50" style="width:100%;margin-top:6px"><path d="M0 40C40 38 60 30 90 32S150 20 190 18 260 10 300 6" fill="none" stroke="var(--mar)" stroke-width="3" stroke-linecap="round"/></svg></div>
+<div class="sec"><div class="eyebrow">Needs attention</div><button class="row" onclick="drill()"><div><b class="serif" style="font-size:24px;font-weight:400">Verbal Ability</b><small>64% accuracy</small></div><span class="cta mar" style="margin:0;padding:9px 16px;box-shadow:none">Practice</span></button></div>
+<div class="sec"><div class="eyebrow">Subject accuracy</div>${subs().map(([n,p],idx)=>`<div style="margin-top:12px;display:flex;justify-content:space-between"><span>${n}</span><b style="color:${idx===0?'var(--mar)':'var(--ink)'}">${p}%</b></div><div class="bar"><i style="width:${p}%"></i></div>`).join('')}</div>
+<div class="sec"><div class="eyebrow">CSE journey</div><div class="jr"><div class="p">Foundation</div><div class="n">Accuracy</div><div>Speed</div><div>Mock Week</div><div>Final Review</div></div></div>
+<div class="sec"><div class="eyebrow">This week</div><div style="display:flex;gap:8px;margin-top:8px">${'MTWTFSS'.split('').map((d,i)=>`<div style="flex:1;text-align:center;font-size:12px;color:var(--mute)"><div style="height:${[30,44,22,50,36,0,0][i]+8}px;background:${i<5?'var(--mar)':'var(--rose)'};border-radius:8px;margin-bottom:6px"></div>${d}</div>`).join('')}</div></div>
+<div class="sec"><div class="eyebrow">Recent mock</div><button class="row" onclick="mockResult()"><div><b>Full mock · 3 days ago</b><small>${S.level} · 68%</small></div><span class="chev">›</span></button></div>`}};
+
+function go(t){S.tab=t;$('#screen').innerHTML=V[t]();$('#screen').scrollTop=0;
+$('#nav').innerHTML=['learn','practice','home','review','progress'].map(k=>{const homeIcon=k==='home'?`<svg class="owl" viewBox="25 24 150 170" style="width:22px;height:22px"><use href="#owl"/></svg>`:ic(k);return `<button class="${k==t?'on':''} ${k=='home'?'home':''}" onclick="go('${k}')"><span class="ico">${homeIcon}</span>${k[0].toUpperCase()+k.slice(1)}${k==='review'&&S.rev?`<span style="position:absolute;margin-left:28px;margin-top:-3px;background:var(--mar);color:white;border-radius:99px;font-size:8px;padding:1px 5px">${S.rev}</span>`:''}</button>`}).join('')}
+
+
+/* ---------- settings / enhanced practice ---------- */
+function applyTheme(mode){S.theme=mode;const root=document.documentElement;if(mode==='device')root.removeAttribute('data-theme');else root.setAttribute('data-theme',mode)}
+function settings(){sheet(`<div class="settings-panel"><div class="top"><button class="x" onclick="sheet('')">✕</button><div><div class="eyebrow">Settings</div><h1 class="serif" style="font-size:32px;font-weight:400">ReviewTayo: CSE</h1></div></div>
+<label class="form-label">Appearance</label><div class="theme-seg">${['device','light','dark'].map(x=>`<button class="${S.theme===x?'sel':''}" onclick="applyTheme('${x}');settings()">${x[0].toUpperCase()+x.slice(1)}</button>`).join('')}</div><div class="theme-note">Dark mode uses the Claude-inspired burgundy palette. Light mode keeps ReviewTayo's cream and maroon identity.</div>
+<div class="settings-panel"><button class="settings-row" onclick="toggleLevel()"><div><b>CSE level</b><small>${S.level}</small></div><span class="chev">›</span></button>
+<button class="settings-row" onclick="editDate()"><div><b>Target exam date</b><small>${S.examDate||'Not set'}</small></div><span class="chev">›</span></button>
+<button class="settings-row" onclick="editGoal()"><div><b>Daily question goal</b><small>${S.goal} questions</small></div><span class="chev">›</span></button>
+<button class="settings-row" onclick="toast('Study reminders · prototype')"><div><b>Study reminders</b><small>${S.reminders?'On':'Off'}</small></div><span class="chev">›</span></button>
+<div class="form-label">Prototype tools</div><button class="settings-row" onclick="startOnboarding()"><div><b>Run onboarding demo</b><small>Preview the full guided setup</small></div><span class="chev">›</span></button></div></div>`)}
+function toggleLevel(){S.level=S.level==='Professional'?'Sub-Professional':'Professional';toast(`Switched to ${S.level}`);settings()}
+function editDate(){sheet(`<div class="top"><button class="x" onclick="settings()">←</button><div><div class="eyebrow">Exam date</div><h1 class="serif" style="font-size:30px;font-weight:400">When is your exam?</h1></div></div><label class="form-label" for="examDateInput">Target date</label><input id="examDateInput" class="field" type="date" value="${S.examDate||''}"><button class="cta mar" style="width:100%;justify-content:center" onclick="saveDate()">Save date</button>`) }
+function saveDate(){const v=$('#examDateInput').value;S.examDate=v;if(v){const d=Math.ceil((new Date(v+'T12:00:00')-new Date())/86400000);S.days=Math.max(0,d)}settings()}
+function editGoal(){sheet(`<div class="top"><button class="x" onclick="settings()">←</button><div><div class="eyebrow">Daily goal</div><h1 class="serif" style="font-size:30px;font-weight:400">Questions per day</h1></div></div><div class="goalgrid" style="margin-top:24px">${[5,10,20].map(n=>`<button class="goal ${S.goal===n?'sel':''}" onclick="S.goal=${n};settings()"><b>${n}</b><small>questions</small></button>`).join('')}</div>`) }
+function timedPractice(){toast('Timed mode · 8 minutes');drill()}
+function morePractice(){sheet(`<div class="top"><button class="x" onclick="sheet('')">✕</button><div><div class="eyebrow">More practice</div><h1 class="serif" style="font-size:32px;font-weight:400">Choose a mode</h1></div></div><div class="mini-grid"><button class="mini-card" onclick="drill()"><b>Random ${N}</b><small>Fresh mixed set</small></button><button class="mini-card" onclick="customQuiz()"><b>Build a Quiz</b><small>Choose question count</small></button><button class="mini-card" onclick="toast('Mastery Rounds · prototype');drill()"><b>Mastery Rounds</b><small>Difficulty rises with you</small></button></div>`)}
+function customQuiz(){sheet(`<div class="top"><button class="x" onclick="morePractice()">←</button><div><div class="eyebrow">Build a Quiz</div><h1 class="serif" style="font-size:32px;font-weight:400">How many questions?</h1></div></div><div class="goalgrid" style="margin-top:22px">${[5,10,20].map(n=>`<button class="goal" onclick="customStart(${n})"><b>${n}</b><small>questions</small></button>`).join('')}</div>`)}
+function customStart(n){Q=shuf(BANK).slice(0,Math.min(n,BANK.length));qi=0;right=0;ask()}
+function subjectPractice(){sheet(`<div class="top"><button class="x" onclick="sheet('')">✕</button><div><div class="eyebrow">Practice by subject</div><h1 class="serif" style="font-size:32px;font-weight:400">Choose a subject</h1></div></div><div class="subject-menu">${subs().map(([name,p])=>`<button class="row" onclick="toast('${name} practice');drill()"><div><b>${name}</b><small>${p}% recent accuracy</small></div><span class="chev">›</span></button>`).join('')}</div>`)}
+function mockExam(resume=false){const total=S.level==='Professional'?170:165,time=S.level==='Professional'?'3h 10m':'2h 40m';sheet(`<div class="top"><button class="x" onclick="sheet('')">✕</button><div class="eyebrow">Mock Exam</div></div><div class="mock-hero"><div class="serif">${S.level}</div><p>${resume?`Resume from ${S.mockProgress}/${total}`:'Full exam simulation'}</p><div class="mock-facts"><div class="mock-fact"><b>${total}</b><small>items</small></div><div class="mock-fact"><b>${time}</b><small>time</small></div><div class="mock-fact"><b>1</b><small>attempt</small></div></div></div><button class="cta mar" style="width:100%;justify-content:center" onclick="mockResult()">${resume?'Resume sample':'Start sample mock'}</button><button class="ghost" onclick="sheet('')">Not now</button>`)}
+function mockResult(){sheet(`<div class="center" style="margin-top:10px"><div class="eyebrow">Mock result</div><div class="serif" style="font-size:88px;color:var(--mar);line-height:1">82</div><b>Study result</b><p style="color:var(--mute);margin-top:6px">Your weakest area is Verbal Ability.</p></div><div style="margin-top:22px">${subs().map(([n,p])=>`<div style="display:flex;justify-content:space-between;margin-top:12px"><span>${n}</span><b>${p}%</b></div><div class="bar"><i style="width:${p}%"></i></div>`).join('')}</div><div class="first-card"><div><small>NEXT 7 DAYS</small><b>Focus on Verbal + timed practice</b><small>Review mistakes → Smart Drill → Mock</small></div></div><button class="cta mar" style="width:100%;justify-content:center" onclick="sheet('');go('progress')">See Progress</button>`)}
+
+/* ---------- drill ---------- */
+let Q=[],qi=0,right=0;
+function drill(){Q=shuf(BANK).slice(0,N);qi=0;right=0;ask()}
+function daily(){Q=[shuf(BANK)[0]];qi=0;right=0;ask()}
+function ask(){const q=Q[qi];
+sheet(`<div class="top"><button class="x" onclick="sheet('');go(S.tab)">✕</button><div class="seg">${Q.map((_,i)=>`<i class="${i<qi?'f':''}"></i>`).join('')}</div></div>
+<div class="eyebrow" style="margin-top:26px">${q.c}</div><h1 class="q serif" style="margin-top:8px">${q.q}</h1>
+<div>${q.o.map((o,i)=>`<button class="opt" onclick="pick(${i},this)"><span>${'ABCD'[i]}</span>${o}</button>`).join('')}</div><div id="fbx" style="display:contents"></div>`)}
+function pick(i,el){const q=Q[qi],ok=i==q.a,os=document.querySelectorAll('.opt');
+os.forEach((b,k)=>{b.disabled=true;if(k==q.a)b.classList.add('right');else if(k==i)b.classList.add('wrong')});
+M[q.c]=Math.max(0,Math.min(3,M[q.c]+(ok?1:-1)));if(ok)right++;S.done++;
+const last=qi==Q.length-1,lv=LV[M[q.c]];
+$('#fbx').innerHTML=`<div class="fb ${ok?'good':'bad'}"><h3 class="serif">${ok?'Correct':'Not quite.'}</h3>
+<p>${ok?'':`Correct answer: <b>${'ABCD'[q.a]}</b>. `}${q.e}</p><div style="margin-bottom:14px"><b>${q.c}</b> <span class="badge lv-${lv}">${lv}</span></div>
+<button class="cta mar" style="margin:0;width:100%;justify-content:center" onclick="next()">${last?'Finish':'Next'}</button>
+${ok?'':'<button class="ghost" onclick="similar()">Try another like this</button><button class="ghost" style="padding-top:0;color:var(--mute)" onclick="toast(\'Concept page · full build\')">Review concept</button>'}</div>`}
+function next(){qi++;qi<Q.length?ask():done()}
+function similar(){const c=Q[qi].c,pool=BANK.filter(b=>b.c==c&&b.q!=Q[qi].q);Q.splice(qi+1,0,pool[0]||shuf(BANK)[0]);next()}
+function done(){const n=Q.length,one=n==1;if(one)S.dailyDone=true;if(!S.streakDone){S.streakDone=true;S.streak++}
+sheet(`<div class="center"><div class="bounce" style="display:inline-block">${owl(130)}</div><h1 class="serif" style="font-size:36px;font-weight:400;margin:20px 0 8px">${one?'Nice one.':'You’re done for today.'}</h1>
+<p style="color:var(--mute)">${right} of ${n} correct · ${S.streak}-day streak<br>${one?'Your Daily Question is checked off.':'Come back tomorrow. Your brain files things while you rest.'}</p>
+<button class="cta mar" onclick="sheet('');go('home')">Back to Home</button></div>`)}
+
+/* ---------- flashcards ---------- */
+let cq=[],ct=0,fl=false;
+function flash(){if(!S.rev)return toast('Nothing due. Nice!');cq=CARDS.map((_,i)=>i);ct=cq.length;fl=false;card()}
+function card(){if(!cq.length){S.rev=Math.max(0,S.rev-ct);return sheet(`<div class="center">${owl(110)}<h1 class="serif" style="font-size:34px;font-weight:400;margin:18px 0 8px">${S.rev?'Nice work.':'Review cleared.'}</h1><p style="color:var(--mute)">${S.rev?S.rev+' items are saved for later.':'Next items are due tomorrow.'}</p><button class="cta mar" onclick="sheet('');go('${S.tab}')">Done</button></div>`)}
+const c=CARDS[cq[0]];sheet(`<div class="top"><button class="x" onclick="sheet('');go(S.tab)">✕</button><div class="seg">${CARDS.map((_,i)=>`<i class="${i<ct-cq.length?'f':''}"></i>`).join('')}</div></div>
+<div class="flash serif ${fl?'back':''}" onclick="fl=!fl;card()">${fl?c[1]:c[0]}</div><p style="text-align:center;color:var(--mute)">${fl?'':'Tap to reveal'}</p>
+<div class="two" style="margin-top:auto"><button class="again" onclick="cq.push(cq.shift());fl=false;card()">Again</button><button class="got" onclick="cq.shift();fl=false;card()">Got it</button></div>`)}
+
+/* ---------- onboarding v2 ---------- */
+let ob=0,obDraft=null;
+const DAYS=['M','T','W','T','F','S','S'];
+function startOnboarding(){ob=0;obDraft={account:'guest',level:S.level,start:S.start==='Just starting'?'beginner':S.start==='Practice-ready'?'practice':'reviewing',examDate:S.examDate||'',studyDays:[0,2,4,5],session:S.session||'Regular',goal:S.goal,appearance:S.theme,textSize:'standard',reminders:S.reminders};renderOb()}
+function obHeader(){return `<div class="ob-brand"><button class="ob-back" onclick="${ob?`ob--;renderOb()`:`settings()`}">${ob?'← Back':' '}</button><strong>🦉 ReviewTayo: CSE</strong><button class="ob-close" onclick="settings()">×</button></div><div class="ob-step">Step ${ob+1} of 8</div><div class="ob-progress">${Array.from({length:8},(_,i)=>`<i class="${i<=ob?'on':''}"></i>`).join('')}</div>`}
+function renderOb(){const d=obDraft;let body='';
+if(ob===0)body=`<h1 class="ob-title serif">Keep your progress?</h1><p class="ob-copy">Choose how ReviewTayo saves your study activity.</p>${[['google','Continue with Google','Sync progress across devices.'],['guest','Continue as guest','Keep progress on this device.']].map(([v,t,x])=>`<button class="ob-choice ${d.account===v?'sel':''}" onclick="d.account='${v}';renderOb()"><div><div class="lead">${t}</div><small>${x}</small></div><span class="mark">${d.account===v?'✓':''}</span></button>`).join('')}`;
+if(ob===1)body=`<h1 class="ob-title serif">Which CSE level are you taking?</h1><p class="ob-copy">We'll match your subjects and mock exams.</p>${[['Professional','Analytical Ability · 170-item mock'],['Sub-Professional','Clerical Ability · 165-item mock']].map(([v,x])=>`<button class="ob-choice ${d.level===v?'sel':''}" onclick="d.level='${v}';renderOb()"><div><div class="lead">${v}</div><small>${x}</small></div><span class="mark">${d.level===v?'✓':''}</span></button>`).join('')}`;
+if(ob===2)body=`<h1 class="ob-title serif">Where should we start?</h1><p class="ob-copy">Pick what sounds closest to you.</p>${[['beginner','Just starting','Build the basics first.'],['reviewing','Reviewing','Find and strengthen weak areas.'],['practice','Practice-ready','Focus on drills and mock exams.']].map(([v,t,x])=>`<button class="ob-choice ${d.start===v?'sel':''}" onclick="d.start='${v}';renderOb()"><div><div class="lead">${t}</div><small>${x}</small></div><span class="mark">${d.start===v?'✓':''}</span></button>`).join('')}<label class="form-label">Exam date <span style="float:right;text-transform:none;letter-spacing:0;font-weight:500">Optional</span></label><input class="field" type="date" value="${d.examDate}" onchange="d.examDate=this.value">`;
+if(ob===3)body=`<h1 class="ob-title serif">When can you usually study?</h1><p class="ob-copy">We'll build your week around your schedule.</p><div class="eyebrow">Study days</div><div class="daygrid">${DAYS.map((x,i)=>`<button class="day ${d.studyDays.includes(i)?'sel':''}" onclick="toggleObDay(${i})">${x}</button>`).join('')}</div><div class="eyebrow">Typical session <span style="float:right;text-transform:none;letter-spacing:0;font-weight:500">Optional</span></div><div class="goalgrid" style="margin-top:10px">${[['Quick','10–15 min'],['Regular','20–30 min'],['Long','45+ min']].map(([v,x])=>`<button class="goal ${d.session===v?'sel':''}" onclick="d.session='${v}';renderOb()"><strong>${v}</strong><small>${x}</small></button>`).join('')}</div>`;
+if(ob===4)body=`<h1 class="ob-title serif">What feels doable most days?</h1><p class="ob-copy">Choose a daily question goal. You can change it anytime.</p><div class="goalgrid">${[[5,'3–5 min'],[10,'5–10 min'],[20,'10–15 min']].map(([n,x])=>`<button class="goal ${d.goal===n?'sel':''}" onclick="d.goal=${n};renderOb()"><b>${n}</b><small>questions<br>${x}</small></button>`).join('')}</div><button class="row" style="margin-top:10px" onclick="customObGoal()"><b>Custom goal</b><span class="chev">›</span></button>`;
+if(ob===5)body=`<h1 class="ob-title serif">Here's your study plan</h1><p class="ob-copy">Review anything you'd like to change.</p><div class="plan-card"><div class="planline"><span>CSE level</span><b>${d.level}</b></div><div class="planline"><span>Starting point</span><b>${obStartLabel(d.start)}</b></div><div class="planline"><span>Study days</span><b>${obDaysLabel(d.studyDays)}</b></div><div class="planline"><span>Daily goal</span><b>${d.goal} questions</b></div><div class="planline"><span>Session</span><b>${d.session||'Flexible'}</b></div><div class="planline"><span>Exam date</span><b>${d.examDate||'Not set'}</b></div></div><div class="first-card">${owl(46,'20 8 160 145')}<div><small>YOUR FIRST ACTIVITY</small><b>${d.start==='beginner'?'Foundation diagnostic':d.start==='practice'?'Smart Drill':'Verbal Ability diagnostic'}</b><small>${Math.min(d.goal,10)} questions · ~10 min</small></div></div><button class="ghost" onclick="ob=1;renderOb()">Adjust plan</button>`;
+if(ob===6)body=`<h1 class="ob-title serif">Make it yours</h1><p class="ob-copy">A few optional preferences before you begin.</p><div class="eyebrow">Appearance</div><div class="theme-seg">${['device','light','dark'].map(x=>`<button class="${d.appearance===x?'sel':''}" onclick="d.appearance='${x}';previewObTheme('${x}');renderOb()">${x[0].toUpperCase()+x.slice(1)}</button>`).join('')}</div><div class="eyebrow" style="margin-top:22px">Text size</div><div class="plan-card" style="margin-top:8px"><span style="font-size:${d.textSize==='large'?'18px':d.textSize==='extra'?'21px':'16px'}">Plentiful means available in large amounts.</span></div><div class="theme-seg">${[['standard','Standard'],['large','Large'],['extra','Extra Large']].map(([v,t])=>`<button class="${d.textSize===v?'sel':''}" onclick="d.textSize='${v}';renderOb()">${t}</button>`).join('')}</div><div class="eyebrow" style="margin-top:22px">Study reminders</div><p style="color:var(--mute);margin:6px 0 10px">Build the habit with a reminder on your study days.</p><div class="two"><button class="${d.reminders?'got':'again'}" onclick="d.reminders=true;renderOb()">Enable reminders</button><button class="${!d.reminders?'got':'again'}" onclick="d.reminders=false;renderOb()">Not now</button></div>`;
+if(ob===7)body=`<div class="center" style="margin-top:8px">${owl(126,'0 0 200 220')}<h1 class="ob-title serif" style="font-size:38px;margin-top:8px">You're all set!</h1><p class="ob-copy" style="margin-bottom:12px">Your CSE study plan is ready.</p><div class="ob-stats"><span class="ob-stat">${d.level}</span><span class="ob-stat">${d.goal} / day</span><span class="ob-stat">${d.studyDays.length||'Flexible'} study days</span></div></div><div class="first-card"><div><small>FIRST UP</small><b>${d.start==='beginner'?'Foundation diagnostic':d.start==='practice'?'Smart Drill':'Verbal Ability diagnostic'}</b><small>${Math.min(d.goal,10)} questions · ~10 min</small></div></div><p style="text-align:center;color:var(--mute);font-size:12px;margin-top:14px">${d.account==='guest'?'Saved on this device. Create an account later to sync.':'Progress sync is ready.'}</p>`;
+const primary=ob===7?'Start my first practice →':'Continue →';const secondary=(ob===3||ob===6)?'<button class="ghost" onclick="ob++;renderOb()">Skip</button>':ob===7?'<button class="ghost" onclick="commitOnboarding(false)">Explore Home</button>':'';
+sheet(`<div class="onboard-shell">${obHeader()}<div class="ob-body">${body}</div><div class="ob-footer"><button class="cta mar" onclick="${ob===7?'commitOnboarding(true)':'ob++;renderOb()'}">${primary}</button>${secondary}</div></div>`)}
+function toggleObDay(i){const a=obDraft.studyDays,j=a.indexOf(i);j>=0?a.splice(j,1):a.push(i);renderOb()}
+function obDaysLabel(a){if(!a.length)return 'Flexible';return a.map(i=>['Mon','Tue','Wed','Thu','Fri','Sat','Sun'][i]).join(' · ')}
+function obStartLabel(v){return v==='beginner'?'Just starting':v==='practice'?'Practice-ready':'Reviewing'}
+function customObGoal(){const n=prompt('Questions per day (5–50)',obDraft.goal);const v=Math.max(5,Math.min(50,+n||obDraft.goal));obDraft.goal=v;renderOb()}
+function previewObTheme(mode){if(mode==='device')document.documentElement.removeAttribute('data-theme');else document.documentElement.setAttribute('data-theme',mode)}
+function commitOnboarding(startPractice){const d=obDraft;S.level=d.level;S.goal=d.goal;S.start=obStartLabel(d.start);S.sched=obDaysLabel(d.studyDays);S.session=d.session||'Flexible';S.examDate=d.examDate;S.theme=d.appearance;S.reminders=d.reminders;applyTheme(S.theme);if(d.examDate){S.days=Math.max(0,Math.ceil((new Date(d.examDate+'T12:00:00')-new Date())/86400000))}sheet('');go('home');if(startPractice)setTimeout(()=>drill(),150)}
+document.addEventListener('keydown',e=>{if(e.key=='Escape'&&$('#sheet').className=='on'){sheet('');go(S.tab)}});
+applyTheme(S.theme);go('home');
+</script></body></html>

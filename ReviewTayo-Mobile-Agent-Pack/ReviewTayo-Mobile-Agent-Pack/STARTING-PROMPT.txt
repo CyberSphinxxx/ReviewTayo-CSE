@@ -1,0 +1,13 @@
+Read `START-HERE.md`, `AGENTS.md`, `MASTER-AGENT-PROMPT.md`, and `agent/DEVELOPMENT-LOOP.md`.
+
+Treat `references/merged-prototype/` as the design and interaction source of truth and `agent/MASTER-CHECKLIST.md` plus `DEFINITION-OF-DONE.md` as the engineering source of truth.
+
+Begin at Phase 0. Inspect the existing ReviewTayo repository before creating or changing architecture. Build the mobile application inside `/mobile` using Expo + React Native + TypeScript + Expo Router and npm.
+
+Continue autonomously through every phase. Implement, test, diagnose, fix, self-review, document decisions, update persistent agent state, and continue to the next task. Do not stop after a partial feature, a successful build, or a single green test suite.
+
+Use the scalable generic exam engine described in `exams/`. The v1 UI is CSE-only, but generic services must not be CSE-hardcoded. Reuse existing ReviewTayo backend/API/contracts where practical without destabilizing the web app. Core study behavior must be offline-first.
+
+If a session ends for tool/context limits, update `agent/PROJECT-STATE.md`, `agent/PROJECT-STATE.json`, and `agent/HANDOFF.md` so the next session resumes exactly where you stopped.
+
+Only stop when `DEFINITION-OF-DONE.md` passes with zero unresolved internal blockers. Ask me only for genuinely external requirements such as credentials, signing access, or an irreversible product decision not covered by the pack.

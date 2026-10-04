@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "phase": "03-exam-core",
+  "currentTask": "Phase 3 — generic exam contracts, registry, validation, CSE configs, fixture exam",
+  "lastCompletedTask": "phase-02-design-system",
+  "nextAction": "Implement src/domain/exams contracts + registry, CSE Professional/Sub-Professional configs, second-exam fixture, validation tests",
+  "lastSuccessfulBuild": "expo export --platform android (PASS, 2.9MB Hermes bundle)",
+  "failingTests": [],
+  "testSummary": {
+    "suites": 2,
+    "tests": 64,
+    "passed": 64,
+    "failed": 0
+  },
+  "externalBlockers": [
+    {
+      "id": "google-oauth-credentials",
+      "detail": "Live Google sign-in verification needs client IDs. Provider boundary + fake provider are implemented and tested; Guest mode is fully functional."
+    },
+    {
+      "id": "production-api-endpoint",
+      "detail": "Live sync verification needs a ReviewTayo API base URL + credentials. Contract-first client and local-only transport are implemented and tested."
+    }
+  ],
+  "internalBlockers": [],
+  "verifiedBaseline": {
+    "typecheck": "pass",
+    "lint": "pass",
+    "format": "pass",
+    "tests": "pass",
+    "androidBundle": "pass"
+  },
+  "completedPhases": ["00-repo-audit", "01-bootstrap", "02-design-system"],
+  "partialItems": [
+    "phase-2: responsive/small-device visual checks require a device or emulator pass",
+    "phase-2: bottom navigation belongs to Phase 5 (route shell)"
+  ],
+  "environment": {
+    "node": "24.16.0",
+    "npm": "11.13.0",
+    "expoSdk": "57.0.26",
+    "reactNative": "0.86.3",
+    "react": "19.2.3",
+    "typescript": "6.0.3",
+    "androidSdkInstalled": false,
+    "javaPresent": true
+  },
+  "decisions": {
+    "platforms": ["android", "ios"],
+    "primaryQaPlatform": "android",
+    "mobilePath": "/mobile",
+    "framework": "Expo React Native TypeScript",
+    "router": "Expo Router",
+    "packageManager": "npm",
+    "appId": "com.reviewtayo.cse",
+    "offlineFirst": true,
+    "realGoogleArchitecture": true,
+    "syncExistingBackendWhenPossible": true,
+    "cseOnlyUiV1": true,
+    "genericExamCore": true,
+    "realLocalNotifications": true,
+    "analyticsDefault": "vendor-neutral-noop",
+    "webRefactorForSharing": false,
+    "productionCodeRefactorOutsideMobile": false
+  }
+}

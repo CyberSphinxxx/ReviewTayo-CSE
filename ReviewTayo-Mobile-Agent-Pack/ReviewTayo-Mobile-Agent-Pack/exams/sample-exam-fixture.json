@@ -1,0 +1,50 @@
+{
+  "id": "fixture-exam",
+  "version": 1,
+  "name": "Architecture Fixture Exam",
+  "shortName": "FIXTURE",
+  "authority": "Internal test only",
+  "tracks": [
+    {
+      "id": "default",
+      "name": "Default",
+      "subjectIds": [
+        "subject-a"
+      ]
+    }
+  ],
+  "subjects": [
+    {
+      "id": "subject-a",
+      "name": "Subject A",
+      "shortName": "A",
+      "conceptIds": [
+        "concept-a"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "id": "concept-a",
+      "subjectId": "subject-a",
+      "name": "Concept A"
+    }
+  ],
+  "blueprint": {
+    "sections": [
+      {
+        "subjectId": "subject-a",
+        "questionCount": 5
+      }
+    ]
+  },
+  "timing": {
+    "totalMinutes": 10
+  },
+  "scoring": {
+    "mode": "raw-correct"
+  },
+  "studyPolicy": {
+    "supportsSmartDrill": true
+  }
+}
