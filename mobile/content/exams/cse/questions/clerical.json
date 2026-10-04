@@ -1,0 +1,341 @@
+[
+  {
+    "id": "cse-clerical-file-01",
+    "examId": "cse",
+    "trackIds": ["subprofessional"],
+    "subjectId": "clerical-ability",
+    "conceptIds": ["alphabetizing-and-filing"],
+    "difficulty": "standard",
+    "cognitiveSkill": "alphabetical-order",
+    "stem": "Which name should be filed first?",
+    "choices": [
+      { "id": "a", "text": "Dela Cruz" },
+      { "id": "b", "text": "Delgado" },
+      { "id": "c", "text": "Domingo" },
+      { "id": "d", "text": "Dizon" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "Compare letter by letter: all four start with “Di/De”. “Dela” and “Delgado” share “Del”, and the fourth letter “a” comes before “g”, so Dela Cruz is first.",
+    "relatedQuestionGroupId": "cse-clerical-file-a",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-clerical-file-02",
+    "examId": "cse",
+    "trackIds": ["subprofessional"],
+    "subjectId": "clerical-ability",
+    "conceptIds": ["alphabetizing-and-filing"],
+    "difficulty": "easy",
+    "cognitiveSkill": "alphabetical-order",
+    "stem": "Four records share the surname Reyes. When filing by surname first, which is filed first?",
+    "choices": [
+      { "id": "a", "text": "Reyes, Ana" },
+      { "id": "b", "text": "Reyes, Ben" },
+      { "id": "c", "text": "Reyes, Carlo" },
+      { "id": "d", "text": "Reyes, Dan" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "When surnames are identical, the given name decides the order. Ana comes before Ben, Carlo and Dan.",
+    "relatedQuestionGroupId": "cse-clerical-file-a",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-clerical-file-03",
+    "examId": "cse",
+    "trackIds": ["subprofessional"],
+    "subjectId": "clerical-ability",
+    "conceptIds": ["alphabetizing-and-filing"],
+    "difficulty": "challenging",
+    "cognitiveSkill": "alphabetical-order",
+    "stem": "Which of these names would be filed last?",
+    "choices": [
+      { "id": "a", "text": "Bautista" },
+      { "id": "b", "text": "Bautista-Santos" },
+      { "id": "c", "text": "Bauzon" },
+      { "id": "d", "text": "Bayani" }
+    ],
+    "correctChoiceId": "d",
+    "explanation": "All begin with “Ba”. The third letter decides: “u” comes before “y”, so the Bautista and Bauzon entries precede Bayani. Within the “Bau” group the fourth letter is “t” before “z”, and “Bautista” is shorter than “Bautista-Santos”, so Bayani is last.",
+    "relatedQuestionGroupId": "cse-clerical-file-b",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-clerical-file-04",
+    "examId": "cse",
+    "trackIds": ["subprofessional"],
+    "subjectId": "clerical-ability",
+    "conceptIds": ["alphabetizing-and-filing"],
+    "difficulty": "standard",
+    "cognitiveSkill": "alphabetical-order",
+    "stem": "In this file list, which entry is out of order? — Cruz, Jose · Cruz, Maria · Dizon, Ana · Cruz, Pedro",
+    "choices": [
+      { "id": "a", "text": "Cruz, Jose" },
+      { "id": "b", "text": "Cruz, Maria" },
+      { "id": "c", "text": "Dizon, Ana" },
+      { "id": "d", "text": "Cruz, Pedro" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "All names beginning with “Cruz” must be filed together. “Dizon, Ana” interrupts them and belongs after the Cruz entries.",
+    "relatedQuestionGroupId": "cse-clerical-file-b",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+
+  {
+    "id": "cse-clerical-spelling-01",
+    "examId": "cse",
+    "trackIds": ["subprofessional"],
+    "subjectId": "clerical-ability",
+    "conceptIds": ["spelling-and-word-usage"],
+    "difficulty": "easy",
+    "cognitiveSkill": "spelling",
+    "stem": "Which word is spelled correctly?",
+    "choices": [
+      { "id": "a", "text": "recieve" },
+      { "id": "b", "text": "receive" },
+      { "id": "c", "text": "receve" },
+      { "id": "d", "text": "receeve" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "Use the rule “i before e except after c”: receive is spelled with “ei” because it follows “c”.",
+    "relatedQuestionGroupId": "cse-clerical-spelling-a",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-clerical-spelling-02",
+    "examId": "cse",
+    "trackIds": ["subprofessional"],
+    "subjectId": "clerical-ability",
+    "conceptIds": ["spelling-and-word-usage"],
+    "difficulty": "standard",
+    "cognitiveSkill": "spelling",
+    "stem": "Which word is spelled correctly?",
+    "choices": [
+      { "id": "a", "text": "accomodate" },
+      { "id": "b", "text": "accommodate" },
+      { "id": "c", "text": "acommodate" },
+      { "id": "d", "text": "accommadate" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "Accommodate has double “c” and double “m”. Remembering “two c’s, two m’s” settles it.",
+    "relatedQuestionGroupId": "cse-clerical-spelling-a",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-clerical-spelling-03",
+    "examId": "cse",
+    "trackIds": ["subprofessional"],
+    "subjectId": "clerical-ability",
+    "conceptIds": ["spelling-and-word-usage"],
+    "difficulty": "standard",
+    "cognitiveSkill": "word-usage",
+    "stem": "Which sentence uses the correct word?",
+    "choices": [
+      { "id": "a", "text": "The new rule will affect our schedule." },
+      { "id": "b", "text": "The new rule will effect our schedule." },
+      { "id": "c", "text": "The new rule will affects our schedule." },
+      { "id": "d", "text": "The new rule will effecting our schedule." }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "“Affect” is the verb meaning to influence. “Effect” is normally a noun meaning result, and the other two options are not grammatical after “will”.",
+    "relatedQuestionGroupId": "cse-clerical-spelling-b",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-clerical-spelling-04",
+    "examId": "cse",
+    "trackIds": ["subprofessional"],
+    "subjectId": "clerical-ability",
+    "conceptIds": ["spelling-and-word-usage"],
+    "difficulty": "standard",
+    "cognitiveSkill": "spelling",
+    "stem": "Which word is spelled correctly?",
+    "choices": [
+      { "id": "a", "text": "seperate" },
+      { "id": "b", "text": "separate" },
+      { "id": "c", "text": "seperete" },
+      { "id": "d", "text": "separat" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "Separate has “par” in the middle — think of “a rat” separating the “se” and the “ate”.",
+    "relatedQuestionGroupId": "cse-clerical-spelling-b",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+
+  {
+    "id": "cse-clerical-check-01",
+    "examId": "cse",
+    "trackIds": ["subprofessional"],
+    "subjectId": "clerical-ability",
+    "conceptIds": ["clerical-checking"],
+    "difficulty": "standard",
+    "cognitiveSkill": "accuracy",
+    "stem": "Which pair of reference numbers is NOT identical?",
+    "choices": [
+      { "id": "a", "text": "8-2451 and 8-2451" },
+      { "id": "b", "text": "39-7210 and 39-7120" },
+      { "id": "c", "text": "502-118 and 502-118" },
+      { "id": "d", "text": "61-0407 and 61-0407" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "In pair B the last four digits differ: 7210 versus 7120 — the second and third digits are swapped.",
+    "relatedQuestionGroupId": "cse-clerical-check-a",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-clerical-check-02",
+    "examId": "cse",
+    "trackIds": ["subprofessional"],
+    "subjectId": "clerical-ability",
+    "conceptIds": ["clerical-checking"],
+    "difficulty": "standard",
+    "cognitiveSkill": "accuracy",
+    "stem": "Which code is different from the other three?",
+    "choices": [
+      { "id": "a", "text": "NCR-0091" },
+      { "id": "b", "text": "NCR-0091" },
+      { "id": "c", "text": "NCR-0910" },
+      { "id": "d", "text": "NCR-0091" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "Three entries read NCR-0091. Only NCR-0910 has a different digit arrangement.",
+    "relatedQuestionGroupId": "cse-clerical-check-a",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-clerical-check-03",
+    "examId": "cse",
+    "trackIds": ["subprofessional"],
+    "subjectId": "clerical-ability",
+    "conceptIds": ["clerical-checking"],
+    "difficulty": "easy",
+    "cognitiveSkill": "counting",
+    "stem": "How many times does the digit 7 appear in the number 77,407?",
+    "choices": [
+      { "id": "a", "text": "2" },
+      { "id": "b", "text": "3" },
+      { "id": "c", "text": "4" },
+      { "id": "d", "text": "1" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "The digits are 7, 7, 4, 0, 7 — three of them are 7.",
+    "relatedQuestionGroupId": "cse-clerical-check-b",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-clerical-check-04",
+    "examId": "cse",
+    "trackIds": ["subprofessional"],
+    "subjectId": "clerical-ability",
+    "conceptIds": ["clerical-checking"],
+    "difficulty": "standard",
+    "cognitiveSkill": "computation",
+    "stem": "1,204 + 3,096 + 700 = ?",
+    "choices": [
+      { "id": "a", "text": "4,900" },
+      { "id": "b", "text": "5,000" },
+      { "id": "c", "text": "5,100" },
+      { "id": "d", "text": "4,000" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "1,204 + 3,096 = 4,300, then adding 700 gives 5,000.",
+    "relatedQuestionGroupId": "cse-clerical-check-b",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+
+  {
+    "id": "cse-clerical-record-01",
+    "examId": "cse",
+    "trackIds": ["subprofessional"],
+    "subjectId": "clerical-ability",
+    "conceptIds": ["record-keeping"],
+    "difficulty": "standard",
+    "cognitiveSkill": "computation",
+    "stem": "A ledger shows a beginning balance of ₱5,000, receipts of ₱2,300 and disbursements of ₱1,800. What is the ending balance?",
+    "choices": [
+      { "id": "a", "text": "₱4,500" },
+      { "id": "b", "text": "₱5,500" },
+      { "id": "c", "text": "₱9,100" },
+      { "id": "d", "text": "₱5,300" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "Ending balance = beginning + receipts − disbursements = 5,000 + 2,300 − 1,800 = ₱5,500.",
+    "relatedQuestionGroupId": "cse-clerical-record-a",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-clerical-record-02",
+    "examId": "cse",
+    "trackIds": ["subprofessional"],
+    "subjectId": "clerical-ability",
+    "conceptIds": ["record-keeping"],
+    "difficulty": "standard",
+    "cognitiveSkill": "computation",
+    "stem": "A record book holds 48 entries per page. If 25 pages are completely filled and the last page has 12 entries, how many entries are there in all?",
+    "choices": [
+      { "id": "a", "text": "1,200" },
+      { "id": "b", "text": "1,212" },
+      { "id": "c", "text": "1,188" },
+      { "id": "d", "text": "1,250" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "25 × 48 = 1,200, plus the 12 entries on the last page gives 1,212.",
+    "relatedQuestionGroupId": "cse-clerical-record-a",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-clerical-record-03",
+    "examId": "cse",
+    "trackIds": ["subprofessional"],
+    "subjectId": "clerical-ability",
+    "conceptIds": ["record-keeping"],
+    "difficulty": "challenging",
+    "cognitiveSkill": "error-detection",
+    "stem": "A column of figures totals ₱12,480, but an entry of ₱340 was posted twice. What is the corrected total?",
+    "choices": [
+      { "id": "a", "text": "₱12,140" },
+      { "id": "b", "text": "₱12,820" },
+      { "id": "c", "text": "₱12,480" },
+      { "id": "d", "text": "₱11,800" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "Remove the duplicate posting: 12,480 − 340 = ₱12,140.",
+    "relatedQuestionGroupId": "cse-clerical-record-b",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-clerical-record-04",
+    "examId": "cse",
+    "trackIds": ["subprofessional"],
+    "subjectId": "clerical-ability",
+    "conceptIds": ["record-keeping"],
+    "difficulty": "standard",
+    "cognitiveSkill": "computation",
+    "stem": "A filing cabinet has 6 drawers with 85 folders in each drawer. If 137 folders are removed, how many folders remain?",
+    "choices": [
+      { "id": "a", "text": "373" },
+      { "id": "b", "text": "480" },
+      { "id": "c", "text": "400" },
+      { "id": "d", "text": "347" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "6 × 85 = 510 folders in all. Removing 137 leaves 510 − 137 = 373.",
+    "relatedQuestionGroupId": "cse-clerical-record-b",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  }
+]

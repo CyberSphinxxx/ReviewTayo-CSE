@@ -1,0 +1,129 @@
+{
+  "id": "fixture-exam",
+  "version": 1,
+  "name": "Architecture Fixture Exam",
+  "shortName": "FIXTURE",
+  "authority": "Internal test only",
+  "description": "A deliberately non-CSE exam used to prove the engine is generic. It never ships to users.",
+  "defaultTrackId": "default",
+  "tracks": [
+    {
+      "id": "default",
+      "name": "Default",
+      "shortName": "Default",
+      "description": "Single track used to prove that track handling is not CSE-specific.",
+      "subjectIds": ["cataloguing", "reference-service"]
+    }
+  ],
+  "subjects": [
+    {
+      "id": "cataloguing",
+      "name": "Cataloguing",
+      "shortName": "Cataloguing",
+      "order": 1,
+      "conceptIds": ["classification-schemes", "catalogue-entries"]
+    },
+    {
+      "id": "reference-service",
+      "name": "Reference Service",
+      "shortName": "Reference",
+      "order": 2,
+      "conceptIds": ["reference-interview"]
+    }
+  ],
+  "concepts": [
+    {
+      "id": "classification-schemes",
+      "subjectId": "cataloguing",
+      "name": "Classification Schemes",
+      "tags": ["fixture"],
+      "summary": "Choose the scheme that matches how the collection is used."
+    },
+    {
+      "id": "catalogue-entries",
+      "subjectId": "cataloguing",
+      "name": "Catalogue Entries",
+      "tags": ["fixture"],
+      "summary": "Record the elements a borrower actually searches for."
+    },
+    {
+      "id": "reference-interview",
+      "subjectId": "reference-service",
+      "name": "Reference Interview",
+      "tags": ["fixture"],
+      "summary": "Find out what the reader needs before answering."
+    }
+  ],
+  "blueprint": {
+    "sections": [
+      { "subjectId": "cataloguing", "questionCount": 5 },
+      { "subjectId": "reference-service", "questionCount": 5 }
+    ],
+    "totalItems": 10
+  },
+  "timing": {
+    "totalMinutes": 10,
+    "perQuestionSeconds": 60,
+    "allowPause": true,
+    "pauseLimitMinutes": 120
+  },
+  "scoring": {
+    "mode": "raw-correct",
+    "pointsPerCorrect": 1,
+    "penaltyPerWrong": 0,
+    "passingPercent": 0.75
+  },
+  "studyPolicy": {
+    "supportsSmartDrill": true,
+    "supportsTimedPractice": true,
+    "supportsDailyQuestion": true,
+    "supportsMasteryRounds": true,
+    "supportsBuildAQuiz": true,
+    "drillSize": 5,
+    "weakestAreaMinimumAttempts": 3,
+    "needsAttentionAccuracy": 0.75,
+    "timedPracticeQuestionCount": 5,
+    "timedPracticeMinutes": 5,
+    "dailyQuestionMinutes": 2,
+    "review": {
+      "gotItIntervalDays": [1, 2, 4],
+      "againIntervalDays": 1,
+      "dailyDueLimit": 10
+    },
+    "mastery": {
+      "levelCount": 4,
+      "developingThreshold": 0.35,
+      "strongThreshold": 0.55,
+      "masteredThreshold": 0.8,
+      "correctDelta": 1,
+      "wrongDelta": 1
+    },
+    "journeyPhases": [
+      {
+        "id": "warm-up",
+        "name": "Warm-up Phase",
+        "minDaysRemaining": 21,
+        "description": "Fixture phase used to prove phase configuration is data."
+      },
+      {
+        "id": "steady",
+        "name": "Steady Phase",
+        "minDaysRemaining": 7,
+        "description": "Fixture phase used to prove phase configuration is data."
+      },
+      {
+        "id": "exam-week",
+        "name": "Exam Week",
+        "minDaysRemaining": 0,
+        "description": "Fixture phase used to prove phase configuration is data."
+      }
+    ],
+    "smartDrillWeights": {
+      "weakness": 3,
+      "dueReview": 2,
+      "unseen": 2,
+      "lowCoverage": 1,
+      "recentLesson": 1
+    }
+  }
+}

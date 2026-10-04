@@ -1,0 +1,156 @@
+[
+  {
+    "id": "vocabulary",
+    "subjectId": "verbal-ability",
+    "name": "Vocabulary",
+    "tags": ["word-meaning", "context"],
+    "summary": "Use context and word parts to choose the precise meaning of a word."
+  },
+  {
+    "id": "grammar-and-usage",
+    "subjectId": "verbal-ability",
+    "name": "Grammar and Usage",
+    "tags": ["syntax", "agreement"],
+    "summary": "Match subjects and verbs, keep tenses consistent, and place modifiers correctly."
+  },
+  {
+    "id": "sentence-completion",
+    "subjectId": "verbal-ability",
+    "name": "Sentence Completion",
+    "tags": ["context-clues", "contrast-signals"],
+    "summary": "Read the signal words — contrast, cause, addition — to predict what fits the blank."
+  },
+  {
+    "id": "reading-comprehension",
+    "subjectId": "verbal-ability",
+    "name": "Reading Comprehension",
+    "tags": ["main-idea", "inference"],
+    "summary": "Separate the main idea from supporting detail and answer only what the passage supports."
+  },
+  {
+    "id": "analogy",
+    "subjectId": "verbal-ability",
+    "name": "Analogy",
+    "tags": ["relationships", "pairing"],
+    "summary": "Name the relationship in the given pair first, then look for the same relationship."
+  },
+  {
+    "id": "basic-operations",
+    "subjectId": "numerical-ability",
+    "name": "Basic Operations",
+    "tags": ["order-of-operations", "integers"],
+    "summary": "Apply PEMDAS carefully and keep signs straight when adding and subtracting."
+  },
+  {
+    "id": "fractions-and-decimals",
+    "subjectId": "numerical-ability",
+    "name": "Fractions and Decimals",
+    "tags": ["conversion", "lowest-terms"],
+    "summary": "Convert between fractions, decimals and percents, then simplify to lowest terms."
+  },
+  {
+    "id": "percentages",
+    "subjectId": "numerical-ability",
+    "name": "Percentages",
+    "tags": ["discount", "increase"],
+    "summary": "Break percentages into friendly parts (10%, 5%, 1%) to compute them mentally."
+  },
+  {
+    "id": "ratio-and-proportion",
+    "subjectId": "numerical-ability",
+    "name": "Ratio and Proportion",
+    "tags": ["scaling", "sharing"],
+    "summary": "Set up the proportion so matching units sit opposite each other, then solve."
+  },
+  {
+    "id": "word-problems",
+    "subjectId": "numerical-ability",
+    "name": "Word Problems",
+    "tags": ["translation", "age-work-money"],
+    "summary": "Translate the sentence into an equation before calculating anything."
+  },
+  {
+    "id": "number-series",
+    "subjectId": "analytical-ability",
+    "name": "Number Series",
+    "tags": ["patterns", "differences"],
+    "summary": "Check differences first, then ratios, then alternating or combined patterns."
+  },
+  {
+    "id": "logical-deduction",
+    "subjectId": "analytical-ability",
+    "name": "Logical Deduction",
+    "tags": ["syllogism", "ordering"],
+    "summary": "Accept only what the premises force; reject anything that merely sounds likely."
+  },
+  {
+    "id": "data-interpretation",
+    "subjectId": "analytical-ability",
+    "name": "Data Interpretation",
+    "tags": ["tables", "comparison"],
+    "summary": "Read the question before the data so you know which figure actually matters."
+  },
+  {
+    "id": "assumptions-and-conclusions",
+    "subjectId": "analytical-ability",
+    "name": "Assumptions and Conclusions",
+    "tags": ["assumption", "strengthen-weaken"],
+    "summary": "An assumption is an unstated premise the argument needs; a conclusion follows from it."
+  },
+  {
+    "id": "alphabetizing-and-filing",
+    "subjectId": "clerical-ability",
+    "name": "Alphabetizing and Filing",
+    "tags": ["letter-order", "names"],
+    "summary": "Compare letter by letter from the left, and file surnames before given names."
+  },
+  {
+    "id": "spelling-and-word-usage",
+    "subjectId": "clerical-ability",
+    "name": "Spelling and Word Usage",
+    "tags": ["spelling", "confusables"],
+    "summary": "Watch for doubled letters and commonly confused pairs such as affect and effect."
+  },
+  {
+    "id": "clerical-checking",
+    "subjectId": "clerical-ability",
+    "name": "Clerical Checking",
+    "tags": ["accuracy", "comparison"],
+    "summary": "Compare digit by digit and group long numbers so nothing shifts unnoticed."
+  },
+  {
+    "id": "record-keeping",
+    "subjectId": "clerical-ability",
+    "name": "Record Keeping",
+    "tags": ["totals", "balances"],
+    "summary": "Keep totals and balances consistent; a difference of one entry should be traceable."
+  },
+  {
+    "id": "philippine-constitution",
+    "subjectId": "general-information",
+    "name": "Philippine Constitution",
+    "tags": ["1987-constitution", "bill-of-rights"],
+    "summary": "Know the structure of government, the Bill of Rights and the independent commissions."
+  },
+  {
+    "id": "code-of-conduct-and-ethics",
+    "subjectId": "general-information",
+    "name": "Code of Conduct and Ethics",
+    "tags": ["ra-6713", "public-service"],
+    "summary": "Remember the eight norms of conduct and the duties expected of every public servant."
+  },
+  {
+    "id": "peace-and-human-rights",
+    "subjectId": "general-information",
+    "name": "Peace and Human Rights",
+    "tags": ["human-rights", "due-process"],
+    "summary": "Know the basic rights guaranteed by the Constitution and how they may be limited."
+  },
+  {
+    "id": "environment-management",
+    "subjectId": "general-information",
+    "name": "Environment Management",
+    "tags": ["waste", "conservation"],
+    "summary": "Apply the reduce-reuse-recycle hierarchy and know the agencies responsible for it."
+  }
+]

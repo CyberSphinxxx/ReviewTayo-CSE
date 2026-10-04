@@ -50,22 +50,22 @@ Status legend:
 - [ ] responsive/small-device checks. *(needs a device/emulator pass — tracked in VISUAL-QA.md)*
 
 ## Phase 3 — Exam core
-- [ ] ExamRuleConfig.
-- [ ] ExamRegistry.
-- [ ] ExamTrack.
-- [ ] SubjectDefinition.
-- [ ] ConceptDefinition.
-- [ ] Question contract.
-- [ ] ExamBlueprint.
-- [ ] TimingRules.
-- [ ] ScoringRules.
-- [ ] StudyPolicy.
-- [ ] config validation.
-- [ ] content manifest/versioning.
-- [ ] CSE Professional config.
-- [ ] CSE Sub-Professional config.
-- [ ] exam fixture for second-exam validation.
-- [ ] generic engine tests.
+- [x] ExamRuleConfig.
+- [x] ExamRegistry.
+- [x] ExamTrack.
+- [x] SubjectDefinition.
+- [x] ConceptDefinition.
+- [x] Question contract.
+- [x] ExamBlueprint.
+- [x] TimingRules.
+- [x] ScoringRules.
+- [x] StudyPolicy.
+- [x] config validation.
+- [x] content manifest/versioning.
+- [x] CSE Professional config.
+- [x] CSE Sub-Professional config.
+- [x] exam fixture for second-exam validation.
+- [x] generic engine tests.
 
 ## Phase 4 — Data / offline
 - [ ] SQLite bootstrap.

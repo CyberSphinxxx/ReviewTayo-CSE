@@ -1,0 +1,95 @@
+{
+  "id": "cse",
+  "version": 1,
+  "name": "Career Service Examination",
+  "shortName": "CSE",
+  "authority": "Civil Service Commission (Philippines)",
+  "description": "The Philippine Civil Service Examination, taken at the Professional or Sub-Professional level.",
+  "defaultTrackId": "professional",
+  "blueprint": {
+    "sections": [
+      { "subjectId": "verbal-ability", "questionCount": 50 },
+      { "subjectId": "numerical-ability", "questionCount": 45 },
+      { "subjectId": "analytical-ability", "questionCount": 45 },
+      { "subjectId": "general-information", "questionCount": 30 }
+    ],
+    "totalItems": 170
+  },
+  "timing": {
+    "totalMinutes": 190,
+    "perQuestionSeconds": 67,
+    "allowPause": true,
+    "pauseLimitMinutes": 720
+  },
+  "scoring": {
+    "mode": "raw-correct",
+    "pointsPerCorrect": 1,
+    "penaltyPerWrong": 0,
+    "passingPercent": 0.8
+  },
+  "studyPolicy": {
+    "supportsSmartDrill": true,
+    "supportsTimedPractice": true,
+    "supportsDailyQuestion": true,
+    "supportsMasteryRounds": true,
+    "supportsBuildAQuiz": true,
+    "drillSize": 10,
+    "weakestAreaMinimumAttempts": 8,
+    "needsAttentionAccuracy": 0.7,
+    "timedPracticeQuestionCount": 10,
+    "timedPracticeMinutes": 8,
+    "dailyQuestionMinutes": 1,
+    "review": {
+      "gotItIntervalDays": [1, 3, 7, 16, 35],
+      "againIntervalDays": 1,
+      "dailyDueLimit": 40
+    },
+    "mastery": {
+      "levelCount": 4,
+      "developingThreshold": 0.4,
+      "strongThreshold": 0.6,
+      "masteredThreshold": 0.85,
+      "correctDelta": 1,
+      "wrongDelta": 1
+    },
+    "journeyPhases": [
+      {
+        "id": "foundation",
+        "name": "Foundation Phase",
+        "minDaysRemaining": 90,
+        "description": "Build the basics across every subject before worrying about speed."
+      },
+      {
+        "id": "accuracy",
+        "name": "Accuracy Phase",
+        "minDaysRemaining": 30,
+        "description": "Accuracy first. Slow down on weak concepts and drive mistakes down."
+      },
+      {
+        "id": "speed",
+        "name": "Speed Phase",
+        "minDaysRemaining": 14,
+        "description": "Same accuracy, less time. Start timing your practice sets."
+      },
+      {
+        "id": "mock-week",
+        "name": "Mock Week",
+        "minDaysRemaining": 7,
+        "description": "Full timed simulations. Treat each one as the real examination."
+      },
+      {
+        "id": "final-review",
+        "name": "Final Review",
+        "minDaysRemaining": 0,
+        "description": "Light review only. Rest, review quick sheets, and protect your confidence."
+      }
+    ],
+    "smartDrillWeights": {
+      "weakness": 3,
+      "dueReview": 2.5,
+      "unseen": 2,
+      "lowCoverage": 1.5,
+      "recentLesson": 1
+    }
+  }
+}

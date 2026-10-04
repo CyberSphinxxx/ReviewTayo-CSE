@@ -1,0 +1,341 @@
+[
+  {
+    "id": "cse-analytical-series-01",
+    "examId": "cse",
+    "trackIds": ["professional"],
+    "subjectId": "analytical-ability",
+    "conceptIds": ["number-series"],
+    "difficulty": "easy",
+    "cognitiveSkill": "pattern-recognition",
+    "stem": "What number comes next? 2, 4, 8, 16, ______",
+    "choices": [
+      { "id": "a", "text": "24" },
+      { "id": "b", "text": "32" },
+      { "id": "c", "text": "20" },
+      { "id": "d", "text": "18" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "Each term doubles the previous one, so 16 × 2 = 32.",
+    "relatedQuestionGroupId": "cse-analytical-series-a",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-analytical-series-02",
+    "examId": "cse",
+    "trackIds": ["professional"],
+    "subjectId": "analytical-ability",
+    "conceptIds": ["number-series"],
+    "difficulty": "easy",
+    "cognitiveSkill": "pattern-recognition",
+    "stem": "What number comes next? 3, 7, 11, 15, ______",
+    "choices": [
+      { "id": "a", "text": "18" },
+      { "id": "b", "text": "19" },
+      { "id": "c", "text": "20" },
+      { "id": "d", "text": "23" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "The difference between consecutive terms is a constant 4, so 15 + 4 = 19.",
+    "relatedQuestionGroupId": "cse-analytical-series-a",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-analytical-series-03",
+    "examId": "cse",
+    "trackIds": ["professional"],
+    "subjectId": "analytical-ability",
+    "conceptIds": ["number-series"],
+    "difficulty": "standard",
+    "cognitiveSkill": "pattern-recognition",
+    "stem": "What number comes next? 1, 4, 9, 16, ______",
+    "choices": [
+      { "id": "a", "text": "20" },
+      { "id": "b", "text": "24" },
+      { "id": "c", "text": "25" },
+      { "id": "d", "text": "32" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "These are perfect squares: 1², 2², 3², 4², so the next term is 5² = 25. The differences (3, 5, 7) confirm it.",
+    "relatedQuestionGroupId": "cse-analytical-series-b",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-analytical-series-04",
+    "examId": "cse",
+    "trackIds": ["professional"],
+    "subjectId": "analytical-ability",
+    "conceptIds": ["number-series"],
+    "difficulty": "challenging",
+    "cognitiveSkill": "pattern-recognition",
+    "stem": "What number comes next? 2, 6, 12, 20, 30, ______",
+    "choices": [
+      { "id": "a", "text": "36" },
+      { "id": "b", "text": "40" },
+      { "id": "c", "text": "42" },
+      { "id": "d", "text": "44" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "Each term is n × (n + 1): 1×2, 2×3, 3×4, 4×5, 5×6, so the next is 6×7 = 42. The differences 4, 6, 8, 10, 12 also increase by 2 each time.",
+    "relatedQuestionGroupId": "cse-analytical-series-b",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+
+  {
+    "id": "cse-analytical-logic-01",
+    "examId": "cse",
+    "trackIds": ["professional"],
+    "subjectId": "analytical-ability",
+    "conceptIds": ["logical-deduction"],
+    "difficulty": "easy",
+    "cognitiveSkill": "deduction",
+    "stem": "All clerks in the office are licensed. All licensed staff have completed training. Therefore:",
+    "choices": [
+      { "id": "a", "text": "All clerks in the office have completed training." },
+      { "id": "b", "text": "Some clerks have not completed training." },
+      { "id": "c", "text": "Only clerks have completed training." },
+      { "id": "d", "text": "No licensed staff are clerks." }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "Chaining the two universal statements gives: clerks → licensed → trained. So every clerk has completed training.",
+    "relatedQuestionGroupId": "cse-analytical-logic-a",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-analytical-logic-02",
+    "examId": "cse",
+    "trackIds": ["professional"],
+    "subjectId": "analytical-ability",
+    "conceptIds": ["logical-deduction"],
+    "difficulty": "standard",
+    "cognitiveSkill": "deduction",
+    "stem": "No member of the committee was absent. Maria is a member of the committee. Therefore:",
+    "choices": [
+      { "id": "a", "text": "Maria was absent." },
+      { "id": "b", "text": "Maria was not absent." },
+      { "id": "c", "text": "Maria is not a member of the committee." },
+      { "id": "d", "text": "Some members were absent." }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "If no member was absent, then every member — Maria included — was present.",
+    "relatedQuestionGroupId": "cse-analytical-logic-a",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-analytical-logic-03",
+    "examId": "cse",
+    "trackIds": ["professional"],
+    "subjectId": "analytical-ability",
+    "conceptIds": ["logical-deduction"],
+    "difficulty": "easy",
+    "cognitiveSkill": "ordering",
+    "stem": "Rina is taller than Ana. Ana is taller than Joy. Who is the shortest?",
+    "choices": [
+      { "id": "a", "text": "Rina" },
+      { "id": "b", "text": "Ana" },
+      { "id": "c", "text": "Joy" },
+      { "id": "d", "text": "Cannot be determined" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "Ordering from tallest: Rina, Ana, Joy. Joy is the shortest.",
+    "relatedQuestionGroupId": "cse-analytical-logic-b",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-analytical-logic-04",
+    "examId": "cse",
+    "trackIds": ["professional"],
+    "subjectId": "analytical-ability",
+    "conceptIds": ["logical-deduction"],
+    "difficulty": "challenging",
+    "cognitiveSkill": "ordering",
+    "stem": "Lito, Maya, Nena and Omar finished a race at different times. Lito finished before Maya but after Omar. Nena finished last. Who finished first?",
+    "choices": [
+      { "id": "a", "text": "Lito" },
+      { "id": "b", "text": "Maya" },
+      { "id": "c", "text": "Omar" },
+      { "id": "d", "text": "Nena" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "Omar finished before Lito, who finished before Maya, and Nena was last. The order is Omar, Lito, Maya, Nena — so Omar finished first.",
+    "relatedQuestionGroupId": "cse-analytical-logic-b",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+
+  {
+    "id": "cse-analytical-data-01",
+    "examId": "cse",
+    "trackIds": ["professional"],
+    "subjectId": "analytical-ability",
+    "conceptIds": ["data-interpretation"],
+    "difficulty": "easy",
+    "cognitiveSkill": "data-reading",
+    "stem": "Enrolment by office — Accounting: 120, HR: 80, Operations: 150, IT: 50. Which office has the most enrollees?",
+    "choices": [
+      { "id": "a", "text": "Accounting" },
+      { "id": "b", "text": "HR" },
+      { "id": "c", "text": "Operations" },
+      { "id": "d", "text": "IT" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "Comparing the four figures, 150 in Operations is the largest.",
+    "relatedQuestionGroupId": "cse-analytical-data-a",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-analytical-data-02",
+    "examId": "cse",
+    "trackIds": ["professional"],
+    "subjectId": "analytical-ability",
+    "conceptIds": ["data-interpretation"],
+    "difficulty": "standard",
+    "cognitiveSkill": "data-reading",
+    "stem": "Enrolment by office — Accounting: 120, HR: 80, Operations: 150, IT: 50. What percentage of the total is IT?",
+    "choices": [
+      { "id": "a", "text": "10%" },
+      { "id": "b", "text": "12.5%" },
+      { "id": "c", "text": "15%" },
+      { "id": "d", "text": "20%" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "The total is 120 + 80 + 150 + 50 = 400, so IT is 50 ÷ 400 = 0.125, or 12.5%.",
+    "relatedQuestionGroupId": "cse-analytical-data-a",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-analytical-data-03",
+    "examId": "cse",
+    "trackIds": ["professional"],
+    "subjectId": "analytical-ability",
+    "conceptIds": ["data-interpretation"],
+    "difficulty": "challenging",
+    "cognitiveSkill": "data-reading",
+    "stem": "Sales were ₱80,000 in January, ₱100,000 in February and ₱90,000 in March. What is the percent change from January to March?",
+    "choices": [
+      { "id": "a", "text": "10% increase" },
+      { "id": "b", "text": "12.5% increase" },
+      { "id": "c", "text": "12.5% decrease" },
+      { "id": "d", "text": "10% decrease" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "Compare March with January, not February: (90,000 − 80,000) ÷ 80,000 = 0.125, which is a 12.5% increase. February is a distractor.",
+    "relatedQuestionGroupId": "cse-analytical-data-b",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-analytical-data-04",
+    "examId": "cse",
+    "trackIds": ["professional"],
+    "subjectId": "analytical-ability",
+    "conceptIds": ["data-interpretation"],
+    "difficulty": "standard",
+    "cognitiveSkill": "data-reading",
+    "stem": "A report covers five regions, and three of them exceeded their targets. What fraction of the regions did NOT exceed their targets?",
+    "choices": [
+      { "id": "a", "text": "1/5" },
+      { "id": "b", "text": "2/5" },
+      { "id": "c", "text": "3/5" },
+      { "id": "d", "text": "1/2" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "If three of the five exceeded their targets, the remaining 5 − 3 = 2 did not, which is 2/5 of the regions.",
+    "relatedQuestionGroupId": "cse-analytical-data-b",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+
+  {
+    "id": "cse-analytical-assumption-01",
+    "examId": "cse",
+    "trackIds": ["professional"],
+    "subjectId": "analytical-ability",
+    "conceptIds": ["assumptions-and-conclusions"],
+    "difficulty": "challenging",
+    "cognitiveSkill": "assumption",
+    "stem": "Proposal: “Adding two lanes to the highway will reduce traffic congestion.” Which statement is an assumption the proposal depends on?",
+    "choices": [
+      { "id": "a", "text": "Traffic volume will not grow faster than the added road capacity." },
+      { "id": "b", "text": "The highway is the only road in the city." },
+      { "id": "c", "text": "Drivers prefer to travel at night." },
+      { "id": "d", "text": "Public transport will be abolished." }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "The proposal only works if extra capacity is not immediately swallowed by extra traffic. The other options are far stronger than the argument requires.",
+    "relatedQuestionGroupId": "cse-analytical-assumption-a",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-analytical-assumption-02",
+    "examId": "cse",
+    "trackIds": ["professional"],
+    "subjectId": "analytical-ability",
+    "conceptIds": ["assumptions-and-conclusions"],
+    "difficulty": "standard",
+    "cognitiveSkill": "deduction",
+    "stem": "All successful applicants passed the written examination. Rico did not pass the written examination. Therefore:",
+    "choices": [
+      { "id": "a", "text": "Rico is a successful applicant." },
+      { "id": "b", "text": "Rico is not a successful applicant." },
+      { "id": "c", "text": "Rico applied late." },
+      { "id": "d", "text": "No one passed the examination." }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "Failing the examination excludes Rico from the group of successful applicants.",
+    "relatedQuestionGroupId": "cse-analytical-assumption-a",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-analytical-assumption-03",
+    "examId": "cse",
+    "trackIds": ["professional"],
+    "subjectId": "analytical-ability",
+    "conceptIds": ["assumptions-and-conclusions"],
+    "difficulty": "challenging",
+    "cognitiveSkill": "weaken-argument",
+    "stem": "Argument: “Our store should open an hour earlier, because nearby competitor stores that open earlier report 15% more morning sales.” Which finding would most weaken this argument?",
+    "choices": [
+      { "id": "a", "text": "The competitors' extra morning customers are commuters who pass only that location." },
+      { "id": "b", "text": "Our store sells the same products as the competitors." },
+      { "id": "c", "text": "Our store has more employees than the competitors." },
+      { "id": "d", "text": "The competitors also run evening promotions." }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "If the extra sales come from traffic that our location never sees, then opening earlier would not reproduce those sales — the comparison is not transferable.",
+    "relatedQuestionGroupId": "cse-analytical-assumption-b",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-analytical-assumption-04",
+    "examId": "cse",
+    "trackIds": ["professional"],
+    "subjectId": "analytical-ability",
+    "conceptIds": ["assumptions-and-conclusions"],
+    "difficulty": "standard",
+    "cognitiveSkill": "flaw-identification",
+    "stem": "“Students who review daily score higher. Therefore, reviewing daily is what causes higher scores.” What is the flaw in this reasoning?",
+    "choices": [
+      { "id": "a", "text": "It treats a correlation as proof of causation." },
+      { "id": "b", "text": "It uses too few students." },
+      { "id": "c", "text": "It assumes students never review twice a day." },
+      { "id": "d", "text": "It ignores the difficulty of the examination." }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "The observation is only that the two go together. Disciplined students might both review daily and score higher for other reasons, so causation is not established.",
+    "relatedQuestionGroupId": "cse-analytical-assumption-b",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  }
+]

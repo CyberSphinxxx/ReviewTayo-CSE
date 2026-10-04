@@ -1,0 +1,202 @@
+[
+  {
+    "id": "fixture-cat-01",
+    "examId": "fixture-exam",
+    "trackIds": ["default"],
+    "subjectId": "cataloguing",
+    "conceptIds": ["classification-schemes"],
+    "difficulty": "easy",
+    "stem": "Which scheme groups materials by discipline using numeric notation?",
+    "choices": [
+      { "id": "a", "text": "Dewey Decimal Classification" },
+      { "id": "b", "text": "An alphabetical author list" },
+      { "id": "c", "text": "A shelf list" },
+      { "id": "d", "text": "An accession register" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "Dewey arranges knowledge by discipline with numeric notation.",
+    "relatedQuestionGroupId": "fixture-cat-a",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "fixture-cat-02",
+    "examId": "fixture-exam",
+    "trackIds": ["default"],
+    "subjectId": "cataloguing",
+    "conceptIds": ["classification-schemes"],
+    "difficulty": "standard",
+    "stem": "A library's readers browse by subject most often. Which classification approach should it prioritise?",
+    "choices": [
+      { "id": "a", "text": "A subject-based classification" },
+      { "id": "b", "text": "A colour-coded shelf" },
+      { "id": "c", "text": "Order of acquisition" },
+      { "id": "d", "text": "Author surname only" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "Browsing by subject is best served by subject-based classification.",
+    "relatedQuestionGroupId": "fixture-cat-a",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "fixture-cat-03",
+    "examId": "fixture-exam",
+    "trackIds": ["default"],
+    "subjectId": "cataloguing",
+    "conceptIds": ["catalogue-entries"],
+    "difficulty": "standard",
+    "stem": "Which element should a catalogue entry always include so a borrower can locate the item?",
+    "choices": [
+      { "id": "a", "text": "The call number" },
+      { "id": "b", "text": "The cover designer" },
+      { "id": "c", "text": "The printing company" },
+      { "id": "d", "text": "The acquisition price" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "The call number is how the borrower finds the item on the shelf.",
+    "relatedQuestionGroupId": "fixture-cat-b",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "fixture-cat-04",
+    "examId": "fixture-exam",
+    "trackIds": ["default"],
+    "subjectId": "cataloguing",
+    "conceptIds": ["catalogue-entries"],
+    "difficulty": "challenging",
+    "stem": "A record lists the title but no author. What is the most likely consequence?",
+    "choices": [
+      { "id": "a", "text": "An author search will not find the item" },
+      { "id": "b", "text": "The item cannot be shelved" },
+      { "id": "c", "text": "The item must be discarded" },
+      { "id": "d", "text": "The call number becomes invalid" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "The item is still shelved and retrievable, but author searches will miss it.",
+    "relatedQuestionGroupId": "fixture-cat-b",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "fixture-cat-05",
+    "examId": "fixture-exam",
+    "trackIds": ["default"],
+    "subjectId": "cataloguing",
+    "conceptIds": ["classification-schemes"],
+    "difficulty": "standard",
+    "stem": "What is the main purpose of consistent classification?",
+    "choices": [
+      { "id": "a", "text": "Placing related items together on the shelf" },
+      { "id": "b", "text": "Making shelves look tidy" },
+      { "id": "c", "text": "Reducing the number of acquisitions" },
+      { "id": "d", "text": "Recording staff borrowings" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "Consistency puts related material in the same place, which is what makes browsing work.",
+    "relatedQuestionGroupId": "fixture-cat-a",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "fixture-ref-01",
+    "examId": "fixture-exam",
+    "trackIds": ["default"],
+    "subjectId": "reference-service",
+    "conceptIds": ["reference-interview"],
+    "difficulty": "standard",
+    "stem": "What is the purpose of a reference interview?",
+    "choices": [
+      { "id": "a", "text": "To clarify what the reader actually needs" },
+      { "id": "b", "text": "To test the reader's knowledge" },
+      { "id": "c", "text": "To collect a fine" },
+      { "id": "d", "text": "To record the reader's address" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "The interview turns an initial question into a clear information need.",
+    "relatedQuestionGroupId": "fixture-ref-a",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "fixture-ref-02",
+    "examId": "fixture-exam",
+    "trackIds": ["default"],
+    "subjectId": "reference-service",
+    "conceptIds": ["reference-interview"],
+    "difficulty": "easy",
+    "stem": "A reader asks for “everything about the topic”. What should staff do first?",
+    "choices": [
+      { "id": "a", "text": "Ask what they plan to use the information for" },
+      { "id": "b", "text": "Hand over every available title" },
+      { "id": "c", "text": "Refuse the request" },
+      { "id": "d", "text": "Send them to the internet" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "Knowing the purpose narrows an otherwise unanswerable request.",
+    "relatedQuestionGroupId": "fixture-ref-a",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "fixture-ref-03",
+    "examId": "fixture-exam",
+    "trackIds": ["default"],
+    "subjectId": "reference-service",
+    "conceptIds": ["reference-interview"],
+    "difficulty": "challenging",
+    "stem": "A reader repeats the same question after receiving an answer. What is the best response?",
+    "choices": [
+      { "id": "a", "text": "Re-check the original need and confirm the answer met it" },
+      { "id": "b", "text": "Give the identical answer again" },
+      { "id": "c", "text": "Assume the reader was not listening" },
+      { "id": "d", "text": "End the interaction" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "A repeated question usually means the underlying need was not captured.",
+    "relatedQuestionGroupId": "fixture-ref-b",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "fixture-ref-04",
+    "examId": "fixture-exam",
+    "trackIds": ["default"],
+    "subjectId": "reference-service",
+    "conceptIds": ["reference-interview"],
+    "difficulty": "standard",
+    "stem": "Which behaviour best follows up a reference enquiry?",
+    "choices": [
+      { "id": "a", "text": "Asking whether the material answered the question" },
+      { "id": "b", "text": "Closing the desk" },
+      { "id": "c", "text": "Recording the reader's borrowing history" },
+      { "id": "d", "text": "Filing the question as closed without contact" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "Follow-up confirms whether the need was actually met and reveals any misunderstanding.",
+    "relatedQuestionGroupId": "fixture-ref-b",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "fixture-ref-05",
+    "examId": "fixture-exam",
+    "trackIds": ["default"],
+    "subjectId": "reference-service",
+    "conceptIds": ["reference-interview"],
+    "difficulty": "standard",
+    "stem": "Which question is most useful during a reference interview?",
+    "choices": [
+      { "id": "a", "text": "“What will you do with the information once you have it?”" },
+      { "id": "b", "text": "“Why did you not look it up yourself?”" },
+      { "id": "c", "text": "“Are you a member?”" },
+      { "id": "d", "text": "“Do you own a computer?”" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "Purpose questions reveal the real need without interrogating the reader.",
+    "relatedQuestionGroupId": "fixture-ref-b",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  }
+]

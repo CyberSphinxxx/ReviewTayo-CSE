@@ -1,0 +1,426 @@
+[
+  {
+    "id": "cse-verbal-vocabulary-01",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "verbal-ability",
+    "conceptIds": ["vocabulary"],
+    "difficulty": "standard",
+    "cognitiveSkill": "recall",
+    "stem": "Choose the word closest in meaning to “ephemeral”.",
+    "choices": [
+      { "id": "a", "text": "Lasting" },
+      { "id": "b", "text": "Brief" },
+      { "id": "c", "text": "Ancient" },
+      { "id": "d", "text": "Fragile" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "Ephemeral describes something that lasts only a very short time, so “brief” is the closest match. “Fragile” describes weakness, not duration.",
+    "relatedQuestionGroupId": "cse-verbal-vocabulary-a",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-verbal-vocabulary-02",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "verbal-ability",
+    "conceptIds": ["vocabulary"],
+    "difficulty": "easy",
+    "cognitiveSkill": "recall",
+    "stem": "“Meticulous” most nearly means:",
+    "choices": [
+      { "id": "a", "text": "Careless" },
+      { "id": "b", "text": "Hasty" },
+      { "id": "c", "text": "Very careful" },
+      { "id": "d", "text": "Boastful" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "Meticulous means showing great attention to detail — the opposite of careless or hasty.",
+    "relatedQuestionGroupId": "cse-verbal-vocabulary-a",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-verbal-vocabulary-03",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "verbal-ability",
+    "conceptIds": ["vocabulary"],
+    "difficulty": "challenging",
+    "cognitiveSkill": "recall",
+    "stem": "“Ubiquitous” most nearly means:",
+    "choices": [
+      { "id": "a", "text": "Rare" },
+      { "id": "b", "text": "Present everywhere" },
+      { "id": "c", "text": "Outdated" },
+      { "id": "d", "text": "Carefully hidden" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "Ubiquitous means found everywhere at the same time. Its opposite is rare.",
+    "relatedQuestionGroupId": "cse-verbal-vocabulary-b",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-verbal-vocabulary-04",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "verbal-ability",
+    "conceptIds": ["vocabulary"],
+    "difficulty": "standard",
+    "cognitiveSkill": "recall",
+    "stem": "“Candid” is closest in meaning to:",
+    "choices": [
+      { "id": "a", "text": "Deceptive" },
+      { "id": "b", "text": "Frank" },
+      { "id": "c", "text": "Cautious" },
+      { "id": "d", "text": "Formal" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "Candid means honest and straightforward — frank. It is the opposite of deceptive.",
+    "relatedQuestionGroupId": "cse-verbal-vocabulary-b",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+
+  {
+    "id": "cse-verbal-grammar-01",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "verbal-ability",
+    "conceptIds": ["grammar-and-usage"],
+    "difficulty": "standard",
+    "cognitiveSkill": "application",
+    "stem": "Neither of the clerks ______ ready for the audit.",
+    "choices": [
+      { "id": "a", "text": "are" },
+      { "id": "b", "text": "is" },
+      { "id": "c", "text": "were" },
+      { "id": "d", "text": "be" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "“Neither” is singular, so it takes the singular verb “is”. The noun in the following phrase (“clerks”) does not change the subject.",
+    "relatedQuestionGroupId": "cse-verbal-grammar-a",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-verbal-grammar-02",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "verbal-ability",
+    "conceptIds": ["grammar-and-usage"],
+    "difficulty": "challenging",
+    "cognitiveSkill": "application",
+    "stem": "The number of applicants ______ increased this year.",
+    "choices": [
+      { "id": "a", "text": "have" },
+      { "id": "b", "text": "has" },
+      { "id": "c", "text": "having" },
+      { "id": "d", "text": "are" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "“The number of” is singular, so it takes “has”. (“A number of applicants” would be plural and take “have”.)",
+    "relatedQuestionGroupId": "cse-verbal-grammar-a",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-verbal-grammar-03",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "verbal-ability",
+    "conceptIds": ["grammar-and-usage"],
+    "difficulty": "standard",
+    "cognitiveSkill": "application",
+    "stem": "Which sentence is grammatically correct?",
+    "choices": [
+      { "id": "a", "text": "She had went to the office before the meeting started." },
+      { "id": "b", "text": "She had gone to the office before the meeting started." },
+      { "id": "c", "text": "She had go to the office before the meeting started." },
+      { "id": "d", "text": "She has went to the office before the meeting started." }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "The past perfect is “had” plus the past participle “gone”. “Went” is the simple past and cannot follow “had” or “has”.",
+    "relatedQuestionGroupId": "cse-verbal-grammar-b",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-verbal-grammar-04",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "verbal-ability",
+    "conceptIds": ["grammar-and-usage"],
+    "difficulty": "challenging",
+    "cognitiveSkill": "analysis",
+    "stem": "It was the manager, not the clerks, who ______ late.",
+    "choices": [
+      { "id": "a", "text": "were" },
+      { "id": "b", "text": "are" },
+      { "id": "c", "text": "was" },
+      { "id": "d", "text": "be" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "The relative clause attaches to “the manager”, which is singular, so “was” is correct. “Not the clerks” is parenthetical and does not control the verb.",
+    "relatedQuestionGroupId": "cse-verbal-grammar-b",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+
+  {
+    "id": "cse-verbal-completion-01",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "verbal-ability",
+    "conceptIds": ["sentence-completion"],
+    "difficulty": "standard",
+    "cognitiveSkill": "application",
+    "stem": "The new policy was ______ by employees, who welcomed the shorter queues.",
+    "choices": [
+      { "id": "a", "text": "lamented" },
+      { "id": "b", "text": "embraced" },
+      { "id": "c", "text": "ignored" },
+      { "id": "d", "text": "contested" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "The clause “who welcomed the shorter queues” tells us the reaction was positive, so the blank needs a positive word: embraced.",
+    "relatedQuestionGroupId": "cse-verbal-completion-a",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-verbal-completion-02",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "verbal-ability",
+    "conceptIds": ["sentence-completion"],
+    "difficulty": "challenging",
+    "cognitiveSkill": "analysis",
+    "stem": "Despite her ______ manner, she remained a fierce negotiator.",
+    "choices": [
+      { "id": "a", "text": "aggressive" },
+      { "id": "b", "text": "mild" },
+      { "id": "c", "text": "hostile" },
+      { "id": "d", "text": "arrogant" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "“Despite” signals contrast with “fierce”, so the blank must describe the opposite quality: mild.",
+    "relatedQuestionGroupId": "cse-verbal-completion-a",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-verbal-completion-03",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "verbal-ability",
+    "conceptIds": ["sentence-completion"],
+    "difficulty": "standard",
+    "cognitiveSkill": "application",
+    "stem": "The hall was so ______ that even a whisper carried to the back row.",
+    "choices": [
+      { "id": "a", "text": "crowded" },
+      { "id": "b", "text": "quiet" },
+      { "id": "c", "text": "bright" },
+      { "id": "d", "text": "warm" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "A whisper being audible across the room is only remarkable if the hall was very quiet.",
+    "relatedQuestionGroupId": "cse-verbal-completion-b",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-verbal-completion-04",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "verbal-ability",
+    "conceptIds": ["sentence-completion"],
+    "difficulty": "challenging",
+    "cognitiveSkill": "analysis",
+    "stem": "He was promoted not because he was the most brilliant, but because he was the most ______.",
+    "choices": [
+      { "id": "a", "text": "outspoken" },
+      { "id": "b", "text": "popular" },
+      { "id": "c", "text": "diligent" },
+      { "id": "d", "text": "talented" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "The “not … but …” construction sets up a contrast with brilliance, so the blank must name a different quality — steady effort, or diligence.",
+    "relatedQuestionGroupId": "cse-verbal-completion-b",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+
+  {
+    "id": "cse-verbal-reading-01",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "verbal-ability",
+    "conceptIds": ["reading-comprehension"],
+    "difficulty": "standard",
+    "cognitiveSkill": "comprehension",
+    "stem": "The barangay council approved an ordinance requiring stores to segregate their waste. Vendors first objected, citing the cost of extra bins. After the council offered free bins for the first year, compliance rose sharply. — What caused compliance to rise?",
+    "choices": [
+      { "id": "a", "text": "Vendors were fined for not complying." },
+      { "id": "b", "text": "The council provided the bins at no cost." },
+      { "id": "c", "text": "The ordinance was later withdrawn." },
+      { "id": "d", "text": "Vendors changed the kind of goods they sold." }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "The passage states the objection was cost and that compliance rose after free bins were offered. Nothing in the passage mentions fines or withdrawal.",
+    "relatedQuestionGroupId": "cse-verbal-reading-a",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-verbal-reading-02",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "verbal-ability",
+    "conceptIds": ["reading-comprehension"],
+    "difficulty": "standard",
+    "cognitiveSkill": "inference",
+    "stem": "The barangay council approved an ordinance requiring stores to segregate their waste. Vendors first objected, citing the cost of extra bins. After the council offered free bins for the first year, compliance rose sharply. — Which statement is supported by the passage?",
+    "choices": [
+      { "id": "a", "text": "Vendors opposed the ordinance mainly because of expense." },
+      { "id": "b", "text": "Vendors believed segregation was unnecessary." },
+      { "id": "c", "text": "The council ignored the vendors' concerns." },
+      { "id": "d", "text": "Compliance remained low throughout the year." }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "The only objection the passage reports is the cost of extra bins. The other options describe positions the passage never states.",
+    "relatedQuestionGroupId": "cse-verbal-reading-a",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-verbal-reading-03",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "verbal-ability",
+    "conceptIds": ["reading-comprehension"],
+    "difficulty": "challenging",
+    "cognitiveSkill": "inference",
+    "stem": "Many students assume that studying longer guarantees higher scores. Research on retrieval practice suggests otherwise: short, frequent self-testing often produces better retention than rereading notes for the same total time. — What does the passage suggest?",
+    "choices": [
+      { "id": "a", "text": "Studying longer is always better." },
+      { "id": "b", "text": "How study time is used matters more than how much time is spent." },
+      { "id": "c", "text": "Rereading notes is the most effective method." },
+      { "id": "d", "text": "Self-testing only helps students who already score well." }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "The passage contrasts two methods given equal total time, so the distinguishing factor is how the time is used, not the amount.",
+    "relatedQuestionGroupId": "cse-verbal-reading-b",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-verbal-reading-04",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "verbal-ability",
+    "conceptIds": ["reading-comprehension"],
+    "difficulty": "standard",
+    "cognitiveSkill": "vocabulary-in-context",
+    "stem": "Many students assume that studying longer guarantees higher scores. Research on retrieval practice suggests otherwise: short, frequent self-testing often produces better retention than rereading notes for the same total time. — In the passage, “retention” most nearly means:",
+    "choices": [
+      { "id": "a", "text": "The ability to remember" },
+      { "id": "b", "text": "The act of writing notes" },
+      { "id": "c", "text": "The length of a study session" },
+      { "id": "d", "text": "The difficulty of a test" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "In this context retention is how much of the material the learner can keep and recall.",
+    "relatedQuestionGroupId": "cse-verbal-reading-b",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+
+  {
+    "id": "cse-verbal-analogy-01",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "verbal-ability",
+    "conceptIds": ["analogy"],
+    "difficulty": "easy",
+    "cognitiveSkill": "relationships",
+    "stem": "PEN : WRITER :: NEEDLE : ______",
+    "choices": [
+      { "id": "a", "text": "CLOTH" },
+      { "id": "b", "text": "TAILOR" },
+      { "id": "c", "text": "THREAD" },
+      { "id": "d", "text": "SEW" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "A pen is the tool of a writer, so the needle is the tool of a tailor. “Thread” is used with a needle but is not the person who uses it.",
+    "relatedQuestionGroupId": "cse-verbal-analogy-a",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-verbal-analogy-02",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "verbal-ability",
+    "conceptIds": ["analogy"],
+    "difficulty": "easy",
+    "cognitiveSkill": "relationships",
+    "stem": "PUPPY : DOG :: CUB : ______",
+    "choices": [
+      { "id": "a", "text": "DEN" },
+      { "id": "b", "text": "HERD" },
+      { "id": "c", "text": "BEAR" },
+      { "id": "d", "text": "FOREST" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "The relationship is young animal to adult animal. A cub is the young of a bear (or another large mammal).",
+    "relatedQuestionGroupId": "cse-verbal-analogy-a",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-verbal-analogy-03",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "verbal-ability",
+    "conceptIds": ["analogy"],
+    "difficulty": "standard",
+    "cognitiveSkill": "relationships",
+    "stem": "THIRSTY : DRINK :: TIRED : ______",
+    "choices": [
+      { "id": "a", "text": "WALK" },
+      { "id": "b", "text": "REST" },
+      { "id": "c", "text": "WORK" },
+      { "id": "d", "text": "YAWN" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "The relationship is condition to its remedy. A thirsty person drinks; a tired person rests. A yawn is a sign of tiredness, not its remedy.",
+    "relatedQuestionGroupId": "cse-verbal-analogy-b",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-verbal-analogy-04",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "verbal-ability",
+    "conceptIds": ["analogy"],
+    "difficulty": "challenging",
+    "cognitiveSkill": "relationships",
+    "stem": "DROUGHT : RAIN :: FAMINE : ______",
+    "choices": [
+      { "id": "a", "text": "HUNGER" },
+      { "id": "b", "text": "HARVEST" },
+      { "id": "c", "text": "FOOD" },
+      { "id": "d", "text": "CROP" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "Rain relieves a drought; food relieves a famine. Hunger is the condition itself, not the relief.",
+    "relatedQuestionGroupId": "cse-verbal-analogy-b",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  }
+]

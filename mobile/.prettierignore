@@ -1,0 +1,12 @@
+# Authored exam content is reviewed and edited by hand: keeping one question per
+# block preserves the readable diff that content review depends on. Prettier still
+# formats every source file, config and documentation file in the project.
+content/exams/**/questions/*.json
+content/exams/*/questions.json
+
+# Build output
+dist/
+coverage/
+android/
+ios/
+.expo/

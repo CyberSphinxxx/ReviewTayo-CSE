@@ -1,0 +1,69 @@
+[
+  {
+    "id": "verbal-ability",
+    "name": "Verbal Ability",
+    "shortName": "Verbal",
+    "order": 1,
+    "category": "Core",
+    "conceptIds": [
+      "vocabulary",
+      "grammar-and-usage",
+      "sentence-completion",
+      "reading-comprehension",
+      "analogy"
+    ]
+  },
+  {
+    "id": "numerical-ability",
+    "name": "Numerical Ability",
+    "shortName": "Numerical",
+    "order": 2,
+    "category": "Core",
+    "conceptIds": [
+      "basic-operations",
+      "fractions-and-decimals",
+      "percentages",
+      "ratio-and-proportion",
+      "word-problems"
+    ]
+  },
+  {
+    "id": "analytical-ability",
+    "name": "Analytical Ability",
+    "shortName": "Analytical",
+    "order": 3,
+    "category": "Professional",
+    "conceptIds": [
+      "number-series",
+      "logical-deduction",
+      "data-interpretation",
+      "assumptions-and-conclusions"
+    ]
+  },
+  {
+    "id": "clerical-ability",
+    "name": "Clerical Ability",
+    "shortName": "Clerical",
+    "order": 3,
+    "category": "Sub-Professional",
+    "conceptIds": [
+      "alphabetizing-and-filing",
+      "spelling-and-word-usage",
+      "clerical-checking",
+      "record-keeping"
+    ]
+  },
+  {
+    "id": "general-information",
+    "name": "General Information",
+    "shortName": "General Info",
+    "order": 4,
+    "category": "Core",
+    "conceptIds": [
+      "philippine-constitution",
+      "code-of-conduct-and-ethics",
+      "peace-and-human-rights",
+      "environment-management"
+    ]
+  }
+]

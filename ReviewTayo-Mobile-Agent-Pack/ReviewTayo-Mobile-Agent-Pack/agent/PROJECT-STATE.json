@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
-  "phase": "03-exam-core",
-  "currentTask": "Phase 3 — generic exam contracts, registry, validation, CSE configs, fixture exam",
-  "lastCompletedTask": "phase-02-design-system",
-  "nextAction": "Implement src/domain/exams contracts + registry, CSE Professional/Sub-Professional configs, second-exam fixture, validation tests",
-  "lastSuccessfulBuild": "expo export --platform android (PASS, 2.9MB Hermes bundle)",
+  "phase": "04-data-offline",
+  "currentTask": "Phase 4 — SQLite bootstrap, migrations, repositories, content import, sync outbox",
+  "lastCompletedTask": "phase-03-exam-core",
+  "nextAction": "Implement DatabasePort (expo-sqlite + node:sqlite), migration framework, repository interfaces + local implementations, content import and outbox",
+  "lastSuccessfulBuild": "expo export --platform android (PASS)",
   "failingTests": [],
   "testSummary": {
-    "suites": 2,
-    "tests": 64,
-    "passed": 64,
+    "suites": 8,
+    "tests": 182,
+    "passed": 182,
     "failed": 0
   },
   "externalBlockers": [
@@ -30,7 +30,13 @@
     "tests": "pass",
     "androidBundle": "pass"
   },
-  "completedPhases": ["00-repo-audit", "01-bootstrap", "02-design-system"],
+  "completedPhases": ["00-repo-audit", "01-bootstrap", "02-design-system", "03-exam-core"],
+  "contentStats": {
+    "cseQuestions": 88,
+    "cseConcepts": 22,
+    "cseTracks": 2,
+    "fixtureQuestions": 10
+  },
   "partialItems": [
     "phase-2: responsive/small-device visual checks require a device or emulator pass",
     "phase-2: bottom navigation belongs to Phase 5 (route shell)"

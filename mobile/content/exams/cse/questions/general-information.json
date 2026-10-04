@@ -1,0 +1,341 @@
+[
+  {
+    "id": "cse-general-constitution-01",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "general-information",
+    "conceptIds": ["philippine-constitution"],
+    "difficulty": "standard",
+    "cognitiveSkill": "recall",
+    "stem": "Under the 1987 Constitution, the Civil Service Commission is a:",
+    "choices": [
+      { "id": "a", "text": "Department of the Executive branch" },
+      { "id": "b", "text": "Independent constitutional commission" },
+      { "id": "c", "text": "Government-owned corporation" },
+      { "id": "d", "text": "Body under the Judiciary" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "Article IX of the 1987 Constitution establishes the Civil Service Commission, the Commission on Elections and the Commission on Audit as independent constitutional commissions.",
+    "relatedQuestionGroupId": "cse-general-constitution-a",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-general-constitution-02",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "general-information",
+    "conceptIds": ["philippine-constitution"],
+    "difficulty": "easy",
+    "cognitiveSkill": "recall",
+    "stem": "How many members does the Senate of the Philippines have?",
+    "choices": [
+      { "id": "a", "text": "12" },
+      { "id": "b", "text": "24" },
+      { "id": "c", "text": "250" },
+      { "id": "d", "text": "30" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "The Senate is composed of 24 senators elected at large, as provided in Article VI of the 1987 Constitution.",
+    "relatedQuestionGroupId": "cse-general-constitution-a",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-general-constitution-03",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "general-information",
+    "conceptIds": ["philippine-constitution"],
+    "difficulty": "standard",
+    "cognitiveSkill": "recall",
+    "stem": "The Bill of Rights is found in which Article of the 1987 Constitution?",
+    "choices": [
+      { "id": "a", "text": "Article II" },
+      { "id": "b", "text": "Article III" },
+      { "id": "c", "text": "Article VI" },
+      { "id": "d", "text": "Article IX" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "Article III is the Bill of Rights. Article II is the Declaration of Principles and State Policies, Article VI covers the Legislative Department and Article IX the Constitutional Commissions.",
+    "relatedQuestionGroupId": "cse-general-constitution-b",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-general-constitution-04",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "general-information",
+    "conceptIds": ["philippine-constitution"],
+    "difficulty": "easy",
+    "cognitiveSkill": "recall",
+    "stem": "What is the term of office of the President of the Philippines?",
+    "choices": [
+      { "id": "a", "text": "Four years" },
+      { "id": "b", "text": "Six years" },
+      { "id": "c", "text": "Three years" },
+      { "id": "d", "text": "Five years" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "Article VII sets a single six-year term for the President, who is not eligible for any re-election.",
+    "relatedQuestionGroupId": "cse-general-constitution-b",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+
+  {
+    "id": "cse-general-conduct-01",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "general-information",
+    "conceptIds": ["code-of-conduct-and-ethics"],
+    "difficulty": "standard",
+    "cognitiveSkill": "recall",
+    "stem": "Which law is known as the Code of Conduct and Ethical Standards for Public Officials and Employees?",
+    "choices": [
+      { "id": "a", "text": "Republic Act 6713" },
+      { "id": "b", "text": "Republic Act 9003" },
+      { "id": "c", "text": "Republic Act 3019" },
+      { "id": "d", "text": "Republic Act 9485" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "RA 6713 is the Code of Conduct and Ethical Standards. RA 3019 is the Anti-Graft and Corrupt Practices Act, RA 9485 is the Anti-Red Tape Act and RA 9003 covers solid waste management.",
+    "relatedQuestionGroupId": "cse-general-conduct-a",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-general-conduct-02",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "general-information",
+    "conceptIds": ["code-of-conduct-and-ethics"],
+    "difficulty": "challenging",
+    "cognitiveSkill": "recall",
+    "stem": "Under RA 6713, within how many days must a public official file a Statement of Assets, Liabilities and Net Worth after assuming office?",
+    "choices": [
+      { "id": "a", "text": "15 days" },
+      { "id": "b", "text": "30 days" },
+      { "id": "c", "text": "60 days" },
+      { "id": "d", "text": "90 days" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "The statement must be filed within thirty days after assuming office, and every year on or before April 30 thereafter.",
+    "relatedQuestionGroupId": "cse-general-conduct-a",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-general-conduct-03",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "general-information",
+    "conceptIds": ["code-of-conduct-and-ethics"],
+    "difficulty": "standard",
+    "cognitiveSkill": "recall",
+    "stem": "Which of the following is NOT one of the norms of conduct required of public officials under RA 6713?",
+    "choices": [
+      { "id": "a", "text": "Commitment to public interest" },
+      { "id": "b", "text": "Political neutrality" },
+      { "id": "c", "text": "Responsiveness to the public" },
+      { "id": "d", "text": "Priority to personal connections" }
+    ],
+    "correctChoiceId": "d",
+    "explanation": "The eight norms of conduct are commitment to public interest, professionalism, justness and sincerity, political neutrality, responsiveness to the public, nationalism and patriotism, commitment to democracy, and simple living. Giving priority to personal connections is the opposite of these.",
+    "relatedQuestionGroupId": "cse-general-conduct-b",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-general-conduct-04",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "general-information",
+    "conceptIds": ["code-of-conduct-and-ethics"],
+    "difficulty": "standard",
+    "cognitiveSkill": "application",
+    "stem": "“Simple living” as a norm of conduct means that a public official should:",
+    "choices": [
+      { "id": "a", "text": "Avoid extravagant or ostentatious display of wealth." },
+      { "id": "b", "text": "Refuse all forms of compensation for work." },
+      { "id": "c", "text": "Live outside the city where they work." },
+      { "id": "d", "text": "Never accept gifts from relatives." }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "Simple living requires public officials to live modestly, keep expenses within lawful income, and avoid lavish display that could raise doubts about how income was earned.",
+    "relatedQuestionGroupId": "cse-general-conduct-b",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+
+  {
+    "id": "cse-general-rights-01",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "general-information",
+    "conceptIds": ["peace-and-human-rights"],
+    "difficulty": "challenging",
+    "cognitiveSkill": "recall",
+    "stem": "Under the 1987 Constitution, the privilege of the writ of habeas corpus may be suspended only in cases of:",
+    "choices": [
+      { "id": "a", "text": "Invasion or rebellion, when public safety requires it" },
+      { "id": "b", "text": "Any crime involving more than one accused" },
+      { "id": "c", "text": "National elections" },
+      { "id": "d", "text": "A declared state of calamity" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "Article III, Section 15 allows suspension only in cases of invasion or rebellion, when public safety requires it. A state of calamity does not suspend the privilege.",
+    "relatedQuestionGroupId": "cse-general-rights-a",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-general-rights-02",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "general-information",
+    "conceptIds": ["peace-and-human-rights"],
+    "difficulty": "standard",
+    "cognitiveSkill": "recall",
+    "stem": "Which body is mandated to investigate complaints of human rights violations involving civil and political rights?",
+    "choices": [
+      { "id": "a", "text": "Commission on Human Rights" },
+      { "id": "b", "text": "Commission on Audit" },
+      { "id": "c", "text": "Commission on Elections" },
+      { "id": "d", "text": "Civil Service Commission" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "Article XIII, Section 18 gives the Commission on Human Rights the power to investigate civil and political rights violations. The other three are constitutional commissions with different mandates.",
+    "relatedQuestionGroupId": "cse-general-rights-a",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-general-rights-03",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "general-information",
+    "conceptIds": ["peace-and-human-rights"],
+    "difficulty": "standard",
+    "cognitiveSkill": "recall",
+    "stem": "The due process clause of the Bill of Rights provides that:",
+    "choices": [
+      { "id": "a", "text": "No person shall be deprived of life, liberty or property without due process of law." },
+      { "id": "b", "text": "Only citizens may be tried in Philippine courts." },
+      { "id": "c", "text": "All accused persons must be released before trial." },
+      { "id": "d", "text": "Property may be taken at any time for public use." }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "Article III, Section 1 states the due process and equal protection guarantees, which protect all persons, not only citizens.",
+    "relatedQuestionGroupId": "cse-general-rights-b",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-general-rights-04",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "general-information",
+    "conceptIds": ["peace-and-human-rights"],
+    "difficulty": "challenging",
+    "cognitiveSkill": "recall",
+    "stem": "The right to a speedy disposition of cases applies before:",
+    "choices": [
+      { "id": "a", "text": "All judicial, quasi-judicial and administrative bodies" },
+      { "id": "b", "text": "The Supreme Court only" },
+      { "id": "c", "text": "Criminal courts only" },
+      { "id": "d", "text": "Election tribunals only" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "Article III, Section 16 guarantees speedy disposition of cases before all judicial, quasi-judicial and administrative bodies, so it is broader than the right to a speedy trial in criminal cases.",
+    "relatedQuestionGroupId": "cse-general-rights-b",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+
+  {
+    "id": "cse-general-environment-01",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "general-information",
+    "conceptIds": ["environment-management"],
+    "difficulty": "easy",
+    "cognitiveSkill": "recall",
+    "stem": "Which sequence correctly expresses the waste management hierarchy, from most to least preferred?",
+    "choices": [
+      { "id": "a", "text": "Reduce, reuse, recycle, dispose" },
+      { "id": "b", "text": "Dispose, recycle, reuse, reduce" },
+      { "id": "c", "text": "Recycle, reduce, reuse, dispose" },
+      { "id": "d", "text": "Reuse, dispose, reduce, recycle" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "Preventing waste by reducing consumption is best, followed by reusing and recycling. Disposal is the last resort.",
+    "relatedQuestionGroupId": "cse-general-environment-a",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-general-environment-02",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "general-information",
+    "conceptIds": ["environment-management"],
+    "difficulty": "standard",
+    "cognitiveSkill": "recall",
+    "stem": "Which agency is the primary government body mandated to protect the country's environment and natural resources?",
+    "choices": [
+      { "id": "a", "text": "Department of Environment and Natural Resources" },
+      { "id": "b", "text": "Department of Agriculture" },
+      { "id": "c", "text": "Department of Public Works and Highways" },
+      { "id": "d", "text": "Department of Energy" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "The DENR is the primary agency responsible for the conservation, management and development of the country's environment and natural resources.",
+    "relatedQuestionGroupId": "cse-general-environment-a",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-general-environment-03",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "general-information",
+    "conceptIds": ["environment-management"],
+    "difficulty": "standard",
+    "cognitiveSkill": "recall",
+    "stem": "Republic Act 9003 is known as the:",
+    "choices": [
+      { "id": "a", "text": "Ecological Solid Waste Management Act" },
+      { "id": "b", "text": "Clean Air Act" },
+      { "id": "c", "text": "Clean Water Act" },
+      { "id": "d", "text": "National Integrated Protected Areas System Act" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "RA 9003 is the Ecological Solid Waste Management Act of 2000. The Clean Air Act is RA 8749, the Clean Water Act is RA 9275 and the protected areas law is RA 7586.",
+    "relatedQuestionGroupId": "cse-general-environment-b",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-general-environment-04",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "general-information",
+    "conceptIds": ["environment-management"],
+    "difficulty": "standard",
+    "cognitiveSkill": "application",
+    "stem": "Which practice conserves the most water in a typical household?",
+    "choices": [
+      { "id": "a", "text": "Repairing leaks and using a pail instead of a hose to wash a vehicle" },
+      { "id": "b", "text": "Running the tap while brushing teeth" },
+      { "id": "c", "text": "Washing one garment at a time in the machine" },
+      { "id": "d", "text": "Watering the lawn at noon" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "Fixing leaks stops continuous loss, and a pail uses far less water than a running hose. Watering at noon also wastes water through evaporation.",
+    "relatedQuestionGroupId": "cse-general-environment-b",
+    "status": "published",
+    "contentVersion": "1.0.0"
+  }
+]

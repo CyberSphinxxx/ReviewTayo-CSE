@@ -1,0 +1,22 @@
+{
+  "id": "subprofessional",
+  "name": "Sub-Professional",
+  "shortName": "Sub-Pro",
+  "description": "For non-degree holders. Uses Clerical Ability and a 165-item mock.",
+  "subjectIds": ["verbal-ability", "numerical-ability", "clerical-ability", "general-information"],
+  "blueprintOverride": {
+    "sections": [
+      { "subjectId": "verbal-ability", "questionCount": 50 },
+      { "subjectId": "numerical-ability", "questionCount": 45 },
+      { "subjectId": "clerical-ability", "questionCount": 40 },
+      { "subjectId": "general-information", "questionCount": 30 }
+    ],
+    "totalItems": 165
+  },
+  "timingOverride": {
+    "totalMinutes": 160,
+    "perQuestionSeconds": 58,
+    "allowPause": true,
+    "pauseLimitMinutes": 720
+  }
+}
