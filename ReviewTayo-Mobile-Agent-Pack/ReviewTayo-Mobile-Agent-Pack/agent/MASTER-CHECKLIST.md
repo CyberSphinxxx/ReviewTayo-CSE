@@ -44,7 +44,7 @@ Status legend:
 - [x] Segmented control.
 - [x] Badge.
 - [x] Progress components.
-- [ ] Bottom nav. *(Phase 5)*
+- [x] Bottom nav. *(built in Phase 5)*
 - [x] Owl/brand component.
 - [x] accessibility defaults.
 - [ ] responsive/small-device checks. *(needs a device/emulator pass — tracked in VISUAL-QA.md)*
@@ -85,16 +85,17 @@ Status legend:
 - [x] database/migration tests.
 
 ## Phase 5 — Navigation shell
-- [ ] five tabs.
-- [ ] centered Home.
-- [ ] route groups.
-- [ ] settings route.
-- [ ] quiz route.
-- [ ] mock route.
-- [ ] onboarding route.
-- [ ] theme-aware nav.
-- [ ] due-count badge.
-- [ ] accessibility/keyboard/screen-reader labels.
+- [x] five tabs.
+- [x] centered Home.
+- [x] route groups.
+- [x] settings route.
+- [x] quiz route.
+- [x] mock route.
+- [x] onboarding route.
+- [x] theme-aware nav.
+- [x] due-count badge.
+- [x] accessibility/keyboard/screen-reader labels. *(labels + badge verified by tests and
+  router integration; a physical-device keyboard/screen-reader pass is tracked in VISUAL-QA.md)*
 
 ## Phase 6 — Onboarding/settings
 - [ ] onboarding shell/progress.

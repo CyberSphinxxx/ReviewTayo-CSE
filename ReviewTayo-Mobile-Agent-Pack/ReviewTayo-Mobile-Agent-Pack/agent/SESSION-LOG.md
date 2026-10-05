@@ -104,3 +104,33 @@ second-exam fixture, validation tooling and tests.
 ### Next session starts at
 Phase 5 — navigation shell: five tabs with Home centred, route groups, due-count badge from the
 review repository, theme-aware nav and accessibility labels.
+
+## Session 4 — 2026-10-06 — Phase 5
+### Phase 5 — Navigation shell (complete)
+- `LocalDataProvider` is the composition root: opens the device database, migrates, imports
+  bundled content, exposes repositories, and gates the navigation tree behind a themed launch /
+  recoverable-error state. Test seams allow the exact same wiring to run against `node:sqlite`.
+- `(tabs)` route group with Learn / Practice / Home (centred, owl pill) / Review / Progress;
+  theme-aware tab bar using the `nav*` roles prepared in Phase 2; modal/full-screen routes for
+  settings, quiz, mock and onboarding; `index` redirects into the shell until Phase 6 adds the
+  onboarding gate.
+- Review badge reads `countDue` from the real review queue via `useDueReviewCount`; the tab's
+  accessibility label announces the due count.
+- Startup registration made idempotent so a fast refresh or remount cannot disable content
+  (D-018).
+- Tests: configuration order/centre, icon rendering per route/theme, due-count helper against a
+  migrated database, provider happy path + recoverable failure with real retry, and a real
+  expo-router integration test (redirect → Home, all five tabs, badge from seeded data, tab
+  switching to Review/Progress). 16 suites / 243 tests.
+### Verification evidence
+| Command (from `mobile/`) | Result |
+|---|---|
+| `npx tsc --noEmit` | PASS |
+| `npx eslint .` | PASS — 0 errors, 0 warnings |
+| `npx prettier --write .` | PASS |
+| `npx jest` | PASS — 16 suites, 243 tests |
+| `npx expo export --platform android` | PASS — Hermes bundle emitted |
+
+### Next session starts at
+Phase 6 — onboarding and settings: guest/Google choice, CSE level, starting point, exam date,
+study days, session length, daily goal, generated plan, appearance, text size, reminders.

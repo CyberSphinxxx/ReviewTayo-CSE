@@ -1,27 +1,26 @@
 # Agent Handoff
 
 ## Current phase
-Phases 0–4 complete. Starting Phase 5.
+Phases 0–5 complete. Starting Phase 6.
 
 ## Current task
-Phase 5 — navigation shell: five tabs (Learn / Practice / Home centred / Review / Progress),
-route groups, settings/quiz/mock/onboarding routes, theme-aware navigation, due-count badge fed by
-the review repository, accessibility and screen-reader labels.
+Phase 6 — onboarding and settings: onboarding shell/progress, Guest identity, Google auth
+architecture, CSE level, starting point, exam date, study days, session length, daily goal,
+generated plan, plan editing, appearance, text size, reminders, completion, settings
+integration, rerun-onboarding dev tool.
 
-## Files changed
-- `/mobile/**` — Expo + React Native + TypeScript package (see `mobile/README.md`).
-- `/mobile/app/**` — root layout, index redirect, design-system probe route.
-- `/mobile/src/theme|components|store|services/**` — design system, primitives, providers, logging,
-  analytics, crash boundary, id generation (`src/services/ids.ts`).
-- `/mobile/src/domain/exams/**` — generic exam engine contracts, registry, validator, session
-  planning; `content/exams/**` — CSE pack + non-CSE fixture pack.
-- `/mobile/src/data/repositories/**` — repository interfaces by domain need.
-- `/mobile/src/data/local/**` — `DatabasePort`, `node:sqlite`/`expo-sqlite` adapters, migration
-  framework + schema v1, SQLite repository implementations, content import and database bootstrap.
-- `/mobile/tests/**` — 229 tests: theme contrast, primitives, exam domain, content validation,
-  migrations, repositories, content import, sync outbox, offline durability.
-- Agent pack: `agent/MASTER-CHECKLIST.md`, `agent/DECISIONS.md` (D-014…D-017),
-  `agent/PROJECT-STATE.md`, `agent/PROJECT-STATE.json`, `agent/SESSION-LOG.md`, this file.
+## Files changed (Phase 5)
+- `/mobile/app/_layout.tsx` — root layout now wraps `LocalDataProvider` (composition root) and a
+  themed data gate; route presentations declared for the shell and modal routes.
+- `/mobile/app/index.tsx` — redirects into `(tabs)/home` until Phase 6 adds the onboarding gate.
+- `/mobile/app/(tabs)/**` — tab layout plus five destination screens (placeholders until their
+  phases: Home 7, Learn 8, Practice 9, Review 10, Progress 11).
+- `/mobile/app/{settings,quiz,mock,onboarding}.tsx` — real routes for later phases.
+- `/mobile/src/store/LocalDataProvider.tsx` — database bootstrap + repositories context.
+- `/mobile/src/navigation/**` — tab definitions, themed `TabBarIcon`, due-count helper/hook.
+- `/mobile/src/domain/exams/bootstrap.ts` — idempotent startup registration (D-018).
+- `/mobile/tests/app/**`, `/mobile/tests/store/**` — navigation, provider and real router
+  integration tests.
 
 ## Tests run
 ```
@@ -29,7 +28,7 @@ cd mobile
 npx tsc --noEmit                      # PASS
 npx eslint .                          # PASS (0 errors, 0 warnings)
 npx prettier --write .                # PASS
-npx jest                              # PASS — 13 suites, 229 tests
+npx jest                              # PASS — 16 suites, 243 tests
 npx expo export --platform android    # PASS — Hermes bundle emitted
 ```
 
@@ -40,22 +39,22 @@ All of the above.
 None.
 
 ## Root cause if failing
-N/A. (One real defect was found and fixed in Phase 4: `asStorageError` dropped the SQLite driver
-message — see D-014. Detection had to be duck-typed, not `instanceof Error`, because native-driver
-errors come from another realm inside Jest.)
+N/A.
 
 ## Next exact action
-1. Open the database at app startup (`openExpoDatabase` + `bootstrapLocalDatabase` with the packs
-   registered by `registerBundledPacks`) behind a provider so screens receive repositories, never
-   SQLite directly.
-2. Build the `(tabs)` route group with Learn / Practice / Home (centre) / Review / Progress,
-   stub modal routes for settings, quiz, mock and onboarding, theme-aware tab bar, and the
-   Review due badge read through `Repositories.review.countDue`.
-3. Add navigation tests (tabs render, Home centred, due badge reflects repository state, a11y
-   labels), then run the gate, update the agent docs and commit.
+1. Build the onboarding flow in `app/onboarding.tsx` (eight steps from the merged reference):
+   guest/Google choice, CSE level, starting point + optional exam date, study days + session
+   length, daily goal, plan preview/edit, appearance + text size + reminders, completion.
+2. Persist via `Repositories.profile` / `Repositories.settings`; generate the first study plan
+   through the domain study-policy code and store it with `Repositories.studyPlans`.
+3. Wire the bootstrap gate in `app/index.tsx` (profile complete → tabs, otherwise onboarding),
+   hydrate `AppearanceProvider` from settings, build `app/settings.tsx`, and add a rerun-onboarding
+   developer action.
+4. Tests: onboarding step state machine, validation, persistence round trip, gate redirect and
+   settings edits — then run the gate, update agent docs and commit.
 
 ## Decisions made
-D-007 … D-017 (see `agent/DECISIONS.md`); ADR-001 integration, ADR-002 database port,
+D-007 … D-018 (see `agent/DECISIONS.md`); ADR-001 integration, ADR-002 database port,
 ADR-003 contract-first sync.
 
 ## New blockers
@@ -68,4 +67,4 @@ present untracked under `archives/mobile-prototype/`. This reorganisation pre-da
 it was left untouched. Commit or discard it deliberately before release.
 
 ## Commit/hash
-See the checkpoint commit created at the end of Phase 4 (`feat(data): …`).
+See the checkpoint commit created at the end of Phase 5 (`feat(navigation): …`).

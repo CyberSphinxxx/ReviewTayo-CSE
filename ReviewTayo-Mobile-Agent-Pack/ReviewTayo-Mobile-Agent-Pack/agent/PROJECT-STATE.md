@@ -1,16 +1,16 @@
 # Project State
 
-**Phase:** 4 — Data / offline (complete) → starting Phase 5 — Navigation shell
-**Current task:** Phase 5 — navigation shell: five tabs with Home centred, route groups, due badge,
-accessibility labels
-**Last completed task:** Phase 4 data/offline — `DatabasePort` (expo-sqlite + node:sqlite), migration
-framework with schema v1, repository layer by domain need, idempotent version-gated content import,
-sync outbox groundwork, and restart-durability tests against a file-backed database.
-**Next action:** Wire database + repositories into app startup, build the `(tabs)` shell
-(Learn / Practice / Home centred / Review / Progress) with stub settings/quiz/mock/onboarding
-routes, the review due-count badge, theme-aware navigation and screen-reader labels.
+**Phase:** 5 — Navigation shell (complete) → starting Phase 6 — Onboarding / settings
+**Current task:** Phase 6 — onboarding flow (guest/Google architecture, level, schedule, plan) and
+settings integration
+**Last completed task:** Phase 5 navigation shell — `LocalDataProvider` composition root, five-tab
+shell with centred Home, modal/onboarding routes, real due-count badge from the review queue, and a
+router integration test over a seeded database.
+**Next action:** Build the onboarding steps and persistence (profile, settings, first study plan),
+add the bootstrap gate that chooses onboarding vs the shell, build settings, and hydrate appearance
+from stored settings.
 **Last successful build:** `npx expo export --platform android` → PASS (Hermes bundle)
-**Known failing tests:** None. `npx jest` → 229 passed / 229.
+**Known failing tests:** None. `npx jest` → 243 passed / 243.
 **External blockers:** Live Google OAuth credentials and a production API endpoint (verify-only;
 everything else works without them).
 **Internal blockers:** None.
@@ -21,7 +21,7 @@ everything else works without them).
 | `npm run typecheck` | PASS |
 | `npm run lint` | PASS (0 errors, 0 warnings) |
 | `npm run format:check` | PASS |
-| `npm test` | PASS — 229 tests |
+| `npm test` | PASS — 243 tests |
 | `npx expo export --platform android` | PASS |
 
 ## Repository reality (Phase 0 audit)
@@ -51,7 +51,7 @@ everything else works without them).
 ## Decisions added this session
 D-014 storage errors keep the driver message · D-015 transactions are passed down, never nested ·
 D-016 content import is version-gated and wholesale · D-017 identifier generation lives in
-services. Earlier: D-007 database port · D-008 platform fonts · D-009 modal screens are routes ·
+services · D-018 startup content registration is idempotent. Earlier: D-007 database port · D-008 platform fonts · D-009 modal screens are routes ·
 D-010 bundled validated content packs · D-011 E2E strategy · D-012 route placement · D-013 exam
 phase derived. ADRs: 001 integration, 002 database port, 003 contract-first sync.
 

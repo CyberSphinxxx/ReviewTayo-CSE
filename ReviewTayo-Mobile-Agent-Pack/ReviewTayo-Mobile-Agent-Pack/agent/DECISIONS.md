@@ -78,3 +78,10 @@ replacing content can never rewrite or delete what a learner did.
 `createId` (an `expo-crypto` UUID) lives in `src/services/ids.ts`, not `src/domain`, because the
 lint boundary forbids Expo imports in the domain layer. Domain code receives ids; it does not
 create them, which also keeps persisted test fixtures deterministic.
+
+## D-018 — Startup content registration is idempotent
+`registerBundledPacks` treats an already-registered pack with the same `contentVersion` as
+current instead of a duplicate error, and replaces the registration when the bundled version is
+newer. Startup runs again after a fast refresh or a second provider mount, and that must not
+disable content or fail the launch. The `ExamRegistry` itself still rejects true duplicate ids
+from other callers.

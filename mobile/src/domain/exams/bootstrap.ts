@@ -37,6 +37,19 @@ export const registerBundledPacks = (
       continue;
     }
 
+    // Startup registration can run again after a fast refresh or a second mount.
+    // An identical pack is simply already current; a newer bundled pack replaces
+    // the registered one, while the registry itself keeps rejecting true
+    // duplicates from arbitrary callers.
+    const existing = registry.get(result.pack.exam.id);
+    if (existing !== null) {
+      if (existing.contentVersion !== result.pack.manifest.contentVersion) {
+        registry.replace(result.pack);
+      }
+      registered.push(result.pack);
+      continue;
+    }
+
     const registration = registry.register(result.pack);
     if (!registration.ok) {
       log.error('content pack registration failed', registration.error, {
