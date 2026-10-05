@@ -68,21 +68,21 @@ Status legend:
 - [x] generic engine tests.
 
 ## Phase 4 — Data / offline
-- [ ] SQLite bootstrap.
-- [ ] migration framework.
-- [ ] repository interfaces.
-- [ ] local repositories.
-- [ ] question/content import.
-- [ ] user exam profile storage.
-- [ ] practice session persistence.
-- [ ] answer persistence.
-- [ ] mastery persistence.
-- [ ] review queue persistence.
-- [ ] saved questions persistence.
-- [ ] study plan persistence.
-- [ ] mock persistence.
-- [ ] sync outbox.
-- [ ] database/migration tests.
+- [x] SQLite bootstrap.
+- [x] migration framework.
+- [x] repository interfaces.
+- [x] local repositories.
+- [x] question/content import.
+- [x] user exam profile storage.
+- [x] practice session persistence.
+- [x] answer persistence.
+- [x] mastery persistence.
+- [x] review queue persistence.
+- [x] saved questions persistence.
+- [x] study plan persistence.
+- [x] mock persistence.
+- [x] sync outbox.
+- [x] database/migration tests.
 
 ## Phase 5 — Navigation shell
 - [ ] five tabs.

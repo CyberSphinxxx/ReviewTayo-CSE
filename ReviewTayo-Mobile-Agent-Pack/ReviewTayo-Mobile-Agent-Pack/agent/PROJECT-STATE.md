@@ -1,14 +1,16 @@
 # Project State
 
-**Phase:** 3 — Exam core (complete) → starting Phase 4 — Data / offline
-**Current task:** Phase 4 — SQLite bootstrap, migration framework, repositories, content import, outbox
-**Last completed task:** Phase 3 exam core — generic contracts, registry, validator, session planning
-engine, CSE Professional and Sub-Professional config with a 88-question content pack, and a non-CSE
-fixture exam proving extensibility.
-**Next action:** Implement the `DatabasePort` (expo-sqlite + node:sqlite adapters), the migration
-framework, repository interfaces and local implementations, content import, and the sync outbox.
+**Phase:** 4 — Data / offline (complete) → starting Phase 5 — Navigation shell
+**Current task:** Phase 5 — navigation shell: five tabs with Home centred, route groups, due badge,
+accessibility labels
+**Last completed task:** Phase 4 data/offline — `DatabasePort` (expo-sqlite + node:sqlite), migration
+framework with schema v1, repository layer by domain need, idempotent version-gated content import,
+sync outbox groundwork, and restart-durability tests against a file-backed database.
+**Next action:** Wire database + repositories into app startup, build the `(tabs)` shell
+(Learn / Practice / Home centred / Review / Progress) with stub settings/quiz/mock/onboarding
+routes, the review due-count badge, theme-aware navigation and screen-reader labels.
 **Last successful build:** `npx expo export --platform android` → PASS (Hermes bundle)
-**Known failing tests:** None. `npx jest` → 182 passed / 182.
+**Known failing tests:** None. `npx jest` → 229 passed / 229.
 **External blockers:** Live Google OAuth credentials and a production API endpoint (verify-only;
 everything else works without them).
 **Internal blockers:** None.
@@ -19,7 +21,7 @@ everything else works without them).
 | `npm run typecheck` | PASS |
 | `npm run lint` | PASS (0 errors, 0 warnings) |
 | `npm run format:check` | PASS |
-| `npm test` | PASS — 182 tests |
+| `npm test` | PASS — 229 tests |
 | `npx expo export --platform android` | PASS |
 
 ## Repository reality (Phase 0 audit)
@@ -47,9 +49,11 @@ everything else works without them).
 - do not refactor the web app merely to share code.
 
 ## Decisions added this session
-D-007 database port · D-008 platform fonts · D-009 modal screens are routes · D-010 bundled
-validated content packs · D-011 E2E strategy · D-012 route placement · D-013 exam phase derived.
-ADRs: 001 integration, 002 database port, 003 contract-first sync.
+D-014 storage errors keep the driver message · D-015 transactions are passed down, never nested ·
+D-016 content import is version-gated and wholesale · D-017 identifier generation lives in
+services. Earlier: D-007 database port · D-008 platform fonts · D-009 modal screens are routes ·
+D-010 bundled validated content packs · D-011 E2E strategy · D-012 route placement · D-013 exam
+phase derived. ADRs: 001 integration, 002 database port, 003 contract-first sync.
 
 ## Content note
 88 authored CSE questions across 22 concepts (4 per concept, every concept covered in both

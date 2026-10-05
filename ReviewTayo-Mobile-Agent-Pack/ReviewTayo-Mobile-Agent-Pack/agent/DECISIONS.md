@@ -55,3 +55,26 @@ lives in `mobile/src/`. The `@/` alias maps to `src/`, keeping imports unambiguo
 ## D-013 — Exam phase is derived, never stored
 The CSE Journey phase and countdown are computed from the target exam date and the exam
 config's phase policy. Storing a phase would let it drift from the date and from config.
+
+## D-014 — Storage errors keep the driver's message
+`asStorageError` appends the underlying SQLite text (e.g. `UNIQUE constraint failed: …`) to the
+typed `AppError`, because constraint failures are only identifiable from it. Detection is
+duck-typed rather than `instanceof Error`: native-driver errors can originate in another realm,
+where `instanceof` is false inside Jest even though the message is intact.
+
+## D-015 — Transactions are passed down, never nested
+Every repository write accepts an optional active transaction and otherwise opens its own via
+`withTransaction`. Neither engine supports nested transactions, and silently turning nesting
+into savepoints would let device and test behaviour diverge. Use cases that change several
+repositories together (answer + mastery + review + outbox) receive one transaction.
+
+## D-016 — Content import is version-gated and wholesale
+Startup imports a bundled pack only when its `contentVersion` differs from what is stored, and a
+changed pack replaces that exam's content atomically (cascading delete, then insert) with
+`content_meta` bookkeeping. Learner history references question ids rather than foreign keys, so
+replacing content can never rewrite or delete what a learner did.
+
+## D-017 — Identifier generation lives in services
+`createId` (an `expo-crypto` UUID) lives in `src/services/ids.ts`, not `src/domain`, because the
+lint boundary forbids Expo imports in the domain layer. Domain code receives ids; it does not
+create them, which also keeps persisted test fixtures deterministic.

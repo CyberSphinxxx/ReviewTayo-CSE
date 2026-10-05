@@ -1,4 +1,4 @@
-import { fixtureContentPack } from '@content/exams';
+import { cseContentPack, fixtureContentPack } from '@content/exams';
 import { validateContentPack } from '@/domain/exams/validation';
 import type { ExamContentPack, RawContentPack } from '@/domain/exams/types';
 
@@ -34,13 +34,17 @@ export const clonePack = (): MutablePack => {
 
 export const asRawPack = (pack: MutablePack): RawContentPack => pack as unknown as RawContentPack;
 
-export const loadFixturePack = (): ExamContentPack => {
-  const result = validateContentPack(fixtureContentPack);
+export const loadPack = (raw: RawContentPack): ExamContentPack => {
+  const result = validateContentPack(raw);
   if (!result.ok || result.pack === null) {
-    throw new Error(`Fixture pack is invalid:\n${JSON.stringify(result.issues, null, 2)}`);
+    throw new Error(`Pack is invalid:\n${JSON.stringify(result.issues, null, 2)}`);
   }
   return result.pack;
 };
+
+export const loadFixturePack = (): ExamContentPack => loadPack(fixtureContentPack);
+
+export const loadCsePack = (): ExamContentPack => loadPack(cseContentPack);
 
 /**
  * Deterministic pseudo-random generator (mulberry32) so session planning tests

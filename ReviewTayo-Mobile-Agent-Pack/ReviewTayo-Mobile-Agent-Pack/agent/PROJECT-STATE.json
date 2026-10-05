@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
-  "phase": "04-data-offline",
-  "currentTask": "Phase 4 — SQLite bootstrap, migrations, repositories, content import, sync outbox",
-  "lastCompletedTask": "phase-03-exam-core",
-  "nextAction": "Implement DatabasePort (expo-sqlite + node:sqlite), migration framework, repository interfaces + local implementations, content import and outbox",
+  "phase": "05-navigation",
+  "currentTask": "Phase 5 — Navigation shell: five tabs (Home centred), route groups, due badge, accessibility labels",
+  "lastCompletedTask": "phase-04-data-offline",
+  "nextAction": "Wire the database + repositories into app startup, build the (tabs) route shell (Learn / Practice / Home / Review / Progress) with stub modal routes, due-count badge from the review repository, theme-aware navigation and screen-reader labels",
   "lastSuccessfulBuild": "expo export --platform android (PASS)",
   "failingTests": [],
   "testSummary": {
-    "suites": 8,
-    "tests": 182,
-    "passed": 182,
+    "suites": 13,
+    "tests": 229,
+    "passed": 229,
     "failed": 0
   },
   "externalBlockers": [
@@ -30,7 +30,7 @@
     "tests": "pass",
     "androidBundle": "pass"
   },
-  "completedPhases": ["00-repo-audit", "01-bootstrap", "02-design-system", "03-exam-core"],
+  "completedPhases": ["00-repo-audit", "01-bootstrap", "02-design-system", "03-exam-core", "04-data-offline"],
   "contentStats": {
     "cseQuestions": 88,
     "cseConcepts": 22,
@@ -39,7 +39,8 @@
   },
   "partialItems": [
     "phase-2: responsive/small-device visual checks require a device or emulator pass",
-    "phase-2: bottom navigation belongs to Phase 5 (route shell)"
+    "phase-2: bottom navigation belongs to Phase 5 (route shell)",
+    "phase-4: device-level offline E2E (no-network relaunch) is covered by file-backed restart tests; device pass tracked for Phase 16"
   ],
   "environment": {
     "node": "24.16.0",

@@ -61,3 +61,46 @@ Development pack initialized.
 ### Next session starts at
 Phase 3 — generic exam core (`src/domain/exams`), CSE Professional/Sub-Professional config,
 second-exam fixture, validation tooling and tests.
+
+## Session 2 — 2026-10-05 — Phase 3
+### Phase 3 — Exam core (complete)
+- Generic contracts (`ExamRuleConfig`, tracks, subjects, concepts, blueprint, timing, scoring,
+  study policy) plus registry, validator and session planning in `src/domain/exams/`.
+- CSE content pack: 88 questions across 22 concepts, Professional and Sub-Professional tracks,
+  plus a second non-CSE fixture exam proving the engine is generic.
+- Validator fix: the pack layout keeps subjects/concepts/tracks outside `exam.json`; the
+  validator now assembles them before validating (was the Phase 3 suite failure).
+- 182 tests green; Android bundle PASS.
+
+## Session 3 — 2026-10-06 — Phase 4
+### Phase 4 — Data / offline (complete)
+- `DatabasePort` with two adapters: `node:sqlite` (tests/CI and repository verification against a
+  real engine) and `expo-sqlite` (device). Nested transactions are refused; pragmas (WAL,
+  `foreign_keys`, busy timeout) applied on every open.
+- Migration framework: `PRAGMA user_version`, one transaction per migration, rollback with the
+  failing migration named, downgrade refusal, `schema_meta` bookkeeping. Schema v1 covers
+  content, learner history, study planning, progress and sync (27 tables).
+- Repository interfaces by domain need plus SQLite implementations: exam content, questions,
+  profile, settings, practice sessions, answers, mastery, review queue, saved questions, study
+  plans/tasks, mock sessions/answers, activity days, sync outbox and sync state. Every write
+  accepts an optional active transaction (D-015).
+- Content import: validated packs imported idempotently by `contentVersion`, wholesale atomic
+  replacement, `content_meta` bookkeeping, and `bootstrapLocalDatabase` to migrate + import at
+  startup. Both CSE and the fixture exam import side by side.
+- Tests added: content import (8), repositories (14), sync outbox (7), offline durability (3)
+  including a file-backed reopen proving a session, its answers and its outbox survive restart.
+- Defect found and fixed by the suite: `asStorageError` dropped the driver message, so
+  constraint failures were unidentifiable (D-014). Lint caught an Expo import in `src/domain`
+  and id generation moved to `src/services` (D-017).
+### Verification evidence
+| Command (from `mobile/`) | Result |
+|---|---|
+| `npx tsc --noEmit` | PASS |
+| `npx eslint .` | PASS — 0 errors, 0 warnings |
+| `npx prettier --write .` | PASS |
+| `npx jest` | PASS — 13 suites, 229 tests |
+| `npx expo export --platform android` | PASS — Hermes bundle emitted |
+
+### Next session starts at
+Phase 5 — navigation shell: five tabs with Home centred, route groups, due-count badge from the
+review repository, theme-aware nav and accessibility labels.
