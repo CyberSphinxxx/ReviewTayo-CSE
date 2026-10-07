@@ -149,3 +149,31 @@ is not written to the profile or the plan. Persisting a dismissal needs a field 
 says *which* session was dismissed and until when, and the session it refers to (a mock
 that is paused or expired) is Phase 12's to define. Writing half of that now would leave
 a preference that outlives the session it was about.
+
+## D-029 — Mastery is derived from answer evidence, and quantised before it is compared
+A concept's level comes from the correct and wrong counts stored against it, never from the stored
+`level` column, which is treated as a cache. The exam's own `MasteryPolicy` supplies the increments
+and the band boundaries, a confidence ramp based on an evidence floor of five answers keeps one
+lucky answer from reading as mastery, and the score is quantised to three decimals before a
+threshold decides anything — without that step `2/3 × 0.6` lands one ulp under `0.4` and a concept
+sits a whole level lower for no reason a learner could ever explain. `src/domain/exams/mastery.ts`
+is the only place that maps evidence to a level, so Learn, Progress and Review cannot disagree.
+
+## D-030 — Reference content is generated from concepts, not written twice
+Quick Sheets and Study Guides are built from the exam's own concepts: a quick sheet is a subject's
+first concept and a guide is its concepts in order with their summaries. This means a new exam has
+reference material the moment its content validates, and no reference text can drift away from the
+questions it explains. The concept page and the guide are routes (`/concept`, `/guide`) rather than
+overlays, so Android back, deep links and text-size changes behave natively.
+
+## D-031 — Learn's subject bar is accuracy; mastery is the line underneath
+The Subjects list measures what practice actually moves, so the bar is the learner's accuracy over
+that subject's real answers, and the line under it names how many of the subject's concepts are
+mastered. Learning strength is the more flattering number to show, but it moves for reasons a
+learner cannot see; accuracy is the one they can act on.
+
+## D-032 — Continue Learning never recommends a lesson already mastered
+The row resumes the concept that is started and not yet mastered, most recently answered first, so
+closing the app mid-topic lands back on the same topic. With no history it points at the first
+lesson still to be mastered and labels it `Start here` rather than `Continue learning`, and when
+every lesson in the track is mastered the row disappears instead of repeating finished work.

@@ -165,12 +165,23 @@ Status legend:
   cases over the real router and a seeded database. Device captures are tracked in VISUAL-QA.md.)*
 
 ## Phase 8 — Learn
-- [ ] Continue Learning.
-- [ ] Quick Sheets.
-- [ ] Subjects.
-- [ ] Study Guides.
-- [ ] subject track switching.
-- [ ] Learn tests.
+- [x] Continue Learning. *(the concept the learner is partway through, most recently answered first;
+  a learner with no history is pointed at their track's first unmastered lesson and told it is a
+  start, and a fully mastered track shows no row at all rather than repeating a finished lesson)*
+- [x] Quick Sheets. *(one concept summary per subject in track order, labelled with its reading time
+  and opening that concept's own reference page)*
+- [x] Subjects. *(every subject of the learner's track with an accuracy bar, the concept count it is
+  measured over and how many concepts are mastered; an untouched subject says "not started" instead
+  of reporting a confident zero)*
+- [x] Study Guides. *(generated from the pack's concepts rather than a second hand-written corpus: a
+  subject's lessons in order with the mastery each has earned, and each concept's own page with its
+  summary and tags — the `/guide` and `/concept` routes)*
+- [x] subject track switching. *(every list comes from `subjectsForTrack`, so Professional shows
+  Analytical Ability while Sub-Professional shows Clerical Ability, with their own quick sheets,
+  lesson counts and guide index; changing track in Settings changes Learn on its next focus)*
+- [x] Learn tests. *(`tests/domain/mastery.test.ts` — 13 cases; `tests/domain/learn.test.ts` — 24
+  cases; `tests/app/learn-screen.test.tsx` — 11 cases over the real router and a seeded database.
+  Device captures are tracked in VISUAL-QA.md.)*
 
 ## Phase 9 — Practice + Quiz
 - [ ] Smart Drill domain service.

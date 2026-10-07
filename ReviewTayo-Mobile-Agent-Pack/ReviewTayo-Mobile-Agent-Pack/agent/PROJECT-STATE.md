@@ -1,14 +1,16 @@
 # Project State
 
-**Phase:** 7 — Home (complete) → starting Phase 8 — Learn
-**Current task:** Phase 8 — Learn (Continue Learning, Quick Sheets, Subjects, Study Guides)
-**Last completed task:** Phase 7 Home — the editorial hero with the exam phase and countdown, one
-Smart Drill recommendation sized from the learner's goal, the three daily actions, the goal ring
-with the streak, the contextual resume card and the derived Done For Today state.
-**Next action:** Build Learn from the approved prototype, reading subjects, concepts and lesson
-progress from the imported content pack and the practice history.
+**Phase:** 8 — Learn (complete) → starting Phase 9 — Practice + Quiz
+**Current task:** Phase 9 — Practice + Quiz (Smart Drill, Weakest Area, Timed Practice, Random set,
+Build a Quiz, Mastery Rounds, Practice by Subject, question screen, answer checking)
+**Last completed task:** Phase 8 Learn — Continue Learning (the concept partway through), Quick
+Sheets, Subjects with accuracy, and Study Guides generated from the pack's concepts, with a derived
+mastery ladder shared by the whole engine and both CSE tracks wired through `subjectsForTrack`.
+**Next action:** Build the Practice tab and the quiz experience from the approved prototype: the
+Smart Drill domain service over the session planner, the question screen with answer checking and
+feedback, and the rest of the practice modes behind progressive disclosure.
 **Last successful build:** `npx expo export --platform android` → PASS (Hermes bundle)
-**Known failing tests:** None. `npx jest` → 325 passed / 325.
+**Known failing tests:** None. `npx jest` → 373 passed / 373.
 **External blockers:** Live Google OAuth credentials and a production API endpoint (verify-only;
 everything else works without them).
 **Internal blockers:** None.
@@ -19,7 +21,7 @@ everything else works without them).
 | `npm run typecheck` | PASS |
 | `npm run lint` | PASS (0 errors, 0 warnings) |
 | `npm run format:check` | PASS |
-| `npm test` | PASS — 325 tests across 24 suites |
+| `npm test` | PASS — 373 tests across 27 suites |
 | `npx expo export --platform android` | PASS |
 
 ## Repository reality (Phase 0 audit)
@@ -47,7 +49,10 @@ everything else works without them).
 - do not refactor the web app merely to share code.
 
 ## Decisions added this session
-D-026 Home derives everything and stores nothing · D-027 a streak counts answered questions and
+D-029 mastery is derived from answer evidence and quantised before thresholds · D-030 reference
+content is generated from concepts, not written twice · D-031 Learn's subject bar is accuracy and
+mastery is the line underneath · D-032 Continue Learning never recommends a lesson already mastered.
+Earlier: D-026 Home derives everything and stores nothing · D-027 a streak counts answered questions and
 tolerates an empty today · D-028 resume dismissal stays in screen state until the mock phase.
 Earlier: D-019 appearance vocabulary lives in the domain · D-020 preference parsing never throws on
 an untrusted row · D-021 bootstrap hydrates appearance before first paint · D-022 onboarding commits

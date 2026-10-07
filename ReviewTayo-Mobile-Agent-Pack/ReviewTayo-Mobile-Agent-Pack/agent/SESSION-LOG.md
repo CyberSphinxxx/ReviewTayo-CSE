@@ -208,3 +208,43 @@ Smart Drill call to action, and today's plan read from the generated study plan.
 ### Next session starts at
 Phase 8 — Learn: Continue Learning, Quick Sheets, Subjects and Study Guides from the approved
 prototype, reading content from the imported pack.
+
+## Session 7 — 2026-10-07 — Phase 8
+### Phase 8 — Learn (complete)
+- `src/domain/learn/` holds the four claims Learn makes and nothing about how they are drawn: which
+  concept to read next, which quick sheets to offer, how far into each subject the learner is, and
+  what the guides contain. Every list is built from `subjectsForTrack`, which is what makes the two
+  CSE tracks differ without a single CSE-specific branch.
+- Mastery became a first-class derivation (`src/domain/exams/mastery.ts`) because Learn needs a level
+  it can trust: level is computed from correct/wrong evidence with the exam's own policy, damped by
+  an evidence floor of five answers and quantised to three decimals before any threshold is applied
+  (D-029). `RTBadge` now re-exports the vocabulary from the domain instead of declaring a second
+  copy of it, and `conceptsForTrack` joined the registry next to `subjectsForTrack`.
+- Continue Learning resumes the concept the learner is partway through — most recently answered
+  first — falls back to their track's first unmastered lesson labelled `Start here`, and shows no row
+  at all once everything is mastered (D-032).
+- Quick Sheets are one concept summary per subject; Study Guides are the same material at full depth,
+  generated from the pack's concepts rather than a second corpus (D-030), and reachable as two new
+  routes (`/guide`, `/concept`) so back, deep links and text-size changes behave natively.
+- Subjects list accuracy per subject with the concept count it is measured over, and says "not
+  started" rather than reporting a confident zero (D-031). Review Due deliberately does not appear on
+  this screen, and a test asserts it never returns.
+- Tests: 27 suites / 373 tests — 13 mastery cases (ramp, weighting, ladder, clamping, policy
+  sensitivity), 24 Learn domain cases (resume/start/fully-mastered, both tracks, accuracy and mastery
+  arithmetic, guide order, concept reference) and 11 integration cases over the real router and a
+  seeded database (title, resume, quick sheets, subjects, both tracks, no Review Due, subject→guide→
+  concept routing, the full guide index, both themes, unknown concept).
+
+### Verification evidence
+| Command (from `mobile/`) | Result |
+|---|---|
+| `npx tsc --noEmit` | PASS |
+| `npx eslint .` | PASS — 0 errors, 0 warnings |
+| `npx prettier --check .` | PASS |
+| `npx jest` | PASS — 27 suites, 373 tests |
+| `npx expo export --platform android` | PASS — Hermes bundle emitted |
+
+### Next session starts at
+Phase 9 — Practice + Quiz: the Smart Drill domain service, Weakest Area, Timed Practice, Random set,
+Build a Quiz, Mastery Rounds, Practice by Subject, progressive disclosure, the question screen and
+answer checking.

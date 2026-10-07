@@ -5,6 +5,7 @@ export { FatalErrorFallback } from './errors/FatalErrorFallback';
 export { RTScreenShell, type ScreenProgress } from './layout/RTScreenShell';
 export { RTBadge, masteryToneKey, type BadgeTone, type MasteryLevel } from './primitives/RTBadge';
 export { RTButton, type ButtonSize, type ButtonVariant } from './primitives/RTButton';
+export { RTChip, type RTChipProps } from './primitives/RTChip';
 export { RTChoice, type ChoiceMarker } from './primitives/RTChoice';
 export { RTIconButton, type IconButtonVariant } from './primitives/RTIconButton';
 export { RTListGroup, RTListRow } from './primitives/RTListRow';

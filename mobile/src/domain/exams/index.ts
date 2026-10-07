@@ -1,8 +1,19 @@
 export * from './types';
 export {
+  MASTERY_EVIDENCE_FLOOR,
+  MASTERY_LADDER,
+  isMasteryStarted,
+  masteryLevelFor,
+  masteryLevelIndex,
+  masteryScore,
+  type MasteryEvidence,
+  type MasteryLevel,
+} from './mastery';
+export {
   ExamRegistry,
   examRegistry,
   conceptsForSubject,
+  conceptsForTrack,
   getConcept,
   getSubject,
   getTrack,

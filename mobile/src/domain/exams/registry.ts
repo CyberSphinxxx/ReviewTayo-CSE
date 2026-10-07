@@ -116,6 +116,11 @@ export const conceptsForSubject = (exam: ExamRuleConfig, subjectId: SubjectId) =
 };
 
 /** Questions that belong to a subject inside a track of this exam. */
+/** Every concept a track examines, in subject then lesson order. */
+export const conceptsForTrack = (exam: ExamRuleConfig, trackId: string) =>
+  subjectsForTrack(exam, trackId).flatMap((subject) => conceptsForSubject(exam, subject.id));
+
+/** Questions that belong to a subject inside a track of this exam. */
 export const questionsForSubject = (
   exam: ExamRuleConfig,
   questions: readonly Question[],

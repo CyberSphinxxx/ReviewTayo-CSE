@@ -1,5 +1,6 @@
 import { View, type StyleProp, type ViewStyle } from 'react-native';
 
+import type { MasteryLevel } from '@/domain/exams/mastery';
 import { useTheme } from '@/theme';
 
 import { RTText } from './RTText';
@@ -13,7 +14,13 @@ import { RTText } from './RTText';
  */
 
 export type BadgeTone = 'neutral' | 'success' | 'danger' | 'gold' | 'inverse' | 'accent';
-export type MasteryLevel = 'Learning' | 'Developing' | 'Strong' | 'Mastered';
+
+/**
+ * The mastery vocabulary lives in the domain (see `domain/exams/mastery`), so the
+ * exam engine can reason about levels without importing a component. Re-exported
+ * here because callers treat it as part of this primitive's contract.
+ */
+export type { MasteryLevel };
 
 export interface RTBadgeProps {
   readonly label: string;
