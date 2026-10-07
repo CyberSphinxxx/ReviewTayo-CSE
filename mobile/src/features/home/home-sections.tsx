@@ -1,7 +1,7 @@
 import { Pressable, View } from 'react-native';
 
 import { RTOwlMark, RTProgressRing, RTSurface, RTText, SettingsIcon } from '@/components';
-import type { HomeTask } from '@/domain/home';
+import type { HomeTask, ResumeCandidate } from '@/domain/home';
 import { useTheme } from '@/theme';
 
 import type { HomeModel } from './use-home';
@@ -325,7 +325,7 @@ export const HomeResumeCard = ({
   onResume,
 }: {
   readonly model: HomeModel;
-  readonly onResume: (kind: 'mock' | 'practice') => void;
+  readonly onResume: (candidate: ResumeCandidate) => void;
 }) => {
   const theme = useTheme();
   const resume = model.resume;
@@ -357,7 +357,7 @@ export const HomeResumeCard = ({
         </RTText>
       </View>
       <Pressable
-        onPress={() => onResume(resume.kind)}
+        onPress={() => onResume(resume)}
         testID="home-resume-action"
         accessibilityRole="button"
         accessibilityLabel="Resume"

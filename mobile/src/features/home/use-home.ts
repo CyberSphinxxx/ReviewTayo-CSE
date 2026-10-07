@@ -7,22 +7,24 @@ import type { ExamRuleConfig } from '@/domain/exams/types';
 import {
   computeStreak,
   describeGoalProgress,
-  describeResumeProgress,
   describeStreakLine,
-  dailyQuestionSpec,
   DRILL_META_UNDER,
   DONE_CONTEXT,
   DONE_HEADLINE,
   needsAttentionLine,
   phasePill,
-  reviewDueSpec,
   smartDrillHeadline,
-  smartDrillSpec,
   summarizeToday,
   type ResumeCandidate,
-  type SessionSpec,
   type TodaySummary,
 } from '@/domain/home';
+import {
+  dailyQuestionSpec,
+  describeResumeProgress,
+  reviewDueSpec,
+  smartDrillSpec,
+  type SessionSpec,
+} from '@/domain/sessions';
 import { toIsoDate } from '@/domain/study-plan';
 import { toAppError, type AppError } from '@/domain/result';
 import { activeExam } from '@/services/exams';
@@ -142,6 +144,8 @@ export const useHome = (repositories: Repositories, now?: Date): HomeModel => {
         mock !== null
           ? {
               kind: 'mock',
+              sessionId: mock.id,
+              mode: 'mock-exam',
               answeredCount: mock.answeredCount,
               totalCount: mock.totalItems,
               updatedAt: mock.updatedAt,
@@ -149,6 +153,8 @@ export const useHome = (repositories: Repositories, now?: Date): HomeModel => {
           : practice !== null
             ? {
                 kind: 'practice',
+                sessionId: practice.id,
+                mode: practice.mode,
                 answeredCount: resumablePracticeAnswers,
                 totalCount: practice.requestedCount,
                 updatedAt: practice.updatedAt,

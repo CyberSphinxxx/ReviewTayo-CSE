@@ -1,10 +1,13 @@
 /**
- * Session sizing for Home.
+ * Session sizing.
  *
- * A drill is sized to what the learner said they can do, capped by the exam's own
+ * Every mode is sized to what the learner said they can do, capped by the exam's own
  * policy — never by a number this file invents. Duration estimates are deliberately
  * rough and derived from a single constant, so the copy reads honestly ("about")
  * rather than pretending to a precision the app does not have.
+ *
+ * Shared by Home (which recommends a drill) and Practice (which offers one), so the
+ * two can never disagree about how long ten questions take.
  */
 
 /** Planning estimate: a CSE-style drill question takes about a minute. */

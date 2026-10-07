@@ -248,3 +248,60 @@ prototype, reading content from the imported pack.
 Phase 9 — Practice + Quiz: the Smart Drill domain service, Weakest Area, Timed Practice, Random set,
 Build a Quiz, Mastery Rounds, Practice by Subject, progressive disclosure, the question screen and
 answer checking.
+
+## Session 8 — 2026-10-08 — Phase 9 (+ a Phase 8 audit)
+### Phase 8 audit (fixed before continuing)
+- The audit found four real defects in Learn, now fixed and committed separately (`f6a54d5`): Study
+  Guides listed one row per subject and duplicated the Subjects list above it; `useLearn`/`useReference`
+  exposed an `exam` and a `trackId` nothing read; `/guide` claimed "Nothing to read yet" while it was
+  still loading; and the guide row's `onPress` handed React Native's press event into a route param,
+  which arrived as `[object Object]`. The same `onPress={fn}` shape was swept for across the app.
+- Session sizing and the shared evidence shapes moved out of Home into `src/domain/sessions/`
+  (`sizing.ts`, `evidence.ts`) so Practice and the quiz could use them without importing Home.
+
+### Phase 9 — Practice + Quiz (complete)
+- `src/domain/practice/` holds everything Practice claims and nothing about how it is drawn: the drill
+  ranking (`drill.ts`), the catalogue of honest actions (`catalogue.ts`), the answer and results copy
+  (`feedback.ts`), the plan-task mapping (`task-kind.ts`) and the shared types. Every mode is data —
+  an action carries its own request — so the screen never decides how a mode works.
+- Smart Drill ranks every concept of the learner's track with the exam's own `SmartDrillWeights`
+  (weakness, due review, unseen, low coverage, recent lesson) and hands the top of that list to the
+  same generic planner every other mode uses (D-035). Weakest Area names a real subject or does not
+  appear at all (D-036). Mastery Rounds drills every concept that is not yet `Mastered`, and drops the
+  filter when that would be the whole track.
+- `src/services/practice.ts` is the one place a session is created and an answer is committed:
+  `startSession` (including `similarToQuestionId` → `buildSimilarQuestionPlan`), `submitAnswer` (one
+  transaction: the answer, mastery per concept, the review schedule, today's activity, the plan task
+  and the session's score — D-033, D-034), `finishSession`, `pauseSession` and `hasSimilarQuestion`.
+- The four modules the screen needs landed behind them: `/quiz` (one question at a time), `/build-quiz`
+  (subject chips and length), `/subject-practice` (one row per track subject with real counts) and a
+  real Practice tab — eyebrow, editorial title, one dominant Smart Drill, the targeted rows that can
+  be honestly offered, and everything else behind a single disclosure.
+- The wrong-answer recovery loop is the prototype's: another question about the same idea (offered
+  only when a related question exists — D-037), the concept's own reference page, then the next
+  question. Bookmarking lives in the quiz header and reads its state back from the database.
+- Timed Practice runs on a stored deadline rather than a counted-down variable, and a clock that runs
+  out finishes the session with what was answered (D-038). Closing a session pauses it; reopening by
+  `sessionId` restores the stored order, the score so far, the clock's remainder and the first
+  unanswered question — and Home's resume card now carries that id, so it truly resumes.
+- Results report the score without judging it and then recommend one next action from the score and
+  the distinct concepts missed: widen to a mixed set, drill again, or take the misses to Review.
+- Tests: 31 suites / 437 tests — 24 domain cases (catalogue per policy and per track, ranking,
+  weakest area, mastery rounds, feedback copy, recommendations), 17 service cases (session creation,
+  the answer transaction, the plan task, pause/resume, similar questions), 10 Practice screen cases
+  and 13 quiz cases over the real router and a seeded database (checking, explaining, mastery,
+  queueing a miss, no second answer, the walk to the results, resuming, bookmark, follow-up concept
+  and similar-question routing, the recommendation's destinations, an unsatisfiable request).
+
+### Verification evidence
+| Command (from `mobile/`) | Result |
+|---|---|
+| `npx tsc --noEmit` | PASS |
+| `npx eslint .` | PASS — 0 errors, 0 warnings |
+| `npx prettier --check .` | PASS |
+| `npx jest` | PASS — 31 suites, 437 tests |
+| `npx expo export --platform android` | PASS — Hermes bundle emitted |
+
+### Next session starts at
+Phase 10 — Review: the review scheduler, the Due queue, Again/Got It, mistakes, saved questions,
+concepts to revisit, history, the caught-up state and the tab's due badge.

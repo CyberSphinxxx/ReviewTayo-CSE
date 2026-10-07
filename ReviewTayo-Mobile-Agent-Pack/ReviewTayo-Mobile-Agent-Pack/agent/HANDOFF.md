@@ -1,12 +1,38 @@
 # Agent Handoff
 
 ## Current phase
-Phases 0–8 complete. Starting Phase 9 (Practice + Quiz).
+Phases 0–9 complete. Starting Phase 10 (Review).
 
 ## Current task
-Phase 9 — Practice + Quiz: the Smart Drill domain service, Weakest Area, Timed Practice, Random set,
-Build a Quiz, Mastery Rounds, Practice by Subject, progressive disclosure, the question screen and
-answer checking.
+Phase 10 — Review: the review scheduler, the Due queue, Again/Got It, mistakes, saved questions,
+concepts to revisit, review history, the caught-up state and the tab's due badge.
+
+## Files changed (Phase 9)
+- `/mobile/src/domain/practice/**` — `drill.ts` (concept weighting with the exam's own
+  `SmartDrillWeights`, `weakestSubject`, `unmasteredConceptIds`), `catalogue.ts` (the honest action
+  list, per track and per policy), `feedback.ts` (answer checking, mastery copy, session summary,
+  `recommendNext`), `task-kind.ts` and `types.ts`.
+- `/mobile/src/domain/sessions/**` — `sizing.ts` and `evidence.ts`, moved out of `domain/home` so
+  Practice and the quiz share them without importing Home.
+- `/mobile/src/services/practice.ts` — `startSession`, `submitAnswer` (one transaction for the answer,
+  mastery, the review schedule, activity, the plan task and the session score), `finishSession`,
+  `pauseSession`, `hasSimilarQuestion`.
+- `/mobile/src/features/practice/**` and `/mobile/src/features/quiz/**` — `usePractice` (catalogue +
+  a destination per action), `useQuiz` (start or resume, one question at a time, the real clock,
+  best-effort bookmark and similar-question lookups), `useTrackSubjects`, and the section components
+  for the practice list, the question, the checked answer and the results.
+- `/mobile/app/(tabs)/practice.tsx`, `/mobile/app/quiz.tsx`, `/mobile/app/build-quiz.tsx`,
+  `/mobile/app/subject-practice.tsx` — the real screens, with the two new modals registered in
+  `/mobile/app/_layout.tsx`.
+- `/mobile/app/(tabs)/home.tsx` — the resume card now carries the session id and mode, so it resumes
+  the practice session instead of only offering it.
+- `/mobile/tests/domain/practice.test.ts`, `/mobile/tests/services/practice-session.test.ts`,
+  `/mobile/tests/app/practice-screen.test.tsx`, `/mobile/tests/app/quiz-screen.test.tsx` — 64 new cases.
+
+## Files changed (Phase 8 audit)
+- `/mobile/src/features/learn/**` and `/mobile/app/guide.tsx` — the Study Guides index collapsed to a
+  single row, the loading state distinguished from an empty one, and the guide row no longer hands its
+  press event into a route param.
 
 ## Files changed (Phase 8)
 - `/mobile/src/domain/exams/mastery.ts` — mastery as a derivation: weighted accuracy from the stored
@@ -42,7 +68,7 @@ cd mobile
 npx tsc --noEmit                      # PASS
 npx eslint .                          # PASS (0 errors, 0 warnings)
 npx prettier --check .                # PASS
-npx jest                              # PASS — 27 suites, 373 tests
+npx jest                              # PASS — 31 suites, 437 tests
 npx expo export --platform android    # PASS — Hermes bundle emitted
 ```
 
@@ -56,22 +82,26 @@ None.
 N/A.
 
 ## Next exact action
-1. Build the Practice tab (`mobile/app/(tabs)/practice.tsx`) from the approved prototype: the Smart
-   Drill card, Weakest Area, Timed Practice, and Mock Exam / Practice by Subject / More Practice
-   behind progressive disclosure.
-2. Add the practice domain service over the existing `buildSessionPlan` planner: candidate selection
-   weighted by weakness, due review and unseen coverage, then the session sizing the screen shows.
-3. Build the question screen (`mobile/app/quiz.tsx`) with answer checking, feedback and progress,
-   persisting answers, mastery and review items in one transaction.
-4. Tests: the drill composition from a seeded history, answer checking and mastery updates, empty
-   states, both themes and routing; then run the gate, update agent docs and commit.
+1. Build Review (`mobile/app/(tabs)/review.tsx`) from the approved prototype on the data Phase 9
+   already writes: the due queue, mistakes, saved questions and concepts to revisit.
+2. Add the review domain service over the existing review repository: due ordering, the interval a
+   Got It earns and the relapse an Again records, so the scheduler is testable without a screen.
+3. Make the tab's due badge read the same count as the queue, and cover the caught-up state and
+   review history.
+4. Tests: scheduling and interval arithmetic, the Again/Got It flow against a real database, the
+   empty and caught-up states, both themes and routing; then run the gate, update agent docs and
+   commit.
 
 ## Decisions made
-D-029 … D-032 (see `agent/DECISIONS.md`): mastery derived from evidence and quantised before
-thresholds · reference content generated from concepts · the Subjects bar is accuracy with mastery
-underneath · Continue Learning never recommends a mastered lesson.
-Earlier: D-019 … D-028 (appearance vocabulary, atomic onboarding commit, Home derives everything,
-streak semantics, resume dismissal). ADRs: 001 integration, 002 database port, 003 contract-first sync.
+D-033 … D-038 (see `agent/DECISIONS.md`): correctness decided by the service from the question · one
+submitted answer is one transaction · the drill's ranking stays a ranking · Practice omits a mode it
+cannot honestly offer · "Try another like this" only when the follow-up exists · a timed session runs
+on a deadline and expiring finishes it.
+Previous session: D-029 … D-032 (mastery derived from evidence and quantised before thresholds ·
+reference content generated from concepts · the Subjects bar is accuracy with mastery underneath ·
+Continue Learning never recommends a mastered lesson). Earlier: D-019 … D-028 (appearance
+vocabulary, atomic onboarding commit, Home derives everything, streak semantics, resume dismissal).
+ADRs: 001 integration, 002 database port, 003 contract-first sync.
 
 ## New blockers
 Only external ones (see `agent/BLOCKERS.md`): live Google credentials, a production API endpoint,

@@ -5,7 +5,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { RTButton, RTStateView, RTText } from '@/components';
 import type { Repositories } from '@/data/repositories';
-import type { HomeTask } from '@/domain/home';
+import type { HomeTask, ResumeCandidate } from '@/domain/home';
 import { HomeHero, HomeResumeCard, HomeToday, useHome } from '@/features/home';
 import { useLocalData } from '@/store/LocalDataProvider';
 import { useTheme } from '@/theme';
@@ -91,11 +91,19 @@ const HomeContent = ({ repositories }: { readonly repositories: Repositories }) 
   );
 
   const resume = useCallback(
-    (kind: 'mock' | 'practice') => {
-      if (kind === 'mock') router.push('/mock');
-      else startDrill();
+    (candidate: ResumeCandidate) => {
+      if (candidate.kind === 'mock') {
+        router.push('/mock');
+        return;
+      }
+      // Reopening the stored session continues it; the quiz route reads the answers
+      // already given rather than starting again.
+      router.push({
+        pathname: '/quiz',
+        params: { mode: candidate.mode, sessionId: candidate.sessionId },
+      });
     },
-    [router, startDrill],
+    [router],
   );
 
   const openSettings = useCallback(() => router.push('/settings'), [router]);

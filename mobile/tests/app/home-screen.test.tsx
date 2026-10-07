@@ -312,12 +312,20 @@ describe('Home', () => {
       });
     }
 
-    await renderHome(db);
+    const result = await renderHome(db);
 
     expect(screen.getByTestId('home-resume')).toBeOnTheScreen();
     expect(screen.getByText('Continue practice')).toBeOnTheScreen();
     // Answered over requested, from the answers themselves rather than a guess.
     expect(screen.getByTestId('home-resume-progress')).toHaveTextContent('2 / 10');
+
+    // Resuming reopens that session rather than starting a new one.
+    await fireEvent.press(screen.getByTestId('home-resume-action'));
+    await waitFor(() => expect(result.getPathname()).toBe('/quiz'));
+    expect(result.getSearchParams()).toMatchObject({
+      mode: 'smart-drill',
+      sessionId: 'session-1',
+    });
   });
 
   it('says the day is done once nothing is planned and nothing is due', async () => {

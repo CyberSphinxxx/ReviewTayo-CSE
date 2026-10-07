@@ -3,22 +3,24 @@ import type { StudyPolicy } from '@/domain/exams/types';
 import {
   BALANCED_CONTEXT,
   computeStreak,
-  dailyQuestionSpec,
   describeGoalProgress,
-  describeResumeProgress,
   describeStreakLine,
   DONE_CONTEXT,
   DONE_HEADLINE,
   needsAttentionLine,
   phasePill,
-  reviewDueSpec,
   smartDrillHeadline,
-  smartDrillSpec,
   summarizeToday,
   tasksForDay,
   type ActivityDay,
   type HomeTask,
 } from '@/domain/home';
+import {
+  dailyQuestionSpec,
+  describeResumeProgress,
+  reviewDueSpec,
+  smartDrillSpec,
+} from '@/domain/sessions';
 
 import { loadFixturePack } from '@tests/utils/exam-fixtures';
 

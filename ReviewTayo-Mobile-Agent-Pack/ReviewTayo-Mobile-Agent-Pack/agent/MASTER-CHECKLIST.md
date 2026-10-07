@@ -184,25 +184,61 @@ Status legend:
   Device captures are tracked in VISUAL-QA.md.)*
 
 ## Phase 9 — Practice + Quiz
-- [ ] Smart Drill domain service.
-- [ ] Weakest Area.
-- [ ] Timed Practice.
-- [ ] Random set.
-- [ ] Build a Quiz.
-- [ ] Mastery Rounds.
-- [ ] Practice by Subject.
-- [ ] Practice progressive disclosure.
-- [ ] question screen.
-- [ ] answer checking.
-- [ ] explanations.
-- [ ] mastery feedback.
-- [ ] Try Another Like This.
-- [ ] Review Concept.
-- [ ] bookmark/save.
-- [ ] pause/resume.
-- [ ] results.
-- [ ] recommended next action.
-- [ ] tests.
+- [x] Smart Drill domain service. *(`src/domain/practice/drill.ts` ranks every concept of the
+  learner's track with the exam's own `SmartDrillWeights` — weakness, due review, unseen, low
+  coverage, recent lesson — and `src/services/practice.ts` turns that ranking into a session through
+  the same generic planner every other mode uses. The score is never sent to the screen: Practice
+  offers a drill, not a league table.)*
+- [x] Weakest Area. *(`weakestSubject` takes the lowest accuracy among the track's subjects that have
+  at least `weakestAreaMinimumAttempts` answers; below that the row is absent rather than invented,
+  and the row's meta line is the learner's real accuracy on that subject.)*
+- [x] Timed Practice. *(`timedPracticeQuestionCount` / `timedPracticeMinutes` from the exam policy.
+  The clock is a stored deadline plus a one-second tick, so a slow tick or a backgrounded app cannot
+  borrow time, and a session whose clock runs out finishes with whatever was answered instead of
+  discarding it.)*
+- [x] Random set. *(`random-set` over the planner with no filter — any subject, any difficulty — and
+  it is what the results screen widens to when there is nothing specific left to fix.)*
+- [x] Build a Quiz. *(`/build-quiz`: subject chips built from the learner's own track (titles and
+  question counts read from the bank, not hardcoded) and a 5/10/20 length control, then an ordinary
+  session with `subjects=` supplied.)*
+- [x] Mastery Rounds. *(`unmasteredConceptIds`: every concept of the track whose derived level is not
+  `Mastered`, including ones never answered. When that is the whole track the filter is omitted —
+  naming every concept in the URL would read as a narrowing that never happened.)*
+- [x] Practice by Subject. *(`/subject-practice` lists the track's subjects with their real published
+  question counts, in track order, and opens a drill per subject.)*
+- [x] Practice progressive disclosure. *(one dominant Smart Drill, the two targeted rows that can be
+  honestly offered, and everything else behind a single "More ways to practise" disclosure.)*
+- [x] question screen. *(the `/quiz` route: one question at a time, segmented progress, the mode's
+  own name in the eyebrow, a clock only for a mode that has one, and a close affordance that pauses
+  rather than discards.)*
+- [x] answer checking. *(the choices stop responding once one is picked, so a second press cannot
+  replace the first answer — and correctness is decided inside `services/practice` from the question
+  itself, never handed in by the caller.)*
+- [x] explanations. *(the content's own explanation every time, plus the plainer restatement offered
+  only after a miss; nothing is generated on the fly.)*
+- [x] mastery feedback. *(`describeMasteryChange` names the concept's new level only when it moved;
+  a concept that held still gets no line rather than a sentence describing arithmetic.)*
+- [x] Try Another Like This. *(`hasSimilarQuestion` builds the follow-up plan first, so the button is
+  only offered when a related question exists and can never lead to an empty session; the route
+  starts a one-question `try-another-like-this` session that prefers the question's related group
+  and falls back to its concept, and never asks the missed question straight back.)*
+- [x] Review Concept. *(`/concept?conceptId=…` for the concept the miss landed on — the same reference
+  page Learn opens, so there is one reading experience rather than two.)*
+- [x] bookmark/save. *(the quiz header toggles a saved question for the question on screen and reads
+  the state back from the database, so a bookmark made anywhere shows up here, and the row Review's
+  saved list will read is written immediately.)*
+- [x] pause/resume. *(closing pauses and leaves the session resumable; reopening it by `sessionId`
+  restores the stored question order, the score so far, the clock's remainder and the first
+  unanswered question. Home's resume card carries the session id, so it truly resumes.)*
+- [x] results. *(the score, a summary that is not a judgement, the recommendation card, and both ways
+  out — another session, or back to Practice.)*
+- [x] recommended next action. *(`recommendNext` reads the score and the number of distinct concepts
+  missed: a clean sheet widens to a mixed set, a rough set points at Review rather than deeper into
+  the same material, and anything in between drills again.)*
+- [x] tests. *(`tests/domain/practice.test.ts` — 24 cases (catalogue, ranking, weakest area, mastery
+  rounds, feedback copy, recommendations); `tests/services/practice-session.test.ts` — 17 cases;
+  `tests/app/practice-screen.test.tsx` — 10 cases; `tests/app/quiz-screen.test.tsx` — 13 cases over
+  the real router and a seeded database. Device captures are tracked in VISUAL-QA.md.)*
 
 ## Phase 10 — Review
 - [ ] review scheduler.

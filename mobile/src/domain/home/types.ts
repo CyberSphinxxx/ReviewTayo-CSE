@@ -1,4 +1,3 @@
-import type { SubjectId } from '@/domain/exams/types';
 import type { StudyTaskKind, StudyTaskStatus } from '@/domain/study-plan';
 
 /**
@@ -28,16 +27,19 @@ export interface ActivityDay {
   readonly goalMet: boolean;
 }
 
-/** Accuracy for one subject across every answer source. */
-export interface SubjectAccuracyRow {
-  readonly subjectId: SubjectId;
-  readonly answered: number;
-  readonly correct: number;
-}
+/**
+ * Answer accuracy is shared with Practice and Progress (`@/domain/sessions`);
+ * re-exported here so Home's own modules keep one import site.
+ */
+export type { SubjectAccuracy as SubjectAccuracyRow } from '@/domain/sessions';
 
 /** An unfinished session the learner can pick up where they left off. */
 export interface ResumeCandidate {
   readonly kind: 'mock' | 'practice';
+  /** The stored session, so the card can reopen it rather than start a new one. */
+  readonly sessionId: string;
+  /** The mode that session was started in; it decides how it is presented again. */
+  readonly mode: string;
   readonly answeredCount: number;
   readonly totalCount: number;
   readonly updatedAt: string;

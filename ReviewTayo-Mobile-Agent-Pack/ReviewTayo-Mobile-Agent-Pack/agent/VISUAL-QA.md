@@ -57,5 +57,20 @@ Do not require pixel-perfect HTML matching. Require faithful design intent and n
   360 px, whether the Subjects bars read as one column of comparable lengths, and whether the guide's
   long concept list stays airy at Extra Large text. Capture Learn, Learn at Extra Large, a subject
   guide and a concept page (light and dark, 360×640 and 390×844) with the rest.
+- Phase 9: Practice, Build a Quiz, Practice by Subject and the quiz flow exist in both themes and
+  their behaviour is asserted from the rendered tree and the database behind it — one dominant Smart
+  Drill card, the targeted rows that can honestly be offered, the disclosure, the question with its
+  choices locked after the first press, the checked answer with its explanation and mastery line, the
+  Try Another Like This / Review Concept pair, the bookmark control in the header, the timed clock
+  and the results with their recommendation. What automated tests cannot judge is exactly what this
+  screen is for: whether the question, its choices and the explanation read as one calm column at
+  360 px without the feedback pushing the next button below the fold, whether the choices are
+  comfortably tappable one-handed, whether the header still fits once the clock and the bookmark
+  share it at Large text, and whether the Practice list's disclosure reads as a natural "and more"
+  rather than a second menu. Capture Practice (light and dark), a quiz question unanswered, a checked
+  correct answer, a checked wrong answer with both recovery actions, the results with a
+  recommendation, and a timed session counting down — at 360×640 and 390×844, Standard and Extra
+  Large. A device pass is also the only way to confirm the clock keeps honest time when the app is
+  backgrounded mid-session.
 - Screens are placeholders until their phases (Home 7, Learn 8, Practice/Quiz 9, Review 10,
   Progress 11, Mock 12); captures are collected as each phase lands.

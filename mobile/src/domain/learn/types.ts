@@ -1,6 +1,10 @@
 import type { MasteryLevel } from '@/domain/exams/mastery';
 import type { ConceptId, SubjectId } from '@/domain/exams/types';
 
+// Evidence shapes are shared with Home, Practice and Progress; Learn keeps them in
+// its own surface so its modules import from one place.
+export type { ConceptEvidence, SubjectAccuracy } from '@/domain/sessions';
+
 /**
  * Learn shapes.
  *
@@ -10,21 +14,6 @@ import type { ConceptId, SubjectId } from '@/domain/exams/types';
  * structurally larger than these, so a repository row can be passed straight in
  * while the domain stays free of the data layer.
  */
-
-/** Mastery evidence for one concept, as Learn reads it. */
-export interface ConceptEvidence {
-  readonly conceptId: ConceptId;
-  readonly correctCount: number;
-  readonly wrongCount: number;
-  readonly lastAnsweredAt: string | null;
-}
-
-/** Accuracy for one subject across every answer source. */
-export interface SubjectAccuracy {
-  readonly subjectId: SubjectId;
-  readonly answered: number;
-  readonly correct: number;
-}
 
 /** A concept as Learn presents it: named, and placed in its subject's lesson order. */
 export interface LearnConcept {

@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
-  "phase": "09-practice-quiz",
-  "currentTask": "Phase 9 — Practice + Quiz: Smart Drill, Weakest Area, Timed Practice, Random set, Build a Quiz, Mastery Rounds, Practice by Subject, question screen and answer checking",
-  "lastCompletedTask": "phase-08-learn",
-  "nextAction": "Build the Practice tab and the quiz experience: the Smart Drill domain service over the session planner, the question screen with answer checking and feedback, and the remaining practice modes behind progressive disclosure",
+  "phase": "10-review",
+  "currentTask": "Phase 10 — Review: review scheduler, Due queue, Again/Got It, mistakes, saved questions, concepts to revisit, history, caught-up state and the tab due badge",
+  "lastCompletedTask": "phase-09-practice-quiz",
+  "nextAction": "Build Review on the data Phase 9 already writes: the due queue with Again/Got It, mistakes, saved questions, concepts to revisit, history and the caught-up state, with the tab badge reading the same due count",
   "lastSuccessfulBuild": "expo export --platform android (PASS)",
   "failingTests": [],
   "testSummary": {
-    "suites": 27,
-    "tests": 373,
-    "passed": 373,
+    "suites": 31,
+    "tests": 437,
+    "passed": 437,
     "failed": 0
   },
   "externalBlockers": [
@@ -39,7 +39,8 @@
     "05-navigation",
     "06-onboarding",
     "07-home",
-    "08-learn"
+    "08-learn",
+    "09-practice-quiz"
   ],
   "contentStats": {
     "cseQuestions": 88,
@@ -56,7 +57,9 @@
     "phase-7: Home's light/dark fidelity is asserted against the theme tokens and the screen's rendered styles; device or emulator captures remain pending (no Android SDK in this environment), tracked in VISUAL-QA.md",
     "phase-7: resume-card dismissal is session-only until the mock phase defines what a dismissed session means (D-028)",
     "phase-8: Learn's light/dark fidelity is asserted against the theme tokens and the rendered styles; device or emulator captures of the reference pages remain pending (no Android SDK in this environment), tracked in VISUAL-QA.md",
-    "phase-8: quick sheets are one concept summary per subject; richer per-topic sheets are a content task, and the concept page is the shape they would arrive in"
+    "phase-8: quick sheets are one concept summary per subject; richer per-topic sheets are a content task, and the concept page is the shape they would arrive in",
+    "phase-9: the quiz's wrong-answer recovery, bookmark and recommendation flows are covered by integration tests over the real router and a seeded database; device captures of the Practice tab, the quiz in both themes and a timed session are tracked in VISUAL-QA.md",
+    "phase-9: the drill ranking's weights (weakness/due review/unseen/low coverage/recent lesson) are asserted from the domain, not from a device; tuning them is a content-and-policy task once real answer volume exists"
   ],
   "environment": {
     "node": "24.16.0",

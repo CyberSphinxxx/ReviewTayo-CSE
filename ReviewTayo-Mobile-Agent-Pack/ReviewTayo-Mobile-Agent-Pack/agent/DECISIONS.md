@@ -177,3 +177,42 @@ The row resumes the concept that is started and not yet mastered, most recently 
 closing the app mid-topic lands back on the same topic. With no history it points at the first
 lesson still to be mastered and labels it `Start here` rather than `Continue learning`, and when
 every lesson in the track is mastered the row disappears instead of repeating finished work.
+
+## D-033 — Correctness is decided by the service, from the question itself
+`submitAnswer` takes the chosen choice and works out whether it was right; it never accepts an
+`isCorrect` flag from a caller. The screen therefore cannot record a wrong answer as right — not by
+a bug, not by a stale session, not by a hand-crafted route — and every consumer of an answer (Home's
+streak, Progress's accuracy, the review queue, mastery) inherits that guarantee for free.
+
+## D-034 — One submitted answer is one transaction
+Recording an answer touches six things that must agree: the answer row, mastery for every concept it
+touched, the review schedule, today's activity, the planned task it counts towards, and the session's
+own score. They are written inside a single transaction. A crash between them would otherwise leave
+mastery that no answer explains or a plan that never notices work the learner actually did, and no
+later screen could tell which half happened.
+
+## D-035 — The drill's ranking stays a ranking
+`weightConcepts` scores every concept and the drill takes the top of that list, but the score, the
+weights and the reasons behind a pick are never sent to the screen. Exposing them would invite the
+learner to game a number instead of practising, and it would turn the exam's own policy into a
+promise to the learner about their future questions. The catalogue says what a drill is, never why
+this question was chosen.
+
+## D-036 — Practice omits a mode it cannot honestly offer
+The catalogue only contains actions the learner's own data supports: no Weakest Area until some
+subject has `weakestAreaMinimumAttempts` answers, no Timed Practice when the policy does not support
+it, and a filter that would name every concept in the track is dropped rather than sent. A row that
+appears and then apologises is worse than a row that was never there, and the same rule is why the
+Smart Drill card is the only dominant action on the screen.
+
+## D-037 — "Try another like this" is offered only when the follow-up exists
+The button is shown after a miss only when `hasSimilarQuestion` has already built the plan it would
+start, so pressing it can never land on an empty session. The follow-up prefers the missed question's
+own related group and falls back to its concept, and it always excludes the question the learner just
+saw — being asked the same question twice is not practice, it is a repeat.
+
+## D-038 — A timed session runs on a deadline, and expiring finishes it
+Timed Practice stores the session's deadline and ticks once a second against it rather than counting
+down a local variable, so a backgrounded app, a slow frame or a throttled timer cannot make the
+session longer than the exam's own rules allow. When the clock reaches zero the session is finished
+with what was answered: time running out is a result, not a reason to throw the work away.
