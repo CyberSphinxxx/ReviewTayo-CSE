@@ -1,34 +1,38 @@
 # Agent Handoff
 
 ## Current phase
-Phases 0–5 complete. Starting Phase 6.
+Phases 0–6 complete. Starting Phase 7 (Home).
 
 ## Current task
-Phase 6 — onboarding and settings: onboarding shell/progress, Guest identity, Google auth
-architecture, CSE level, starting point, exam date, study days, session length, daily goal,
-generated plan, plan editing, appearance, text size, reminders, completion, settings
-integration, rerun-onboarding dev tool.
+Phase 7 — Home: the editorial home layout from the approved prototype, exam phase and countdown,
+the Smart Drill call to action, and today's plan read from the generated study plan.
 
-## Files changed (Phase 5)
-- `/mobile/app/_layout.tsx` — root layout now wraps `LocalDataProvider` (composition root) and a
-  themed data gate; route presentations declared for the shell and modal routes.
-- `/mobile/app/index.tsx` — redirects into `(tabs)/home` until Phase 6 adds the onboarding gate.
-- `/mobile/app/(tabs)/**` — tab layout plus five destination screens (placeholders until their
-  phases: Home 7, Learn 8, Practice 9, Review 10, Progress 11).
-- `/mobile/app/{settings,quiz,mock,onboarding}.tsx` — real routes for later phases.
-- `/mobile/src/store/LocalDataProvider.tsx` — database bootstrap + repositories context.
-- `/mobile/src/navigation/**` — tab definitions, themed `TabBarIcon`, due-count helper/hook.
-- `/mobile/src/domain/exams/bootstrap.ts` — idempotent startup registration (D-018).
-- `/mobile/tests/app/**`, `/mobile/tests/store/**` — navigation, provider and real router
-  integration tests.
+## Files changed (Phase 6)
+- `/mobile/src/domain/preferences.ts` — new authoritative appearance vocabulary (theme, text size,
+  labels, coercion of legacy values).
+- `/mobile/src/domain/onboarding/**` — step ids, draft defaults and the pure draft operations
+  (parsing, clamping, date normalisation, presenters, first activity, step machine).
+- `/mobile/src/domain/study-plan/**` — `buildWeeklyPlan`: answers in, a dated week of tasks out,
+  sized from the exam's own blueprint.
+- `/mobile/src/services/{onboarding,app-settings,exams}.ts` — draft load, the single atomic commit,
+  validated settings read/write and active-exam resolution.
+- `/mobile/src/features/onboarding/**` — the state machine plus the eight approved step bodies.
+- `/mobile/src/features/settings/use-settings.ts` — settings model: reload on focus, immediate
+  persistence for appearance/reminders, step-targeted reopening of the flow.
+- `/mobile/src/store/AppearanceBootstrap.tsx` — hydrates stored appearance before first paint.
+- `/mobile/app/{index,onboarding,settings,_layout}.tsx` — first-run gate, the flow shell, the
+  grouped settings screen and the new provider order.
+- `/mobile/src/data/**` — `Repositories.transaction`, `studyPlans.getByWeek`, and wholesale task
+  replacement on save so an edited plan cannot keep removed tasks.
+- `/mobile/tests/{domain,services,app,store}/**` — six suites covering the phase.
 
 ## Tests run
 ```
 cd mobile
 npx tsc --noEmit                      # PASS
 npx eslint .                          # PASS (0 errors, 0 warnings)
-npx prettier --write .                # PASS
-npx jest                              # PASS — 16 suites, 243 tests
+npx prettier --check .                # PASS
+npx jest                              # PASS — 22 suites, 288 tests
 npx expo export --platform android    # PASS — Hermes bundle emitted
 ```
 
@@ -42,19 +46,16 @@ None.
 N/A.
 
 ## Next exact action
-1. Build the onboarding flow in `app/onboarding.tsx` (eight steps from the merged reference):
-   guest/Google choice, CSE level, starting point + optional exam date, study days + session
-   length, daily goal, plan preview/edit, appearance + text size + reminders, completion.
-2. Persist via `Repositories.profile` / `Repositories.settings`; generate the first study plan
-   through the domain study-policy code and store it with `Repositories.studyPlans`.
-3. Wire the bootstrap gate in `app/index.tsx` (profile complete → tabs, otherwise onboarding),
-   hydrate `AppearanceProvider` from settings, build `app/settings.tsx`, and add a rerun-onboarding
-   developer action.
-4. Tests: onboarding step state machine, validation, persistence round trip, gate redirect and
-   settings edits — then run the gate, update agent docs and commit.
+1. Build Home (`mobile/app/(tabs)/home.tsx`) from the approved prototype: editorial header with the
+   owl, exam phase and countdown from the committed profile, the Smart Drill CTA, and today's tasks
+   from the active weekly plan.
+2. Add a Home feature module (`src/features/home`) so the screen holds layout only.
+3. Tests: phase/countdown derivation from the profile, today's tasks from the generated plan, the
+   empty states (no plan yet, rest day) and a router-level render in both themes; then run the gate,
+   update agent docs and commit.
 
 ## Decisions made
-D-007 … D-018 (see `agent/DECISIONS.md`); ADR-001 integration, ADR-002 database port,
+D-019 … D-025 (see `agent/DECISIONS.md`); ADR-001 integration, ADR-002 database port,
 ADR-003 contract-first sync.
 
 ## New blockers
@@ -67,4 +68,4 @@ present untracked under `archives/mobile-prototype/`. This reorganisation pre-da
 it was left untouched. Commit or discard it deliberately before release.
 
 ## Commit/hash
-See the checkpoint commit created at the end of Phase 5 (`feat(navigation): …`).
+See the checkpoint commit created at the end of Phase 6 (`feat(onboarding): …`).

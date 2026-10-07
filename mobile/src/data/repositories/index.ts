@@ -1,3 +1,5 @@
+import type { DatabaseTransaction } from '@/data/local/database-port';
+
 import type { ExamContentRepository } from './exam-content-repository';
 import type { MasteryRepository } from './mastery-repository';
 import type { MockSessionRepository } from './mock-repository';
@@ -43,4 +45,11 @@ export interface Repositories {
   readonly activity: ActivityRepository;
   readonly outbox: SyncOutboxRepository;
   readonly syncState: SyncStateRepository;
+  /**
+   * Runs a change that spans several repositories atomically — onboarding writes
+   * the profile, settings and study plan together. Repositories accept the active
+   * transaction through `WriteOptions.transaction`; none of them may open a nested
+   * transaction.
+   */
+  readonly transaction: <T>(work: (transaction: DatabaseTransaction) => Promise<T>) => Promise<T>;
 }

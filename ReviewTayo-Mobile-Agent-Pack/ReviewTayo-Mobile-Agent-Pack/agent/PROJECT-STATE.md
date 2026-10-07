@@ -1,16 +1,14 @@
 # Project State
 
-**Phase:** 5 — Navigation shell (complete) → starting Phase 6 — Onboarding / settings
-**Current task:** Phase 6 — onboarding flow (guest/Google architecture, level, schedule, plan) and
-settings integration
-**Last completed task:** Phase 5 navigation shell — `LocalDataProvider` composition root, five-tab
-shell with centred Home, modal/onboarding routes, real due-count badge from the review queue, and a
-router integration test over a seeded database.
-**Next action:** Build the onboarding steps and persistence (profile, settings, first study plan),
-add the bootstrap gate that chooses onboarding vs the shell, build settings, and hydrate appearance
-from stored settings.
+**Phase:** 6 — Onboarding / settings (complete) → starting Phase 7 — Home
+**Current task:** Phase 7 — Home (editorial layout, exam phase/countdown, Smart Drill CTA)
+**Last completed task:** Phase 6 onboarding and settings — the approved eight-step flow with
+draft/commit behaviour, the generated first weekly plan, the bootstrap gate, settings integration,
+and appearance hydration before first paint.
+**Next action:** Build Home from the approved prototype: editorial header, exam phase and countdown,
+Smart Drill call to action, and today's plan — all read from the repositories already in place.
 **Last successful build:** `npx expo export --platform android` → PASS (Hermes bundle)
-**Known failing tests:** None. `npx jest` → 243 passed / 243.
+**Known failing tests:** None. `npx jest` → 288 passed / 288.
 **External blockers:** Live Google OAuth credentials and a production API endpoint (verify-only;
 everything else works without them).
 **Internal blockers:** None.
@@ -21,7 +19,7 @@ everything else works without them).
 | `npm run typecheck` | PASS |
 | `npm run lint` | PASS (0 errors, 0 warnings) |
 | `npm run format:check` | PASS |
-| `npm test` | PASS — 243 tests |
+| `npm test` | PASS — 288 tests across 22 suites |
 | `npx expo export --platform android` | PASS |
 
 ## Repository reality (Phase 0 audit)
@@ -49,11 +47,17 @@ everything else works without them).
 - do not refactor the web app merely to share code.
 
 ## Decisions added this session
-D-014 storage errors keep the driver message · D-015 transactions are passed down, never nested ·
-D-016 content import is version-gated and wholesale · D-017 identifier generation lives in
-services · D-018 startup content registration is idempotent. Earlier: D-007 database port · D-008 platform fonts · D-009 modal screens are routes ·
-D-010 bundled validated content packs · D-011 E2E strategy · D-012 route placement · D-013 exam
-phase derived. ADRs: 001 integration, 002 database port, 003 contract-first sync.
+D-019 appearance vocabulary lives in the domain · D-020 preference parsing never throws on an
+untrusted row · D-021 bootstrap hydrates appearance before first paint · D-022 onboarding commits in
+one transaction · D-023 a same-week rerun replaces that week's plan in place · D-024 settings saves
+immediate preferences and delegates plan edits to onboarding · D-025 edit-mode exit falls back to
+Home without history.
+Earlier: D-014 storage errors keep the driver message · D-015 transactions are passed down, never
+nested · D-016 content import is version-gated and wholesale · D-017 identifier generation lives in
+services · D-018 startup content registration is idempotent · D-007 database port · D-008 platform
+fonts · D-009 modal screens are routes · D-010 bundled validated content packs · D-011 E2E strategy ·
+D-012 route placement · D-013 exam phase derived. ADRs: 001 integration, 002 database port,
+003 contract-first sync.
 
 ## Content note
 88 authored CSE questions across 22 concepts (4 per concept, every concept covered in both

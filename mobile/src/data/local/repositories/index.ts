@@ -39,4 +39,5 @@ export const createLocalRepositories = (database: DatabasePort): Repositories =>
   activity: new SqliteActivityRepository(database),
   outbox: new SqliteSyncOutboxRepository(database),
   syncState: new SqliteSyncStateRepository(database),
+  transaction: (work) => database.transaction(work),
 });

@@ -1,3 +1,10 @@
+import {
+  TEXT_SIZE_PREFERENCES,
+  THEME_PREFERENCES,
+  type TextSizePreference,
+  type ThemePreference,
+} from '@/domain/preferences';
+
 /**
  * Raw design tokens.
  *
@@ -125,17 +132,14 @@ export const touchTarget = {
   comfortable: 48,
 } as const;
 
-export type ThemePreference = 'device' | 'light' | 'dark';
-export type ResolvedThemeMode = 'light' | 'dark';
-export type TextSizePreference = 'standard' | 'large' | 'extra';
+/**
+ * The preference vocabulary lives in the domain (see `@/domain/preferences`) and is
+ * re-exported here so theme consumers keep one import site.
+ */
+export type { ResolvedThemeMode, TextSizePreference, ThemePreference } from '@/domain/preferences';
+export { TEXT_SIZE_SCALE as textScale } from '@/domain/preferences';
 
-export const textScale: Record<TextSizePreference, number> = {
-  standard: 1,
-  large: 1.15,
-  extra: 1.3,
-};
-
-export const TEXT_SIZE_OPTIONS: readonly TextSizePreference[] = ['standard', 'large', 'extra'];
+export const TEXT_SIZE_OPTIONS: readonly TextSizePreference[] = TEXT_SIZE_PREFERENCES;
 
 export const TEXT_SIZE_LABELS: Record<TextSizePreference, string> = {
   standard: 'Standard',
@@ -143,7 +147,7 @@ export const TEXT_SIZE_LABELS: Record<TextSizePreference, string> = {
   extra: 'Extra Large',
 };
 
-export const THEME_OPTIONS: readonly ThemePreference[] = ['device', 'light', 'dark'];
+export const THEME_OPTIONS: readonly ThemePreference[] = THEME_PREFERENCES;
 
 export const THEME_LABELS: Record<ThemePreference, string> = {
   device: 'Device',

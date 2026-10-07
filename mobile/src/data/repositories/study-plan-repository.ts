@@ -1,12 +1,16 @@
 import type { ExamId, ExamTrackId } from '@/domain/exams/types';
+import type { StudyTaskKind, StudyTaskStatus } from '@/domain/study-plan';
 
 import type { WriteOptions } from './types';
 
-export const STUDY_TASK_KINDS = ['learn', 'practice', 'review', 'mock', 'checkpoint'] as const;
-export type StudyTaskKind = (typeof STUDY_TASK_KINDS)[number];
-
-export const STUDY_TASK_STATUSES = ['pending', 'in-progress', 'completed', 'skipped'] as const;
-export type StudyTaskStatus = (typeof STUDY_TASK_STATUSES)[number];
+// Task vocabulary is owned by the domain (see `@/domain/study-plan`); re-exported
+// so repository consumers keep one import site.
+export {
+  STUDY_TASK_KINDS,
+  STUDY_TASK_STATUSES,
+  type StudyTaskKind,
+  type StudyTaskStatus,
+} from '@/domain/study-plan';
 
 export interface StudyPlanRecord {
   readonly id: string;
@@ -36,10 +40,14 @@ export interface StudyPlanRepository {
   getById(id: string): Promise<StudyPlanRecord | null>;
   /** The plan the learner is currently following for an exam. */
   getActive(examId: ExamId): Promise<StudyPlanRecord | null>;
+  /** The plan covering a week; a rerun within the week replaces it in place. */
+  getByWeek(examId: ExamId, weekStart: string): Promise<StudyPlanRecord | null>;
   listTasks(planId: string): Promise<StudyTaskRecord[]>;
   /**
-   * Persists a new plan and its tasks atomically and deactivates the previous
-   * active plan for the exam, so there is never more than one active plan.
+   * Persists a plan and its tasks atomically and deactivates the previous active
+   * plan for the exam, so there is never more than one active plan. Tasks are
+   * replaced wholesale: an edited plan that drops a study day must not leave the
+   * removed day's task behind.
    */
   savePlan(
     plan: StudyPlanRecord,

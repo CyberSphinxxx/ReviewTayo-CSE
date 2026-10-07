@@ -74,6 +74,14 @@ export class SqliteStudyPlanRepository implements StudyPlanRepository {
     return row === null ? null : toPlan(row);
   }
 
+  async getByWeek(examId: string, weekStart: string): Promise<StudyPlanRecord | null> {
+    const row = await this.database.queryOne<PlanRow>(
+      `${PLAN_SELECT} WHERE exam_id = ? AND week_start = ?`,
+      [examId, weekStart],
+    );
+    return row === null ? null : toPlan(row);
+  }
+
   async listTasks(planId: string): Promise<StudyTaskRecord[]> {
     const rows = await this.database.query<TaskRow>(
       `SELECT id, plan_id, day, kind, label, target_count, completed_count, status, position
@@ -114,6 +122,10 @@ export class SqliteStudyPlanRepository implements StudyPlanRepository {
         plan.examId,
         plan.id,
       ]);
+
+      // The plan's task list is its current definition, so it is replaced rather
+      // than merged; otherwise an edited plan keeps tasks it no longer contains.
+      await tx.execute(`DELETE FROM study_tasks WHERE plan_id = ?`, [plan.id]);
 
       for (const task of tasks) {
         await tx.execute(

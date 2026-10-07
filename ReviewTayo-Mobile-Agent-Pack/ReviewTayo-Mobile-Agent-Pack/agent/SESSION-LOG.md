@@ -134,3 +134,43 @@ review repository, theme-aware nav and accessibility labels.
 ### Next session starts at
 Phase 6 — onboarding and settings: guest/Google choice, CSE level, starting point, exam date,
 study days, session length, daily goal, generated plan, appearance, text size, reminders.
+
+## Session 5 — 2026-10-07 — Phase 6
+### Phase 6 — Onboarding and settings (complete)
+- Appearance vocabulary moved into the domain (`src/domain/preferences.ts`) so onboarding, settings,
+  the theme and the stored row share one set of strings; a legacy `extra-large` row is coerced to
+  `extra` rather than reset (D-019, D-020).
+- Eight approved steps in `src/features/onboarding` over a pure draft module: account (guest/Google
+  intent), CSE level from the exam config, starting point with an optional exam date, study-day grid
+  and session length, daily goal with a custom 5–50 field, the generated plan preview with the first
+  activity, appearance/text size/reminders, and the completion summary.
+- `buildWeeklyPlan` turns the answers into a week of dated tasks from the exam's own blueprint —
+  a Sub-Professional mock is 165 items, Professional 170, and neither number is hardcoded.
+- Draft/commit: nothing is written while the flow is open; finishing writes profile, settings and the
+  plan in one transaction (D-022). A rerun inside the same week replaces that week's plan in place
+  and keeps the original `createdAt` (D-023).
+- `app/index.tsx` became the gate between first run and the shell, reading `onboardingCompletedAt`
+  from the profile rather than a flag kept in memory.
+- Settings: grouped Account / Study plan / Appearance / Reminders / Offline content. Appearance and
+  reminders save immediately; plan rows reopen the flow at the step that owns the field (D-024).
+- `AppearanceBootstrap` hydrates the stored theme and text size before the first paint and falls back
+  to defaults if the read fails (D-021).
+- Fixed while testing: `parseStudyDays` threw on a non-string stored row and could take the whole flow
+  down; it now degrades that day instead (D-020).
+- Tests: 22 suites / 288 tests — the full eight-step flow and the edit-mode rerun over a real router
+  and a real migrated database, settings persistence and step-targeted reopening, the first-run gate
+  for three distinct starting states, appearance hydration (including what the tree observed on its
+  first paint) and the domain/service layers.
+
+### Verification evidence
+| Command (from `mobile/`) | Result |
+|---|---|
+| `npx tsc --noEmit` | PASS |
+| `npx eslint .` | PASS — 0 errors, 0 warnings |
+| `npx prettier --check .` | PASS |
+| `npx jest` | PASS — 22 suites, 288 tests |
+| `npx expo export --platform android` | PASS — Hermes bundle emitted |
+
+### Next session starts at
+Phase 7 — Home: the editorial layout from the approved prototype, exam phase and countdown, the
+Smart Drill call to action, and today's plan read from the generated study plan.

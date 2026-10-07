@@ -1,6 +1,11 @@
 import type { ExamId, ExamTrackId } from '@/domain/exams/types';
+import type { TextSizePreference, ThemePreference } from '@/domain/preferences';
 
 import type { WriteOptions } from './types';
+
+// Re-exported so repository consumers keep one import site; the domain owns the
+// vocabulary and the value list.
+export type { TextSizePreference, ThemePreference };
 
 /**
  * Learner profile.
@@ -27,9 +32,6 @@ export interface UserExamProfileRepository {
   get(): Promise<UserExamProfileRecord | null>;
   save(record: UserExamProfileRecord, options?: WriteOptions): Promise<void>;
 }
-
-export type ThemePreference = 'device' | 'light' | 'dark';
-export type TextSizePreference = 'standard' | 'large' | 'extra-large';
 
 export interface AppSettingsRecord {
   readonly themePreference: ThemePreference;

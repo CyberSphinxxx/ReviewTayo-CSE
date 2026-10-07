@@ -8,7 +8,8 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ErrorBoundary } from '@/components/errors/ErrorBoundary';
 import { RTOwlMark } from '@/components/brand/RTOwlMark';
 import { RTStateView } from '@/components/primitives/RTStateView';
-import { AppearanceProvider, useAppearance } from '@/store/AppearanceProvider';
+import { AppearanceBootstrap } from '@/store/AppearanceBootstrap';
+import { useAppearance } from '@/store/AppearanceProvider';
 import { LocalDataProvider, useLocalData } from '@/store/LocalDataProvider';
 import { ThemeProvider, useTheme } from '@/theme';
 
@@ -110,11 +111,11 @@ const ThemedApp = () => {
 export default function RootLayout() {
   return (
     <SafeAreaProvider>
-      <AppearanceProvider>
-        <LocalDataProvider>
+      <LocalDataProvider>
+        <AppearanceBootstrap>
           <ThemedApp />
-        </LocalDataProvider>
-      </AppearanceProvider>
+        </AppearanceBootstrap>
+      </LocalDataProvider>
     </SafeAreaProvider>
   );
 }

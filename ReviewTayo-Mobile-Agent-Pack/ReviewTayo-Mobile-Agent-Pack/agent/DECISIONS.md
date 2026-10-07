@@ -85,3 +85,46 @@ current instead of a duplicate error, and replaces the registration when the bun
 newer. Startup runs again after a fast refresh or a second provider mount, and that must not
 disable content or fail the launch. The `ExamRegistry` itself still rejects true duplicate ids
 from other callers.
+
+## D-019 — The appearance vocabulary lives in the domain
+`device|light|dark` and `standard|large|extra` are product vocabulary: onboarding collects them,
+settings edits them, the theme resolves them and the database stores them. They live in
+`src/domain/preferences.ts` and every other layer re-exports them, so the four layers cannot drift
+into four slightly different string sets. `src/theme/tokens.ts` keeps its presentation concerns
+(labels, scale, options) but no longer owns the vocabulary.
+
+## D-020 — Preference parsing never throws on an untrusted row
+`toThemePreference` / `toTextSizePreference` / `parseStudyDays` accept `unknown`, coerce values an
+older build could have written and fall back otherwise, instead of assuming the stored shape. A row
+written by a bad build, a partial import or a hand-edited database must degrade a single preference,
+never take the first screen of the app down. `extra-large` is kept as an alias of `extra` so a rename
+can never silently reset a learner's choice.
+
+## D-021 — Appearance hydrates before the first paint
+`AppearanceBootstrap` reads the stored theme and text size before mounting the themed tree, and
+returns nothing until the read settles. A launch that paints the default theme and then jumps to the
+learner's is a visible defect that no screen test would catch, so the bootstrap is verified by
+recording every appearance value the tree ever observes. A failed read falls back to defaults:
+appearance is a preference, not a prerequisite for launching.
+
+## D-022 — Onboarding commits once, in one transaction
+The flow edits an ephemeral draft and writes nothing until the learner finishes; the commit writes
+profile, settings and the generated weekly plan in a single transaction. A partially onboarded
+install — a profile that says "done" with no plan, or a plan for no profile — cannot exist, which is
+also what lets the bootstrap gate trust a single field (`onboardingCompletedAt`).
+
+## D-023 — A same-week rerun replaces that week's plan in place
+The schema keeps one plan per exam per week (`UNIQUE (exam_id, week_start)`). Rerunning onboarding
+inside the same week therefore reuses that plan's id and replaces its tasks wholesale (delete then
+insert), keeping the original `createdAt`. The learner is already following that plan; creating a
+second one for the same week is how a schedule silently splits in two.
+
+## D-024 — Settings saves immediately; plan edits delegate to onboarding
+Appearance and reminders persist the moment they change, while every plan row reopens the onboarding
+flow in edit mode at the step that owns the field. There is exactly one definition of a valid plan
+(the flow's own validation), and settings never grows a second, weaker copy of it.
+
+## D-025 — Edit-mode onboarding falls back to Home without history
+Edit mode usually returns to Settings with `router.back()`, but deep links and notification opens
+arrive without history, and dispatching an unhandled `GO_BACK` strands the learner inside the flow.
+The exit checks `router.canGoBack()` and otherwise replaces to Home.

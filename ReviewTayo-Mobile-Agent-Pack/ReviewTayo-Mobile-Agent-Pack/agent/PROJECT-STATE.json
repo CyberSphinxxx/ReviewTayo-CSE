@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
-  "phase": "06-onboarding",
-  "currentTask": "Phase 6 — Onboarding and settings: guest/Google architecture, CSE level, schedule, generated plan, appearance, reminders",
-  "lastCompletedTask": "phase-05-navigation",
-  "nextAction": "Build the onboarding steps and persist profile/settings/first plan, add the bootstrap gate (profile complete → tabs, otherwise onboarding), build the settings screen and hydrate appearance from stored settings",
+  "phase": "07-home",
+  "currentTask": "Phase 7 — Home: editorial layout, exam phase and countdown, Smart Drill call to action, today's plan",
+  "lastCompletedTask": "phase-06-onboarding",
+  "nextAction": "Build Home from the approved prototype, reading the committed profile, generated study plan and due counts from the existing repositories",
   "lastSuccessfulBuild": "expo export --platform android (PASS)",
   "failingTests": [],
   "testSummary": {
-    "suites": 16,
-    "tests": 243,
-    "passed": 243,
+    "suites": 22,
+    "tests": 288,
+    "passed": 288,
     "failed": 0
   },
   "externalBlockers": [
@@ -36,7 +36,8 @@
     "02-design-system",
     "03-exam-core",
     "04-data-offline",
-    "05-navigation"
+    "05-navigation",
+    "06-onboarding"
   ],
   "contentStats": {
     "cseQuestions": 88,
@@ -47,7 +48,9 @@
   "partialItems": [
     "phase-2: responsive/small-device visual checks require a device or emulator pass",
     "phase-4: device-level offline E2E (no-network relaunch) is covered by file-backed restart tests; device pass tracked for Phase 16",
-    "phase-5: physical-device keyboard/screen-reader pass tracked in VISUAL-QA.md; automated label and badge tests are green"
+    "phase-5: physical-device keyboard/screen-reader pass tracked in VISUAL-QA.md; automated label and badge tests are green",
+    "phase-6: the onboarding and settings screens are verified by integration tests over a real database; a device pass for the flow's motion and text-size scaling is tracked in VISUAL-QA.md",
+    "phase-6: reminders capture intent, time and timezone but are not scheduled until Phase 14"
   ],
   "environment": {
     "node": "24.16.0",

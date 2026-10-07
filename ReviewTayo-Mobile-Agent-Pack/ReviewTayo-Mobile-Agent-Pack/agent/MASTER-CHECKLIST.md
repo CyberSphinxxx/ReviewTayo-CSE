@@ -98,24 +98,46 @@ Status legend:
   router integration; a physical-device keyboard/screen-reader pass is tracked in VISUAL-QA.md)*
 
 ## Phase 6 — Onboarding/settings
-- [ ] onboarding shell/progress.
-- [ ] Guest.
-- [ ] Google auth architecture.
-- [ ] CSE level.
-- [ ] starting point.
-- [ ] exam date.
-- [ ] study days.
-- [ ] session length.
-- [ ] daily goal.
-- [ ] generated plan.
-- [ ] edit plan.
-- [ ] appearance.
-- [ ] text size.
-- [ ] reminders.
-- [ ] completion.
-- [ ] settings integration.
-- [ ] rerun onboarding in dev/prototype tools.
-- [ ] onboarding tests.
+- [x] onboarding shell/progress. *(`Step N of 8` eyebrow, progress bar and Back/Close from
+  `RTScreenShell`; verified in `tests/app/onboarding-flow.test.tsx`)*
+- [x] Guest. *(default choice; `account=google` shows the sync note, and the commit records the
+  choice in the plan payload. The Google button stays inert until Phase 13 supplies real client
+  IDs — see BLOCKERS.md)*
+- [x] Google auth architecture. *(onboarding collects the intent and stores it; the OAuth client
+  wiring is Phase 13. No credential is faked or hardcoded.)*
+- [x] CSE level. *(`level` step; track list is read from the exam config, so Sub-Professional and
+  Professional both work without CSE-specific code)*
+- [x] starting point. *(`starting-point` step; optional exam date in the same step with
+  `YYYY-MM-DD` parsing and a days-to-go countdown)*
+- [x] exam date. *(normalises `2026/11/15`, validates real calendar dates, blocks past dates,
+  and can be cleared)*
+- [x] study days. *(`schedule` step; Monday-first grid, no-day selection is a valid "flexible"
+  answer)*
+- [x] session length. *(quick/regular/long in the `schedule` step, skipped with the same Skip
+  button)*
+- [x] daily goal. *(`goal` step; 5/10/20 presets plus a custom 5–50 field that clamps and
+  reports out-of-range input inline)*
+- [x] generated plan. *(`buildWeeklyPlan` in `src/domain/study-plan` turns the answers into a
+  week of dated tasks; mock length comes from the blueprint, so a Sub-Professional mock is
+  165 items and Professional 170)*
+- [x] edit plan. *(Settings reopens the flow with `mode=edit&step=<id>`; a rerun inside the same
+  week replaces that week's plan in place and keeps the original `createdAt`)*
+- [x] appearance. *(device/light/dark from `src/domain/preferences` — one vocabulary shared by
+  onboarding, settings, the theme and the stored row. Dark is previewed live and reverted if
+  the flow is abandoned.)*
+- [x] text size. *(standard/large/extra with a live sample line; a legacy `extra-large` row is
+  coerced rather than reset)*
+- [x] reminders. *(opt-in switch; enabling captures the device timezone and the default
+  19:00 reminder time. Scheduling is Phase 14.)*
+- [x] completion. *(summary badges, first activity, and the single atomic commit — profile,
+  settings and plan in one transaction)*
+- [x] settings integration. *(`app/settings.tsx` grouped by Account / Study plan / Appearance /
+  Reminders / Offline content; appearance and reminders save immediately, plan rows reopen the
+  flow at the step that owns the field)*
+- [x] rerun onboarding in dev/prototype tools. *(`__DEV__`-only "Run onboarding again" row)*
+- [x] onboarding tests. *(`tests/domain/onboarding.test.ts`, `tests/services/onboarding.test.ts`,
+  `tests/app/onboarding-flow.test.tsx`, `tests/app/settings-flow.test.tsx`,
+  `tests/app/first-run-gate.test.tsx`, `tests/store/appearance-bootstrap.test.tsx`)*
 
 ## Phase 7 — Home
 - [ ] Claude-inspired editorial home layout.
