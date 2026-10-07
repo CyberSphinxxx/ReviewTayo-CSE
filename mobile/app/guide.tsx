@@ -44,20 +44,22 @@ const GuideContent = ({
   const openConcept = useCallback(
     (conceptId: string) => router.push({ pathname: '/concept', params: { conceptId } }),
     [router],
-  );
-
-  if (model.status === 'error') {
+  ); // Loading and empty are different claims: while the guide is being read, saying
+  // "nothing to read yet" would be a lie the learner cannot tell apart from an empty
+  // subject.
+  if (model.status !== 'ready') {
     return (
       <RTScreenShell
         testID="screen-guide"
         eyebrow="Study guides"
-        title="Every subject"
+        title={named?.name ?? 'Every subject'}
         onBack={() => router.back()}
       >
         <RTStateView
-          kind="error"
-          title="Could not load this guide"
-          description={model.error?.message ?? 'Your lessons could not be read.'}
+          kind={model.status === 'error' ? 'error' : 'info'}
+          title={model.status === 'error' ? 'Could not load this guide' : 'Study guides'}
+          description={model.error?.message ?? 'Opening your lessons…'}
+          testID="guide-loading"
         />
       </RTScreenShell>
     );

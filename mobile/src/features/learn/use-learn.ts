@@ -2,7 +2,6 @@ import { useFocusEffect } from 'expo-router';
 import { useCallback, useState } from 'react';
 
 import type { Repositories } from '@/data/repositories';
-import type { ExamRuleConfig } from '@/domain/exams/types';
 import {
   continueLearning,
   quickSheets,
@@ -33,8 +32,6 @@ export const LEARN_TITLE = 'Understand it first.';
 export interface LearnModel {
   readonly status: LearnStatus;
   readonly error: AppError | null;
-  readonly exam: ExamRuleConfig | null;
-  readonly trackId: string;
   readonly eyebrow: string;
   readonly title: string;
   readonly continue: ContinueLearning | null;
@@ -47,8 +44,6 @@ export interface LearnModel {
 export const useLearn = (repositories: Repositories): LearnModel => {
   const [status, setStatus] = useState<LearnStatus>('loading');
   const [error, setError] = useState<AppError | null>(null);
-  const [exam, setExam] = useState<ExamRuleConfig | null>(null);
-  const [trackId, setTrackId] = useState('');
   const [next, setNext] = useState<ContinueLearning | null>(null);
   const [sheets, setSheets] = useState<readonly QuickSheet[]>([]);
   const [subjects, setSubjects] = useState<readonly SubjectProgressRow[]>([]);
@@ -69,8 +64,6 @@ export const useLearn = (repositories: Repositories): LearnModel => {
       ]);
       const policy = resolved.studyPolicy.mastery;
 
-      setExam(resolved);
-      setTrackId(resolvedTrack);
       setNext(continueLearning(resolved, resolvedTrack, evidence, policy));
       setSheets(quickSheets(resolved, resolvedTrack));
       setSubjects(subjectProgressRows(resolved, resolvedTrack, accuracy, evidence, policy));
@@ -92,8 +85,6 @@ export const useLearn = (repositories: Repositories): LearnModel => {
   return {
     status,
     error,
-    exam,
-    trackId,
     eyebrow: LEARN_EYEBROW,
     title: LEARN_TITLE,
     continue: next,

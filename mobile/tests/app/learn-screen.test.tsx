@@ -316,13 +316,18 @@ describe('Learn', () => {
     const { db } = await seed({ trackId: 'subprofessional' });
     const result = await renderLearn(db);
 
-    expect(screen.getByTestId('learn-guides-line')).toHaveTextContent('4 subjects · 18 concepts');
-    expect(screen.getByText('Every subject')).toBeOnTheScreen();
+    // One row into the whole index, with nothing listed there twice.
+    expect(screen.getByTestId('learn-guides-title')).toHaveTextContent('Study Guides');
+    expect(screen.getByTestId('learn-guides-line')).toHaveTextContent(
+      '4 subjects · 18 concepts · 0 mastered',
+    );
 
     await fireEvent.press(screen.getByTestId('learn-guides-all'));
     await waitFor(() => {
       expect(result.getPathname()).toBe('/guide');
     });
+    // No subject param, so the index shows every subject of the learner's track.
+    expect(result.getSearchParams()).not.toHaveProperty('subjectId');
     expect(screen.getByTestId('guide-section-verbal-ability')).toBeOnTheScreen();
     expect(screen.getByTestId('guide-section-clerical-ability')).toBeOnTheScreen();
     expect(screen.queryByTestId('guide-section-analytical-ability')).toBeNull();

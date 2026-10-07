@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 
 import type { Repositories } from '@/data/repositories';
-import type { ExamRuleConfig } from '@/domain/exams/types';
 import {
   conceptReference,
   guideSections,
@@ -24,8 +23,6 @@ export type ReferenceStatus = 'loading' | 'ready' | 'error';
 export interface ReferenceModel {
   readonly status: ReferenceStatus;
   readonly error: AppError | null;
-  readonly exam: ExamRuleConfig | null;
-  readonly trackId: string;
   readonly sections: readonly GuideSection[];
   readonly reference: ConceptReference | null;
 }
@@ -36,8 +33,6 @@ export const useReference = (
 ): ReferenceModel => {
   const [status, setStatus] = useState<ReferenceStatus>('loading');
   const [error, setError] = useState<AppError | null>(null);
-  const [exam, setExam] = useState<ExamRuleConfig | null>(null);
-  const [trackId, setTrackId] = useState('');
   const [sections, setSections] = useState<readonly GuideSection[]>([]);
   const [reference, setReference] = useState<ConceptReference | null>(null);
 
@@ -58,8 +53,6 @@ export const useReference = (
         const policy = resolved.studyPolicy.mastery;
         if (cancelled) return;
 
-        setExam(resolved);
-        setTrackId(resolvedTrack);
         setSections(guideSections(resolved, resolvedTrack, evidence, policy, subjectId));
         setReference(
           conceptId === undefined ? null : conceptReference(resolved, conceptId, evidence, policy),
@@ -79,5 +72,5 @@ export const useReference = (
     };
   }, [conceptId, repositories, subjectId]);
 
-  return { status, error, exam, trackId, sections, reference };
+  return { status, error, sections, reference };
 };

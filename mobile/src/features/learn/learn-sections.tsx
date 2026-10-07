@@ -198,64 +198,46 @@ export const LearnSubjects = ({
   );
 };
 
-/** Study Guides: the whole reference index, one row. */
+/**
+ * Study Guides: one row into the whole reference index, as the prototype has it.
+ *
+ * The Subjects list above already opens each subject's guide, so repeating them here
+ * would give the same destination two names and make the section look like a second
+ * list rather than the way into the whole thing.
+ */
 export const LearnStudyGuides = ({
   guides,
   onOpen,
 }: {
   readonly guides: StudyGuidesSummary;
-  readonly onOpen: (subjectId?: string) => void;
+  readonly onOpen: () => void;
 }) => {
   const theme = useTheme();
   return (
     <View testID="learn-study-guides">
       <SectionHeading label="Study guides" />
-      {guides.sections.map((section) => (
-        <Pressable
-          key={section.subjectId}
-          onPress={() => onOpen(section.subjectId)}
-          testID={`learn-guide-${section.subjectId}`}
-          accessibilityRole="button"
-          accessibilityLabel={`${section.name} study guide. ${section.conceptCount} concepts`}
-          style={({ pressed }) => ({
-            flexDirection: 'row',
-            alignItems: 'center',
-            gap: theme.spacing.md,
-            minHeight: theme.touchTarget.minimum,
-            paddingVertical: theme.spacing.sm,
-            opacity: pressed ? 0.8 : 1,
-          })}
-        >
-          <View style={{ flex: 1, minWidth: 0 }}>
-            <RTText role="body">{section.name}</RTText>
-            <RTText role="meta" tone="secondary">
-              {section.conceptCount} {section.conceptCount === 1 ? 'concept' : 'concepts'} ·{' '}
-              {section.masteredCount} mastered
-            </RTText>
-          </View>
-          <ChevronRightIcon color={theme.colors.textSecondary} />
-        </Pressable>
-      ))}
       <Pressable
+        /* Wrapped, not passed directly: `onPress` receives the press event, which
+           would arrive as a subject id. */
         onPress={() => onOpen()}
         testID="learn-guides-all"
         accessibilityRole="button"
-        accessibilityLabel={`All study guides. ${guides.line}`}
+        accessibilityLabel={`Study guides. ${guides.line}. ${guides.masteredCount} concepts mastered`}
         style={({ pressed }) => ({
           flexDirection: 'row',
           alignItems: 'center',
           gap: theme.spacing.md,
           minHeight: theme.touchTarget.comfortable,
           paddingVertical: theme.spacing.sm,
-          borderTopWidth: theme.borderWidth.hairline,
-          borderTopColor: theme.colors.border,
           opacity: pressed ? 0.8 : 1,
         })}
       >
         <View style={{ flex: 1, minWidth: 0 }}>
-          <RTText role="body">Every subject</RTText>
+          <RTText role="body" testID="learn-guides-title">
+            Study Guides
+          </RTText>
           <RTText role="meta" tone="secondary" testID="learn-guides-line">
-            {guides.line}
+            {guides.line} · {guides.masteredCount} mastered
           </RTText>
         </View>
         <ChevronRightIcon color={theme.colors.textSecondary} />
