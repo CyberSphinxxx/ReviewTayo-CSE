@@ -128,3 +128,24 @@ flow in edit mode at the step that owns the field. There is exactly one definiti
 Edit mode usually returns to Settings with `router.back()`, but deep links and notification opens
 arrive without history, and dispatching an unhandled `GO_BACK` strands the learner inside the flow.
 The exit checks `router.canGoBack()` and otherwise replaces to Home.
+
+## D-026 — Home derives everything and stores nothing
+Every line on Home is computed from committed state: the phase from the profile's exam
+date, the drill size from the daily goal capped by the exam policy, the due count from
+the review queue, today's work from the active plan and today's activity. Nothing on
+Home is cached, and nothing new is persisted for it. That is why the screen reloads on
+focus: a drill finished on the Practice tab must change what Home says, without Home
+holding a copy of it.
+
+## D-027 — A streak is measured in answered questions, and today may be empty
+The streak counts consecutive local days with at least one answered question, read from
+study activity rather than from app opens. Today is allowed to be empty: the walk starts
+at yesterday when today has nothing yet, so an evening studier does not watch their
+streak reset every morning. Only a whole missed day breaks it.
+
+## D-028 — Resume dismissal is session-only until the mock phase
+The resume card can be dismissed, and the dismissal lives in the screen's own state: it
+is not written to the profile or the plan. Persisting a dismissal needs a field that
+says *which* session was dismissed and until when, and the session it refers to (a mock
+that is paused or expired) is Phase 12's to define. Writing half of that now would leave
+a preference that outlives the session it was about.

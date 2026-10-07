@@ -174,3 +174,37 @@ study days, session length, daily goal, generated plan, appearance, text size, r
 ### Next session starts at
 Phase 7 — Home: the editorial layout from the approved prototype, exam phase and countdown, the
 Smart Drill call to action, and today's plan read from the generated study plan.
+
+## Session 6 — 2026-10-07 — Phase 7
+### Phase 7 — Home (complete)
+- `src/domain/home/` holds the derivations Home needs and no screen knows: today's plan and
+  progress, the done-for-today rule, the streak, session sizing and the hero copy.
+- The hero is the approved editorial composition: phase pill and countdown from the profile's exam
+  date, one recommendation sized from the learner's own daily goal (capped by the exam's
+  `drillSize`), the owl, the single gold Smart Drill action, and a line naming the subject that
+  needs attention without exposing how it was chosen.
+- "Today" is three small things — Daily Question, Smart Drill, Review Due — with durations from
+  the exam policy and the real due count, followed by the goal ring and the streak.
+- A resume card appears only when there is something to resume: an unfinished mock first, otherwise
+  an unfinished practice session with progress counted from the answers themselves.
+- Done For Today is derived, not stored: the day's plan is finished or the goal is met, and nothing
+  is due. When it is true the hero switches to the approved completion copy.
+- Home stores nothing new (D-026); the streak counts answered questions and tolerates an empty
+  today (D-027); resume dismissal stays in screen state until the mock phase defines what it
+  dismisses (D-028).
+- Tests: 24 suites / 325 tests — 26 domain cases (progress, done rule, streak, sizing, hero copy)
+  and 11 integration cases over the real router and a seeded database (hero, due count, both resume
+  paths, done and not-done, plan-less day, both themes, routing).
+
+### Verification evidence
+| Command (from `mobile/`) | Result |
+|---|---|
+| `npx tsc --noEmit` | PASS |
+| `npx eslint .` | PASS — 0 errors, 0 warnings |
+| `npx prettier --check .` | PASS |
+| `npx jest` | PASS — 24 suites, 325 tests |
+| `npx expo export --platform android` | PASS — Hermes bundle emitted |
+
+### Next session starts at
+Phase 8 — Learn: Continue Learning, Quick Sheets, Subjects and Study Guides from the approved
+prototype, reading content from the imported pack.

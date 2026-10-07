@@ -1,11 +1,22 @@
 # Agent Handoff
 
 ## Current phase
-Phases 0–6 complete. Starting Phase 7 (Home).
+Phases 0–7 complete. Starting Phase 8 (Learn).
 
 ## Current task
-Phase 7 — Home: the editorial home layout from the approved prototype, exam phase and countdown,
-the Smart Drill call to action, and today's plan read from the generated study plan.
+Phase 8 — Learn: Continue Learning, Quick Sheets, Subjects and Study Guides from the approved
+prototype, reading subjects, concepts and progress from the imported content pack.
+
+## Files changed (Phase 7)
+- `/mobile/src/domain/home/**` — today's plan and progress, the done-for-today rule, the streak,
+  session sizing and hero copy, all derived and all pure.
+- `/mobile/src/domain/study-plan/progress.ts` — task completion, where `skipped` counts as answered
+  for so Home stops asking for the same work.
+- `/mobile/src/features/home/**` — `useHome` (reloads on focus, reads profile, plan, activity, due
+  count and resumable sessions) plus the hero, Today timeline, ring and resume card.
+- `/mobile/app/(tabs)/home.tsx` — the real Home screen: readiness wrapper, editorial hero, three
+  daily actions, goal ring, resume card, done banner and the routes each action owns.
+- `/mobile/tests/domain/home.test.ts`, `/mobile/tests/app/home-screen.test.tsx` — 37 new cases.
 
 ## Files changed (Phase 6)
 - `/mobile/src/domain/preferences.ts` — new authoritative appearance vocabulary (theme, text size,
@@ -32,7 +43,7 @@ cd mobile
 npx tsc --noEmit                      # PASS
 npx eslint .                          # PASS (0 errors, 0 warnings)
 npx prettier --check .                # PASS
-npx jest                              # PASS — 22 suites, 288 tests
+npx jest                              # PASS — 24 suites, 325 tests
 npx expo export --platform android    # PASS — Hermes bundle emitted
 ```
 
@@ -46,16 +57,16 @@ None.
 N/A.
 
 ## Next exact action
-1. Build Home (`mobile/app/(tabs)/home.tsx`) from the approved prototype: editorial header with the
-   owl, exam phase and countdown from the committed profile, the Smart Drill CTA, and today's tasks
-   from the active weekly plan.
-2. Add a Home feature module (`src/features/home`) so the screen holds layout only.
-3. Tests: phase/countdown derivation from the profile, today's tasks from the generated plan, the
-   empty states (no plan yet, rest day) and a router-level render in both themes; then run the gate,
-   update agent docs and commit.
+1. Build Learn (`mobile/app/(tabs)/learn.tsx`) from the approved prototype: Continue Learning (the
+   concept the learner is partway through), Quick Sheets, Subjects with progress, and Study Guides.
+2. Add a Learn feature module (`src/features/learn`) so the screen holds layout only, and keep the
+   progress arithmetic in the domain.
+3. Tests: progress per subject from answers and mastery, the continue-learning choice, empty states
+   for a learner who has answered nothing yet, both themes and routing; then run the gate, update
+   agent docs and commit.
 
 ## Decisions made
-D-019 … D-025 (see `agent/DECISIONS.md`); ADR-001 integration, ADR-002 database port,
+D-019 … D-028 (see `agent/DECISIONS.md`); ADR-001 integration, ADR-002 database port,
 ADR-003 contract-first sync.
 
 ## New blockers
@@ -68,4 +79,4 @@ present untracked under `archives/mobile-prototype/`. This reorganisation pre-da
 it was left untouched. Commit or discard it deliberately before release.
 
 ## Commit/hash
-See the checkpoint commit created at the end of Phase 6 (`feat(onboarding): …`).
+See the checkpoint commit created at the end of Phase 7 (`feat(home): …`).

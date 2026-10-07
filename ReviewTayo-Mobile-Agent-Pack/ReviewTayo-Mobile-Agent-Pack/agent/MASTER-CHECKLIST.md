@@ -140,18 +140,29 @@ Status legend:
   `tests/app/first-run-gate.test.tsx`, `tests/store/appearance-bootstrap.test.tsx`)*
 
 ## Phase 7 — Home
-- [ ] Claude-inspired editorial home layout.
-- [ ] light theme fidelity.
-- [ ] dark theme fidelity.
-- [ ] exam phase/countdown.
-- [ ] Smart Drill CTA.
-- [ ] Daily Question.
-- [ ] daily plan.
-- [ ] Review Due.
-- [ ] streak.
-- [ ] resume card.
-- [ ] Done For Today.
-- [ ] Home tests.
+- [x] Claude-inspired editorial home layout. *(full-bleed maroon hero with the owl, one recommendation,
+  then the "Today" timeline — no dashboard clutter, and no algorithm details on screen)*
+- [x] light theme fidelity. *(hero is the brand maroon on the warm cream canvas; asserted against the
+  theme tokens rather than a screenshot)*
+- [x] dark theme fidelity. *(dark keeps the same hero and inverse text over the near-black burgundy
+  canvas — a separate system, not an inversion)*
+- [x] exam phase/countdown. *(`resolveExamPhase` from the profile's exam date; with no date the phase
+  stands alone as "Flexible Study" and no countdown is invented)*
+- [x] Smart Drill CTA. *(one dominant gold action, sized by the learner's daily goal and capped by the
+  exam's `drillSize`; routes to the quiz route with `mode=smart-drill`)*
+- [x] Daily Question. *(one question, duration from `dailyQuestionMinutes`; shows Done once the day has
+  been answered)*
+- [x] daily plan. *(today's tasks from the active weekly plan, with a link to each kind's destination)*
+- [x] Review Due. *(reads the same due count as the tab badge and caps the session at the exam's
+  `dailyDueLimit`)*
+- [x] streak. *(consecutive days with at least one answered question, read from study activity;
+  survives a day that has not started yet and breaks only after a whole missed day)*
+- [x] resume card. *(unfinished mock or practice session with real progress; dismissal is session-only —
+  durable dismissal belongs with the mock phase, see D-028)*
+- [x] Done For Today. *(derived: the day's plan is finished or the goal is met, and nothing is due;
+  the hero switches to the approved completion copy and a banner confirms it)*
+- [x] Home tests. *(`tests/domain/home.test.ts` — 26 cases; `tests/app/home-screen.test.tsx` — 11
+  cases over the real router and a seeded database. Device captures are tracked in VISUAL-QA.md.)*
 
 ## Phase 8 — Learn
 - [ ] Continue Learning.

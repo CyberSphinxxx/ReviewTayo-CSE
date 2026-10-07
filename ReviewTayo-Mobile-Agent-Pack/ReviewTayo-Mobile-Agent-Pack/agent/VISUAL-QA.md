@@ -41,5 +41,12 @@ Do not require pixel-perfect HTML matching. Require faithful design intent and n
     step headings reflow rather than clip.
   The follow-up prompt is "capture the onboarding and settings screens on a device/emulator in both
   themes", to be collected with the Phase 7 Home captures.
+- Phase 7: Home exists in both themes and its composition is asserted from the rendered tree — the
+  hero is the brand maroon surface, the canvas follows the theme, the headline keeps inverse text,
+  and the phase pill, three daily actions, goal ring, streak, resume card and done state all come
+  from committed data. What automated tests cannot judge is the part that matters most on this
+  screen: whether the hero reads as one dominant recommendation at real sizes, how the owl sits in
+  the crop, and whether the type scale still feels editorial at Extra Large. Capture Home (light
+  and dark, 360×640 and 390×844, Standard and Extra Large) with the rest.
 - Screens are placeholders until their phases (Home 7, Learn 8, Practice/Quiz 9, Review 10,
   Progress 11, Mock 12); captures are collected as each phase lands.

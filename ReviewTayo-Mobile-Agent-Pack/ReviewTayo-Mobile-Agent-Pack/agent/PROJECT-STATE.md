@@ -1,14 +1,14 @@
 # Project State
 
-**Phase:** 6 — Onboarding / settings (complete) → starting Phase 7 — Home
-**Current task:** Phase 7 — Home (editorial layout, exam phase/countdown, Smart Drill CTA)
-**Last completed task:** Phase 6 onboarding and settings — the approved eight-step flow with
-draft/commit behaviour, the generated first weekly plan, the bootstrap gate, settings integration,
-and appearance hydration before first paint.
-**Next action:** Build Home from the approved prototype: editorial header, exam phase and countdown,
-Smart Drill call to action, and today's plan — all read from the repositories already in place.
+**Phase:** 7 — Home (complete) → starting Phase 8 — Learn
+**Current task:** Phase 8 — Learn (Continue Learning, Quick Sheets, Subjects, Study Guides)
+**Last completed task:** Phase 7 Home — the editorial hero with the exam phase and countdown, one
+Smart Drill recommendation sized from the learner's goal, the three daily actions, the goal ring
+with the streak, the contextual resume card and the derived Done For Today state.
+**Next action:** Build Learn from the approved prototype, reading subjects, concepts and lesson
+progress from the imported content pack and the practice history.
 **Last successful build:** `npx expo export --platform android` → PASS (Hermes bundle)
-**Known failing tests:** None. `npx jest` → 288 passed / 288.
+**Known failing tests:** None. `npx jest` → 325 passed / 325.
 **External blockers:** Live Google OAuth credentials and a production API endpoint (verify-only;
 everything else works without them).
 **Internal blockers:** None.
@@ -19,7 +19,7 @@ everything else works without them).
 | `npm run typecheck` | PASS |
 | `npm run lint` | PASS (0 errors, 0 warnings) |
 | `npm run format:check` | PASS |
-| `npm test` | PASS — 288 tests across 22 suites |
+| `npm test` | PASS — 325 tests across 24 suites |
 | `npx expo export --platform android` | PASS |
 
 ## Repository reality (Phase 0 audit)
@@ -47,12 +47,13 @@ everything else works without them).
 - do not refactor the web app merely to share code.
 
 ## Decisions added this session
-D-019 appearance vocabulary lives in the domain · D-020 preference parsing never throws on an
-untrusted row · D-021 bootstrap hydrates appearance before first paint · D-022 onboarding commits in
-one transaction · D-023 a same-week rerun replaces that week's plan in place · D-024 settings saves
-immediate preferences and delegates plan edits to onboarding · D-025 edit-mode exit falls back to
-Home without history.
-Earlier: D-014 storage errors keep the driver message · D-015 transactions are passed down, never
+D-026 Home derives everything and stores nothing · D-027 a streak counts answered questions and
+tolerates an empty today · D-028 resume dismissal stays in screen state until the mock phase.
+Earlier: D-019 appearance vocabulary lives in the domain · D-020 preference parsing never throws on
+an untrusted row · D-021 bootstrap hydrates appearance before first paint · D-022 onboarding commits
+in one transaction · D-023 a same-week rerun replaces that week's plan in place · D-024 settings
+saves immediate preferences and delegates plan edits to onboarding · D-025 edit-mode exit falls back
+to Home without history. Also earlier: D-014 storage errors keep the driver message · D-015 transactions are passed down, never
 nested · D-016 content import is version-gated and wholesale · D-017 identifier generation lives in
 services · D-018 startup content registration is idempotent · D-007 database port · D-008 platform
 fonts · D-009 modal screens are routes · D-010 bundled validated content packs · D-011 E2E strategy ·

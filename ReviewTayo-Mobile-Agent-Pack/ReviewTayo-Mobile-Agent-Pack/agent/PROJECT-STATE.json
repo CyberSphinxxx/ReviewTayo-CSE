@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
-  "phase": "07-home",
-  "currentTask": "Phase 7 — Home: editorial layout, exam phase and countdown, Smart Drill call to action, today's plan",
-  "lastCompletedTask": "phase-06-onboarding",
-  "nextAction": "Build Home from the approved prototype, reading the committed profile, generated study plan and due counts from the existing repositories",
+  "phase": "08-learn",
+  "currentTask": "Phase 8 — Learn: Continue Learning, Quick Sheets, Subjects and Study Guides",
+  "lastCompletedTask": "phase-07-home",
+  "nextAction": "Build Learn from the approved prototype, reading subjects, concepts and progress from the imported content pack",
   "lastSuccessfulBuild": "expo export --platform android (PASS)",
   "failingTests": [],
   "testSummary": {
-    "suites": 22,
-    "tests": 288,
-    "passed": 288,
+    "suites": 24,
+    "tests": 325,
+    "passed": 325,
     "failed": 0
   },
   "externalBlockers": [
@@ -37,7 +37,8 @@
     "03-exam-core",
     "04-data-offline",
     "05-navigation",
-    "06-onboarding"
+    "06-onboarding",
+    "07-home"
   ],
   "contentStats": {
     "cseQuestions": 88,
@@ -50,7 +51,9 @@
     "phase-4: device-level offline E2E (no-network relaunch) is covered by file-backed restart tests; device pass tracked for Phase 16",
     "phase-5: physical-device keyboard/screen-reader pass tracked in VISUAL-QA.md; automated label and badge tests are green",
     "phase-6: the onboarding and settings screens are verified by integration tests over a real database; a device pass for the flow's motion and text-size scaling is tracked in VISUAL-QA.md",
-    "phase-6: reminders capture intent, time and timezone but are not scheduled until Phase 14"
+    "phase-6: reminders capture intent, time and timezone but are not scheduled until Phase 14",
+    "phase-7: Home's light/dark fidelity is asserted against the theme tokens and the screen's rendered styles; device or emulator captures remain pending (no Android SDK in this environment), tracked in VISUAL-QA.md",
+    "phase-7: resume-card dismissal is session-only until the mock phase defines what a dismissed session means (D-028)"
   ],
   "environment": {
     "node": "24.16.0",
