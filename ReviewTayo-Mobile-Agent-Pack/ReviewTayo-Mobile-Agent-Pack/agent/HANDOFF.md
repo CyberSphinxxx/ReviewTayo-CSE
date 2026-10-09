@@ -1,22 +1,45 @@
 # Agent Handoff
 
 ## Current phase
-Phases 0–12 complete. Starting Phase 13 (Auth/sync).
+Phases 0–13 complete. Starting Phase 14 (Notifications).
 
 ## Current task
-Phase 13 — Auth/sync: guest identity, the Google provider, secure credential storage, the API client
-boundary, the backend contract, the sync outbox worker with retry/backoff and idempotency, conflict
-policies and offline-to-online recovery.
+Phase 14 — Notifications: the permission request, the reminder schedule on study days, the
+denied-permission state and rescheduling on preference changes.
 
 ## Next exact action
-Build the auth/sync boundary on the contract-first design ADR-003 already chose. Phase 1 shipped the
-https-only API client and the provider interface with a fake provider; Phase 13 wires a real Guest
-identity through secure storage, adds the Google provider behind the same interface, defines the
-outbox the answer/activity writes will queue into, and makes the transport the only thing that talks
-to the network — local-only by default, live only when a base URL and credentials exist. The external
-prerequisites (live Google client IDs, a production API base URL) are still outstanding
-(`agent/BLOCKERS.md`), so the provider and transport are verified against fakes and the local
-transport while the real endpoints are absent.
+Replace the reminder intent captured in Phase 6 with real local notifications. `services/app-settings.ts`
+already stores `remindersEnabled`, `reminderTime` and `reminderTimezone`, and onboarding captures the
+learner's study days — so Phase 14 needs the permission request, a schedule built from those fields
+(`expo-notifications` is installed and already mocked in `tests/setup.ts`), the honest denied state
+(no nagging, no silent no-op), and a reschedule whenever the preference, the time or the plan changes.
+The identifier of the scheduled notification should be recorded so it can be cancelled and replaced
+rather than duplicated.
+
+## Files changed (Phase 13)
+- `/mobile/src/domain/identity/**` — `identity.ts`, the guest/Google vocabulary: descriptions, initials,
+  the untrusted-record narrowing and the pure id-token reader.
+- `/mobile/src/domain/sync/**` — `events.ts` (event types, payload builders, idempotency keys),
+  `backoff.ts` (bounded exponential backoff with equal jitter and an attempt ceiling) and `policies.ts`
+  (per-entity conflict policies with their merge functions).
+- `/mobile/src/data/remote/**` — `api-contract.ts` (versioned requests/responses plus runtime
+  narrowing) and `transport.ts` (`ApiTransport`, `LocalOnlyTransport`, `HttpApiTransport`,
+  `createApiTransport`).
+- `/mobile/src/services/credentials.ts`, `/mobile/src/services/auth.ts`,
+  `/mobile/src/services/google-auth.ts` — the keystore boundary, the account lifecycle (device id,
+  sign-in, sign-out, the server exchange) and the Google provider.
+- `/mobile/src/services/sync.ts` and `/mobile/src/services/saved-questions.ts` — the outbox worker and
+  the bookmark write path that appends its event.
+- `/mobile/src/services/practice.ts` and `/mobile/src/services/app-settings.ts` — the answer and
+  settings events, appended in the same transaction as the change they describe.
+- `/mobile/src/features/settings/use-account.ts` and `/mobile/app/settings.tsx` — the account and sync
+  model and its rows (identity, queue, sign-in/sign-out, Sync now).
+- `/mobile/src/features/quiz/use-quiz.ts` — bookmarks now write through the service, so saving and
+  unsaving each append an event.
+- `/mobile/tests/domain/identity.test.ts`, `/mobile/tests/domain/sync.test.ts`,
+  `/mobile/tests/data/api-transport.test.ts`, `/mobile/tests/services/auth.test.ts`,
+  `/mobile/tests/services/sync.test.ts` and 4 new cases in `/mobile/tests/app/settings-flow.test.tsx` —
+  90 new cases.
 
 ## Files changed (Phase 12)
 - `/mobile/src/domain/mock/**` — `progress.ts` (the answer/correct/flag counts, the first unanswered
@@ -138,7 +161,7 @@ cd mobile
 npx tsc --noEmit                      # PASS
 npx eslint .                          # PASS (0 errors, 0 warnings)
 npx prettier --check .                # PASS
-npx jest                              # PASS — 40 suites, 572 tests
+npx jest                              # PASS — 45 suites, 662 tests
 npx expo export --platform android    # PASS — Hermes bundle emitted
 ```
 
@@ -152,26 +175,28 @@ None.
 N/A.
 
 ## Next exact action
-1. Build the auth/sync boundary (`mobile/src/services/auth.ts`, `mobile/src/services/sync.ts`) on the
-   Phase 1 API client and provider interface: a Guest identity that persists through secure storage, a
-   Google provider behind the same interface, and an outbox that the answer/activity writes queue into.
-2. Add the sync domain over the contract ADR-003 fixed: the outbox record, its retry/backoff schedule
-   and its idempotency key, the conflict policies, and the offline-to-online drain.
-3. Keep the transport the only thing that touches the network; the local-only transport is the default
-   until a base URL and credentials exist, and the real ones are verified against fakes meanwhile.
-4. Tests: the identity lifecycle, credential storage failure, the outbox's ordering and idempotency,
-   retry/backoff, conflict resolution and the drain across a restart; then run the gate, update agent
+1. Build the notification service (`mobile/src/services/notifications.ts`) over `expo-notifications`:
+   as permission request that explains itself, a schedule built from the stored `remindersEnabled`,
+   `reminderTime`, `reminderTimezone` and the learner's study days, and a stored handle per scheduled
+   notification so a change cancels and replaces rather than duplicates.
+2. Decide and encode the denied-permission state: the preference is the learner's, the permission is the
+   OS's, and the screen must say which one is missing without asking twice.
+3. Reschedule on every change that could move the schedule — reminders on/off, time, study days, and an
+   onboarding edit — from one place, the same way settings writes go through one service.
+4. Tests: the schedule built from real stored preferences, the permission outcomes, cancellation and
+   replacement, a denied permission, and the settings screen's rows; then run the gate, update agent
    docs and commit.
 
 ## Decisions made
-D-047 … D-050 (see `agent/DECISIONS.md`): a mock counts through the same answer writer practice uses ·
-a mock reveals nothing until it is submitted · the clock is a deadline and an expired paper is still a
-result · a paper is scored out of the items it holds and unanswered counts wrong.
-Previous session: D-043 … D-046 (the Study Score is a mark, not a forecast · Progress names the subject
-Practice would have offered · mastery is listed least mastered first · the weekly goal is the learner's
-own).
-Earlier: D-039 … D-042 (one review schedule written by the domain · a flashcard does not credit
-mastery · Review is a deck, not another quiz · the review queue belongs to the exam, not the track).
+D-051 … D-056 (see `agent/DECISIONS.md`): a guest is a device, not a missing account · sync is a drain,
+not a daemon · an answer appends its sync event in the same transaction · each kind of change has its
+own merge policy, and settings are intents · the transport is the only thing that talks to a network ·
+signing in does not depend on the backend.
+Previous session: D-047 … D-050 (a mock counts through the same answer writer practice uses · a mock
+reveals nothing until it is submitted · the clock is a deadline and an expired paper is still a result ·
+a paper is scored out of the items it holds and unanswered counts wrong).
+Earlier: D-043 … D-046 (the Study Score is a mark, not a forecast · Progress names the subject Practice
+would have offered · mastery is listed least mastered first · the weekly goal is the learner's own).
 Previous session: D-033 … D-038 (correctness decided by the service from the question · one submitted
 answer is one transaction · the drill's ranking stays a ranking · Practice omits a mode it cannot
 honestly offer · "Try another like this" only when the follow-up exists · a timed session runs on a
@@ -189,5 +214,5 @@ present untracked under `archives/mobile-prototype/`. This reorganisation pre-da
 it was left untouched. Commit or discard it deliberately before release.
 
 ## Commit/hash
-See the checkpoint commit created at the end of Phase 12 (`feat(mock): add the mock exam, its timer and
-its result`).
+See the checkpoint commit created at the end of Phase 13 (`feat(auth): add the account, the outbox and
+the sync worker`).

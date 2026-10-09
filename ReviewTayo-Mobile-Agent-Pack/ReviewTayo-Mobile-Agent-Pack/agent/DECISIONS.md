@@ -311,3 +311,49 @@ cannot read as a good score. The exam's own passing percentage is shown as conte
 and never as a verdict the app is entitled to give, and the result is derived from the stored items each
 time rather than frozen into a payload, so the result screen and Progress's mock row can never disagree
 about the same attempt (D-029).
+
+## D-051 — A guest is a device, not a missing account
+Guest is a complete state rather than a degraded one: on first launch the app generates a device id,
+keeps it in the keystore, and attributes everything the learner does to it, so the same install is the
+same device across launches and a future account can claim its work. Local study needs no account and
+no network, which is what makes the offline-first promise true rather than aspirational. A device with
+no keystore still works: the id becomes per-session and the app says `storageAvailable: false` in
+Settings rather than silently forgetting.
+
+## D-052 — Sync is a drain, not a daemon
+There is no background thread, no polling loop and no busy-wait: a pass over the outbox happens when
+something asks for one (opening the screen that reads sync), takes the events whose next attempt is
+due, and stops. A pass can fail, and it fails as a value — a summary the screen may show — so a broken
+network, a slow server or a bad response can never interrupt answering a question. Events that keep
+failing are abandoned with their reason after a bounded number of attempts rather than retried for
+ever, because an outbox that never empties is just a hidden memory leak.
+
+## D-053 — An answer appends its sync event in the same transaction
+Submitting an answer already writes the answer, mastery, the review schedule, today's activity and the
+planned task in one transaction (D-034). The outbox event joins them: a crash between the answer and
+its event would leave a fact the account never hears about, or a mastery row no answer explains. The
+same rule applies to settings and to saved questions. The event is appended, never the master copy —
+the app's truth stays local, and sync is how it travels.
+
+## D-054 — Each kind of change has its own merge policy, and settings are intents
+Answers are appended and deduplicated by id; mastery is never copied but recomputed from the answers
+that are; saved questions merge as a set, where saving and unsaving are both intents with a timestamp
+and the newest wins; settings are latest-intent-wins too, keyed by the instant the learner meant them
+rather than by a per-device counter. An entity this build does not know is refused (`unsupported`)
+rather than merged by a guess, and ties go to the local device because that is the learner's own
+screen.
+
+## D-055 — The transport is the only thing that talks to a network
+`ApiTransport` is the app's single network boundary, and its default implementation is `LocalOnlyTransport`,
+which reports offline instead of failing. That is what lets a build with no backend behave exactly like
+a build with one: writes queue, the settings screen says `Saved on this device`, and turning sync on
+later is a configured base URL rather than a feature flag. Every HTTP outcome — a timeout, a dead
+socket, a 429, an unreadable body — is a typed `ApiFailure` with a `retryable` flag, so the worker's
+decision is data rather than a caught exception.
+
+## D-056 — Signing in does not depend on the backend
+Obtaining the provider's id token and being recognised by the server are two steps, and only the first
+is required to sign in. If a backend is reachable the token is exchanged for a server session and the
+learner is told their progress syncs; if it is not, sign-in still succeeds, the account is stored in
+the keystore, and the note says sync will retry. A sign-in that failed because the server was down
+would be a lie about the learner's own account, and the outbox already knows how to wait.

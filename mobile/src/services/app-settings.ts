@@ -1,6 +1,7 @@
 import type { AppSettingsRecord, Repositories, WriteOptions } from '@/data/repositories';
 import type { TextSizePreference, ThemePreference } from '@/domain/preferences';
 import { toTextSizePreference, toThemePreference } from '@/domain/preferences';
+import { settingsEvent } from '@/domain/sync';
 
 /**
  * App settings service.
@@ -69,7 +70,12 @@ export const saveAppSettings = async (
     ...(patch.reminderTimezone === undefined ? {} : { reminderTimezone: patch.reminderTimezone }),
     updatedAt: now.toISOString(),
   };
-  await repositories.settings.save(next, transaction === undefined ? {} : { transaction });
+  const options = transaction === undefined ? {} : { transaction };
+  await repositories.settings.save(next, options);
+  // Settings sync as intents: the newest change wins on the server, which is why
+  // the event is keyed by the instant the learner meant it rather than by a
+  // per-device counter (D-054).
+  await repositories.outbox.enqueue(settingsEvent(next), options);
   return next;
 };
 

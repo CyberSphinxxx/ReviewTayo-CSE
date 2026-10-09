@@ -18,6 +18,7 @@ import {
   startSession,
   submitAnswer,
 } from '@/services/practice';
+import { removeSavedQuestion, saveQuestion } from '@/services/saved-questions';
 
 /**
  * Quiz session model.
@@ -254,15 +255,16 @@ export const useQuiz = (repositories: Repositories, start: QuizStart): QuizModel
   const toggleSaved = () => {
     if (current === null) return;
     const question = current;
-    setSaved((value) => !value);
+    const wasSaved = saved;
+    setSaved(!wasSaved);
     void (async () => {
-      if (saved) await repositories.savedQuestions.remove(question.id);
-      else
-        await repositories.savedQuestions.save({
-          questionId: question.id,
-          examId: exam?.id ?? '',
-          savedAt: new Date().toISOString(),
-        });
+      const input = {
+        repositories,
+        questionId: question.id,
+        examId: exam?.id ?? '',
+      };
+      if (wasSaved) await removeSavedQuestion(input);
+      else await saveQuestion(input);
     })();
   };
 

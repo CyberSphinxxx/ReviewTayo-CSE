@@ -19,6 +19,7 @@ import {
   trackName,
 } from '@/domain/onboarding';
 import type { Repositories } from '@/data/repositories';
+import { useAccount } from '@/features/settings/use-account';
 import { useSettings } from '@/features/settings/use-settings';
 import { useLocalData } from '@/store/LocalDataProvider';
 import {
@@ -56,6 +57,7 @@ const SettingsContent = ({ repositories }: { readonly repositories: Repositories
   const theme = useTheme();
   const router = useRouter();
   const model = useSettings(repositories);
+  const account = useAccount(repositories);
   const { exam, profile, settings, content } = model;
 
   const sectionHeading = (label: string) => (
@@ -101,11 +103,86 @@ const SettingsContent = ({ repositories }: { readonly repositories: Repositories
       {sectionHeading('Account')}
       <RTListGroup>
         <RTListRow
-          title="Progress mode"
-          subtitle="Guest — saved on this device"
-          meta="Sign-in and sync arrive in a later update."
+          title={account.identityTitle}
+          subtitle={account.identitySubtitle}
+          meta={account.identityDetail}
+          leading={
+            <View
+              style={{
+                width: theme.touchTarget.comfortable,
+                height: theme.touchTarget.comfortable,
+                borderRadius: theme.radius.pill,
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: theme.colors.accentSoft,
+              }}
+            >
+              <RTText role="cardTitle" colorKey="onAccentSoft">
+                {account.identityInitial}
+              </RTText>
+            </View>
+          }
+          testID="settings-account"
+        />
+        <RTListRow
+          title="Sync"
+          subtitle={account.syncLine}
+          meta={account.pendingLine}
+          testID="settings-sync"
         />
       </RTListGroup>
+      {account.signedIn ? (
+        <RTButton
+          label="Sign out"
+          variant="subtle"
+          fullWidth
+          loading={account.busy}
+          onPress={account.continueAsGuest}
+          testID="settings-sign-out"
+          style={{ marginTop: theme.spacing.md }}
+        />
+      ) : (
+        <RTButton
+          label="Continue with Google"
+          variant="primary"
+          fullWidth
+          disabled={!account.providerConfigured}
+          loading={account.busy}
+          onPress={account.signIn}
+          accessibilityHint="Signs in so your progress can sync across devices."
+          testID="settings-sign-in"
+          style={{ marginTop: theme.spacing.md }}
+        />
+      )}
+      <RTButton
+        label="Sync now"
+        variant="subtle"
+        fullWidth
+        loading={account.busy}
+        onPress={account.runSync}
+        testID="settings-sync-now"
+        style={{ marginTop: theme.spacing.sm }}
+      />
+      {!account.providerConfigured && (
+        <RTText role="meta" tone="secondary" style={{ marginTop: theme.spacing.sm }}>
+          Google sign-in needs client IDs in this build. Everything else works offline.
+        </RTText>
+      )}
+      {!account.storageAvailable && (
+        <RTText role="meta" tone="secondary" style={{ marginTop: theme.spacing.sm }}>
+          This device cannot store sign-in credentials, so your progress stays a guest.
+        </RTText>
+      )}
+      {account.notice !== null && (
+        <RTText
+          role="meta"
+          tone="secondary"
+          testID="settings-account-notice"
+          style={{ marginTop: theme.spacing.sm }}
+        >
+          {account.notice}
+        </RTText>
+      )}
 
       {sectionHeading('Study plan')}
       <RTListGroup>

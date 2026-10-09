@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
-  "phase": "13-auth-sync",
-  "currentTask": "Phase 13 — Auth/sync: guest identity, the Google provider, secure credential storage, the API client boundary, the outbox with retry/backoff and idempotency, conflict policies and offline-to-online recovery",
-  "lastCompletedTask": "phase-12-mock-exam",
-  "nextAction": "Build the auth/sync boundary on the contract-first design: a Guest identity through secure storage, the Google provider behind the same interface, the sync outbox worker with retry/backoff and idempotency keys, the conflict policies and the offline-to-online drain",
+  "phase": "14-notifications",
+  "currentTask": "Phase 14 — Notifications: the permission request, the reminder schedule on study days, the denied-permission state and rescheduling when the preference or the plan changes",
+  "lastCompletedTask": "phase-13-auth-sync",
+  "nextAction": "Implement real local notifications over expo-notifications: request permission honestly, schedule the day's reminder at the learner's own time on their study days, handle a denied permission without nagging, and reschedule on every preference change",
   "lastSuccessfulBuild": "expo export --platform android (PASS)",
   "failingTests": [],
   "testSummary": {
-    "suites": 40,
-    "tests": 572,
-    "passed": 572,
+    "suites": 45,
+    "tests": 662,
+    "passed": 662,
     "failed": 0
   },
   "externalBlockers": [
@@ -43,7 +43,8 @@
     "09-practice-quiz",
     "10-review",
     "11-progress",
-    "12-mock-exam"
+    "12-mock-exam",
+    "13-auth-sync"
   ],
   "contentStats": {
     "cseQuestions": 88,
@@ -70,7 +71,10 @@
     "phase-11: the CSE bank holds four questions per concept while mastery's evidence floor is five, so `Mastered` is not reachable from the current content; more questions per concept is a content task for HANDOFF.md",
     "phase-12: the mock setup, running paper and result are covered by integration tests over the real router and a seeded database; device captures of the setup, a running paper with its clock and grid, the pause panel and the result are tracked in VISUAL-QA.md",
     "phase-12: the full Professional (170) and Sub-Professional (165) papers cannot be served from today's 88-question bank, so the setup screen says the shortfall plainly (`72 of the 170 items`); the paper is scored out of the items it holds rather than the requested count — more questions per concept is a content task for HANDOFF.md",
-    "phase-12: pause/resume and the deadline-derived clock are covered by service and domain tests; confirming the clock keeps honest time with the app backgrounded mid-paper is a device pass tracked in VISUAL-QA.md"
+    "phase-12: pause/resume and the deadline-derived clock are covered by service and domain tests; confirming the clock keeps honest time with the app backgrounded mid-paper is a device pass tracked in VISUAL-QA.md",
+    "phase-13: Guest, the stored account and the sync queue are covered by service and integration tests and the settings screen renders both states; device captures of the account row, the signed-in row and the waiting queue are tracked in VISUAL-QA.md",
+    "phase-13: live Google sign-in (client IDs) and a live backend exchange (base URL + credentials) are verified against fakes and the local-only transport; both remain external and are tracked in agent/BLOCKERS.md",
+    "phase-13: sync drains when the settings screen is opened; a background or app-state-driven drain is deliberately not built (no daemon), and can be added when a backend exists and real traffic suggests the cadence"
   ],
   "environment": {
     "node": "24.16.0",

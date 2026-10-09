@@ -110,5 +110,15 @@ Do not require pixel-perfect HTML matching. Require faithful design intent and n
   threshold, and the recommendation card — at 360×640 and 390×844, Standard and Extra Large. A device
   pass is also the only way to confirm the clock keeps honest time (and submits at zero) with the app
   backgrounded mid-paper.
-- Phases 5–11 captures are still pending a device/emulator pass; the mock screen is no longer a
-  placeholder as of Phase 12, and captures are collected as each phase lands.
+- Phase 13: the account and sync rows exist in both themes and their states are asserted from the
+  rendered tree and the keystore behind them — a guest, a signed-in account with its name and email, the
+  signing-out state, the waiting queue, and the notice that says plainly that nothing leaves the device
+  in a build with no backend. What automated tests cannot judge is whether the account row reads as one
+  calm identity block with its avatar, whether "1 change waiting" reads as information rather than an
+  error, and whether the two stacked actions (Sign in / Sync now, or Sign out / Sync now) still read as
+  one choice at Extra Large text. Capture Settings' Account section as a guest, signed in, with a
+  waiting queue, and with the sync notice visible — light and dark, 360×640 and 390×844, Standard and
+  Extra Large. A device pass with live Google client IDs is also the only way to see the consent screen
+  the learner actually meets.
+- Phases 5–12 captures are still pending a device/emulator pass; the settings Account section is real as
+  of Phase 13, and captures are collected as each phase lands.

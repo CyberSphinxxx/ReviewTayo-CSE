@@ -17,6 +17,7 @@ import {
 import type { ExamRuleConfig, Question, QuestionDifficulty, SubjectId } from '@/domain/exams/types';
 import { isCorrectChoice, taskKindForMode } from '@/domain/practice';
 import { nextReviewSchedule } from '@/domain/review';
+import { answerEvent } from '@/domain/sync';
 import { toIsoDate } from '@/domain/study-plan';
 import { createId } from '@/services/ids';
 
@@ -331,6 +332,11 @@ export const submitAnswer = async ({
       timeSpentSeconds: timeSpentSeconds ?? null,
     };
     await repositories.answers.record(answer, { transaction });
+    // The one syncable fact this write produces: an answer is a fact, so the
+    // event is appended in the same transaction rather than after it. A crash
+    // between the two would otherwise leave mastery no answer explains — or an
+    // answer the account never hears about (D-053).
+    await repositories.outbox.enqueue(answerEvent(answer), { transaction });
 
     let before: MasteryLevel = 'Learning';
     let after: MasteryLevel = 'Learning';

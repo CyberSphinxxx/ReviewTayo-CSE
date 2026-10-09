@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import * as SecureStore from 'expo-secure-store';
 import { fireEvent, renderRouter, screen, waitFor } from 'expo-router/testing-library';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
@@ -15,6 +16,7 @@ import { createLocalRepositories } from '@/data/local/repositories';
 import { runMigrations } from '@/data/local/migration-runner';
 import { openNodeDatabase } from '@/data/local/sqlite/node-database';
 import type { Repositories } from '@/data/repositories';
+import { CREDENTIAL_KEYS } from '@/services/credentials';
 import { AppearanceProvider, useAppearance } from '@/store/AppearanceProvider';
 import { LocalDataProvider } from '@/store/LocalDataProvider';
 import { ThemeProvider } from '@/theme';
@@ -175,5 +177,103 @@ describe('settings flow', () => {
       dailyGoal: 10,
       onboardingCompletedAt: COMPLETED_AT,
     });
+  });
+});
+
+describe('settings account', () => {
+  let db: DatabasePort;
+  let repositories: Repositories;
+
+  const signedInRecord = {
+    mode: 'google',
+    subject: 'google-123',
+    displayName: 'Ada Lovelace',
+    email: 'ada@example.com',
+    photoUrl: null,
+    signedInAt: COMPLETED_AT,
+  };
+
+  beforeEach(async () => {
+    db = await openNodeDatabase();
+    await runMigrations(db);
+    repositories = createLocalRepositories(db);
+    await repositories.profile.save({
+      examId: 'cse',
+      trackId: 'professional',
+      startingPoint: 'reviewing',
+      examDate: null,
+      studyDays: ['Mon'],
+      sessionLength: 'regular',
+      dailyGoal: 10,
+      onboardingCompletedAt: COMPLETED_AT,
+      createdAt: COMPLETED_AT,
+      updatedAt: COMPLETED_AT,
+    });
+
+    // The mocked keystore is shared inside this file; each case starts clean.
+    await SecureStore.deleteItemAsync(CREDENTIAL_KEYS.identity);
+    await SecureStore.deleteItemAsync(CREDENTIAL_KEYS.googleTokens);
+  });
+
+  it('shows a guest as a complete state, with sign-in honestly unavailable', async () => {
+    await renderSettings(db);
+
+    expect(screen.getByText('Guest')).toBeOnTheScreen();
+    expect(screen.getByText('Saved on this device only')).toBeOnTheScreen();
+    expect(screen.getByText('Saved on this device')).toBeOnTheScreen();
+    expect(screen.getByText('Nothing waiting')).toBeOnTheScreen();
+    // No client IDs in this build: the offer is disabled rather than broken.
+    expect(screen.getByTestId('settings-sign-in')).toBeDisabled();
+    expect(screen.getByText(/Google sign-in needs client IDs in this build/)).toBeOnTheScreen();
+  });
+
+  it('shows the signed-in account and signs out to a guest', async () => {
+    await SecureStore.setItemAsync(CREDENTIAL_KEYS.identity, JSON.stringify(signedInRecord));
+    await renderSettings(db);
+
+    expect(screen.getByText('Ada Lovelace')).toBeOnTheScreen();
+    expect(screen.getByText('ada@example.com')).toBeOnTheScreen();
+    expect(screen.getByText('Your progress syncs to this account.')).toBeOnTheScreen();
+
+    await tap('settings-sign-out');
+
+    await waitFor(() => expect(screen.getByText('Guest')).toBeOnTheScreen());
+    expect(await SecureStore.getItemAsync(CREDENTIAL_KEYS.identity)).toBeNull();
+    expect(screen.getByTestId('settings-sign-in')).toBeDisabled();
+  });
+
+  it('counts what is waiting and says plainly that nothing leaves the device', async () => {
+    await repositories.outbox.enqueue({
+      eventType: 'answer.recorded',
+      entityType: 'answer',
+      entityId: 'answer-1',
+      payload: { questionId: 'q1' },
+      idempotencyKey: 'answer:answer-1',
+      occurredAt: COMPLETED_AT,
+    });
+
+    await renderSettings(db);
+    expect(screen.getByText('1 change waiting')).toBeOnTheScreen();
+
+    await tap('settings-sync-now');
+
+    await waitFor(() =>
+      expect(screen.getByTestId('settings-account-notice')).toHaveTextContent(
+        /No backend is configured in this build/,
+      ),
+    );
+    // Nothing was delivered and nothing was lost.
+    expect((await repositories.outbox.listAll())[0]?.status).toBe('pending');
+  });
+
+  it('keeps the account when a sync runs with a stale sign-in', async () => {
+    await SecureStore.setItemAsync(CREDENTIAL_KEYS.identity, JSON.stringify(signedInRecord));
+    await renderSettings(db);
+
+    await tap('settings-sync-now');
+    await waitFor(() => expect(screen.getByTestId('settings-account-notice')).toBeOnTheScreen());
+
+    expect(screen.getByText('Ada Lovelace')).toBeOnTheScreen();
+    expect(screen.getByTestId('settings-sign-out')).toBeOnTheScreen();
   });
 });

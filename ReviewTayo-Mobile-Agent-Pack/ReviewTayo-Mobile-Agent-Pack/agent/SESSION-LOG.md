@@ -473,3 +473,61 @@ Phase 13 — Auth/sync: guest identity, the Google provider, secure credential s
 boundary, the backend contract, the sync outbox worker with retry/backoff and idempotency, conflict
 policies and offline-to-online recovery. External prerequisites still outstanding: live Google OAuth
 client IDs and the production API base URL/credentials (`agent/BLOCKERS.md`).
+
+## Session 12 — 2026-10-10 — Phase 13
+### Phase 13 — Auth/sync (complete)
+- `domain/identity/` is who is using the app: a guest with its own device id, or a Google account, with
+  the stored record narrowed field by field rather than cast — a truncated record, a device restore or
+  an older build falls back to guest instead of showing a half-parsed name (D-051). Reading an OIDC id
+  token is here too, pure and unverified: the client only needs the claims it is allowed to see, and
+  the server does the verification (D-056).
+- `data/remote/` is the backend contract and the one network boundary. The contract is the versioned
+  request/response pair ADR-003 specified (event push, Google auth exchange) with runtime narrowing for
+  both responses; the transport is an interface whose default is `LocalOnlyTransport` — offline, not
+  broken — with `HttpApiTransport` used only for an https base URL and every outcome mapped to a
+  retryable or permanent `ApiFailure` (D-055).
+- `services/auth.ts`, `services/credentials.ts` and `services/google-auth.ts` are the account: a device
+  id generated once and kept, the identity and provider tokens in the keystore rather than SQLite, the
+  authorization-code + PKCE flow behind a provider interface that tests replace with a fake, and a
+  sign-in that succeeds locally even when the server exchange cannot (D-056).
+- `services/sync.ts` and `domain/sync/` are the outbox: events keyed by data that already exists, a
+  bounded exponential backoff with jitter, per-entity conflict policies (answers append-only, settings
+  and bookmarks latest-intent-wins, mastery recomputed rather than copied), and a worker that is a
+  drain rather than a daemon — one pass over what is due, a summary as its result, and no way for a
+  failure to reach the learner's work (D-052, D-054).
+- The write sites now append their own events inside the transaction that makes the change: an answer
+  (`submitAnswer`), a settings change (`saveAppSettings`) and a bookmark (`services/saved-questions.ts`)
+  — so a long offline stretch can never lose one (D-053). Settings shows the account and the queue, and
+  drains whatever is due when it is opened.
+- Tests: 45 suites / 662 tests — 32 domain cases (both identities, untrusted stored records, id-token
+  reading, the backoff schedule and its ceiling and jitter, event keys, every merge policy), 25 transport
+  cases (the local-only default, plaintext refusal, request shape and headers, every HTTP status class,
+  a dead socket, a real abort, both response narrowings), 16 auth cases (device id stability, stored
+  account, unreadable record, sign-in with and without a backend, cancelled sign-in, sign-out keeping
+  the device id, no keystore, a read-only keystore, the narrowed exchange), 13 worker cases over a real
+  database (the event appended with its answer, settings and bookmarks doing the same, offline leaving
+  the outbox alone, delivery, backoff and the delivered retry, permanent failure, exhausted attempts, a
+  server rejection, an unreadable response, the drain after a long offline stretch, a throwing transport
+  and the local work surviving it, both overview lines) and 4 account cases on the settings screen.
+### Audit findings fixed this session
+- `saveAppSettings` is the only writer of the settings row that a learner drives directly, so the sync
+  event was put there rather than at either of its two callers — one write path, one event.
+- The settings screen's old "Sign-in and sync arrive in a later update" row had become false the moment
+  this phase landed; it is replaced by the real account, the real queue and a Sync now action.
+- Offline-to-online recovery is not only a service test: opening the screen that reads sync drains
+  whatever is due, so the behaviour exists in the app rather than only in the suite.
+- The auth service deliberately does not import the Google provider module, so its tests never touch the
+  OAuth libraries; the provider arrives as a parameter and the screen supplies the real one.
+
+### Verification evidence
+| Command (from `mobile/`) | Result |
+|---|---|
+| `npx tsc --noEmit` | PASS |
+| `npx eslint .` | PASS — 0 errors, 0 warnings |
+| `npx prettier --check .` | PASS |
+| `npx jest` | PASS — 45 suites, 662 tests |
+| `npx expo export --platform android` | PASS — Hermes bundle emitted |
+
+### Next session starts at
+Phase 14 — Notifications: the permission request, the reminder schedule on study days at the learner's
+chosen time, the denied-permission state, and rescheduling whenever the preference changes.

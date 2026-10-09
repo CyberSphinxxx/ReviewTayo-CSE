@@ -376,17 +376,66 @@ Status legend:
   in). Device captures are tracked in VISUAL-QA.md.)*
 
 ## Phase 13 — Auth/sync
-- [ ] Guest identity.
-- [ ] Google provider.
-- [ ] secure credential storage.
-- [ ] API client boundary.
-- [ ] backend contract reuse.
-- [ ] sync outbox worker.
-- [ ] retry/backoff.
-- [ ] idempotency.
-- [ ] conflict policies.
-- [ ] offline-to-online recovery.
-- [ ] tests.
+- [x] Guest identity. *(`domain/identity/identity.ts` models both modes as complete states and
+  `services/auth.ts` gives a device its own id, generated once and kept in the keystore — so a guest's
+  answers are attributed to the same device across launches, and a device with no keystore still
+  works with `storageAvailable: false` said out loud rather than a silent failure (D-051).)*
+- [x] Google provider. *(`services/google-auth.ts` implements `GoogleAuthProvider` behind the
+  authorization-code + PKCE flow on `expo-auth-session`, returning an account plus the id token, with
+  the pure `parseGoogleIdToken` in the domain reading (never verifying) the token's claims. The client
+  id is resolved per platform from `EXPO_PUBLIC_GOOGLE_*`; with none configured the provider reports
+  itself unavailable instead of failing at the last moment. Verified with a fake provider; live client
+  IDs remain external (`agent/BLOCKERS.md`).)*
+- [x] secure credential storage. *(`services/credentials.ts` is the boundary — an interface, an
+  `expo-secure-store` implementation for the identity, device id and provider tokens, and a memory
+  store for tests. Every keystore failure is normalised into a `storage` AppError, and the auth service
+  reports a read-only or absent keystore instead of claiming to remember an account.)*
+- [x] API client boundary. *(`data/remote/transport.ts`: `ApiTransport` is the only thing that talks to
+  a network. `LocalOnlyTransport` is the default and reports offline rather than failing, so every
+  syncable action simply queues; `HttpApiTransport` is used only for an https base URL and maps every
+  outcome — 2xx, 429/5xx, 401/403, 409, 4xx, an unparseable body, a timeout, a dead socket — to a
+  retryable or permanent `ApiFailure` value rather than an exception (D-055).)*
+- [x] backend contract reuse. *(`data/remote/api-contract.ts` declares the versioned requests and
+  responses ADR-003 specified (event push, Google auth exchange) with runtime narrowing for both
+  responses, and `services/auth.ts` `exchangeGoogleSession` sends the versioned envelope — so the
+  future backend has an exact target and live integration is one implementation swap.)*
+- [x] sync outbox worker. *(`services/sync.ts` `syncNow` is one pass, not a daemon: it takes the events
+  whose next attempt is due (oldest first, batched), sends each with its idempotency key, records
+  `sent` / a scheduled retry / `dead`, and writes `lastSyncedAt` and `lastError` to `sync_state`. It
+  cannot throw — a sync failure is a summary the screen can show, never an interruption to studying
+  (D-052).)*
+- [x] retry/backoff. *(`domain/sync/backoff.ts`: bounded exponential growth (`base × factor^attempt`)
+  capped at 15 minutes with equal jitter, so a hundred events failing together do not return in the
+  same instant, and `maxAttempts` 8 before an event is abandoned. `nextAttemptAt` stores the instant;
+  the worker never busy-loops, and a pass before the due time touches nothing.)*
+- [x] idempotency. *(`domain/sync/events.ts` derives every key from data that already exists —
+  `answer:<id>`, `settings:<updatedAt>`, `saved-question:<id>:<at>` — the worker sends it as the
+  `Idempotency-Key` header and in the body, and `submitMock`'s replay plus the outbox's unique index
+  mean a retried, re-delivered or double-submitted write lands once.)*
+- [x] conflict policies. *(`domain/sync/policies.ts` names one policy per entity — answers
+  append-only and deduplicated by id, settings latest-intent-wins with the local device breaking a
+  tie, saved questions merged as a set where an unsave is remembered, mastery recomputed from answers
+  rather than copied — with `mergeAnswers`, `mergeSavedQuestions` and `resolveLatestIntent`
+  implementing them, and an unknown entity refused rather than guessed (D-054).)*
+- [x] offline-to-online recovery. *(`tests/services/sync.test.ts` queues work behind an unavailable
+  transport, asserts nothing was attempted and no attempt was counted, then drains all three events in
+  one pass once the network returns; the settings screen drains whatever is due when it is opened, and
+  `services/practice.ts` appends the answer and its event in the same transaction so a long offline
+  stretch can never lose one (D-053).)*
+- [x] tests. *(`tests/domain/identity.test.ts` and `tests/domain/sync.test.ts` — 32 cases (both
+  identities, untrusted stored records, id-token reading, the backoff schedule and its ceiling and
+  jitter, the event keys, and every merge policy); `tests/data/api-transport.test.ts` — 25 cases (the
+  local-only default, plaintext refusal, request shape and headers, every HTTP status class mapped, a
+  dead socket, a real abort, and both response narrowings); `tests/services/auth.test.ts` — 16 cases
+  (device id stability, stored account, unreadable record, sign-in with and without a backend, a
+  cancelled sign-in, sign-out keeping the device id, no keystore, a read-only keystore, and the
+  exchange being narrowed); `tests/services/sync.test.ts` — 13 cases over a real database (the event
+  appended with its answer, settings and bookmarks doing the same, offline leaving the outbox alone,
+  delivery, backoff and the delivered retry, permanent failure, exhausted attempts, a server
+  rejection, an unreadable response, the drain after a long offline stretch, a throwing transport and
+  the local work surviving it, and both overview lines); `tests/app/settings-flow.test.tsx` — 4 new
+  account cases (a guest, a signed-in account and signing out, a waiting queue, and the account
+  surviving a sync).)*
 
 ## Phase 14 — Notifications
 - [ ] local notification permission.
