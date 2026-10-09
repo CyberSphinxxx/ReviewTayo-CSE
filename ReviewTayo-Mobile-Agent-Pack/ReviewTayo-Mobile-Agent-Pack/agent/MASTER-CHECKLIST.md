@@ -241,17 +241,36 @@ Status legend:
   the real router and a seeded database. Device captures are tracked in VISUAL-QA.md.)*
 
 ## Phase 10 — Review
-- [ ] review scheduler.
-- [ ] due queue.
-- [ ] Again.
-- [ ] Got It.
-- [ ] mistakes.
-- [ ] saved.
-- [ ] concepts to revisit.
-- [ ] history.
-- [ ] caught-up state.
-- [ ] tab due badge.
-- [ ] Review tests.
+- [x] review scheduler. *(`src/domain/review/schedule.ts`: the exam's own `gotItIntervalDays` ladder
+  indexed by mastery, `againIntervalDays` for a lapse, a counted lapse and a counted review, and
+  every due date computed from a passed-in clock. The answer writer in `services/practice` now uses
+  the same function, so an answer and a card said "Got it" to move one due date, not two (D-039).)*
+- [x] due queue. *(`loadReviewQueue` reads what is due oldest first, capped by the exam's
+  `dailyDueLimit`, and says how many were due in total so the screen can admit to the remainder.)*
+- [x] Again. *(a lapse: the interval goes back to `againIntervalDays`, the lapse count rises and the
+  card leaves the deck — the schedule already knows when to bring it back, so repeating it in the
+  same session would record two lapses for one honest look at it.)*
+- [x] Got It. *(the interval the concept's mastery has earned: `gotItIntervalDays[level]`, with the
+  review count raised and `lastReviewedAt` set. Mastery itself is not credited — a flashcard proves
+  you can read a definition, not that you can answer a question about it (D-040).)*
+- [x] mistakes. *(`/review-list?kind=mistakes`: every concept-level item an answer created, with its
+  subject, when it returns and how many times it has been missed.)*
+- [x] saved. *(`/review-list?kind=saved`: the questions bookmarked from the quiz header, each with
+  the answer and the content's own explanation, and a link to the concept behind it.)*
+- [x] concepts to revisit. *(`revisitConcepts` reads mastery evidence rather than the queue: started
+  concepts still below `Strong`, weakest first, inside the learner's own track. Untouched material
+  is Learn's, and a concept nobody has answered is not something to "revisit".)*
+- [x] history. *(`buildReviewHistory`: the distinct concepts reviewed in the last seven days, newest
+  first, read from each item's own `lastReviewedAt` so nothing new had to be stored for it.)*
+- [x] caught-up state. *("You're caught up." with the resting owl, and no number to react to: the
+  screen says it once instead of drawing an empty queue.)*
+- [x] tab due badge. *(the Review tab's badge, Home's Review Due line, the deck's size and the
+  screen's own number are all read from the same queue — asserted together in
+  `tests/app/review-screen.test.tsx`.)*
+- [x] Review tests. *(`tests/domain/review.test.ts` — 19 cases (the ladder, lapses, due-date wording,
+  deck, revisit ordering, history window); `tests/services/review.test.ts` — 13 cases (queue, cap,
+  grading, the shared schedule, the four lists); `tests/app/review-screen.test.tsx` — 15 cases over
+  the real router and a seeded database. Device captures are tracked in VISUAL-QA.md.)*
 
 ## Phase 11 — Progress
 - [ ] Study Score.

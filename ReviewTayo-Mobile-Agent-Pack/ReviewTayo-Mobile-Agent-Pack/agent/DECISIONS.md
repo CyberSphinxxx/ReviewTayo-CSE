@@ -216,3 +216,31 @@ Timed Practice stores the session's deadline and ticks once a second against it 
 down a local variable, so a backgrounded app, a slow frame or a throttled timer cannot make the
 session longer than the exam's own rules allow. When the clock reaches zero the session is finished
 with what was answered: time running out is a result, not a reason to throw the work away.
+
+## D-039 — One review schedule, written by the domain
+The Again / Got it arithmetic moved out of `services/practice` into `src/domain/review/schedule.ts`,
+and the answer writer now uses it too. There is one rule for when a concept comes back: a correct
+answer in a drill and a card said "Got it" to in the deck move the same due date and take the same
+rung of the exam's interval ladder. Two implementations would have drifted into a queue whose dates
+depended on which screen the learner happened to be on.
+
+## D-040 — A flashcard does not credit mastery
+Grading a review card changes the schedule and nothing else. Mastery stays derived from answers
+(D-029): recognising a concept's definition is proof that the learner can read it, not that they can
+answer a question about it, and crediting mastery for a tap would inflate the one number Progress
+and the Smart Drill both trust. The deck is a memory aid, not a second, softer exam.
+
+## D-041 — Review is a deck, not another quiz
+Review Due shows one card per due concept — the concept on the front, its own summary on the back —
+rather than sending the learner back into four-option questions. A missed concept is one they have
+already answered and got wrong, so the question worth asking is whether they still know it, and that
+is a thing they answer about themselves. Both answers end the card's turn: "Again" is a statement
+about the learner, not a command to ask the same card again in a minute, and the schedule it just
+wrote is what brings it back.
+
+## D-042 — The review queue belongs to the exam, not the track
+The deck, the badge and Home's Review Due line all count the exam's due items, including concepts
+from a track the learner has since switched away from. The queue is the record of what they got
+wrong; changing which exam they are sitting does not make yesterday's mistakes irrelevant, and
+filtering by track would silently leave due items that the badge kept counting. The one place the
+track does matter is "concepts to revisit", which is about the material being studied right now.

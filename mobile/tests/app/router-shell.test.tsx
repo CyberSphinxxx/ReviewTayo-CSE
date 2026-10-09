@@ -114,13 +114,13 @@ describe('tab shell routing', () => {
       expect(screen.getAllByText(label).length).toBeGreaterThan(0);
     }
 
-    // The Review tab carries the real due count from the seeded database.
+    // The Review tab carries the real due count from the seeded database, both in its
+    // badge and in its accessibility label — asserted through the label because the
+    // Review screen itself now draws the same number, in a larger size.
     await waitFor(() => {
-      expect(screen.getByText('3')).toBeOnTheScreen();
+      expect(screen.getByLabelText('Review tab, 3 items due')).toBeOnTheScreen();
     });
 
-    // Switching tabs through the real tab buttons; the Review label includes the
-    // due count, which also proves the badge is wired to accessibility.
     fireEvent.press(screen.getByLabelText('Review tab, 3 items due'));
     await waitFor(() => {
       expect(result.getPathname()).toBe('/review');

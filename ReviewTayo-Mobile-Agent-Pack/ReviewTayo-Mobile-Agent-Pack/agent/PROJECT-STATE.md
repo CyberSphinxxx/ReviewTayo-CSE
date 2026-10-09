@@ -1,17 +1,17 @@
 # Project State
 
-**Phase:** 9 — Practice + Quiz (complete) → starting Phase 10 — Review
-**Current task:** Phase 10 — Review (review scheduler, Due queue, Again/Got It, mistakes, saved
-questions, concepts to revisit, history, caught-up state, tab due badge)
-**Last completed task:** Phase 9 Practice + Quiz — the practice catalogue and Smart Drill ranking, the
-seven modes, the `/quiz` question screen with answer checking, explanations and mastery feedback, the
-wrong-answer recovery loop (Try Another Like This / Review Concept), bookmarks, pause/resume, results
-and the recommended next action. Plus a Phase 8 audit that fixed four real Learn defects (`f6a54d5`).
-**Next action:** Build Review from the approved prototype on the data Phase 9 already writes: the due
-queue with Again/Got It, mistakes, saved questions, concepts to revisit, history and the caught-up
-state, with the tab's due badge reading the same count.
+**Phase:** 10 — Review (complete) → starting Phase 11 — Progress
+**Current task:** Phase 11 — Progress (Study Score, Needs Attention, subject accuracy, concept
+mastery)
+**Last completed task:** Phase 10 Review — the spaced-repetition schedule shared with the answer
+writer, the due queue and its daily cap, the Again/Got it card deck, mistakes, saved questions,
+concepts to revisit, the week's history and the caught-up state, all reading one queue with the tab
+badge.
+**Next action:** Build Progress from the approved prototype on the same derived mastery and answer
+evidence: the Study Score with its week-over-week line, Needs Attention with a drill that says what to
+fix, subject accuracy and concept mastery.
 **Last successful build:** `npx expo export --platform android` → PASS (Hermes bundle)
-**Known failing tests:** None. `npx jest` → 437 passed / 437.
+**Known failing tests:** None. `npx jest` → 484 passed / 484.
 **External blockers:** Live Google OAuth credentials and a production API endpoint (verify-only;
 everything else works without them).
 **Internal blockers:** None.
@@ -22,7 +22,7 @@ everything else works without them).
 | `npm run typecheck` | PASS |
 | `npm run lint` | PASS (0 errors, 0 warnings) |
 | `npm run format:check` | PASS |
-| `npm test` | PASS — 437 tests across 31 suites |
+| `npm test` | PASS — 484 tests across 34 suites |
 | `npx expo export --platform android` | PASS |
 
 ## Repository reality (Phase 0 audit)
@@ -50,11 +50,14 @@ everything else works without them).
 - do not refactor the web app merely to share code.
 
 ## Decisions added this session
-D-033 correctness is decided by the service from the question itself · D-034 one submitted answer is
-one transaction · D-035 the drill's ranking stays a ranking · D-036 Practice omits a mode it cannot
-honestly offer · D-037 "Try another like this" is offered only when the follow-up exists · D-038 a
-timed session runs on a deadline and expiring finishes it rather than discarding the work.
-Previous session: D-029 mastery is derived from answer evidence and quantised before thresholds ·
+D-039 one review schedule, written by the domain · D-040 a flashcard does not credit mastery ·
+D-041 Review is a deck, not another quiz · D-042 the review queue belongs to the exam, not the track.
+Previous session: D-033 correctness is decided by the service from the question itself · D-034 one
+submitted answer is one transaction · D-035 the drill's ranking stays a ranking · D-036 Practice omits
+a mode it cannot honestly offer · D-037 "Try another like this" is offered only when the follow-up
+exists · D-038 a timed session runs on a deadline and expiring finishes it rather than discarding the
+work.
+Earlier session: D-029 mastery is derived from answer evidence and quantised before thresholds ·
 D-030 reference content is generated from concepts, not written twice · D-031 Learn's subject bar is
 accuracy and mastery is the line underneath · D-032 Continue Learning never recommends a lesson
 already mastered.

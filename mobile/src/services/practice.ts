@@ -16,6 +16,7 @@ import {
 } from '@/domain/exams/mastery';
 import type { ExamRuleConfig, Question, QuestionDifficulty, SubjectId } from '@/domain/exams/types';
 import { isCorrectChoice, taskKindForMode } from '@/domain/practice';
+import { nextReviewSchedule } from '@/domain/review';
 import { toIsoDate } from '@/domain/study-plan';
 import { createId } from '@/services/ids';
 
@@ -57,9 +58,6 @@ export interface StartedSession {
   /** True when the content bank could not serve the requested number of questions. */
   readonly shortfall: boolean;
 }
-
-const daysFromNow = (now: Date, days: number): string =>
-  new Date(now.getTime() + Math.max(0, days) * 86_400_000).toISOString();
 
 export const startSession = async ({
   repositories,
@@ -220,6 +218,9 @@ const saveMastery = async (
  * Schedules the concept for review. A miss creates or refreshes a concept-level item;
  * a correct answer advances an item that already exists. Correct answers never create
  * review work — that would make the queue grow with study rather than with mistakes.
+ *
+ * The arithmetic itself is `domain/review`'s, so an answer here and a card said "Got
+ * it" to in the review deck move the same due date.
  */
 const scheduleReview = async (
   repositories: Repositories,
@@ -230,50 +231,37 @@ const scheduleReview = async (
   levelIndex: number,
   now: Date,
 ): Promise<boolean> => {
-  const reviewPolicy = exam.studyPolicy.review;
   const nowIso = now.toISOString();
   const existing = await repositories.review.findByConcept(exam.id, conceptId, null);
 
-  if (!isCorrect) {
-    const intervalDays = Math.max(0, reviewPolicy.againIntervalDays);
-    const item: ReviewItemRecord = {
-      id: existing?.id ?? createId('review'),
-      examId: exam.id,
-      conceptId,
-      questionId: null,
-      source: 'mistake',
-      dueAt: daysFromNow(now, intervalDays),
-      intervalDays,
-      easeLevel: levelIndex,
-      lapses: (existing?.lapses ?? 0) + 1,
-      reviews: existing?.reviews ?? 0,
-      lastReviewedAt: existing?.lastReviewedAt ?? null,
-      createdAt: existing?.createdAt ?? nowIso,
-      updatedAt: nowIso,
-    };
-    await repositories.review.upsert(item, { transaction });
-    return existing === null;
-  }
+  if (isCorrect && existing === null) return false;
 
-  if (existing === null) return false;
+  const schedule = nextReviewSchedule({
+    policy: exam.studyPolicy.review,
+    outcome: isCorrect ? 'got-it' : 'again',
+    levelIndex,
+    reviews: existing?.reviews ?? 0,
+    lapses: existing?.lapses ?? 0,
+    now,
+  });
 
-  const intervals = reviewPolicy.gotItIntervalDays;
-  const intervalDays =
-    intervals[Math.min(levelIndex, Math.max(0, intervals.length - 1))] ??
-    reviewPolicy.againIntervalDays;
-  await repositories.review.upsert(
-    {
-      ...existing,
-      intervalDays,
-      easeLevel: levelIndex,
-      reviews: existing.reviews + 1,
-      lastReviewedAt: nowIso,
-      dueAt: daysFromNow(now, intervalDays),
-      updatedAt: nowIso,
-    },
-    { transaction },
-  );
-  return false;
+  const item: ReviewItemRecord = {
+    id: existing?.id ?? createId('review'),
+    examId: exam.id,
+    conceptId,
+    questionId: existing?.questionId ?? null,
+    source: existing?.source ?? 'mistake',
+    dueAt: schedule.dueAt,
+    intervalDays: schedule.intervalDays,
+    easeLevel: schedule.easeLevel,
+    lapses: schedule.lapses,
+    reviews: schedule.reviews,
+    lastReviewedAt: isCorrect ? nowIso : (existing?.lastReviewedAt ?? null),
+    createdAt: existing?.createdAt ?? nowIso,
+    updatedAt: nowIso,
+  };
+  await repositories.review.upsert(item, { transaction });
+  return existing === null;
 };
 
 /** Advances today's planned task of the kind this session answers for. */

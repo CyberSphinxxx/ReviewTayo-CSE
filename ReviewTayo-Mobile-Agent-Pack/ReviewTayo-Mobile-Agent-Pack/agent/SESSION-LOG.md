@@ -305,3 +305,45 @@ answer checking.
 ### Next session starts at
 Phase 10 — Review: the review scheduler, the Due queue, Again/Got It, mistakes, saved questions,
 concepts to revisit, history, the caught-up state and the tab's due badge.
+
+## Session 9 — 2026-10-08 — Phase 10
+### Phase 10 — Review (complete)
+- `src/domain/review/` holds the three things Review claims: the schedule (`schedule.ts` — the
+  exam's own `gotItIntervalDays` ladder indexed by mastery, `againIntervalDays` for a lapse, local-day
+  arithmetic for "Due tomorrow" and a counted lapse and review), the deck (`deck.ts` — one card per
+  due concept, front the concept's name and back its own summary) and what Review says about the
+  learner rather than about their queue (`progress.ts` — concepts to revisit, read from mastery
+  evidence, and the week's history, read from each item's own `lastReviewedAt`).
+- The Again / Got it arithmetic moved out of `services/practice` and into the domain, and the answer
+  writer now uses it (D-039): a drill answer and a card said "Got it" to move one due date. Grading a
+  card changes the schedule and nothing else — mastery stays answer-derived (D-040) — and Review is a
+  deck rather than another quiz, because the concept has already been answered and got wrong once
+  (D-041). The queue belongs to the exam rather than the track, so the badge, Home's line and the deck
+  count the same rows (D-042).
+- `src/services/review.ts` is the one place the queue is read and a card is graded: `loadReviewQueue`
+  (oldest first, capped by `dailyDueLimit`, with the total so the screen can admit the remainder),
+  `loadReviewOverview` (the counts and the duration Home already quotes), `gradeReviewItem` and
+  `loadReviewList` for the four lists behind the rows.
+- The tab leads with the number: review due today, what it costs, one action. When nothing is due it
+  says "You're caught up." once instead of drawing an empty queue, and when a list is empty it says
+  which list it is rather than showing a blank screen. `review-list` carries all four of Review's
+  lists as one shape driven by a parameter — a title, what it belongs to and one supporting line —
+  and an unknown parameter lands on Mistakes rather than on an error.
+- Tests: 34 suites / 484 tests — 19 domain cases (the ladder, lapses, due-date wording, the deck,
+  revisit ordering and the history window), 13 service cases (the queue, the daily cap, grading, the
+  schedule shared with the answer writer, the four lists) and 15 integration cases over the real
+  router and a seeded database (the count and its duration, the caught-up state, the rows, the badge
+  agreeing with the number, reveal-then-grade, Again and Got it writing the right schedule, walking a
+  deck to its completion copy, both themes, every list, and opening the concept behind a card).
+
+### Verification evidence
+| Command (from `mobile/`) | Result |
+|---|---|
+| `npx tsc --noEmit` | PASS |
+| `npx eslint .` | PASS — 0 errors, 0 warnings |
+| `npx prettier --check .` | PASS |
+| `npx jest` | PASS — 34 suites, 484 tests |
+| `npx expo export --platform android` | PASS — Hermes bundle emitted |
+
+### Next session starts at
+Phase 11 — Progress: Study Score, Needs Attention, subject accuracy, concept mastery.

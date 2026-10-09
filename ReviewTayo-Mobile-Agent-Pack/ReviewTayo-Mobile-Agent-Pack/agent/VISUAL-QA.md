@@ -72,5 +72,16 @@ Do not require pixel-perfect HTML matching. Require faithful design intent and n
   recommendation, and a timed session counting down — at 360×640 and 390×844, Standard and Extra
   Large. A device pass is also the only way to confirm the clock keeps honest time when the app is
   backgrounded mid-session.
+- Phase 10: Review exists in both themes and every state is asserted from the rendered tree and the
+  database behind it — the count with its duration, the caught-up state with the resting owl, the
+  four rows, a card face and its revealed answer, Again and Got it writing the schedule they claim,
+  the completion copy and the four lists. What automated tests cannot judge is what this screen is
+  built on: whether the card reads as one calm, legible object at 360 px with the answer long enough
+  to need scrolling, whether the Again / Got it pair is comfortably reachable one-handed right where
+  the thumb already is, whether the 96 px count is a statement rather than a shout at Extra Large
+  text, and whether the four rows still read as a quiet list under it. Capture Review (light and
+  dark), the caught-up state, a card face, a revealed card, the completion state and both a full and
+  an empty list — at 360×640 and 390×844, Standard and Extra Large. A device pass is also the only
+  way to confirm the deck still feels like a deck when a real thumb is tapping through it.
 - Screens are placeholders until their phases (Home 7, Learn 8, Practice/Quiz 9, Review 10,
   Progress 11, Mock 12); captures are collected as each phase lands.

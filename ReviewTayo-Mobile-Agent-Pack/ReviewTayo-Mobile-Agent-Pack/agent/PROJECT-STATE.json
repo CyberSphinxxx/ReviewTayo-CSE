@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
-  "phase": "10-review",
-  "currentTask": "Phase 10 — Review: review scheduler, Due queue, Again/Got It, mistakes, saved questions, concepts to revisit, history, caught-up state and the tab due badge",
-  "lastCompletedTask": "phase-09-practice-quiz",
-  "nextAction": "Build Review on the data Phase 9 already writes: the due queue with Again/Got It, mistakes, saved questions, concepts to revisit, history and the caught-up state, with the tab badge reading the same due count",
+  "phase": "11-progress",
+  "currentTask": "Phase 11 — Progress: Study Score, Needs Attention, subject accuracy and concept mastery",
+  "lastCompletedTask": "phase-10-review",
+  "nextAction": "Build Progress from the same derived mastery and answer evidence Review and Practice use: the Study Score with its week-over-week line, Needs Attention with a drill that says what to fix, subject accuracy and concept mastery",
   "lastSuccessfulBuild": "expo export --platform android (PASS)",
   "failingTests": [],
   "testSummary": {
-    "suites": 31,
-    "tests": 437,
-    "passed": 437,
+    "suites": 34,
+    "tests": 484,
+    "passed": 484,
     "failed": 0
   },
   "externalBlockers": [
@@ -40,7 +40,8 @@
     "06-onboarding",
     "07-home",
     "08-learn",
-    "09-practice-quiz"
+    "09-practice-quiz",
+    "10-review"
   ],
   "contentStats": {
     "cseQuestions": 88,
@@ -59,7 +60,9 @@
     "phase-8: Learn's light/dark fidelity is asserted against the theme tokens and the rendered styles; device or emulator captures of the reference pages remain pending (no Android SDK in this environment), tracked in VISUAL-QA.md",
     "phase-8: quick sheets are one concept summary per subject; richer per-topic sheets are a content task, and the concept page is the shape they would arrive in",
     "phase-9: the quiz's wrong-answer recovery, bookmark and recommendation flows are covered by integration tests over the real router and a seeded database; device captures of the Practice tab, the quiz in both themes and a timed session are tracked in VISUAL-QA.md",
-    "phase-9: the drill ranking's weights (weakness/due review/unseen/low coverage/recent lesson) are asserted from the domain, not from a device; tuning them is a content-and-policy task once real answer volume exists"
+    "phase-9: the drill ranking's weights (weakness/due review/unseen/low coverage/recent lesson) are asserted from the domain, not from a device; tuning them is a content-and-policy task once real answer volume exists",
+    "phase-10: Review's deck, grading and four lists are covered by integration tests over the real router and a seeded database; device captures of the count, a card face and revealed, and the four lists are tracked in VISUAL-QA.md",
+    "phase-10: review history counts distinct concepts reviewed in the last seven days from each item's lastReviewedAt; an append-only review event log (for streaks of review work rather than of concepts) is not needed until Progress or analytics asks for it"
   ],
   "environment": {
     "node": "24.16.0",

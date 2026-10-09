@@ -1,11 +1,25 @@
 # Agent Handoff
 
 ## Current phase
-Phases 0–9 complete. Starting Phase 10 (Review).
+Phases 0–10 complete. Starting Phase 11 (Progress).
 
 ## Current task
-Phase 10 — Review: the review scheduler, the Due queue, Again/Got It, mistakes, saved questions,
-concepts to revisit, review history, the caught-up state and the tab's due badge.
+Phase 11 — Progress: Study Score, Needs Attention, subject accuracy and concept mastery.
+
+## Files changed (Phase 10)
+- `/mobile/src/domain/review/**` — `schedule.ts` (the exam's interval ladder, lapses, local-day
+  due-date arithmetic), `deck.ts` (one card per due concept, and how a deck ends) and `progress.ts`
+  (concepts to revisit from mastery evidence, and the week's history from `lastReviewedAt`).
+- `/mobile/src/services/practice.ts` — the answer writer now schedules through
+  `domain/review.nextReviewSchedule`, so an answer and a graded card move one due date (D-039).
+- `/mobile/src/services/review.ts` — `loadReviewQueue`, `loadReviewOverview`, `gradeReviewItem` and
+  `loadReviewList` for the four lists.
+- `/mobile/src/features/review/**` — `useReview` (the tab, reloaded on focus), `useReviewSession`
+  (one card at a time, a write before the deck moves) and the section components.
+- `/mobile/app/(tabs)/review.tsx`, `/mobile/app/review-session.tsx`, `/mobile/app/review-list.tsx` —
+  the real tab, the deck and the four lists, with their `Stack.Screen` entries in `app/_layout.tsx`.
+- `/mobile/tests/domain/review.test.ts`, `/mobile/tests/services/review.test.ts`,
+  `/mobile/tests/app/review-screen.test.tsx` — 47 new cases.
 
 ## Files changed (Phase 9)
 - `/mobile/src/domain/practice/**` — `drill.ts` (concept weighting with the exam's own
@@ -68,7 +82,7 @@ cd mobile
 npx tsc --noEmit                      # PASS
 npx eslint .                          # PASS (0 errors, 0 warnings)
 npx prettier --check .                # PASS
-npx jest                              # PASS — 31 suites, 437 tests
+npx jest                              # PASS — 34 suites, 484 tests
 npx expo export --platform android    # PASS — Hermes bundle emitted
 ```
 
@@ -82,25 +96,26 @@ None.
 N/A.
 
 ## Next exact action
-1. Build Review (`mobile/app/(tabs)/review.tsx`) from the approved prototype on the data Phase 9
-   already writes: the due queue, mistakes, saved questions and concepts to revisit.
-2. Add the review domain service over the existing review repository: due ordering, the interval a
-   Got It earns and the relapse an Again records, so the scheduler is testable without a screen.
-3. Make the tab's due badge read the same count as the queue, and cover the caught-up state and
-   review history.
-4. Tests: scheduling and interval arithmetic, the Again/Got It flow against a real database, the
-   empty and caught-up states, both themes and routing; then run the gate, update agent docs and
-   commit.
+1. Build Progress (`mobile/app/(tabs)/progress.tsx`) from the approved prototype on the same derived
+   mastery and answer evidence: the Study Score with its week-over-week line, Needs Attention with a
+   drill that says what to fix, subject accuracy and concept mastery.
+2. Add the progress domain over `domain/sessions` evidence and `domain/exams/mastery`: a score that
+   is a claim about study behaviour (not a grade), a needs-attention pick that shares
+   `weakestSubject` with Practice, and the per-concept list the metric is derived from.
+3. Make Needs Attention's drill reuse the Practice catalogue's request rather than inventing a
+   second one, and cover the empty and no-history states honestly.
+4. Tests: score arithmetic and its bands, needs-attention ordering, the concept list, both themes and
+   routing; then run the gate, update agent docs and commit.
 
 ## Decisions made
-D-033 … D-038 (see `agent/DECISIONS.md`): correctness decided by the service from the question · one
-submitted answer is one transaction · the drill's ranking stays a ranking · Practice omits a mode it
-cannot honestly offer · "Try another like this" only when the follow-up exists · a timed session runs
-on a deadline and expiring finishes it.
-Previous session: D-029 … D-032 (mastery derived from evidence and quantised before thresholds ·
-reference content generated from concepts · the Subjects bar is accuracy with mastery underneath ·
-Continue Learning never recommends a mastered lesson). Earlier: D-019 … D-028 (appearance
-vocabulary, atomic onboarding commit, Home derives everything, streak semantics, resume dismissal).
+D-039 … D-042 (see `agent/DECISIONS.md`): one review schedule written by the domain · a flashcard does
+not credit mastery · Review is a deck, not another quiz · the review queue belongs to the exam, not
+the track.
+Previous session: D-033 … D-038 (correctness decided by the service from the question · one submitted
+answer is one transaction · the drill's ranking stays a ranking · Practice omits a mode it cannot
+honestly offer · "Try another like this" only when the follow-up exists · a timed session runs on a
+deadline and expiring finishes it). Earlier: D-019 … D-032 (appearance vocabulary, atomic onboarding
+commit, Home derives everything, streak semantics, resume dismissal, mastery derived from evidence).
 ADRs: 001 integration, 002 database port, 003 contract-first sync.
 
 ## New blockers
