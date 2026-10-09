@@ -4,7 +4,6 @@ import {
   allActions,
   answerOutcome,
   CORRECT_HEADLINE,
-  describeAccuracyPercent,
   describeMasteryChange,
   describeScore,
   describeSessionSummary,
@@ -19,7 +18,12 @@ import {
   weightConcepts,
   WRONG_HEADLINE,
 } from '@/domain/practice';
-import type { ConceptEvidence, SubjectAccuracy } from '@/domain/sessions';
+import {
+  accuracyOf,
+  describeAccuracyPercent,
+  type ConceptEvidence,
+  type SubjectAccuracy,
+} from '@/domain/sessions';
 
 import { loadCsePack } from '@tests/utils/exam-fixtures';
 
@@ -176,8 +180,8 @@ describe('weakest area', () => {
   });
 
   it('reports the accuracy it is judging', () => {
-    expect(describeAccuracyPercent(accuracy('verbal-ability', 25, 16))).toBe('64%');
-    expect(describeAccuracyPercent(accuracy('verbal-ability', 0, 0))).toBe('0%');
+    expect(describeAccuracyPercent(accuracyOf(accuracy('verbal-ability', 25, 16)))).toBe('64%');
+    expect(describeAccuracyPercent(accuracyOf(accuracy('verbal-ability', 0, 0)))).toBe('0%');
   });
 });
 

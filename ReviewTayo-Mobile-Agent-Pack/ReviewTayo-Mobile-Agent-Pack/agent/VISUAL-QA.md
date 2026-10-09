@@ -83,5 +83,16 @@ Do not require pixel-perfect HTML matching. Require faithful design intent and n
   dark), the caught-up state, a card face, a revealed card, the completion state and both a full and
   an empty list — at 360×640 and 390×844, Standard and Extra Large. A device pass is also the only
   way to confirm the deck still feels like a deck when a real thumb is tapping through it.
-- Screens are placeholders until their phases (Home 7, Learn 8, Practice/Quiz 9, Review 10,
-  Progress 11, Mock 12); captures are collected as each phase lands.
+- Phase 11: Progress exists in both themes and every state is asserted from the rendered tree and the
+  database behind it — the score with its trend and sparkline, the needs-attention card and the drill
+  it starts, the four subject bars, the mastery row and both mastery lists, the CSE journey at four
+  horizons, this week's bars and its goal, and both mock states. What automated tests cannot judge is
+  what this screen lives on: whether the 88 px score with its curve reads as one editorial statement
+  rather than two competing blocks at 360 px, whether the seven week bars stay legible when one day is
+  six times another, whether the journey's five stopping points read as a timeline rather than a list,
+  and whether "0 of 22 mastered · 1 started" still reads as encouragement at Extra Large text. Capture
+  Progress (light and dark), the score at the top of a scrolled screen, the needs-attention card, the
+  subject bars, the journey with a phase in progress, this week with and without a target, the mastery
+  list for one subject, and the empty recent-mock row — at 360×640 and 390×844, Standard and Extra
+  Large.
+- The mock screen is still a placeholder until Phase 12; captures are collected as each phase lands.

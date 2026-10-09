@@ -347,3 +347,63 @@ concepts to revisit, history, the caught-up state and the tab's due badge.
 
 ### Next session starts at
 Phase 11 — Progress: Study Score, Needs Attention, subject accuracy, concept mastery.
+
+## Session 10 — 2026-10-09 — Phase 11
+### Phase 11 — Progress (complete)
+- `src/domain/progress/` is the five things Progress claims, each from evidence the app already had:
+  the score (`score.ts` — three answer-derived ingredients over a seven-day window, with the same
+  arithmetic giving last week and the six-week curve; D-043), the subject to work on
+  (`needs-attention.ts` — Practice's own `weakestSubject` judgement, D-044), mastery
+  (`mastery.ts` — the whole track, least mastered first, unanswered concepts leading; D-045), the
+  exam's phases (`journey.ts`), this week (`week.ts` — Monday-first bars, ahead-of-today days marked as
+  ahead, and a weekly goal of the learner's own `dailyGoal × chosen study days`; D-046) and the last
+  simulation (`mock.ts` — the newest completed mock, never an unfinished one).
+- `src/services/progress.ts` composes them over one read: `loadProgressOverview` (score, needs
+  attention, subject accuracy reused from Learn's own derivation, mastery summary, journey, week, mock)
+  and `loadConceptMastery` (the same rows narrowed to one subject). Subject accuracy is deliberately
+  *not* recomputed: Progress and Learn read `subjectProgressRows`, so the two screens cannot disagree.
+- The screen follows the reference: the Study Score with its week-over-week line and a sparkline of the
+  six weeks behind it, Needs Attention with the one action that fixes it, subject accuracy bars, mastery
+  one layer below them, the CSE journey, this week and the last mock. The two sections that need history
+  a learner may not have yet (needs attention, the last mock) are absent or say so rather than inventing
+  a number, and `/progress-list` is the one drill-down behind both the mastery row and any subject row.
+- `RTSparkline` is a new design-system primitive (a bar, ring and now a line), drawn in a fixed
+  coordinate space that scales to its container, announced to assistive technology with its own series,
+  and it is on the design-system dev screen beside the other two.
+- Tests: 37 suites / 538 tests — 31 domain cases (the score's ingredients and window edges, the series
+  and all four trend directions, needs-attention emptiness, mastery ordering and summary, the journey at
+  four horizons and with no date, the week's bars and goal, the mock row), 11 service cases over a real
+  database and real answers (an empty learner, the score moving with answers, subject accuracy, the
+  weakest subject, the mastery summary, the weekly target, the journey, the mock row, the concept list
+  and its track scoping, mastery moving) and 12 integration cases over the real router (every section,
+  the reload on focus, needs attention appearing only once it can be honest and starting the right
+  drill, both mastery lists, the week, the journey, both mock states, the dark theme).
+### Audit findings fixed this session
+- `describeAccuracyPercent` existed twice, in `domain/practice/drill.ts` (row-shaped) and
+  `domain/review/progress.ts` (number-shaped), exported from both barrels under one name. It now lives
+  once in `domain/sessions/evidence.ts` (the shared evidence module) and every caller — Practice's
+  catalogue, Review's revisit list and Progress — reads that one implementation, so "64% accuracy"
+  means the same thing wherever it is printed. Call sites and the two affected suites were updated.
+- Needs Attention's card was briefly one accessible node containing the Practice button, which would
+  have hidden the button from a screen reader; the label now lives on the text and the action stays its
+  own element.
+- The score's windows are half-open (`[from, to)`), so an answer at exactly the read instant falls
+  outside the current week. In practice the write always precedes the read, and the service test reads a
+  second after it answers rather than pretending the edge does not exist.
+- Content observation, not a defect: the pack has four questions per concept, and mastery's evidence
+  floor is five, so a concept can reach `Strong` but not `Mastered` on today's bank (asserted in
+  `tests/services/progress.test.ts`). More questions per concept is a content task, already tracked.
+
+### Verification evidence
+| Command (from `mobile/`) | Result |
+|---|---|
+| `npx tsc --noEmit` | PASS |
+| `npx eslint .` | PASS — 0 errors, 0 warnings |
+| `npx prettier --check .` | PASS |
+| `npx jest` | PASS — 37 suites, 538 tests |
+| `npx expo export --platform android` | PASS — Hermes bundle emitted |
+
+### Next session starts at
+Phase 12 — Mock Exam: mock setup, the Professional and Sub-Professional blueprints, the timer, answer
+persistence, pause/resume, submission, the result score, the subject breakdown and the recommended next
+plan.

@@ -1,8 +1,13 @@
 import { blueprintTotalItems, formatDuration, getSubject, resolveTiming } from '@/domain/exams';
 import type { ExamRuleConfig, StudyPolicy } from '@/domain/exams/types';
-import { smartDrillSpec, type SubjectAccuracy } from '@/domain/sessions';
+import {
+  accuracyOf,
+  describeAccuracyPercent,
+  smartDrillSpec,
+  type SubjectAccuracy,
+} from '@/domain/sessions';
 
-import { describeAccuracyPercent, weakestSubject } from './drill';
+import { weakestSubject } from './drill';
 import type { PracticeAction, PracticeCatalogue } from './types';
 
 /**
@@ -58,7 +63,7 @@ export const practiceCatalogue = ({
       id: 'weakest-area',
       mode: 'weakest-area',
       title: 'Weakest Area',
-      meta: `${weakestName} · ${describeAccuracyPercent(weakest)}`,
+      meta: `${weakestName} · ${describeAccuracyPercent(accuracyOf(weakest))}`,
       description: WEAKEST_AREA_DESCRIPTION,
       count: Math.max(1, policy.drillSize),
       subjectIds: [weakest.subjectId],

@@ -1,5 +1,5 @@
 import { View, type StyleProp, type ViewStyle } from 'react-native';
-import Svg, { Circle } from 'react-native-svg';
+import Svg, { Circle, Polyline } from 'react-native-svg';
 
 import { useTheme } from '@/theme';
 
@@ -7,8 +7,10 @@ import { useTheme } from '@/theme';
  * Progress primitives.
  *
  * `bar` is used for subject accuracy and plan progress; `ring` mirrors the
- * reference prototype's daily-goal ring. Both expose their value to assistive
- * technology through an adjustable accessibility value.
+ * reference prototype's daily-goal ring; `sparkline` draws the shape of a short
+ * series (the Study Score's last six weeks). All of them expose their value to
+ * assistive technology rather than being decoration, and none of them decides what
+ * the value means.
  */
 
 const clamp01 = (value: number): number =>
@@ -72,6 +74,69 @@ export const RTProgressBar = ({
           backgroundColor: fill,
         }}
       />
+    </View>
+  );
+};
+
+export interface RTSparklineProps {
+  /** Points in reading order, oldest first; each is drawn against `max`. */
+  readonly values: readonly number[];
+  /** The value the top of the plot area represents. */
+  readonly max?: number;
+  readonly height?: number;
+  readonly label?: string;
+  readonly style?: StyleProp<ViewStyle>;
+  readonly testID?: string;
+}
+
+/**
+ * A tiny line chart of a short series, drawn in a fixed 300×50 coordinate space that
+ * scales to whatever width it is given. Values are already 0–`max`; the primitive
+ * neither sorts nor smooths them, so the curve is exactly the numbers it was handed.
+ */
+export const RTSparkline = ({
+  values,
+  max = 100,
+  height = 56,
+  label,
+  style,
+  testID,
+}: RTSparklineProps) => {
+  const theme = useTheme();
+  const ceiling = max > 0 ? max : 100;
+  const width = 300;
+  const plotHeight = 50;
+  const padding = 3;
+  const usable = plotHeight - padding * 2;
+
+  const points = values
+    .map((value, index) => {
+      if (!Number.isFinite(value)) return null;
+      const x = values.length <= 1 ? width / 2 : (index / (values.length - 1)) * width;
+      const ratio = Math.min(1, Math.max(0, value / ceiling));
+      return `${x.toFixed(2)},${(plotHeight - padding - ratio * usable).toFixed(2)}`;
+    })
+    .filter((point): point is string => point !== null)
+    .join(' ');
+
+  return (
+    <View
+      testID={testID}
+      accessible
+      accessibilityRole="image"
+      accessibilityLabel={label ?? `Trend of ${values.length} points`}
+      style={[{ width: '100%', height }, style]}
+    >
+      <Svg width="100%" height={height} viewBox={`0 0 ${width} ${plotHeight}`}>
+        <Polyline
+          points={points}
+          fill="none"
+          stroke={theme.colors.accentText}
+          strokeWidth={3}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </Svg>
     </View>
   );
 };

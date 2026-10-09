@@ -12,7 +12,6 @@ export {
   HISTORY_WINDOW_DAYS,
   REVISIT_BELOW,
   buildReviewHistory,
-  describeAccuracyPercent,
   describeHistoryLine,
   describeReviewedWhen,
   revisitConcepts,

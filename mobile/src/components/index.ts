@@ -9,7 +9,7 @@ export { RTChip, type RTChipProps } from './primitives/RTChip';
 export { RTChoice, type ChoiceMarker } from './primitives/RTChoice';
 export { RTIconButton, type IconButtonVariant } from './primitives/RTIconButton';
 export { RTListGroup, RTListRow } from './primitives/RTListRow';
-export { RTProgressBar, RTProgressRing } from './primitives/RTProgress';
+export { RTProgressBar, RTProgressRing, RTSparkline } from './primitives/RTProgress';
 export { RTSegmentedControl, type SegmentedOption } from './primitives/RTSegmentedControl';
 export { RTStateView, RTLoadingView, type StateViewKind } from './primitives/RTStateView';
 export { RTStat, RTStatRow } from './primitives/RTStat';

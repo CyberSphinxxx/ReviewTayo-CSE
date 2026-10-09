@@ -1,17 +1,16 @@
 # Project State
 
-**Phase:** 10 — Review (complete) → starting Phase 11 — Progress
-**Current task:** Phase 11 — Progress (Study Score, Needs Attention, subject accuracy, concept
-mastery)
-**Last completed task:** Phase 10 Review — the spaced-repetition schedule shared with the answer
-writer, the due queue and its daily cap, the Again/Got it card deck, mistakes, saved questions,
-concepts to revisit, the week's history and the caught-up state, all reading one queue with the tab
-badge.
-**Next action:** Build Progress from the approved prototype on the same derived mastery and answer
-evidence: the Study Score with its week-over-week line, Needs Attention with a drill that says what to
-fix, subject accuracy and concept mastery.
+**Phase:** 11 — Progress (complete) → starting Phase 12 — Mock Exam
+**Current task:** Phase 12 — Mock Exam (blueprints, timer, pause/resume, submission, result)
+**Last completed task:** Phase 11 Progress — the Study Score with its week-over-week line and six-week
+curve, Needs Attention reusing Practice's own weakest-area judgement, subject accuracy read from
+Learn's derivation, concept mastery least-mastered-first, the CSE journey, this week's activity against
+the learner's own goal, and the last completed mock.
+**Next action:** Build the mock exam on the exam engine's existing blueprint: setup per track, the
+timer with pause/resume, answer persistence, submission, the result score with its subject breakdown
+and the recommended next plan Progress already links to.
 **Last successful build:** `npx expo export --platform android` → PASS (Hermes bundle)
-**Known failing tests:** None. `npx jest` → 484 passed / 484.
+**Known failing tests:** None. `npx jest` → 538 passed / 538.
 **External blockers:** Live Google OAuth credentials and a production API endpoint (verify-only;
 everything else works without them).
 **Internal blockers:** None.
@@ -22,7 +21,7 @@ everything else works without them).
 | `npm run typecheck` | PASS |
 | `npm run lint` | PASS (0 errors, 0 warnings) |
 | `npm run format:check` | PASS |
-| `npm test` | PASS — 484 tests across 34 suites |
+| `npm test` | PASS — 538 tests across 37 suites |
 | `npx expo export --platform android` | PASS |
 
 ## Repository reality (Phase 0 audit)
@@ -50,9 +49,13 @@ everything else works without them).
 - do not refactor the web app merely to share code.
 
 ## Decisions added this session
-D-039 one review schedule, written by the domain · D-040 a flashcard does not credit mastery ·
-D-041 Review is a deck, not another quiz · D-042 the review queue belongs to the exam, not the track.
-Previous session: D-033 correctness is decided by the service from the question itself · D-034 one
+D-043 the Study Score is a mark, not a forecast · D-044 Progress names the subject Practice would have
+offered · D-045 concept mastery is listed least mastered first, unanswered concepts included · D-046
+the weekly goal is the learner's own, and only exists if they set one.
+Previous session: D-039 one review schedule, written by the domain · D-040 a flashcard does not credit
+mastery · D-041 Review is a deck, not another quiz · D-042 the review queue belongs to the exam, not the
+track.
+Earlier session: D-033 correctness is decided by the service from the question itself · D-034 one
 submitted answer is one transaction · D-035 the drill's ranking stays a ranking · D-036 Practice omits
 a mode it cannot honestly offer · D-037 "Try another like this" is offered only when the follow-up
 exists · D-038 a timed session runs on a deadline and expiring finishes it rather than discarding the
@@ -77,4 +80,6 @@ D-012 route placement · D-013 exam phase derived. ADRs: 001 integration, 002 da
 ## Content note
 88 authored CSE questions across 22 concepts (4 per concept, every concept covered in both
 tracks that examine it). Expanding the bank is a content task tracked in HANDOFF.md; nothing in
-the engine depends on the current volume.
+the engine depends on the current volume. One consequence is now visible on Progress: mastery's
+evidence floor is five answers, so with four questions per concept a concept can reach `Strong` but
+not `Mastered` — the ladder is correct and simply waiting for more questions per concept.

@@ -1,10 +1,40 @@
 # Agent Handoff
 
 ## Current phase
-Phases 0–10 complete. Starting Phase 11 (Progress).
+Phases 0–11 complete. Starting Phase 12 (Mock Exam).
 
 ## Current task
-Phase 11 — Progress: Study Score, Needs Attention, subject accuracy and concept mastery.
+Phase 12 — Mock Exam: blueprints, timer, pause/resume, submission and the result breakdown.
+
+## Next exact action
+Build `/mobile/app/mock.tsx` for real on the engine that already exists: `resolveBlueprint` and
+`resolveTiming` give the Professional (170 items · 3h 10m) and Sub-Professional (165 · 2h 40m)
+sessions, `buildMockSessionPlan` orders the questions inside it, and `repositories.mock` already
+stores the session and its items with a wall-clock deadline. Then the result: `summarizeMock` for the
+score, the subject breakdown from the same blueprint, and one recommended next plan. Progress's
+"Recent mock" row already reads the newest completed session and opens `/mock`, so finishing a mock
+should make that row appear without any change to Progress.
+
+## Files changed (Phase 11)
+- `/mobile/src/domain/progress/**` — `score.ts` (the Study Score's three ingredients, its weekly
+  series and its trend), `needs-attention.ts` (Practice's own weakest-area judgement, named),
+  `mastery.ts` (the track's concepts least mastered first, with the summary above them), `journey.ts`
+  (the exam's phases as done / current / upcoming), `week.ts` (Monday-first bars, ahead-of-today days
+  and the learner's own weekly target) and `mock.ts` (the newest completed mock, never an unfinished
+  one).
+- `/mobile/src/domain/sessions/evidence.ts` — `describeAccuracyPercent` moved here from the two
+  copies in `domain/practice` and `domain/review`, so every screen prints one format (audit fix).
+- `/mobile/src/services/progress.ts` — `loadProgressOverview` (one read for the whole tab) and
+  `loadConceptMastery` (the same rows narrowed to one subject). Subject accuracy is Learn's own
+  `subjectProgressRows`, reused rather than recomputed.
+- `/mobile/src/features/progress/**` — `useProgress` (the tab, reloaded on focus), `useConceptMastery`
+  (the drill-down) and the section components.
+- `/mobile/src/components/primitives/RTProgress.tsx` — `RTSparkline`, the third chart primitive, also
+  shown on `app/dev/design-system.tsx`.
+- `/mobile/app/(tabs)/progress.tsx` and `/mobile/app/progress-list.tsx` — the real tab and its one
+  drill-down, with the `Stack.Screen` entry in `app/_layout.tsx`.
+- `/mobile/tests/domain/progress.test.ts`, `/mobile/tests/services/progress.test.ts`,
+  `/mobile/tests/app/progress-screen.test.tsx` — 54 new cases.
 
 ## Files changed (Phase 10)
 - `/mobile/src/domain/review/**` — `schedule.ts` (the exam's interval ladder, lapses, local-day

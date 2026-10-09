@@ -37,3 +37,16 @@ export const evidenceAccuracy = (evidence: ConceptEvidence | undefined): number 
   const attempts = attemptsOf(evidence);
   return attempts <= 0 ? 0 : Math.max(0, evidence?.correctCount ?? 0) / attempts;
 };
+
+/**
+ * `64%` — an accuracy fraction as every screen writes it.
+ *
+ * One implementation, because "64% accuracy" appears on Learn, Practice, Review and
+ * Progress; two screens rounding the same fraction differently would look like a bug
+ * in the learner's own history. Values outside 0–1 are clamped, so a caller that has
+ * already divided the wrong way round shows a bounded number rather than `140%`.
+ */
+export const describeAccuracyPercent = (accuracy: number): string => {
+  const clamped = Number.isFinite(accuracy) ? Math.min(1, Math.max(0, accuracy)) : 0;
+  return `${Math.round(clamped * 100)}%`;
+};

@@ -273,14 +273,45 @@ Status legend:
   the real router and a seeded database. Device captures are tracked in VISUAL-QA.md.)*
 
 ## Phase 11 — Progress
-- [ ] Study Score.
-- [ ] Needs Attention.
-- [ ] subject accuracy.
-- [ ] concept mastery.
-- [ ] CSE Journey.
-- [ ] weekly goal/activity.
-- [ ] recent mock.
-- [ ] Progress tests.
+- [x] Study Score. *(`domain/progress/score.ts`: 0–100 from three answer-derived ingredients —
+  accuracy, how much of the syllabus was touched, and how many of the week's days had work in them —
+  with the exam's own answers as the only input. It is explicitly not a pass probability, and the
+  same arithmetic run over any seven-day window gives the trend and the six-week curve without
+  storing anything (D-043).)*
+- [x] Needs Attention. *(`domain/progress/needs-attention.ts` reuses Practice's own `weakestSubject`
+  over the same `weakestAreaMinimumAttempts` rule, so Progress names the subject Practice would have
+  offered; `null` rather than a guess for a learner without that many answers, and the section is then
+  absent (D-044). Its single action starts `weakest-area` filtered to that subject.)*
+- [x] subject accuracy. *(`services/progress.ts` maps Learn's own `subjectProgressRows`, so the
+  accuracy bar on Progress and the accuracy bar on Learn can never disagree; each row opens that
+  subject's concepts.)*
+- [x] concept mastery. *(`domain/progress/mastery.ts`: the track's whole syllabus, least mastered
+  first — an unanswered concept leads, because not knowing something is the largest gap — with level,
+  accuracy and attempts behind each row, plus a summary counting `Strong` and above as solid. The
+  drill-down is `/progress-list` (one row opens `/concept`), and mastery is still answer-derived
+  (D-045).)*
+- [x] CSE Journey. *(`domain/progress/journey.ts` walks the exam's own `journeyPhases` in presentation
+  order and marks done / current / upcoming from `resolveExamPhase`; a phase list is content, so an
+  exam with three phases or seven gets a correct timeline, and no exam date places nobody rather than
+  guessing.)*
+- [x] weekly goal/activity. *(`domain/progress/week.ts`: Monday-first bars of the learner's own
+  activity against their daily goal, the days ahead marked as ahead rather than missed, and a weekly
+  target of `dailyGoal × chosen study days` (D-046) with the planned days flagged in each bar's own
+  label.)*
+- [x] recent mock. *(`domain/progress/mock.ts` reports the newest completed mock from its stored
+  session — an unfinished or expired attempt is not a result, and belongs to Home's resume card — and
+  the row falls back to "No mock exam yet" opening `/mock` rather than showing a score that does not
+  exist.)*
+- [x] Progress tests. *(`tests/domain/progress.test.ts` — 31 cases (the score's three ingredients,
+  window edges, the series, all four trend directions, needs-attention emptiness, mastery ordering
+  and summary, the journey at four horizons and with no date, the week's bars and goal, the mock row);
+  `tests/services/progress.test.ts` — 11 cases over a real database and real answers (the empty
+  learner, the score moving, subject accuracy, the weakest subject, mastery summaries, the weekly
+  target, the journey, the mock row, the concept list and its track scoping);
+  `tests/app/progress-screen.test.tsx` — 12 cases over the real router (every section, the reload on
+  focus, needs-attention appearing only once it can be honest, the drill it starts, both mastery
+  lists, the week, the journey, both mock states, and the dark theme). Device captures are tracked in
+  VISUAL-QA.md.)*
 
 ## Phase 12 — Mock Exam
 - [ ] mock setup.

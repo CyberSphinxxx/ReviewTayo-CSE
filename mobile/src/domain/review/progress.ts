@@ -93,10 +93,6 @@ export const revisitConcepts = ({
     .map((entry) => entry.concept);
 };
 
-/** `64%` — accuracy as the screen shows it. */
-export const describeAccuracyPercent = (accuracy: number): string =>
-  `${Math.round(Math.max(0, Math.min(1, accuracy)) * 100)}%`;
-
 export interface ReviewHistoryEntry {
   readonly itemId: string;
   readonly conceptId: string;

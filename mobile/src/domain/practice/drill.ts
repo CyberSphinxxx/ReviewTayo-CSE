@@ -157,7 +157,3 @@ export const unmasteredConceptIds = (
     })
     .map((concept) => concept.id);
 };
-
-/** `64%` — the accuracy the weakest-area row shows. */
-export const describeAccuracyPercent = (row: SubjectAccuracy): string =>
-  row.answered <= 0 ? '0%' : `${Math.round((row.correct / row.answered) * 100)}%`;

@@ -5,7 +5,6 @@ import type { ExamRuleConfig } from '@/domain/exams/types';
 import {
   buildReviewDeck,
   buildReviewHistory,
-  describeAccuracyPercent,
   describeDueAt,
   describeInterval,
   describeLapses,
@@ -17,7 +16,7 @@ import {
   type ReviewHistory,
   type ReviewOutcome,
 } from '@/domain/review';
-import { reviewDueSpec } from '@/domain/sessions';
+import { describeAccuracyPercent, reviewDueSpec } from '@/domain/sessions';
 
 /**
  * Review.

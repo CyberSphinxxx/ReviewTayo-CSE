@@ -244,3 +244,33 @@ from a track the learner has since switched away from. The queue is the record o
 wrong; changing which exam they are sitting does not make yesterday's mistakes irrelevant, and
 filtering by track would silently leave due items that the badge kept counting. The one place the
 track does matter is "concepts to revisit", which is about the material being studied right now.
+
+## D-043 — The Study Score is a mark, not a forecast
+Progress puts one number on "how am I doing?" out of 100, and it is built only from what the app can
+see the learner do: the share of the window's answers that were right (weight 0.5), how much of the
+track's syllabus the window touched (0.35), and how many of the window's seven days had work in them
+(0.15). It is deliberately not a pass probability — the app has no calibrated model of the real
+examination, and a number presented as one would be a claim nobody could stand behind. Because the
+same arithmetic runs over any seven-day window, this week, last week and the six weeks behind them are
+all computed from the answer history that already exists; nothing is stored to draw the trend.
+
+## D-044 — Progress names the subject Practice would have offered
+Needs Attention reads the same `weakestSubject` judgement Practice has used since Phase 9, over the
+same subject accuracy and the same `weakestAreaMinimumAttempts` floor, and its one action starts the
+same `weakest-area` drill filtered to that subject. Two screens naming different weakest areas from one
+history would look like a bug in the learner's own record, and a learner without enough answers gets no
+section at all rather than a subject picked from noise.
+
+## D-045 — Concept mastery is listed least mastered first, unanswered concepts included
+The drill-down behind Progress is the track's whole syllabus rather than only what has been answered: a
+concept nobody has touched is the largest gap there is, so it leads the list, and an untouched concept
+reads "Not answered yet" instead of a confident 0%. Ordering is the derived level, then accuracy, then
+attempts, with the track's own order as the tie-break, so the list is stable between visits. Mastery
+itself stays answer-derived (D-029) — a focus or a review card never moves it (D-040).
+
+## D-046 — The weekly goal is the learner's own, and only exists if they set one
+This week's target is `dailyGoal × the study days the learner chose during onboarding`, and the line
+under the bars counts chosen days that actually had work in them ("3 of 5 study days"). No daily goal
+means no target, and the section shows the week's activity without inventing a bar to fill. Days ahead
+of today are drawn as ahead rather than as zeros, so a Wednesday is never presented as a missed day on
+a Monday.

@@ -44,6 +44,7 @@ const ThemedNavigator = () => {
         <Stack.Screen name="quiz" options={{ presentation: 'modal' }} />
         <Stack.Screen name="review-session" options={{ presentation: 'fullScreenModal' }} />
         <Stack.Screen name="review-list" />
+        <Stack.Screen name="progress-list" />
         <Stack.Screen name="mock" options={{ presentation: 'fullScreenModal' }} />
         <Stack.Screen name="dev/design-system" options={{ animation: 'slide_from_bottom' }} />
       </Stack>

@@ -1,7 +1,6 @@
 import {
   buildReviewDeck,
   buildReviewHistory,
-  describeAccuracyPercent,
   describeDeckCompletion,
   describeDueAt,
   describeHistoryLine,
@@ -16,7 +15,7 @@ import {
   revisitConcepts,
   type ScheduledReviewItem,
 } from '@/domain/review';
-import type { ConceptEvidence } from '@/domain/sessions';
+import { describeAccuracyPercent, type ConceptEvidence } from '@/domain/sessions';
 
 import { loadCsePack } from '@tests/utils/exam-fixtures';
 

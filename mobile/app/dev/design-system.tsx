@@ -9,6 +9,7 @@ import {
   RTChoice,
   RTProgressBar,
   RTProgressRing,
+  RTSparkline,
   RTSegmentedControl,
   RTStateView,
   RTStat,
@@ -113,6 +114,10 @@ export default function DesignSystemScreen() {
         <RTProgressRing value={0.4} size={72} label="Daily goal">
           <RTText role="meta">4/10</RTText>
         </RTProgressRing>
+        <RTSparkline
+          values={[38, 44, 41, 56, 63, 72]}
+          label="Study Score over the last six weeks"
+        />
       </View>
 
       <View style={{ paddingHorizontal: theme.spacing.xl, gap: theme.spacing.md }}>
