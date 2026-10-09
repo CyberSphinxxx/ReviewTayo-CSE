@@ -5,10 +5,11 @@ import type { ExamRuleConfig } from '@/domain/exams/types';
  * The most recent mock exam.
  *
  * Progress ends with the last full simulation, because that is the one number that
- * resembles the real thing. The row is read from the stored session — its item count
- * and score are already there — and an unfinished or expired mock is deliberately not
- * this section's business: an attempt the learner can still resume belongs to Home,
- * and an exam they abandoned is not a result to show them again.
+ * resembles the real thing. The row is read from the stored session — its item count and
+ * score are already there — and only a paper that was actually submitted counts: one the
+ * learner can still resume belongs to Home, and one they walked away from is not a result.
+ * A paper that ran out of time does count: the clock ending is the exam's decision, not an
+ * abandoned attempt, and the score it produced is real.
  */
 
 export const MOCK_ROW_TITLE = 'Full mock';
@@ -51,7 +52,11 @@ export interface RecentMockInput {
 
 export const recentMockResult = ({ exam, attempts }: RecentMockInput): RecentMock | null => {
   const completed = attempts
-    .filter((attempt) => attempt.status === 'completed' && attempt.completedAt !== null)
+    .filter(
+      (attempt) =>
+        (attempt.status === 'completed' || attempt.status === 'expired') &&
+        attempt.completedAt !== null,
+    )
     .sort((a, b) => (b.completedAt ?? '').localeCompare(a.completedAt ?? ''));
 
   const latest = completed[0];

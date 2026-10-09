@@ -95,4 +95,20 @@ Do not require pixel-perfect HTML matching. Require faithful design intent and n
   subject bars, the journey with a phase in progress, this week with and without a target, the mastery
   list for one subject, and the empty recent-mock row — at 360×640 and 390×844, Standard and Extra
   Large.
-- The mock screen is still a placeholder until Phase 12; captures are collected as each phase lands.
+- Phase 12: the mock exam exists in both themes and every state is asserted from the rendered tree and
+  the database behind it — the setup with its facts and sections (and, on today's bank, the shortfall
+  note), a running paper with its clock, choices, flag and grid, the pause panel, the submit summary,
+  the result with its score and passing mark, the section bars with the weakest named, the
+  recommendation card, and an expired paper submitted on the way in. What automated tests cannot judge
+  is what an examination screen lives on: whether the question, its four choices and the progress line
+  read as one calm column at 360 px with the clock and flag sharing the header, whether the grid reads
+  as a map of the paper rather than a wall of numbers at Extra Large text, whether the five-minute
+  low-time warning reads as a nudge rather than a panic, and whether the result's score and its
+  section bars look like one verdict and its evidence. Capture the mock setup (light and dark), a
+  running paper with a full clock, the same paper inside the five-minute warning, the grid open, the
+  pause panel, the submit summary, the result with a passing mark and with a section under the
+  threshold, and the recommendation card — at 360×640 and 390×844, Standard and Extra Large. A device
+  pass is also the only way to confirm the clock keeps honest time (and submits at zero) with the app
+  backgrounded mid-paper.
+- Phases 5–11 captures are still pending a device/emulator pass; the mock screen is no longer a
+  placeholder as of Phase 12, and captures are collected as each phase lands.

@@ -470,17 +470,27 @@ describe('recent mock', () => {
     expect(row?.subtitle).toBe('Professional · 68%');
   });
 
-  it('counts a mock that is not finished as no result at all', () => {
+  it('counts a mock that was never submitted as no result at all', () => {
     expect(
       recentMockResult({
         exam,
         attempts: [
           attempt({ status: 'in-progress', completedAt: null }),
-          attempt({ status: 'expired' }),
+          attempt({ status: 'paused', completedAt: null }),
         ],
       }),
     ).toBeNull();
     expect(recentMockResult({ exam, attempts: [] })).toBeNull();
+  });
+
+  it('counts a paper that ran out of time as a result', () => {
+    const row = recentMockResult({
+      exam,
+      attempts: [attempt({ id: 'expired', status: 'expired', correctCount: 51 })],
+    });
+
+    expect(row?.id).toBe('expired');
+    expect(row?.scorePercent).toBe(30);
   });
 
   it('scores an empty mock as zero rather than dividing by nothing', () => {

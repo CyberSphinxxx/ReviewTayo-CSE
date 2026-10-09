@@ -168,6 +168,7 @@ export class SqliteMockSessionRepository implements MockSessionRepository {
     if (patch.completedAt !== undefined) set('completed_at', patch.completedAt);
     if (patch.pausedAt !== undefined) set('paused_at', patch.pausedAt);
     if (patch.remainingSeconds !== undefined) set('remaining_seconds', patch.remainingSeconds);
+    if (patch.expiresAt !== undefined) set('expires_at', patch.expiresAt);
     if (patch.payload !== undefined) set('payload', jsonParam(patch.payload));
     if (assignments.length === 0) return;
 

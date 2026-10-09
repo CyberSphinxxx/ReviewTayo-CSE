@@ -274,3 +274,40 @@ under the bars counts chosen days that actually had work in them ("3 of 5 study 
 means no target, and the section shows the week's activity without inventing a bar to fill. Days ahead
 of today are drawn as ahead rather than as zeros, so a Wednesday is never presented as a missed day on
 a Monday.
+
+## D-047 — A mock counts through the same answer writer practice uses
+While the paper is running, only the mock's own item rows are written: changing an answer is free and
+an abandoned paper leaves no trace on the learner. On submission every answered item is replayed
+through the one `submitAnswer` practice uses, tagged `source: 'mock'` and carrying the mock's own
+session id, so mastery, the review queue, the streak and the day's activity all see the paper without a
+second implementation of "an answer". That session id is also what makes submission idempotent: an item
+this paper already recorded is skipped rather than counted twice, so a double submit, a retry after a
+failure or an expired paper submitted on the way in all produce one result.
+
+## D-048 — A mock reveals nothing until it is submitted
+This is the mark/review decision the phase asked for. The runner never shows whether an answer was
+right: the stored `isCorrect` is written but not read back, choices show only that one was taken, and
+there is no feedback panel, because a simulation that grades as it goes stops being a simulation. The
+flag is therefore a navigation aid, not a grading one — marked questions appear in the grid with their
+answered state so the learner can jump back to them, and the header counts them (`3 marked for
+review`). Nothing about this needs the exam to be CSE: the grid is the paper's own items and the flag
+is one boolean.
+
+## D-049 — The clock is a deadline, and an expired paper is still a result
+Like timed practice (D-038), the runner re-derives the remaining time from the session's stored
+`expiresAt` on every tick instead of counting down in a component, so a throttled timer, a backgrounded
+app or a pause cannot buy the learner minutes the examination never gave. The moment the remainder
+reaches zero the paper is submitted as it stands, with no confirmation step — there is nothing to
+confirm, the time is gone. A paper left open past its deadline is submitted on the way in rather than
+discarded: the attempt happened, its score is real, and Progress counts an `expired` session with a
+`completedAt` as the learner's latest mock. Pausing is the one exception, and deliberately: it stops the
+clock and stores the remainder, because a pause is the learner choosing not to sit the paper right now.
+
+## D-050 — A paper is scored out of the items it holds, and unanswered counts wrong
+A mock's score is `correct / total items on the paper` — the count `startMock` actually planned from the
+bank, not the blueprint's requested figure — because a score out of items nobody could answer would be
+a lie. Unanswered items count wrong, exactly as they will on the day, so a paper abandoned halfway
+cannot read as a good score. The exam's own passing percentage is shown as context (`Passing mark 80%`)
+and never as a verdict the app is entitled to give, and the result is derived from the stored items each
+time rather than frozen into a payload, so the result screen and Progress's mock row can never disagree
+about the same attempt (D-029).

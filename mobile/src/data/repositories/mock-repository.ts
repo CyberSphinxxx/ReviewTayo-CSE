@@ -42,6 +42,11 @@ export interface MockSessionPatch {
   readonly completedAt?: string | null;
   readonly pausedAt?: string | null;
   readonly remainingSeconds?: number | null;
+  /**
+   * The paper's deadline. Resuming a paused paper moves it forward by exactly the time
+   * that was left, which is why the clock can be a stored instant rather than a counter.
+   */
+  readonly expiresAt?: string;
   readonly payload?: unknown;
 }
 

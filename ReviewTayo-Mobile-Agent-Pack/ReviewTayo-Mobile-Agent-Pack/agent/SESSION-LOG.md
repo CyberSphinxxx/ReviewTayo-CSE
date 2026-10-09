@@ -407,3 +407,69 @@ Phase 11 — Progress: Study Score, Needs Attention, subject accuracy, concept m
 Phase 12 — Mock Exam: mock setup, the Professional and Sub-Professional blueprints, the timer, answer
 persistence, pause/resume, submission, the result score, the subject breakdown and the recommended next
 plan.
+
+## Session 11 — 2026-10-10 — Phase 12
+### Phase 12 — Mock Exam (complete)
+- `src/domain/mock/` is the two things a running examination adds to the engine, both derived from the
+  stored session: where the learner is inside the paper and how much time is left (`progress.ts` — the
+  answer/correct/flag counts, the first unanswered question a resumed paper opens at, the progress and
+  flag lines, and a clock read against the session's own stored `expiresAt`, with a paused paper using
+  its stored remainder and a negative remainder clamped to zero; D-049), and what the finished paper
+  says (`result.ts` — the score out of the items the paper actually holds with unanswered counting
+  wrong, the sections in the exam's own blueprint order, the weakest section marked, and one of four
+  honest next steps; D-050). The engine still owns what a paper *is* — blueprint, sections and clock
+  come from `domain/exams`, and nothing in the mock module knows the exam is CSE.
+- `src/services/mock.ts` owns the paper's life and nothing else: `loadMockSetup` (the exam's own summary
+  plus the plan's per-section allocation, with the bank's shortfall said plainly — `72 of the 170 items
+  this paper asks for`), `startMock`, `answerMockItem`, `flagMockItem`, `pauseMock`, `resumeMock`,
+  `submitMock` and `loadMockResult`. Two rules make it safe: while running, only the paper's item rows
+  are written, so changing an answer is free and an abandoned paper changes nothing; on submission every
+  answered item goes through the *same* `submitAnswer` practice uses, tagged `source: 'mock'` and
+  carrying the mock's own session id, which is what makes the attempt count towards mastery, the review
+  queue, the streak and the day — and what makes submitting twice a no-op (D-047).
+- `src/features/mock/` is the screen's model: `useMock` picks the face from what is stored (setup,
+  running, result) and submits a paper whose clock ran out while the app was closed on the way in
+  rather than resuming it; `useMockRunner` owns the running paper — a one-second interval re-derives the
+  remainder from the deadline and submits at zero, `choose` shows the choice but never whether it was
+  right, the flag and its grid are navigation aids, and pause/resume stop and restart the stored clock
+  (D-048). `RunningPaper` in `app/mock.tsx` is its own component so the tick only exists while the paper
+  does, and the route hides the tab bar while the examination is open.
+- The result screen follows the reference: the score out of the paper with the exam's passing mark as
+  context, what was skipped and wrong, per-section bars with the weakest named, and one recommended next
+  step wired to the route that does it — `weakest-area` runs a drill filtered to that subject, `review`
+  opens Review, `progress` opens Progress, and a cut-short paper offers a retake that starts a fresh one.
+  `domain/progress/mock.ts` was taught to count an `expired` session with a `completedAt` as a result
+  too, so the progress row and the result screen cannot disagree about the same attempt.
+- Tests: 40 suites / 572 tests — 13 domain cases (counts, where a resumed paper opens, the clock against
+  a deadline, a paused remainder, expiry and clamping, scoring with skips, section order and the weakest
+  mark, all four recommendations), 11 service cases over a real database and the real bank (setup and
+  its shortfall, starting, an empty bank, answering and changing an answer, flags, pause/resume, expiry
+  without loss, the idempotent submission through the answer writer, the result, mastery moving) and 9
+  integration cases over the real router (setup, starting, answering without feedback, marking, leaving
+  to Home and resuming, submitting with a summary, the result and its recommendation action, and an
+  expired paper submitted on the way in).
+### Audit findings fixed this session
+- `MockSessionState.answeredCountLine` was referenced by a test but never existed on the type; the
+  assertion now reads the real `progressLine`, so `tsc` covers the whole suite again.
+- The mock repository's session patch gained `expiresAt` (and the SQLite implementation writes
+  `expires_at`), because `resumeMock` must move the deadline when the pause ends — without it a resumed
+  paper would have kept the original deadline and lost the paused time twice.
+- Progress's mock row previously ignored `expired` papers entirely, which would have made a paper that
+  ran out of time vanish from Progress while its result screen still showed a score. It now counts
+  `expired` + `completedAt`, and only an in-progress or paused paper is excluded (it belongs to Home's
+  resume card).
+
+### Verification evidence
+| Command (from `mobile/`) | Result |
+|---|---|
+| `npx tsc --noEmit` | PASS |
+| `npx eslint .` | PASS — 0 errors, 0 warnings |
+| `npx prettier --check .` | PASS |
+| `npx jest` | PASS — 40 suites, 572 tests |
+| `npx expo export --platform android` | PASS — Hermes bundle emitted |
+
+### Next session starts at
+Phase 13 — Auth/sync: guest identity, the Google provider, secure credential storage, the API client
+boundary, the backend contract, the sync outbox worker with retry/backoff and idempotency, conflict
+policies and offline-to-online recovery. External prerequisites still outstanding: live Google OAuth
+client IDs and the production API base URL/credentials (`agent/BLOCKERS.md`).

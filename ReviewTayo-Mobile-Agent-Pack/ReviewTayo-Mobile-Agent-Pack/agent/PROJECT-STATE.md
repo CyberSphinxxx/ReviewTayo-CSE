@@ -1,16 +1,18 @@
 # Project State
 
-**Phase:** 11 — Progress (complete) → starting Phase 12 — Mock Exam
-**Current task:** Phase 12 — Mock Exam (blueprints, timer, pause/resume, submission, result)
-**Last completed task:** Phase 11 Progress — the Study Score with its week-over-week line and six-week
-curve, Needs Attention reusing Practice's own weakest-area judgement, subject accuracy read from
-Learn's derivation, concept mastery least-mastered-first, the CSE journey, this week's activity against
-the learner's own goal, and the last completed mock.
-**Next action:** Build the mock exam on the exam engine's existing blueprint: setup per track, the
-timer with pause/resume, answer persistence, submission, the result score with its subject breakdown
-and the recommended next plan Progress already links to.
+**Phase:** 12 — Mock Exam (complete) → starting Phase 13 — Auth/sync
+**Current task:** Phase 13 — Auth/sync (guest identity, the Google provider, secure credentials, the
+API boundary, the outbox)
+**Last completed task:** Phase 12 Mock Exam — the setup per track with the bank's shortfall said
+plainly, a running paper on a stored deadline with pause/resume and flags that never reveal
+correctness, submission through the same answer writer practice uses (idempotent), and the result with
+its score, subject breakdown and one recommended next step.
+**Next action:** Build the auth/sync boundary on the contract-first design ADR-003 already chose: a
+Guest identity persisted through secure storage, the Google provider behind the same interface, the
+sync outbox with retry/backoff and idempotency keys, the conflict policies and the offline-to-online
+drain — with the local-only transport still the default until a base URL and credentials exist.
 **Last successful build:** `npx expo export --platform android` → PASS (Hermes bundle)
-**Known failing tests:** None. `npx jest` → 538 passed / 538.
+**Known failing tests:** None. `npx jest` → 572 passed / 572.
 **External blockers:** Live Google OAuth credentials and a production API endpoint (verify-only;
 everything else works without them).
 **Internal blockers:** None.
@@ -21,7 +23,7 @@ everything else works without them).
 | `npm run typecheck` | PASS |
 | `npm run lint` | PASS (0 errors, 0 warnings) |
 | `npm run format:check` | PASS |
-| `npm test` | PASS — 538 tests across 37 suites |
+| `npm test` | PASS — 572 tests across 40 suites |
 | `npx expo export --platform android` | PASS |
 
 ## Repository reality (Phase 0 audit)
@@ -49,10 +51,13 @@ everything else works without them).
 - do not refactor the web app merely to share code.
 
 ## Decisions added this session
-D-043 the Study Score is a mark, not a forecast · D-044 Progress names the subject Practice would have
-offered · D-045 concept mastery is listed least mastered first, unanswered concepts included · D-046
-the weekly goal is the learner's own, and only exists if they set one.
-Previous session: D-039 one review schedule, written by the domain · D-040 a flashcard does not credit
+D-047 a mock counts through the same answer writer practice uses · D-048 a mock reveals nothing until
+it is submitted · D-049 the clock is a deadline and an expired paper is still a result · D-050 a paper
+is scored out of the items it holds, and unanswered counts wrong.
+Previous session: D-043 the Study Score is a mark, not a forecast · D-044 Progress names the subject
+Practice would have offered · D-045 concept mastery is listed least mastered first, unanswered
+concepts included · D-046 the weekly goal is the learner's own, and only exists if they set one.
+Earlier: D-039 one review schedule, written by the domain · D-040 a flashcard does not credit
 mastery · D-041 Review is a deck, not another quiz · D-042 the review queue belongs to the exam, not the
 track.
 Earlier session: D-033 correctness is decided by the service from the question itself · D-034 one

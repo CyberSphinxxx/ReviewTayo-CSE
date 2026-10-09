@@ -314,18 +314,66 @@ Status legend:
   VISUAL-QA.md.)*
 
 ## Phase 12 — Mock Exam
-- [ ] mock setup.
-- [ ] Professional blueprint.
-- [ ] Sub-Pro blueprint.
-- [ ] timer.
-- [ ] answer persistence.
-- [ ] pause/resume.
-- [ ] mark/review behavior decision.
-- [ ] submission.
-- [ ] result score.
-- [ ] subject breakdown.
-- [ ] recommended next plan.
-- [ ] tests.
+- [x] mock setup. *(`services/mock.ts` `loadMockSetup` composes the exam's own `summarizeMock`
+  (the blueprint's item count and duration), the plan's per-section allocation and the named sections
+  this build can actually serve; `features/mock/mock-sections.tsx` `MockSetupView` shows the facts,
+  the sections with requested-vs-planned counts and, when the bank cannot fill the blueprint, the
+  shortfall said plainly — `This build can serve 72 of the 170 items this paper asks for.` Nothing on
+  the setup screen is hardcoded to CSE: the numbers all come from the exam's own files.)*
+- [x] Professional blueprint. *(`app/mock.tsx` reads the profile's `trackId` (defaulting to the
+  exam's `defaultTrackId`) and every number flows from `resolveBlueprint`/`resolveTiming`; the
+  Professional paper is the exam's own 170 items over 190 minutes because that is what
+  `content/exams/cse` declares, not because the screen knows it.)*
+- [x] Sub-Pro blueprint. *(`tests/domain/mock.test.ts` and `tests/services/mock.test.ts` both build
+  their papers from the Sub-Professional track and assert its own section order and scoring, so the
+  one engine serves both tracks; switching tracks changes only the resolved blueprint.)*
+- [x] timer. *(`domain/mock/progress.ts` `remainingSeconds`/`isExpired` read the session's stored
+  `expiresAt` (or, when paused, the stored remainder) rather than counting down, exactly as timed
+  practice does (D-038). `startMock` sets `expiresAt = now + resolveTiming(exam, trackId).totalMinutes`;
+  the runner's one-second interval re-derives the remainder from that deadline and submits the paper
+  the moment it reaches zero — closing the app, backgrounding it or a throttled timer cannot lengthen
+  the examination, and time running out is a result rather than a crash (D-049).)*
+- [x] answer persistence. *(`answerMockItem` writes only the paper's own item row (`chosenChoiceId`,
+  `isCorrect`, `answeredAt`) and refreshes the session's counts, so changing an answer is free and an
+  abandoned paper leaves the learner untouched; `features/mock/use-mock-runner.ts` shows the choice
+  immediately and persists behind it. `repositories.mock.saveItem`/`listItems` and the new
+  `expires_at` column carry it through SQLite.)*
+- [x] pause/resume. *(`pauseMock` stops the clock and stores what was left (`status: 'paused'`,
+  `pausedAt`, `remainingSeconds`); `resumeMock` restarts from that remainder with a fresh deadline, so
+  a paused paper does not run while the learner is away. The runner hides the questions behind a
+  `paused` panel while stopped, and a resumed paper opens at `firstUnansweredIndex`.)*
+- [x] mark/review behavior decision. *(`domain/mock` never exposes correctness: `answerMockItem`
+  stores `isCorrect`, but the runner's `choose` shows only that a choice was taken, and the flag is a
+  navigation aid (`flagMockItem`/`describeMockFlagged`) — a grid of every question with answered/marked
+  state to jump by. A mock is the one place the learner is not told until the end (D-048).)*
+- [x] submission. *(`submitMock` replays every answered item through the *same* `submitAnswer` practice
+  uses, with `source: 'mock'` and the mock's own `sessionId`, so mastery, the review queue, the streak
+  and the day's activity all see the paper (D-047); an item already recorded is skipped, which makes
+  submitting twice a no-op. The session is then closed `completed`, or `expired` when the clock ran
+  out, and `loadMockResult` builds the result from the stored items.)*
+- [x] result score. *(`domain/mock/result.ts` `buildMockResult` scores the paper out of the items it
+  actually holds, with unanswered counting wrong, and reports the exam's own passing mark as context —
+  `Passing mark 80%` — never as a verdict (D-050). `describeMockSkipped` names what was left out
+  (`1 skipped · 1 wrong`).)*
+- [x] subject breakdown. *(`subjectResults` walks the exam's `sectionsForTrack` order, so the learner
+  sees the sections they will actually sit, each with its own total, answered, correct and percent, and
+  the weakest section that had answers is marked for the recommendation. Sections with no items are
+  omitted rather than shown as zero.)*
+- [x] recommended next plan. *(`recommendationFor` returns one of four honest next steps in order — a
+  paper cut short is worth re-sitting (`retake`), a section under the exam's own `needsAttentionAccuracy`
+  names itself (`weakest-area`, carrying its `subjectId`), a paper with misses goes to Review
+  (`review`), and a clean paper is a reason to keep going (`progress`). `app/mock.tsx` wires each kind
+  to the route that does it, and a retake starts a fresh paper.)*
+- [x] tests. *(`tests/domain/mock.test.ts` — 13 cases (answers/correct/flagged counts, where a resumed
+  paper opens, the progress and flag lines, the clock against a deadline, a paused remainder, expiry
+  and clamping, low time, the rough line, scoring with skips, section order and the weakest mark, and
+  all four recommendations); `tests/services/mock.test.ts` — 11 cases over a real database and the real
+  bank (setup and its shortfall, starting a paper, empty bank, answering and changing an answer, flags,
+  pause/resume, expiry without loss, the idempotent submission through the answer writer, the result,
+  and mastery moving); `tests/app/mock-screen.test.tsx` — 9 cases over the real router (setup, the
+  shortfall, starting, answering without feedback, marking, leaving to Home and resuming, submitting
+  with a summary, the result and its recommendation action, and an expired paper submitted on the way
+  in). Device captures are tracked in VISUAL-QA.md.)*
 
 ## Phase 13 — Auth/sync
 - [ ] Guest identity.
