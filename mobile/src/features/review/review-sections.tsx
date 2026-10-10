@@ -51,7 +51,7 @@ export const ReviewSummary = ({
   const theme = useTheme();
   return (
     <View style={{ alignItems: 'center', paddingTop: theme.spacing.xl }}>
-      <RTText role="display" testID="review-count" style={{ fontSize: 96, lineHeight: 100 }}>
+      <RTText role="countLarge" testID="review-count">
         {String(count)}
       </RTText>
       <RTText

@@ -334,7 +334,7 @@ const StartingPointStep = ({ model }: { readonly model: OnboardingModel }) => {
           backgroundColor: theme.colors.surface,
           paddingHorizontal: theme.spacing.base,
           color: theme.colors.text,
-          fontSize: 16,
+          ...theme.typography.body,
         }}
       />
       <View
@@ -511,7 +511,7 @@ const GoalStep = ({ model }: { readonly model: OnboardingModel }) => {
               backgroundColor: theme.colors.surface,
               paddingHorizontal: theme.spacing.base,
               color: theme.colors.text,
-              fontSize: 16,
+              ...theme.typography.body,
             }}
           />
           <RTText role="meta" tone="secondary" style={{ marginTop: theme.spacing.xs }}>

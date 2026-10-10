@@ -250,4 +250,30 @@ describe('RTText', () => {
       fontSize: extra.typography.body.fontSize,
     });
   });
+
+  it('announces screen and section titles as headings', async () => {
+    const view = await renderWithProviders(
+      <>
+        <RTText role="pageTitle">Study plan</RTText>
+        <RTText role="sectionTitle">This week</RTText>
+        <RTText role="body">Plain body copy.</RTText>
+      </>,
+    );
+
+    // Screen readers can jump between headings instead of hearing one long stream.
+    expect(view.getByRole('header', { name: 'Study plan' })).toBeOnTheScreen();
+    expect(view.getByRole('header', { name: 'This week' })).toBeOnTheScreen();
+    expect(view.queryByRole('header', { name: 'Plain body copy.' })).toBeNull();
+  });
+
+  it('lets an explicit accessibility role override the derived heading', async () => {
+    const view = await renderWithProviders(
+      <RTText role="sectionTitle" accessibilityRole="summary">
+        Not a heading
+      </RTText>,
+    );
+
+    expect(view.queryByRole('header')).toBeNull();
+    expect(view.getByRole('summary')).toBeOnTheScreen();
+  });
 });

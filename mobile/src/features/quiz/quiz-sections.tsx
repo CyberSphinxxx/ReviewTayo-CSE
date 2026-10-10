@@ -72,7 +72,11 @@ export const QuizFeedback = ({
 }) => {
   const theme = useTheme();
   return (
-    <View testID="quiz-feedback" style={{ gap: theme.spacing.sm, marginTop: theme.spacing.base }}>
+    <View
+      testID="quiz-feedback"
+      accessibilityLiveRegion="polite"
+      style={{ gap: theme.spacing.sm, marginTop: theme.spacing.base }}
+    >
       <RTText
         role="sectionTitle"
         tone={outcome.correct ? 'success' : 'danger'}

@@ -374,3 +374,23 @@ device's list always equals what the screen says it is. A denied permission is a
 line ("Notifications are turned off for ReviewTayo in your device settings"), not a second request or
 a silent no-op: the OS owns that decision, and the app's job is to say so plainly and keep working
 offline without it.
+
+## D-059 — Overlapping writes queue; a nested transaction is still an error
+Two independent top-level writes arriving in the same instant — a deadline tick finishing a session
+while an answer is being saved, a bookmark tapped during a submit — were both refused by the adapters
+with "Nested transactions are not supported", so a real save could fail. The fix is not to allow
+nesting (D-015 stands: a transaction is passed down, never opened inside another) but to give each
+adapter a small transaction gate: a top-level transaction that arrives while one is open waits for it,
+in arrival order, and begins when the first finishes. A transaction genuinely opened inside another —
+the same async context, which must not exist — is still refused, via a bounded wait (`nestGuardMs`,
+default 5 s) so the error stays honest instead of hanging. Concurrent work queues; a programming error
+stays loud.
+
+## D-060 — A finished session owns no clock, and finishing is idempotent
+The quiz's interval used to keep running after the session ended: `use-quiz.ts` re-finished every
+second, rewriting `completedAt` and inflating `durationSeconds` while the learner read the result, and
+`finishSession` was re-called forever. A finished session now stops its own clock (the interval
+returns early once `status === 'finished'`), and finishing is serialized per session in
+`services/practice.ts` (`finishChains`) with `completeSession` a no-op once the row is `completed` — so
+the first result is the result, whatever a race or a re-render asks for. Same discipline as the
+deadline (D-049): the record of what happened is written once, then read.

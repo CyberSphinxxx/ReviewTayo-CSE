@@ -1,8 +1,13 @@
 import * as SQLite from 'expo-sqlite';
 
 import { createLogger } from '@/services/logging/logger';
-import { asStorageError } from '@/data/local/database-port';
-import type { DatabasePort, DatabaseTransaction, SqlValue } from '@/data/local/database-port';
+import { asStorageError, createTransactionGate } from '@/data/local/database-port';
+import type {
+  DatabasePort,
+  DatabaseTransaction,
+  SqlValue,
+  TransactionGate,
+} from '@/data/local/database-port';
 
 const log = createLogger('sqlite');
 
@@ -44,7 +49,7 @@ class ExpoTransaction implements DatabaseTransaction {
 
 class ExpoDatabase extends ExpoTransaction implements DatabasePort {
   readonly name: string;
-  private inTransaction = false;
+  private readonly gate: TransactionGate = createTransactionGate();
 
   constructor(
     private readonly database: SQLite.SQLiteDatabase,
@@ -55,34 +60,29 @@ class ExpoDatabase extends ExpoTransaction implements DatabasePort {
   }
 
   /**
-   * Runs `work` atomically. Nesting is refused rather than silently converted into a
-   * savepoint: use cases that must change several repositories together receive the
-   * active transaction instead (see `UnitOfWork`).
+   * Runs `work` atomically. Concurrent top-level writes take turns via the
+   * transaction gate — a timer tick finishing a session while an answer is being
+   * saved must wait its turn rather than fail as a "nested" transaction. Nesting
+   * itself is still refused rather than silently converted into a savepoint: use
+   * cases that must change several repositories together receive the active
+   * transaction instead (see `UnitOfWork`).
    */
   async transaction<T>(work: (tx: DatabaseTransaction) => Promise<T>): Promise<T> {
-    if (this.inTransaction) {
-      throw asStorageError(
-        'transaction',
-        new Error('Nested transactions are not supported. Pass the active transaction instead.'),
-      );
-    }
+    return this.gate.run(async () => {
+      let result: T | undefined;
+      let failure: unknown;
 
-    this.inTransaction = true;
-    let result: T | undefined;
-    let failure: unknown;
+      try {
+        await this.database.withExclusiveTransactionAsync(async (txn) => {
+          result = await work(new ExpoTransaction(txn));
+        });
+      } catch (error) {
+        failure = error;
+      }
 
-    try {
-      await this.database.withExclusiveTransactionAsync(async (txn) => {
-        result = await work(new ExpoTransaction(txn));
-      });
-    } catch (error) {
-      failure = error;
-    } finally {
-      this.inTransaction = false;
-    }
-
-    if (failure !== undefined) throw failure;
-    return result as T;
+      if (failure !== undefined) throw failure;
+      return result as T;
+    });
   }
 
   async close(): Promise<void> {

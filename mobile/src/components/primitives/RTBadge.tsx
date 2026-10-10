@@ -1,7 +1,7 @@
 import { View, type StyleProp, type ViewStyle } from 'react-native';
 
 import type { MasteryLevel } from '@/domain/exams/mastery';
-import { useTheme } from '@/theme';
+import { textScale, useTheme } from '@/theme';
 
 import { RTText } from './RTText';
 
@@ -48,6 +48,9 @@ export const masteryToneKey = (
 
 export const RTBadge = ({ label, tone = 'neutral', mastery, style, testID }: RTBadgeProps) => {
   const theme = useTheme();
+  // The pill stays compact by design, but it must still follow the learner's
+  // text-size preference the way every other string does.
+  const scale = textScale[theme.textSize];
 
   const palette = (() => {
     if (mastery !== undefined) {
@@ -109,7 +112,12 @@ export const RTBadge = ({ label, tone = 'neutral', mastery, style, testID }: RTB
     >
       <RTText
         role="meta"
-        style={{ color: palette.text, fontSize: 11, fontWeight: '700', lineHeight: 15 }}
+        style={{
+          color: palette.text,
+          fontSize: Math.round(11 * scale),
+          fontWeight: '700',
+          lineHeight: Math.round(15 * scale),
+        }}
       >
         {label}
       </RTText>

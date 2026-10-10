@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { fireEvent, renderRouter, screen, waitFor } from 'expo-router/testing-library';
+import { act, fireEvent, renderRouter, screen, waitFor } from 'expo-router/testing-library';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import BuildQuizScreen from '../../app/build-quiz';
@@ -155,6 +155,8 @@ describe('Question screen', () => {
 
     await fireEvent.press(screen.getByTestId(`quiz-choice-${first.correctChoiceId}`));
     await waitFor(() => expect(screen.getByTestId('quiz-feedback')).toBeOnTheScreen());
+    // The verdict is announced to a screen reader without it having to hunt for it.
+    expect(screen.getByTestId('quiz-feedback')).toHaveProp('accessibilityLiveRegion', 'polite');
 
     expect(screen.getByTestId('quiz-feedback-headline')).toHaveTextContent('Correct.');
     expect(screen.getByTestId('quiz-feedback-explanation')).toHaveTextContent(first.explanation);
@@ -329,6 +331,32 @@ describe('Question screen', () => {
     await renderQuiz(db, '/quiz?mode=timed-practice&count=10&minutes=8');
 
     expect(screen.getByTestId('quiz-clock')).toHaveTextContent('8:00');
+  });
+
+  it('freezes the result once a timed session runs out', async () => {
+    const { db, repositories } = await seed();
+    await renderQuiz(db, '/quiz?mode=timed-practice&count=10&minutes=8');
+    const session = await openSession(repositories);
+
+    // Ride past the deadline: the paper submits itself at zero.
+    await act(async () => {
+      jest.advanceTimersByTime(482_000);
+    });
+    await waitFor(async () => {
+      expect((await repositories.practice.getById(session.id))?.status).toBe('completed');
+    });
+    await screen.findByTestId('quiz-results');
+    const finished = await repositories.practice.getById(session.id);
+    expect(finished?.completedAt).not.toBeNull();
+
+    // The results screen is where the learner lingers. Nothing may rewrite the
+    // result while they read it — no ticking clock, no second finish.
+    await act(async () => {
+      jest.advanceTimersByTime(120_000);
+    });
+    const later = await repositories.practice.getById(session.id);
+    expect(later?.completedAt).toBe(finished?.completedAt);
+    expect(later?.durationSeconds).toBe(finished?.durationSeconds);
   });
 
   it('starts a fresh session when the learner asks for another', async () => {

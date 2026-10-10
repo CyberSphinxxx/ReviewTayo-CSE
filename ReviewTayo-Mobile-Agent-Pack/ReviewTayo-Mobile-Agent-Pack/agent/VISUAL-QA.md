@@ -131,5 +131,15 @@ Do not require pixel-perfect HTML matching. Require faithful design intent and n
   360×640 and 390×844, Standard and Extra Large — plus the delivered notification itself on a real
   device (permission sheet, the scheduled list under Android's notification settings, and one arrival
   at 7:00 PM with the app closed).
-- Phases 5–14 captures are still pending a device/emulator pass; reminders are real as of Phase 14,
-  and captures are collected as each phase lands.
+- Phase 15: the hardening phase changed what a screen reader and a large-text setting experience, and
+  the automated side is asserted from the rendered tree and the tokens — titles expose heading roles,
+  the quiz verdict is a polite live region, the review-due count and both onboarding fields follow the
+  text-size preference, `RTBadge` scales, and 28 colour pairs pass WCAG AA in both themes. What only a
+  device can judge: a TalkBack traversal of one full flow (onboarding → Home → a quiz → Review) hearing
+  the headings and the announcement of a verdict in order, the whole app at font scale 200% on a small
+  screen (360×640) looking for clipped rows, overlapping labels and a tab bar that still fits, and
+  measured frame times on a mid-range device for the quiz feedback and the mock paper's timer tick.
+  Those device-profiler numbers are deliberately not claimed here — no Android SDK exists in this
+  environment.
+- Phases 5–15 captures are still pending a device/emulator pass; reminders are real as of Phase 14 and
+  the hardening fixes as of Phase 15, and captures are collected as each phase lands.

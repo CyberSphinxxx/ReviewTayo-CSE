@@ -462,6 +462,41 @@ describe('finishing a session', () => {
     expect((await repositories.practice.getById(started.session.id))?.status).toBe('completed');
   });
 
+  it('keeps the first finish when a session is finished twice', async () => {
+    const { repositories } = await seed();
+    const started = await startSession({
+      repositories,
+      exam,
+      trackId: TRACK,
+      mode: 'smart-drill',
+      questionCount: 2,
+      now: NOW,
+    });
+
+    const firstFinish = new Date(NOW.getTime() + 60_000);
+    const strayTick = new Date(NOW.getTime() + 900_000);
+    // Two finishes arriving together — the deadline's tick and a double tap —
+    // are run in order, so the second one sees the session already completed.
+    await Promise.all([
+      finishSession({
+        repositories,
+        sessionId: started.session.id,
+        correctCount: 1,
+        now: firstFinish,
+      }),
+      finishSession({
+        repositories,
+        sessionId: started.session.id,
+        correctCount: 1,
+        now: strayTick,
+      }),
+    ]);
+
+    const finished = await repositories.practice.getById(started.session.id);
+    expect(finished?.completedAt).toBe(firstFinish.toISOString());
+    expect(finished?.durationSeconds).toBe(60);
+  });
+
   it('does nothing for a session that is not there', async () => {
     const { repositories } = await seed();
     await expect(

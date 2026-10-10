@@ -1,20 +1,48 @@
 # Agent Handoff
 
 ## Current phase
-Phases 0–14 complete. Starting Phase 15 (Hardening).
+Phases 0–15 complete. Starting Phase 16 (Full regression).
 
 ## Current task
-Phase 15 — Hardening: the accessibility, large-text, contrast, performance, SQLite index/query,
-security, logging/privacy, dependency, loading/error/empty/offline and memory/startup audits.
+Phase 16 — Full regression: the unit, component, integration, DB/migration, offline and sync suites,
+the onboarding / Professional / Sub-Professional / Review / Mock E2E flows, visual QA and any
+regression fixes they surface.
 
 ## Next exact action
-Work `phases/15-*.md` one audit item at a time. Each item: read the current code and screens with that
-audit's question in mind, file real defects (a missing `accessibilityLabel` on a control, an
-unbounded list re-render, a query that scans without an index, a log line carrying a learner's answer),
-fix them with a test that fails before the fix, and re-run the full gate. Findings only a device can
-judge (TalkBack traversal, font scaling to 200%, measured frame times) go in `agent/VISUAL-QA.md` as
-capture items rather than being claimed. Do not add suppressions to make a lint rule pass — fix the
-cause (D-003's discipline still applies).
+Run the full gate first (`prettier --check`, `tsc --noEmit`, `eslint .`, `jest`, `expo export`), then
+walk the Phase 16 rows in `agent/MASTER-CHECKLIST.md` one at a time: for each suite and E2E flow,
+assert from the output that it covers what the row claims, add the missing coverage (a second exam
+pack through onboarding → practice → review → mock is the likely gap), and fix any regression it
+surfaces. Anything only a device can judge (TalkBack traversal, font scale to 200%, measured frame
+times, a delivered notification) stays in `agent/VISUAL-QA.md` as a capture item rather than being
+claimed. Do not add suppressions to make a check pass — fix the cause (D-003's discipline still
+applies).
+
+## Files changed (Phase 15)
+- `/mobile/src/components/primitives/RTText.tsx` — derives `accessibilityRole="header"` from
+  `pageTitle`/`sectionTitle` unless an explicit role is passed (`accessibilityRole` is destructured
+  before the rest spread), and `/mobile/src/components/primitives/RTBadge.tsx` scales its compact
+  size by the learner's text-size preference (audit fixes).
+- `/mobile/src/features/review/review-sections.tsx` — the due count uses the `countLarge` role
+  instead of a hard-coded `fontSize: 96`; `/mobile/src/features/onboarding/step-content.tsx` — both
+  `TextInput`s take the scaled body role instead of a hard-coded 16 px; 
+  `/mobile/src/features/quiz/quiz-sections.tsx` — the verdict block is a polite live region.
+- `/mobile/src/features/quiz/use-quiz.ts` — the interval stops the moment the session is finished
+  (no more re-finishing and rewriting `completedAt`/`durationSeconds` on the results screen).
+- `/mobile/src/services/practice.ts` — `finishChains` serialize finishing per session and
+  `completeSession` is a no-op once the row is `completed`, so the first result is the result (D-060).
+- `/mobile/src/data/local/database-port.ts` — `NESTED_TRANSACTION_MESSAGE`, `TransactionGate`,
+  `createTransactionGate({ nestGuardMs = 5000 })`: concurrent top-level transactions queue in arrival
+  order while a genuinely nested one is still refused after a bounded wait (D-059). Wired into
+  `/mobile/src/data/local/sqlite/expo-database.ts` and `/mobile/src/data/local/sqlite/node-database.ts`
+  (the node adapter gained the `nestGuardMs` option so tests can bound the wait).
+- `/mobile/tests/data/transaction-gate.test.ts` (new) — overlapping writes serialize in order, a
+  nested write is refused with the nesting message and the engine stays healthy, and a failed
+  transaction releases the gate. Plus new cases in `/mobile/tests/components/primitives.test.tsx`
+  (heading derivation and the explicit-role override), `/mobile/tests/app/quiz-screen.test.tsx` (the
+  timed session's result freezes; the live region), `/mobile/tests/services/practice-session.test.ts`
+  (two concurrent finishes keep the first result) and `/mobile/tests/theme/contrast.test.ts` (seven new
+  pairs, 60 assertions). Suite at 48 / 720.
 
 ## Files changed (Phase 14)
 - `/mobile/src/domain/notifications/**` — `schedule.ts`, the schedule as data: time parsing and the

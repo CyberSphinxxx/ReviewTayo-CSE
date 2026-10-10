@@ -279,8 +279,11 @@ export const useQuiz = (repositories: Repositories, start: QuizStart): QuizModel
 
   // A timed mode runs on a real clock. The interval only reads the deadline, so a
   // slow tick or a backgrounded app cannot make the session longer than it is.
+  // Once the session is finished — expired or answered to the end — it owns no
+  // clock: keeping the interval alive would re-finish it every second, rewriting
+  // `completedAt` and the duration while the learner reads the results.
   useEffect(() => {
-    if (remainingSeconds === null) return;
+    if (remainingSeconds === null || status === 'finished') return;
     const timer = setInterval(() => {
       const expiresAt = deadline.current;
       if (expiresAt === null) return;
@@ -289,7 +292,7 @@ export const useQuiz = (repositories: Repositories, start: QuizStart): QuizModel
       if (left === 0) finishExpired();
     }, 1000);
     return () => clearInterval(timer);
-  }, [finishExpired, remainingSeconds]);
+  }, [finishExpired, remainingSeconds, status]);
 
   const choose = (choiceId: string) => {
     if (chosenChoiceId !== null || current === null || exam === null || status !== 'ready') return;

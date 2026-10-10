@@ -582,3 +582,81 @@ chosen time, the denied-permission state, and rescheduling whenever the preferen
 ### Next session starts at
 Phase 15 — Hardening: accessibility, large text, contrast, performance, SQLite index/query review,
 security, logging/privacy, dependencies, loading/error/empty/offline states, and memory/startup.
+
+## Session 14 — 2026-10-11 — Phase 15
+### Phase 15 — Hardening (complete)
+All ten audits were worked against the built app, not a checklist in the abstract: each one read the
+screens, the services and the data layer with that audit's question, and filed only defects that would
+be visible to a learner or a reviewer. Six real findings were fixed; the rest of the ten lists are
+clean and recorded as such.
+- **Accessibility:** every interactive primitive already announces itself (roles, labels and
+  disabled/busy state), and every raw `Pressable` in the feature sections now carries both a label and
+a role (23/23, counted file by file), the owl is a labelled image, press targets sit on the
+  `touchTarget` tokens (≥44 with `hitSlop` on `RTIconButton`). Finding fixed: screen and section titles
+did not announce themselves as headings; `RTText` now derives `accessibilityRole="header"` from
+  `pageTitle`/`sectionTitle` unless an explicit role is passed, so a screen reader can navigate by
+  heading. The quiz's verdict block is now a polite live region, so the answer's outcome is announced
+  the moment it appears.
+- **Large text:** no `numberOfLines` exists anywhere, so nothing truncates. Findings fixed: the
+  review-due count hard-coded `fontSize: 96` over a 36 px role, bypassing the learner's preference — it
+  now uses `countLarge`; the two onboarding `TextInput`s hard-coded 16 px and now take the scaled body
+  role; `RTBadge` multiplies its compact 11/15 by the preference scale instead of ignoring it. The tab
+  badge's 10 px is React Navigation's own styling and deliberately fixed.
+- **Contrast:** `tests/theme/contrast.test.ts` now audits 28 pairs × 2 themes plus four display-size
+  cases, all rendered combinations, with seven new pairs covering error and success lines on the
+  canvas and surface and secondary/accent text on the raised and soft surfaces — 60 assertions at
+  WCAG AA. The hairline `border` token stays reference-faithful (it matches the prototype's `--line`)
+  and rows are identified by labels and content, not by their outline.
+- **Performance:** one real defect — the quiz's interval kept ticking after the session finished, so
+  the results screen re-rendered every second and `finishSession` re-ran forever, rewriting
+  `completedAt` and inflating `durationSeconds` while the learner read their score. The interval now
+  stops the moment the session is finished and finishing is serialized and idempotent (D-060). The rest
+  checked out: intervals and listeners clear on unmount, derivations are cheap, and bounded lists (≤170
+  cells) use `ScrollView` where that is the right tool.
+- **SQLite:** all SQL is parameterised and the schema's 18 covering indexes match the query shapes.
+  One real defect: two overlapping top-level writes — a deadline tick racing an answer, a bookmark
+  during a submit — were refused with a spurious nesting error, so a real save could fail. Both engine
+  adapters now run through a shared transaction gate that queues concurrent top-level writes in arrival
+  order while still refusing a genuinely nested one after a bounded wait (D-059,
+  `tests/data/transaction-gate.test.ts`).
+- **Security:** authorization-code + PKCE, `state` verified by `expo-auth-session` before success, the
+  id token read for claims only and never treated as proof; plaintext base URLs refused; identity and
+  tokens in the keystore, not SQLite; every query parameterised; no deep link carries credentials. No
+  findings.
+- **Logging/privacy:** redaction by key (`token|secret|password|email|…`), long free text truncated so
+  question content cannot leak, debug/info suppressed in production, analytics buffered in memory with
+  a 100-event cap and dev-only property logging. No log call site passes an email, token or answer. No
+  findings.
+- **Dependencies:** npm reports 66 vulnerabilities but only 5 distinct advisories (`braces`,
+  `decode-uri-component`, `node-forge`, `sprintf-js`, `uuid`), every one of them in a build-time chain
+  (Expo CLI, Metro, Jest, `xcode` under the config plugins). None is imported by `src/` or `app/`, so
+  none reaches the Hermes bundle; they are upstream releases the SDK pins and `npm audit fix` cannot
+  clear them. Recorded in `BLOCKERS.md` as a limitation rather than force-fixed.
+- **Loading/error/empty/offline:** 19 routes render their states through `RTStateView`, every feature
+  hook exposes a `status`, and the "cannot be served" paths are asserted screen by screen. Offline is
+  the default posture — the local-only transport and the outbox mean a build with no network behaves
+  exactly like a build with one. No findings.
+- **Memory/startup:** quiz and mock timers clear on unmount, the transport clears its abort timer,
+  `LocalDataProvider` defers the open by a tick and closes on unmount, and the only module-level
+  buffers (analytics, log sink) are bounded and replaceable. No findings.
+### Audit findings fixed this session
+- Two concurrent top-level transactions no longer race: a shared gate queues them by arrival and a
+  truly nested one is still refused (D-059). This was a real save-failure path, not a theoretical one.
+- The quiz's clock stops when the session finishes, and `finishSession` is serialized per session so a
+  second finish cannot rewrite the first result (D-060).
+- Titles announce themselves as headings, and the quiz verdict is a live region.
+- Three large-text violations fixed (`review-count` 96 px literal, two onboarding inputs, `RTBadge`).
+- Seven contrast pairs added and audited (60 assertions, all passing).
+### Verification evidence
+| Command (from `mobile/`) | Result |
+|---|---|
+| `npx prettier --write .` | PASS — `RTText.tsx` reformatted |
+| `npx tsc --noEmit` | PASS |
+| `npx eslint .` | PASS — 0 errors, 0 warnings |
+| `npx jest` | PASS — 48 suites, 720 tests |
+| `npx expo export --platform android` | PASS — Hermes bundle emitted |
+
+### Next session starts at
+Phase 16 — Full regression: the unit, component, integration, DB/migration, offline and sync suites,
+the onboarding / Professional / Sub-Professional / Review / Mock E2E flows, visual QA and any
+regression fixes they surface.

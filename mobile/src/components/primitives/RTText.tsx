@@ -48,11 +48,25 @@ export const RTText = ({
   tone = 'default',
   colorKey,
   style,
+  accessibilityRole,
   ...rest
 }: RTTextProps) => {
   const theme = useTheme();
   const color =
     colorKey !== undefined ? (theme.colors[colorKey] as string) : toneColor(theme.colors, tone);
 
-  return <Text {...rest} style={[theme.typography[role], { color }, style]} />;
+  // Screen and section titles are headings, so screen readers can jump between
+  // them instead of reading a screen as one undifferentiated stream. An explicit
+  // role from the caller always wins.
+  const headingRole =
+    accessibilityRole ??
+    (role === 'pageTitle' || role === 'sectionTitle' ? ('header' as const) : undefined);
+
+  return (
+    <Text
+      {...rest}
+      accessibilityRole={headingRole}
+      style={[theme.typography[role], { color }, style]}
+    />
+  );
 };

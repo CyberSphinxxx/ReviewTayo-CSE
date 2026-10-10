@@ -23,6 +23,17 @@
   profiles are verified; the production build path is documented and CI-ready.
 - **Owner:** environment/user (Android SDK install or EAS account).
 
+### B-EXT-4 — Build-chain dependency advisories (upstream, non-blocking)
+- **What:** `npm audit` reports 66 vulnerabilities, but only 5 distinct advisories — `braces`,
+  `decode-uri-component`, `node-forge`, `sprintf-js`, `uuid` — and every one of them sits in a
+  build-time chain: the Expo CLI, Metro, Jest, and `xcode` under the config plugins.
+- **Impact:** none on the shipped app. None of the affected packages is imported by `src/` or `app/`,
+  so none can reach the Hermes bundle; they run on the build machine, not the learner's device.
+- **Why not fixed:** the fixes are upstream releases that the Expo SDK pins; `npm audit fix` cannot
+  clear them and `--force` would break the SDK's own dependency graph for no runtime gain. Phase 15
+  deliberately did not force it. To be re-checked at Phase 17 against the next SDK release.
+- **Owner:** upstream (Expo/RN toolchain), watched by the project.
+
 ## Internal blockers
 None.
 

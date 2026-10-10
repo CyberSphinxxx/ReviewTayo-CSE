@@ -1,7 +1,12 @@
 import { DatabaseSync } from 'node:sqlite';
 
-import { asStorageError } from '@/data/local/database-port';
-import type { DatabasePort, DatabaseTransaction, SqlValue } from '@/data/local/database-port';
+import { asStorageError, createTransactionGate } from '@/data/local/database-port';
+import type {
+  DatabasePort,
+  DatabaseTransaction,
+  SqlValue,
+  TransactionGate,
+} from '@/data/local/database-port';
 
 /**
  * Test/CI implementation of the database port, backed by Node's built-in SQLite.
@@ -41,44 +46,41 @@ class NodeTransaction implements DatabaseTransaction {
 
 class NodeDatabase extends NodeTransaction implements DatabasePort {
   readonly name: string;
-  private inTransaction = false;
+  private readonly gate: TransactionGate;
 
   constructor(
     private readonly db: DatabaseSync,
     name: string,
+    gateOptions: { readonly nestGuardMs?: number } = {},
   ) {
     super(db);
     this.name = name;
+    this.gate = createTransactionGate(gateOptions);
   }
 
   /**
-   * Mirrors the device adapter exactly, including refusing to nest: composing work
-   * atomically is done by passing a transaction into repository calls, so a test can
-   * never pass while the real engine would fail.
+   * Mirrors the device adapter exactly: concurrent top-level writes take turns via
+   * the transaction gate, composing work atomically is done by passing a
+   * transaction into repository calls, and a call made from inside another
+   * transaction is refused — so a test can never pass while the real engine would
+   * fail.
    */
   async transaction<T>(work: (tx: DatabaseTransaction) => Promise<T>): Promise<T> {
-    if (this.inTransaction) {
-      throw asStorageError(
-        'transaction',
-        new Error('Nested transactions are not supported. Pass the active transaction instead.'),
-      );
-    }
-    this.db.exec('BEGIN');
-    this.inTransaction = true;
-    try {
-      const result = await work(this);
-      this.db.exec('COMMIT');
-      return result;
-    } catch (error) {
+    return this.gate.run(async () => {
+      this.db.exec('BEGIN');
       try {
-        this.db.exec('ROLLBACK');
-      } catch {
-        // The original failure is the useful one; a rollback failure is secondary.
+        const result = await work(this);
+        this.db.exec('COMMIT');
+        return result;
+      } catch (error) {
+        try {
+          this.db.exec('ROLLBACK');
+        } catch {
+          // The original failure is the useful one; a rollback failure is secondary.
+        }
+        throw error;
       }
-      throw error;
-    } finally {
-      this.inTransaction = false;
-    }
+    });
   }
 
   async close(): Promise<void> {
@@ -89,6 +91,8 @@ class NodeDatabase extends NodeTransaction implements DatabasePort {
 export interface NodeDatabaseOptions {
   /** `:memory:` by default so each test starts from a clean database. */
   readonly location?: string;
+  /** How long a write may wait out an open transaction before it is the nesting error. */
+  readonly nestGuardMs?: number;
 }
 
 export const openNodeDatabase = async (
@@ -96,5 +100,9 @@ export const openNodeDatabase = async (
 ): Promise<DatabasePort> => {
   const database = new DatabaseSync(options.location ?? ':memory:');
   database.exec('PRAGMA foreign_keys = ON;');
-  return new NodeDatabase(database, options.location ?? ':memory:');
+  return new NodeDatabase(
+    database,
+    options.location ?? ':memory:',
+    options.nestGuardMs === undefined ? {} : { nestGuardMs: options.nestGuardMs },
+  );
 };

@@ -80,3 +80,80 @@ export const asStorageError = (operation: string, cause: unknown): AppError => {
     { cause },
   );
 };
+
+export const NESTED_TRANSACTION_MESSAGE =
+  'Nested transactions are not supported. Pass the active transaction instead.';
+
+export interface TransactionGate {
+  /** True while a queued transaction's work is executing. */
+  readonly isActive: boolean;
+  /** Runs `execute` after every transaction queued before it. */
+  run<T>(execute: () => Promise<T>): Promise<T>;
+}
+
+/**
+ * Serializes top-level transactions on both engines.
+ *
+ * Two writes that arrive at the same instant — the deadline ticking while an
+ * answer is being saved, a bookmark tapped during a submit — are not a nesting
+ * bug: they must take turns. Before this gate, the second write was refused with
+ * a spurious "nested transaction" error, so a real save failed and the learner
+ * was told their work did not happen. A call made from *inside* another
+ * transaction's work — the mistake the refusal exists to catch — would wait
+ * forever, so an arrival while a transaction is open is bounded by `nestGuardMs`:
+ * a genuine race resolves in milliseconds, and anything still waiting at the
+ * limit is the nesting error and is refused with the same message as before.
+ */
+export const createTransactionGate = (
+  options: { readonly nestGuardMs?: number } = {},
+): TransactionGate => {
+  const nestGuardMs = options.nestGuardMs ?? 5_000;
+  let tail: Promise<void> = Promise.resolve();
+  let active = false;
+
+  const enqueue = <T>(execute: () => Promise<T>): Promise<T> => {
+    const turn = tail.then(async () => {
+      active = true;
+      try {
+        return await execute();
+      } finally {
+        active = false;
+      }
+    });
+    tail = turn.then(
+      () => undefined,
+      () => undefined,
+    );
+    return turn;
+  };
+
+  /** Waits out the transaction that is open, or gives up as a nesting mistake. */
+  const waitOut = (): Promise<void> => {
+    const open = tail;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    const timeout = new Promise<never>((_, reject) => {
+      timer = setTimeout(() => {
+        reject(asStorageError('transaction', new Error(NESTED_TRANSACTION_MESSAGE)));
+      }, nestGuardMs);
+    });
+    return Promise.race([
+      open.then(
+        () => undefined,
+        () => undefined,
+      ),
+      timeout,
+    ]).finally(() => {
+      if (timer !== undefined) clearTimeout(timer);
+    });
+  };
+
+  return {
+    get isActive(): boolean {
+      return active;
+    },
+    run<T>(execute: () => Promise<T>): Promise<T> {
+      if (!active) return enqueue(execute);
+      return waitOut().then(() => enqueue(execute));
+    },
+  };
+};

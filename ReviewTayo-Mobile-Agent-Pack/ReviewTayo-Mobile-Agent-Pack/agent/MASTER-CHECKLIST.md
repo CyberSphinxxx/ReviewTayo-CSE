@@ -482,16 +482,66 @@ Status legend:
   millisecond settings collision now queued as two events. Full gate: 47 suites / 699 tests.)*
 
 ## Phase 15 — Hardening
-- [ ] accessibility audit.
-- [ ] large text audit.
-- [ ] dark/light contrast audit.
-- [ ] performance audit.
-- [ ] SQLite index/query review.
-- [ ] security audit.
-- [ ] logging/privacy audit.
-- [ ] dependency audit.
-- [ ] loading/error/empty/offline audit.
-- [ ] memory/startup review.
+- [x] accessibility audit. *(Every interactive primitive announces itself — `RTButton`/`RTIconButton`
+  with role, label and disabled/busy state, `RTChoice` as radio/checkbox with `selected`,
+  `RTSegmentedControl` as a radiogroup, `RTChip` and `RTListRow` as buttons — every raw `Pressable` in
+  the feature sections carries both a label and a role (23/23), the owl is a labelled image, and all
+  press targets sit on the `touchTarget` tokens (≥44, `hitSlop` on the icon button). Findings fixed:
+  screen and section titles now derive `accessibilityRole="header"` from their type role in `RTText`
+  (explicit roles still win), so a screen reader can navigate by heading; and the quiz's verdict block
+  is an `accessibilityLiveRegion`, so the outcome is announced the moment it appears.)*
+- [x] large text audit. *(Text never truncates — `numberOfLines` appears nowhere — and layouts use
+  `minHeight` where text grows. Findings fixed: the review-due count hard-coded `fontSize: 96` over a
+  36 px role, bypassing the learner's text-size preference; it now uses the system's `countLarge`
+  role. The two onboarding `TextInput`s hard-coded 16 px and now take the scaled body role, and
+  `RTBadge` multiplies its compact size by the preference scale instead of ignoring it. The tab
+  badge's 10 px is React Navigation's own styling and is deliberately fixed.)*
+- [x] dark/light contrast audit. *(`tests/theme/contrast.test.ts` now audits 28 pairs × 2 themes plus
+  four display-size cases,
+  every one of them a combination the screens actually render: the seven new ones cover error and
+  success lines on the canvas and surface and secondary/accent text on the raised and soft surfaces.
+  All 60 assertions pass at WCAG AA. The hairline `border` token stays reference-faithful (it matches
+  the prototype's `--line`); fields and rows are identified by labels and content, not by their
+  outline.)*
+- [x] performance audit. *(One real defect: the quiz's clock kept ticking after the session ended —
+  the results screen re-rendered every second and `finishSession` was re-called forever, rewriting
+  `completedAt` and inflating `durationSeconds` while the learner read their score. The interval now
+  stops the moment the session is finished (`use-quiz.ts`), and finishing itself is serialized and
+  idempotent (`services/practice.ts`). Everything else checked out: intervals, timers and listeners
+  all clear on unmount, derivations are per-frame-cheap, and the screens render bounded lists (≤170
+  cells) where `ScrollView` is the right tool rather than `FlatList`.)*
+- [x] SQLite index/query review. *(All SQL is parameterised — values never enter SQL text — and the
+  schema carries 18 covering indexes matching the query shapes: due items by `(exam_id, due_at)`,
+  answers by `(exam_id, subject_id, answered_at)` and the session/question unique index, the outbox
+  by `(status, next_attempt_at)` for the worker, and session lookups by status. One real defect:
+  two overlapping top-level writes — a deadline tick racing an answer, a bookmark tapped during a
+  submit — were refused with a spurious "nested transaction" error, so a real save failed. Both
+  engine adapters now run through a shared transaction gate (`database-port.ts`) that queues
+  concurrent writes in arrival order; a transaction genuinely opened inside another one is still
+  refused, via a bounded wait, with the same message (D-059, `tests/data/transaction-gate.test.ts`).)*
+- [x] security audit. *(Sign-in is the authorization-code flow with PKCE, and `state` is verified by
+  `expo-auth-session` before success is reported; the id token is read for its claims and never
+  treated as proof — the server verifies it. The transport refuses plaintext base URLs, identity and
+  tokens live in the keystore rather than SQLite, every query is parameterised, and no deep link
+  carries credentials. No findings.)*
+- [x] logging/privacy audit. *(The logger redacts by key (`token|secret|password|email|…`), truncates
+  long free text so question content cannot leak, suppresses debug/info in production, and buffers
+  analytics events in memory with a 100-event cap and dev-only property logging. No log call site
+  passes a learner's email, token or answer. No findings.)*
+- [x] dependency audit. *(5 distinct advisories underlie npm's 66 reports — `braces`,
+  `decode-uri-component`, `node-forge`, `sprintf-js`, `uuid` — and every one of them sits in a
+  build-time chain: the Expo CLI, Metro, Jest, and `xcode` under the config plugins. None is imported
+  by `src/` or `app/`, so none reaches the Hermes bundle; the fixes are upstream releases the SDK
+  pins. Recorded here and in `agent/BLOCKERS.md` rather than forced with `npm audit fix --force`.)*
+- [x] loading/error/empty/offline audit. *(Every screen renders its loading, error and empty states
+  through `RTStateView` (19 routes), every feature hook exposes a `status`, and "the request cannot be
+  served" paths are asserted screen by screen. Offline is the default posture: the local-only
+  transport and the outbox mean a build with no network behaves exactly like a build with one. No
+  findings.)*
+- [x] memory/startup review. *(Intervals in the quiz and mock runner clear on unmount, the transport
+  clears its abort timer, `LocalDataProvider` defers the database open by a tick and closes the
+  database on unmount, and the only module-level buffers — analytics and the log sink — are bounded
+  and replaceable. No unbounded growth and no listener leaks found.)*
 
 ## Phase 16 — Full regression
 - [ ] unit suite.

@@ -76,6 +76,41 @@ const auditPairs = (label: string, theme: ReturnType<typeof createTheme>, minimu
       background: colors.dangerSoft,
     },
     {
+      name: `${label}: danger text on canvas (error lines)`,
+      foreground: colors.dangerText,
+      background: colors.canvas,
+    },
+    {
+      name: `${label}: danger text on surface (error lines)`,
+      foreground: colors.dangerText,
+      background: colors.surface,
+    },
+    {
+      name: `${label}: success text on canvas`,
+      foreground: colors.successText,
+      background: colors.canvas,
+    },
+    {
+      name: `${label}: success text on surface`,
+      foreground: colors.successText,
+      background: colors.surface,
+    },
+    {
+      name: `${label}: secondary text on raised surface`,
+      foreground: colors.textSecondary,
+      background: colors.surfaceRaised,
+    },
+    {
+      name: `${label}: secondary text on soft surface`,
+      foreground: colors.textSecondary,
+      background: colors.surfaceSoft,
+    },
+    {
+      name: `${label}: accent text on raised surface`,
+      foreground: colors.accentText,
+      background: colors.surfaceRaised,
+    },
+    {
       name: `${label}: neutral badge text`,
       foreground: colors.onNeutralSoft,
       background: colors.neutralSoft,

@@ -419,14 +419,26 @@ export interface FinishSessionInput {
 }
 
 /** Marks a session finished. The score is passed in from the session's own answers. */
-export const finishSession = async ({
+/**
+ * Finishes are chained per session.
+ *
+ * The deadline's tick and a tap can both decide to finish at the same instant;
+ * run in order, the second one sees the session already completed and leaves the
+ * first instant standing — one finish, one truth (D-047's rule for a
+ * double-submitted write).
+ */
+const finishChains = new Map<string, Promise<void>>();
+
+const completeSession = async ({
   repositories,
   sessionId,
   correctCount,
   now = new Date(),
 }: FinishSessionInput): Promise<void> => {
   const session = await repositories.practice.getById(sessionId);
-  if (session === null) return;
+  // Finishing is idempotent: a session that is already completed keeps the
+  // instant it actually ended, so a stray second finish cannot rewrite history.
+  if (session === null || session.status === 'completed') return;
   const nowIso = now.toISOString();
   await repositories.practice.update(sessionId, {
     status: 'completed',
@@ -438,6 +450,24 @@ export const finishSession = async ({
       Math.round((now.getTime() - Date.parse(session.startedAt)) / 1000),
     ),
   });
+};
+
+export const finishSession = (input: FinishSessionInput): Promise<void> => {
+  const previous = finishChains.get(input.sessionId) ?? Promise.resolve();
+  const run = previous.then(
+    () => completeSession(input),
+    () => completeSession(input),
+  );
+  finishChains.set(input.sessionId, run);
+  run.then(
+    () => {
+      if (finishChains.get(input.sessionId) === run) finishChains.delete(input.sessionId);
+    },
+    () => {
+      if (finishChains.get(input.sessionId) === run) finishChains.delete(input.sessionId);
+    },
+  );
+  return run;
 };
 
 /** Leaves a session resumable; used when the learner closes it mid-way. */
