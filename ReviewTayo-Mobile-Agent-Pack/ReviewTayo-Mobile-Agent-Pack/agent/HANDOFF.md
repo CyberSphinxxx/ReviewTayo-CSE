@@ -1,22 +1,41 @@
 # Agent Handoff
 
 ## Current phase
-Phases 0–15 complete. Starting Phase 16 (Full regression).
+Phases 0–16 complete. Starting Phase 17 (Release readiness).
 
 ## Current task
-Phase 16 — Full regression: the unit, component, integration, DB/migration, offline and sync suites,
-the onboarding / Professional / Sub-Professional / Review / Mock E2E flows, visual QA and any
-regression fixes they surface.
+Phase 17 — Release readiness: the app icon and splash, the permission set, environment docs, a
+development build, the Android production build path, iOS-ready config, CI quality gates, the release
+checklist, Play Store and App Store preparation docs, and the final Definition of Done review.
 
 ## Next exact action
-Run the full gate first (`prettier --check`, `tsc --noEmit`, `eslint .`, `jest`, `expo export`), then
-walk the Phase 16 rows in `agent/MASTER-CHECKLIST.md` one at a time: for each suite and E2E flow,
-assert from the output that it covers what the row claims, add the missing coverage (a second exam
-pack through onboarding → practice → review → mock is the likely gap), and fix any regression it
-surfaces. Anything only a device can judge (TalkBack traversal, font scale to 200%, measured frame
-times, a delivered notification) stays in `agent/VISUAL-QA.md` as a capture item rather than being
-claimed. Do not add suppressions to make a check pass — fix the cause (D-003's discipline still
-applies).
+Work the Phase 17 rows in `agent/MASTER-CHECKLIST.md` one at a time, verifying rather than asserting:
+confirm from `app.json` and `expo config` that the icon, splash, identifiers and permissions are what
+the store expects; document the environment (env vars, both build paths) in the repo; check in a CI
+workflow that runs the same gate (format, lint, typecheck, tests, export); and only then write the
+release checklist and both store preparation docs. Read `DEFINITION-OF-DONE.md` first so the last row
+is a real review against the definition, not a summary. Anything needing a device, a signing key or a
+store account is already tracked in `agent/BLOCKERS.md` and `agent/VISUAL-QA.md` — keep it there and
+do not claim it.
+
+## Files changed (Phase 16)
+- `/mobile/src/services/practice.ts` — the phase's one regression fix: `startSession` now builds the
+  plan the mode owns (a daily question through the domain's `buildDailyQuestionPlan`, one question
+  preferring unseen material, and a similar-question session through `buildSimilarQuestionPlan`)
+  instead of passing the route's `count` default into the generic planner, and records
+  `requestedCount` from that plan rather than from the number the route happened to pass (D-061).
+- `/mobile/tests/app/release-journey.test.tsx` (new) — the continuous journey the per-screen suites
+  could not give: a fresh install through onboarding into its first answered question and its own
+  1/1 result with the records behind it, and an interrupted three-question set that is paused, has
+  the database file closed and reopened, and is offered back by Home with `1 / 3` and reopened as the
+  same session. Two harness facts are encoded here: `renderRouter`'s resolved value owns `unmount`,
+  and a second mount inside one test inherits the router store's navigation state, so one mount per
+  test.
+- `/mobile/tests/services/practice-session.test.ts` — the failing-first service test for the daily
+  question: asked with the route's default count of ten, the session still holds one question and
+  records `requestedCount: 1`.
+- The checklist row mapping for every suite and E2E flow lives in `agent/MASTER-CHECKLIST.md` beside
+  its row; the regression's evidence is in `agent/SESSION-LOG.md` (Session 15).
 
 ## Files changed (Phase 15)
 - `/mobile/src/components/primitives/RTText.tsx` — derives `accessibilityRole="header"` from

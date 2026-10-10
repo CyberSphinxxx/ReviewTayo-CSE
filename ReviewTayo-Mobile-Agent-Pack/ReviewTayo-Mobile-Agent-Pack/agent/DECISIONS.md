@@ -394,3 +394,13 @@ returns early once `status === 'finished'`), and finishing is serialized per ses
 `services/practice.ts` (`finishChains`) with `completeSession` a no-op once the row is `completed` — so
 the first result is the result, whatever a race or a re-render asks for. Same discipline as the
 deadline (D-049): the record of what happened is written once, then read.
+
+## D-061 — A mode's size belongs to the mode, not to the route's default
+Home's Daily Question row promises one question, but the quiz route gives every mode the same
+`count` default of ten, so the daily question arrived as a ten-question drill and the domain's own
+one-question planner was never called. `startSession` now decides the plan by the mode it was asked
+for — a similar-question session is one question about that idea, a daily question is one question
+from the domain's own `buildDailyQuestionPlan` (preferring unseen material), and everything else
+keeps the route's count — and the session records `requestedCount` from the plan the mode produced
+rather than from the number the route happened to pass. Route defaults are for screens; a session's
+size is a policy of its mode.

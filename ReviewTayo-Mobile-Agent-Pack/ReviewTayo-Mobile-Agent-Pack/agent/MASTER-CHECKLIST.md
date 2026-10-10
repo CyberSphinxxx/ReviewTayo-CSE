@@ -544,19 +544,62 @@ Status legend:
   and replaceable. No unbounded growth and no listener leaks found.)*
 
 ## Phase 16 — Full regression
-- [ ] unit suite.
-- [ ] component suite.
-- [ ] integration suite.
-- [ ] DB/migration suite.
-- [ ] offline suite.
-- [ ] sync suite.
-- [ ] E2E onboarding.
-- [ ] E2E Professional.
-- [ ] E2E Sub-Professional.
-- [ ] E2E Review.
-- [ ] E2E Mock.
-- [ ] visual QA.
-- [ ] regression fixes complete.
+- [x] unit suite. *(`tests/domain/` — 16 suites covering the exam registry, blueprint, validation,
+  session planning, mastery, home, learn, practice, progress, review, mock, notifications, identity,
+  sync and onboarding logic — plus `tests/content/` (the authored pack against its own rules) and
+  `tests/theme/` (28 colour pairs × 2 themes at WCAG AA). All green in the 49-suite run.)*
+- [x] component suite. *(`tests/components/primitives.test.tsx` — every primitive's roles, states,
+  labels, disabled/busy handling, heading derivation and text scaling. Green.)*
+- [x] integration suite. *(`tests/app/` — 13 suites driving the real Expo Router and a real migrated
+  database — plus `tests/services/` (8) and `tests/store/` (2). The suite now includes
+  `tests/app/release-journey.test.tsx`, the one continuous path: a fresh install through onboarding
+  into its first answered question, and an interrupted session surviving a close-and-reopen of the
+  database file.)*
+- [x] DB/migration suite. *(`tests/data/migrations.test.ts` applies every migration and asserts the
+  final schema and its version, `tests/data/repositories.test.ts` exercises each repository against
+  real SQLite including the constraints, and `tests/data/content-import.test.ts` covers the wholesale
+  version-gated import. Green.)*
+- [x] offline suite. *(`tests/data/offline-durability.test.ts` reopens a file-backed database and
+  asserts the unfinished session, its question order and its answers are all there; the local-only
+  transport's offline-everything behaviour is asserted in `tests/data/api-transport.test.ts`, and the
+  restart path is now also driven through the app in the release journey. Green.)*
+- [x] sync suite. *(`tests/domain/sync.test.ts` for events, backoff and every merge policy;
+  `tests/data/sync-outbox.test.ts` for the queue against real SQLite; `tests/services/sync.test.ts`
+  for the worker over a real database — delivery, backoff, retry, permanent failure, exhausted
+  attempts, a rejected event, an unreadable response and the drain after a long offline stretch.
+  Green.)*
+- [x] E2E onboarding. *(`tests/app/first-run-gate.test.tsx` — a fresh install is sent into the flow,
+  a half-saved plan is not treated as done, a returning learner goes Home;
+  `tests/app/onboarding-flow.test.tsx` — all eight steps, the committed plan and the reminder
+  schedule; `tests/app/release-journey.test.tsx` — the fresh install carries straight on into its
+  first answered question. Green.)*
+- [x] E2E Professional. *(`tests/app/home-screen.test.tsx`, `practice-screen.test.tsx`,
+  `mock-screen.test.tsx` and the release journey all run a seeded Professional profile through the
+  real screens — Home's recommendation and the Smart Drill it starts, the quiz, the mock paper and
+  the results they report. Green.)*
+- [x] E2E Sub-Professional. *(`tests/app/onboarding-flow.test.tsx` chooses the track on step 2 and
+  asserts it in the committed plan; `learn-screen.test.tsx` and `practice-screen.test.tsx` seed a
+  Sub-Professional profile and assert Clerical Ability appears (and Analytical, which the track does
+  not examine, does not). Green.)*
+- [x] E2E Review. *(`tests/app/review-screen.test.tsx` — the due count from the real queue, the empty
+  caught-up state, a card's face and its revealed answer, Again and Got it writing the schedules they
+  claim, the completion copy and the four lists. Green.)*
+- [x] E2E Mock. *(`tests/app/mock-screen.test.tsx` — the setup with the bank's honest shortfall, a
+  running paper with its clock, choices, flag and grid, pause and resume, submit with its summary,
+  the result with its sections and recommendation, and a paper whose time ran out while the app was
+  closed. Green.)*
+- [x] visual QA. *(Every screen's light/dark composition, spacing, type roles and colour roles are
+  asserted from the rendered tree and the tokens, including the hardening phase's contrast math; the
+  device pass — captures at 360×640 and 390×844, Extra Large text, TalkBack, a delivered notification
+  and measured frame times — remains tracked in `agent/VISUAL-QA.md`, blocked by the missing Android
+  SDK in this environment (B-EXT-3).)*
+- [x] regression fixes complete. *(The release journey found one real defect: Home's Daily Question
+  promises one question (“~1 min” on the row), but the quiz route handed every mode its default count
+  of ten — so the daily question was a 10-question drill, and the domain's purpose-built
+  `buildDailyQuestionPlan` (one question, preferring unseen material) was dead code. `startSession`
+  now builds the plan the mode owns and records `requestedCount` from that plan rather than from the
+  route's default (D-061). Covered by a service test and by the release journey. Gate re-run after
+  the fix: 49 suites / 723 tests green, export green.)*
 
 ## Phase 17 — Release readiness
 - [ ] icons.

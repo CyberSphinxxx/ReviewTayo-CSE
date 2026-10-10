@@ -660,3 +660,50 @@ did not announce themselves as headings; `RTText` now derives `accessibilityRole
 Phase 16 — Full regression: the unit, component, integration, DB/migration, offline and sync suites,
 the onboarding / Professional / Sub-Professional / Review / Mock E2E flows, visual QA and any
 regression fixes they surface.
+
+## Session 15 — 2026-10-11 — Phase 16
+### Phase 16 — Full regression (complete)
+The regression is one walk over every row of the checklist against the suite that actually exists, not
+a rerun by habit. Each row was mapped to its suites, the mapping is written into
+`MASTER-CHECKLIST.md` beside the row, and the one journey no suite covered was added: a single learner
+crossing routes in one continuous test.
+- The suite inventory behind the rows: `tests/domain/` (16), `tests/content/` (1), `tests/theme/` (1),
+  `tests/components/` (1), `tests/app/` (13), `tests/services/` (8), `tests/data/` (7),
+  `tests/store/` (2) — 49 suites in all.
+- **The missing journey** — `tests/app/release-journey.test.tsx`: a fresh install is sent into the
+  flow, onboards through every step, lands on Home, answers Home's Daily Question, reads its own 1/1
+  result and the record behind it; then a half-finished three-question set is paused, the database
+  file is closed, the app is reopened against the same file, and Home offers the resumed session with
+  `1 / 3` and reopens exactly that session. Every prior suite tested a screen or a service; this one
+  tests the path between them.
+- **The regression it found** — Home's Daily Question row promises one question (“~1 min”), but the
+  quiz route gives every mode the same default count of ten, and `startSession` passed that ten
+  straight to the generic planner. The daily question was a ten-question drill, and the domain's own
+  `buildDailyQuestionPlan` — one question, preferring unseen material — was dead code. `startSession`
+  now lets the mode decide its own plan and records `requestedCount` from that plan (D-061), so a
+  similar-question session is honestly 1 of 1 too. Covered by a service test (fails before the fix)
+  and by the journey test’s `Question 1 of 1` and `1/1`.
+- **Visual QA** stayed where it belongs: the light/dark composition of every screen is asserted from
+  the rendered tree and the tokens, and the device-only judgments (captures, TalkBack, a delivered
+  notification, measured frame times) remain in `agent/VISUAL-QA.md`, blocked by the absent Android
+  SDK (B-EXT-3).
+### Audit findings fixed this session
+- The release journey found the Daily Question defect above; it is the only regression the phase
+  surfaced, and it was fixed rather than documented.
+- The journey test itself needed two harness lessons: `renderRouter`'s resolved value (not the
+  thenable) owns `unmount`, and a second mount inside one test inherits the router store's previous
+  navigation state — so the restart test keeps to one mount per test and asserts the restart through
+  Home and the database.
+### Verification evidence
+| Command (from `mobile/`) | Result |
+|---|---|
+| `npx tsc --noEmit` | PASS |
+| `npx eslint .` | PASS — 0 errors, 0 warnings |
+| `npx prettier --check .` | PASS |
+| `npx jest` | PASS — 49 suites, 723 tests |
+| `npx expo export --platform android` | PASS — Hermes bundle emitted |
+
+### Next session starts at
+Phase 17 — Release readiness: icons, splash, permissions, environment docs, development build,
+Android production build path, iOS-ready config, CI quality gates, the release checklist, Play
+Store and App Store preparation docs, and the final Definition of Done review.

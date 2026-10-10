@@ -7,7 +7,7 @@ import type {
 } from '@/data/repositories';
 import type { DatabaseTransaction } from '@/data/local/database-port';
 import type { SessionMode, SessionPlan, SessionRequest } from '@/domain/exams';
-import { buildSessionPlan, buildSimilarQuestionPlan } from '@/domain/exams';
+import { buildDailyQuestionPlan, buildSessionPlan, buildSimilarQuestionPlan } from '@/domain/exams';
 import {
   masteryLevelFor,
   masteryLevelIndex,
@@ -81,21 +81,32 @@ export const startSession = async ({
       : (questions.find((question) => question.id === similarToQuestionId) ?? null);
 
   const plan =
-    missed === null
-      ? buildSessionPlan(
-          exam,
-          questions,
-          {
-            mode,
+    missed !== null
+      ? buildSimilarQuestionPlan(exam, questions, missed, random === undefined ? {} : { random })
+      : mode === 'daily-question'
+        ? // The daily question is one question by definition, and the domain's planner
+          // prefers material the learner has not seen. The route's `count` default is
+          // for the other modes and must not turn it into a drill.
+          buildDailyQuestionPlan(
+            exam,
+            questions,
             trackId,
-            questionCount,
-            ...(subjectIds === undefined ? {} : { subjectIds }),
-            ...(conceptIds === undefined ? {} : { conceptIds }),
-            ...(difficulties === undefined ? {} : { difficulties }),
-          } satisfies SessionRequest,
-          random === undefined ? {} : { random },
-        )
-      : buildSimilarQuestionPlan(exam, questions, missed, random === undefined ? {} : { random });
+            [],
+            random === undefined ? {} : { random },
+          )
+        : buildSessionPlan(
+            exam,
+            questions,
+            {
+              mode,
+              trackId,
+              questionCount,
+              ...(subjectIds === undefined ? {} : { subjectIds }),
+              ...(conceptIds === undefined ? {} : { conceptIds }),
+              ...(difficulties === undefined ? {} : { difficulties }),
+            } satisfies SessionRequest,
+            random === undefined ? {} : { random },
+          );
 
   const nowIso = now.toISOString();
   const timeLimitSeconds =
@@ -107,7 +118,9 @@ export const startSession = async ({
     trackId,
     mode,
     status: 'in-progress',
-    requestedCount: Math.max(0, Math.floor(questionCount)),
+    // What the plan actually asked the bank for, which is the honest count for a
+    // mode whose size the domain decides (the daily question, a similar question).
+    requestedCount: Math.max(0, Math.floor(plan.requestedCount)),
     correctCount: 0,
     startedAt: nowIso,
     updatedAt: nowIso,

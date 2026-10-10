@@ -110,6 +110,24 @@ describe('starting a session', () => {
     );
   });
 
+  it('serves the daily question as the one question it promises', async () => {
+    const { repositories } = await seed();
+    // Home promises a minute; the quiz route hands every mode its default count of
+    // ten. The mode, not the route's default, decides what a daily question is.
+    const started = await startSession({
+      repositories,
+      exam,
+      trackId: TRACK,
+      mode: 'daily-question',
+      questionCount: 10,
+      now: NOW,
+    });
+
+    expect(started.plan.questions).toHaveLength(1);
+    expect(started.session.requestedCount).toBe(1);
+    expect((await repositories.practice.getById(started.session.id))?.requestedCount).toBe(1);
+  });
+
   it('keeps a drill inside the concepts it was asked for', async () => {
     const { repositories } = await seed();
     const started = await startSession({

@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
-  "phase": "16-full-regression",
-  "currentTask": "Phase 16 — Full regression: unit, component, integration, DB/migration, offline and sync suites, the onboarding / Professional / Sub-Professional / Review / Mock E2E flows, visual QA and regression fixes",
-  "lastCompletedTask": "phase-15-hardening",
-  "nextAction": "Run the full gate, then walk the Phase 16 checklist row by row: assert each suite and E2E flow covers what the row claims, add missing coverage, and fix any regression it surfaces",
+  "phase": "17-release-readiness",
+  "currentTask": "Phase 17 — Release readiness: icons, splash, permissions, environment docs, development build, Android production build path, iOS-ready config, CI quality gates, release checklist, Play Store and App Store preparation docs, final Definition of Done review",
+  "lastCompletedTask": "phase-16-full-regression",
+  "nextAction": "Work the Phase 17 checklist row by row: verify icon/splash/permission config, document the environment and both build paths, set up CI quality gates, prepare store submission docs, and close with the Definition of Done review. Device-only or account-gated items stay in BLOCKERS.md/VISUAL-QA.md rather than being claimed",
   "lastSuccessfulBuild": "expo export --platform android (PASS)",
   "failingTests": [],
   "testSummary": {
-    "suites": 48,
-    "tests": 720,
-    "passed": 720,
+    "suites": 49,
+    "tests": 723,
+    "passed": 723,
     "failed": 0
   },
   "externalBlockers": [
@@ -50,7 +50,8 @@
     "12-mock-exam",
     "13-auth-sync",
     "14-notifications",
-    "15-hardening"
+    "15-hardening",
+    "16-full-regression"
   ],
   "contentStats": {
     "cseQuestions": 88,
@@ -86,7 +87,10 @@
     "phase-15: headings and the quiz live region are asserted from the rendered tree; TalkBack traversal and font-scale-to-200% behaviour can only be judged on a device, tracked in VISUAL-QA.md",
     "phase-15: the transaction gate queues concurrent writes and refuses a nested one after nestGuardMs; the refusal path is covered with real timers in tests/data/transaction-gate.test.ts, and a device pass adds nothing beyond the suite here",
     "phase-15: measured frame times and startup timing are not claimed — no Android SDK/emulator in this environment; device-profiler numbers are tracked in VISUAL-QA.md",
-    "phase-15: build-chain dependency advisories (5 distinct, none reaching the bundle) are recorded in BLOCKERS.md; clearing them requires upstream releases the Expo SDK pins"
+    "phase-15: build-chain dependency advisories (5 distinct, none reaching the bundle) are recorded in BLOCKERS.md; clearing them requires upstream releases the Expo SDK pins",
+    "phase-16: every suite and E2E row is mapped to its suites in MASTER-CHECKLIST.md, and tests/app/release-journey.test.tsx adds the one continuous path (fresh install → onboarding → first answer; interrupted session across a close-and-reopen)",
+    "phase-16: the only regression the phase found — Home's Daily Question served as a ten-question drill because the route's default count overrode the mode's own planner — is fixed in services/practice.ts (D-061) and covered by a service test and the journey test",
+    "phase-16: the visual QA row stays device-pending (captures, TalkBack, a delivered notification, measured frame times) and is tracked in VISUAL-QA.md, blocked by the missing Android SDK (B-EXT-3)"
   ],
   "environment": {
     "node": "24.16.0",
