@@ -404,3 +404,13 @@ from the domain's own `buildDailyQuestionPlan` (preferring unseen material), and
 keeps the route's count — and the session records `requestedCount` from the plan the mode produced
 rather than from the number the route happened to pass. Route defaults are for screens; a session's
 size is a policy of its mode.
+
+## D-062 — The resolver is the permission audit, and every release row names its evidence
+`app.json` says what was asked for; only `expo config --type introspect` says what the merged
+manifest will actually request, and the difference was two legacy storage permissions this app never
+uses. Release configuration is audited from the resolver — manifest permissions and plist
+contributions — anything unnecessary is removed with `tools:node="remove"` rather than hoped away,
+and plugin defaults that remain (SecureStore's Face ID string, notifications' `aps-environment`) are
+documented as inert instead of quietly unexplained. The same rule runs through the release
+documents: every row carries its evidence or names its external blocker, because a checklist tick
+with nothing behind it is a claim, not a check.

@@ -707,3 +707,54 @@ crossing routes in one continuous test.
 Phase 17 — Release readiness: icons, splash, permissions, environment docs, development build,
 Android production build path, iOS-ready config, CI quality gates, the release checklist, Play
 Store and App Store preparation docs, and the final Definition of Done review.
+
+## Session 16 — 2026-10-11 — Phase 17
+### Phase 17 — Release readiness (complete)
+Every release row was verified against the built app rather than copied from the phase text, and the
+phase found three real gaps.
+- **Permissions were audited with the resolver, not by reading `app.json`.**
+  `expo config --type introspect` showed the merged manifest requesting
+  `READ_EXTERNAL_STORAGE`/`WRITE_EXTERNAL_STORAGE` — legacy permissions this app never needs,
+  since content is bundled and every write goes to app-private storage. They are now blocked in
+  `app.json` and appear in the manifest as `tools:node="remove"`; the resolved permission set is
+  `INTERNET` plus the notifications plugin's `VIBRATE`/`POST_NOTIFICATIONS`, with
+  `SYSTEM_ALERT_WINDOW` identified as React Native's debug overlay. On iOS,
+  `ITSAppUsesNonExemptEncryption: false` is set and the two inert plugin defaults (SecureStore's
+  Face ID string, notifications' `aps-environment`) are documented instead of unexplained.
+- **The release paths were written down and made runnable.** `eas.json` now defines
+  development / preview / production profiles (dev client, channels, remote version source,
+  `autoIncrement`, per-profile `EXPO_PUBLIC_APP_ENV`); `.github/workflows/mobile-quality.yml` runs
+  the same gate CI-side (install from lockfile, format, lint, typecheck, tests, Android export); and
+  `docs/release-checklist.md`, `docs/play-store.md` and `docs/app-store.md` answer every release and
+  store row from what the code actually does.
+- **The missing device half of the E2E strategy was authored.** D-011 and the README promise
+  Maestro flows in `e2e/`; the directory did not exist. The ten pack journeys are now written there
+  (onboarding → first practice, Professional drill, Sub-Professional clerical, wrong-answer
+  recovery, Review Due, Settings appearance, mock, offline restart, interrupted quiz, interrupted
+  mock), sharing two onboarding subflows and using test ids rather than copy. They need a device to
+  run — execution stays external (B-EXT-3) — and every one of them is mirrored by a CI suite that
+  does run.
+- **The Definition of Done was reviewed row by row** in `agent/DEFINITION-OF-DONE-REVIEW.md`: every
+  row is verified with named evidence or explicitly marked external (B-EXT-1, B-EXT-2, B-EXT-3,
+  B-EXT-5).
+### Audit findings fixed this session
+- Legacy external-storage permissions removed from the merged Android manifest (a real Play-store
+  Data safety improvement, not a checkbox).
+- `e2e/` authored: ten Maestro flows plus their README, closing the gap D-011 had recorded but no
+  phase had delivered.
+- Release and store documentation written from the implementation; the release checklist names its
+  blockers instead of pretending they are done.
+### Verification evidence
+| Command (from `mobile/`) | Result |
+|---|---|
+| `npx expo config --type introspect` | PASS — resolved manifest reviewed (permissions, plist) |
+| `npx tsc --noEmit` | PASS |
+| `npx eslint .` | PASS — 0 errors, 0 warnings |
+| `npx prettier --check .` | PASS |
+| `npx jest` | PASS — 49 suites, 723 tests |
+| `npx expo export --platform android` | PASS — Hermes bundle emitted |
+
+### Next session starts at
+Nothing left in the phase list: Phases 0–17 are complete. What remains is the external pass — a
+device/emulator run of `e2e/` and the VISUAL-QA captures, live Google/API credentials, and a
+signing key plus store accounts (B-EXT-1…B-EXT-5). The Definition of Done review is the map of it.

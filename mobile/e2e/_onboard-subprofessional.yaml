@@ -1,0 +1,43 @@
+# Shared subflow: a clean install onboarded as Sub-Professional, on Home.
+appId: com.reviewtayo.cse
+---
+- launchApp:
+    clearState: true
+- assertVisible:
+    id: 'onboarding-step-account'
+- tapOn:
+    id: 'onboarding-primary'
+- assertVisible:
+    id: 'onboarding-step-level'
+- tapOn:
+    id: 'track-subprofessional'
+- tapOn:
+    id: 'onboarding-primary'
+- assertVisible:
+    id: 'onboarding-step-starting-point'
+- tapOn:
+    id: 'starting-point-beginner'
+- tapOn:
+    id: 'onboarding-primary'
+- assertVisible:
+    id: 'onboarding-step-schedule'
+- tapOn:
+    id: 'onboarding-primary'
+- assertVisible:
+    id: 'onboarding-step-goal'
+- tapOn:
+    id: 'onboarding-primary'
+- assertVisible:
+    id: 'onboarding-step-plan'
+- tapOn:
+    id: 'onboarding-primary'
+- assertVisible:
+    id: 'onboarding-step-preferences'
+- tapOn:
+    id: 'onboarding-primary'
+- assertVisible:
+    id: 'onboarding-step-done'
+- tapOn:
+    id: 'onboarding-primary'
+- assertVisible:
+    id: 'screen-home'

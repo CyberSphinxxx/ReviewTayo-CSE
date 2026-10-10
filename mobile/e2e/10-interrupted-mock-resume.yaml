@@ -1,0 +1,49 @@
+appId: com.reviewtayo.cse
+name: 10 — An interrupted mock paper resumes where it stopped
+---
+- runFlow:
+    file: _onboard-professional.yaml
+
+- tapOn: 'Practice tab'
+- tapOn:
+    id: 'practice-more-toggle'
+- tapOn:
+    id: 'practice-action-mock-exam'
+- assertVisible:
+    id: 'mock-setup'
+- tapOn:
+    id: 'mock-start'
+- assertVisible:
+    id: 'mock-stem'
+- tapOn:
+    id: 'mock-choice-.*'
+- tapOn:
+    id: 'mock-next'
+
+# Pause the paper, then leave the app entirely.
+- tapOn:
+    id: 'mock-pause'
+- assertVisible:
+    id: 'mock-paused'
+- tapOn: 'Close'
+- stopApp
+- launchApp:
+    clearState: false
+
+# Home remembers the paper, and reopening it returns to the paused panel with
+# the learner's answers and the clock's remainder intact.
+- assertVisible:
+    id: 'screen-home'
+- assertVisible:
+    id: 'home-resume'
+- assertVisible: 'Continue mock exam'
+- tapOn:
+    id: 'home-resume-action'
+- assertVisible:
+    id: 'screen-mock'
+- assertVisible:
+    id: 'mock-paused'
+- tapOn:
+    id: 'mock-resume'
+- assertVisible:
+    id: 'mock-stem'

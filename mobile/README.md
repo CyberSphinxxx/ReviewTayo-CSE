@@ -77,6 +77,21 @@ e2e/                    Maestro device flows
 5. **No magic colours in screens.** Only semantic theme roles.
 6. **No silent catches.** Expected failures are modelled as `Result` values.
 
+## Release
+
+- **Build profiles:** `eas.json` defines `development` (dev client, internal),
+  `preview` (internal) and `production` (auto-incrementing version, production channel),
+  each setting `EXPO_PUBLIC_APP_ENV`.
+- **Release checklist:** `docs/release-checklist.md` — every row answered with its
+  evidence, and the external blockers named.
+- **Store preparation:** `docs/play-store.md` (listing, Data safety, permissions,
+  testing tracks, signed bundle) and `docs/app-store.md` (listing, App Privacy,
+  purpose strings, TestFlight procedure).
+- **Device flows:** `e2e/` — the pack's ten E2E journeys as Maestro flows, mirrored by
+  the CI journey suites under `tests/app/`.
+- **CI:** `.github/workflows/mobile-quality.yml` runs format, lint, typecheck, tests and
+  the Android bundle export on every change under `mobile/`.
+
 ## Testing
 
 Domain, data and migration tests run in a plain Node environment against a real SQLite database

@@ -34,6 +34,14 @@
   deliberately did not force it. To be re-checked at Phase 17 against the next SDK release.
 - **Owner:** upstream (Expo/RN toolchain), watched by the project.
 
+### B-EXT-5 — EAS project id and store accounts
+- **Needed for:** cloud builds via EAS and any store submission.
+- **Status when blocked:** `eas.json` defines the development / preview / production profiles
+  (channels, remote version source, auto-increment, per-profile env), the local prebuild + Gradle
+  path is documented, and `expo config` resolves cleanly. `app.json` still carries a placeholder
+  `extra.eas.projectId`.
+- **Owner:** user (Expo account, Google Play Console, Apple Developer program).
+
 ## Internal blockers
 None.
 

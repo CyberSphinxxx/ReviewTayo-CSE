@@ -602,15 +602,54 @@ Status legend:
   the fix: 49 suites / 723 tests green, export green.)*
 
 ## Phase 17 — Release readiness
-- [ ] icons.
-- [ ] splash.
-- [ ] permissions.
-- [ ] environment docs.
-- [ ] development build.
-- [ ] Android production build path.
-- [ ] iOS-ready config.
-- [ ] CI quality gates.
-- [ ] release checklist.
-- [ ] Play Store preparation docs.
-- [ ] App Store preparation docs.
-- [ ] final Definition of Done review.
+- [x] icons. *(`assets/icon.png` (1024), the full Android adaptive set
+  (`android-icon-foreground/background/monochrome.png`) and the notification icon are configured
+  in `app.json` and resolved by `expo config`.)*
+- [x] splash. *(`expo-splash-screen` with `splash-icon.png`, `resizeMode: contain`, and separate
+  light (`#FBF4EC`) and dark (`#1D1015`) backgrounds — the two canvas colours, so the launch does
+  not flash a different theme.)*
+- [x] permissions. *(Audited with `expo config --type introspect`. The app asks only for what it
+  uses: `INTERNET` (sync, when a backend is configured) and, from the notifications plugin,
+  `VIBRATE` + `POST_NOTIFICATIONS`. The legacy `READ_EXTERNAL_STORAGE`/`WRITE_EXTERNAL_STORAGE` pair
+  that the resolved config had picked up is now explicitly blocked in `app.json` and appears in the
+  merged manifest as `tools:node="remove"`; `SYSTEM_ALERT_WINDOW` is React Native's debug overlay.
+  iOS: `ITSAppUsesNonExemptEncryption: false` and no API that needs a purpose string — the two
+  plugin defaults that do appear (SecureStore's Face ID string, notifications' `aps-environment`)
+  are documented as inert in `docs/app-store.md` rather than left unexplained.)*
+- [x] environment docs. *(`.env.example` plus the README's Environment section: the optional API
+  base URL (unset = local-only transport, the supported QA configuration), the three Google client
+  IDs (unset = fake provider, Guest mode fully functional) and the environment label. Only
+  `EXPO_PUBLIC_*` reaches the bundle; no secret belongs there and none is committed.)*
+- [x] development build. *(`eas.json` defines the development profile (dev client, internal
+  distribution, `development` channel) alongside preview and production. Actually running it needs
+  an Android SDK or an EAS account — external, B-EXT-3.)*
+- [x] Android production build path. *(The production profile uses `appVersionSource: remote` with
+  `autoIncrement`, the production channel and `EXPO_PUBLIC_APP_ENV=production`; the local
+  prebuild + Gradle path and the signed-AAB process are written in `docs/play-store.md`. The build
+  gate itself is proven here as the Hermes export (`expo export`), which is the CI proxy; a signed
+  artifact is external (B-EXT-3) and the EAS project id in `app.json` is still a placeholder the
+  owner must replace (B-EXT-5).)*
+- [x] iOS-ready config. *(Bundle id matches Android, `supportsTablet`, the `reviewtayo` scheme for
+  the auth return, export-compliance pre-answered, and every plugin's Info.plist contribution
+  reviewed. An archive needs an Apple team — external; the TestFlight procedure is written in
+  `docs/app-store.md`.)*
+- [x] CI quality gates. *(`.github/workflows/mobile-quality.yml` runs on every push/PR touching
+  `mobile/`: `npm ci` from the lockfile, format check, lint, strict typecheck, the full test suite
+  and the Android bundle export — the same gate a developer runs locally, with no secrets needed
+  because the default configuration is offline.)*
+- [x] release checklist. *(`mobile/docs/release-checklist.md`: every row of the pack's checklist
+  answered with its evidence, and the four rows that need a device, a signing key or a store
+  account marked external with the blocker named.)*
+- [x] Play Store preparation docs. *(`mobile/docs/play-store.md`: application id, name, icon,
+  short/full description drafts, Data safety answers taken from what the code stores, the
+  permission rationale table, content rating expectation, the internal → closed → production track
+  plan and both signed-bundle paths.)*
+- [x] App Store preparation docs. *(`mobile/docs/app-store.md`: bundle id, display name, icons,
+  App Privacy answers, the purpose-string review, signing/TestFlight/release procedure and the
+  review notes — the app is fully usable with no account, sign-in optional.)*
+- [x] final Definition of Done review. *(`agent/DEFINITION-OF-DONE-REVIEW.md`: every row of
+  `DEFINITION-OF-DONE.md` reviewed against the built app with its evidence, and the release rows
+  that cannot be executed here marked external (B-EXT-1, B-EXT-2, B-EXT-3, B-EXT-5). The review
+  also closed the one documentation gap it found: D-011 and the README promise a `e2e/` directory
+  of Maestro device flows that had never been authored — the ten pack journeys are now written
+  there, mirrored by the CI journey suites, with execution waiting on a device.)*

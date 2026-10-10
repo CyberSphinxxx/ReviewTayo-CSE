@@ -1,0 +1,49 @@
+appId: com.reviewtayo.cse
+name: 05 — Review Due, graded through the deck
+---
+- runFlow:
+    file: _onboard-professional.yaml
+
+# A checked answer is what puts a concept into the queue (a miss always does;
+# a first correct answer may not), so the flow states both outcomes.
+- tapOn:
+    id: 'home-daily-question'
+- assertVisible:
+    id: 'quiz-question'
+- tapOn:
+    id: 'quiz-choice-.*'
+- assertVisible:
+    id: 'quiz-feedback'
+
+- tapOn: 'Review tab'
+- assertVisible:
+    id: 'screen-review'
+
+# With something due: open the deck, reveal the answer, grade it, and let the
+# requeued card (Again) come back rather than ending the deck.
+- runFlow:
+    when:
+      visible:
+        id: 'review-start'
+    commands:
+      - tapOn:
+          id: 'review-start'
+      - assertVisible:
+          id: 'review-card'
+      - tapOn:
+          id: 'review-card-hint'
+      - assertVisible:
+          id: 'review-card-answer'
+      - tapOn:
+          id: 'review-again'
+      - assertVisible:
+          id: 'review-card'
+
+# With nothing due: the screen says so instead of drawing an empty deck.
+- runFlow:
+    when:
+      notVisible:
+        id: 'review-start'
+    commands:
+      - assertVisible:
+          id: 'review-caught-up'

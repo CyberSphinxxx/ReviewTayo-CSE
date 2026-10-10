@@ -1,22 +1,40 @@
 # Agent Handoff
 
 ## Current phase
-Phases 0–16 complete. Starting Phase 17 (Release readiness).
+Phases 0–17 complete. The app is release-ready; what remains is the external pass.
 
 ## Current task
-Phase 17 — Release readiness: the app icon and splash, the permission set, environment docs, a
-development build, the Android production build path, iOS-ready config, CI quality gates, the release
-checklist, Play Store and App Store preparation docs, and the final Definition of Done review.
+None in the phase list. The remaining work is the external release pass:
+- a development build on a device/emulator, then `e2e/` and the `agent/VISUAL-QA.md` captures;
+- the EAS project id (B-EXT-5), signing credentials and store accounts (B-EXT-3);
+- live Google client IDs and a backend URL for the verify-only paths (B-EXT-1, B-EXT-2).
 
 ## Next exact action
-Work the Phase 17 rows in `agent/MASTER-CHECKLIST.md` one at a time, verifying rather than asserting:
-confirm from `app.json` and `expo config` that the icon, splash, identifiers and permissions are what
-the store expects; document the environment (env vars, both build paths) in the repo; check in a CI
-workflow that runs the same gate (format, lint, typecheck, tests, export); and only then write the
-release checklist and both store preparation docs. Read `DEFINITION-OF-DONE.md` first so the last row
-is a real review against the definition, not a summary. Anything needing a device, a signing key or a
-store account is already tracked in `agent/BLOCKERS.md` and `agent/VISUAL-QA.md` — keep it there and
-do not claim it.
+Read `agent/DEFINITION-OF-DONE-REVIEW.md` — it is the map: every row is either verified with its
+evidence or marked with the blocker that owns it. Start the device pass with
+`mobile/e2e/README.md` (install Maestro, run flow 01, then the rest), taking the VISUAL-QA captures
+as each flow passes; the flows already encode the journeys, so no exploration is needed before the
+first run. Do not re-tick anything in the review from memory: re-run the gate (`npm run verify` plus
+`npx expo export --platform android`) before claiming a row still holds.
+
+## Files changed (Phase 17)
+- `/mobile/app.json` — the permission audit's fix: `android.blockedPermissions` removes the legacy
+  `READ_EXTERNAL_STORAGE`/`WRITE_EXTERNAL_STORAGE` pair from the merged manifest
+  (`tools:node="remove"`), leaving `INTERNET` plus the notifications plugin's permissions (D-062).
+- `/mobile/eas.json` (new) — development / preview / production build profiles: dev client, internal
+  distribution, channels, `appVersionSource: remote` with `autoIncrement`, and a per-profile
+  `EXPO_PUBLIC_APP_ENV`.
+- `/.github/workflows/mobile-quality.yml` (new, repo root) — the CI quality gate for `mobile/`:
+  install from the lockfile, format check, lint, typecheck, the full suite and the Android bundle
+  export; no secrets, because the default configuration is offline.
+- `/mobile/e2e/**` (new) — the ten device journeys from the pack's `testing/E2E-TESTS.md` as Maestro
+  flows, sharing `_onboard-professional`/`_onboard-subprofessional` subflows, plus a README that says
+  how to run them and that execution waits on a device.
+- `/mobile/docs/release-checklist.md`, `/mobile/docs/play-store.md`, `/mobile/docs/app-store.md` (new)
+  — every release and store row answered from the implementation, with the external rows named.
+- `/mobile/README.md` — a Release section linking the profiles, CI, device flows and the three docs.
+- `agent/DEFINITION-OF-DONE-REVIEW.md` (new) — the row-by-row review of `DEFINITION-OF-DONE.md` with
+  evidence or the owning blocker for every line.
 
 ## Files changed (Phase 16)
 - `/mobile/src/services/practice.ts` — the phase's one regression fix: `startSession` now builds the

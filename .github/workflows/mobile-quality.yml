@@ -1,0 +1,51 @@
+# The CI quality gate for the mobile app (release/CI-CD.md).
+#
+# It runs the same checks a developer runs locally (`npm run verify`) plus the
+# Android bundle export, so a change that cannot build cannot reach main. It
+# needs no secrets: the app's default configuration is offline (bundled content
+# and the local-only transport), which is also the supported QA configuration.
+name: mobile-quality
+
+on:
+  push:
+    paths:
+      - "mobile/**"
+      - ".github/workflows/mobile-quality.yml"
+  pull_request:
+    paths:
+      - "mobile/**"
+      - ".github/workflows/mobile-quality.yml"
+
+defaults:
+  run:
+    working-directory: mobile
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: mobile/package-lock.json
+
+      - name: Install from the lockfile
+        run: npm ci
+
+      - name: Format check
+        run: npm run format:check
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Tests (unit, component, integration, database, migration, offline, sync)
+        run: npm test
+
+      - name: Android bundle export
+        run: npx expo export --platform android

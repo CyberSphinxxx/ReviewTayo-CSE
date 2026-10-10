@@ -1,0 +1,29 @@
+appId: com.reviewtayo.cse
+name: 02 — Professional Smart Drill to its result
+---
+- runFlow:
+    file: _onboard-professional.yaml
+
+- tapOn:
+    id: 'home-smart-drill'
+- assertVisible:
+    id: 'quiz-question'
+- assertVisible: 'Question 1 of .*'
+
+# The drill is sized by the daily goal (ten by default); walk it to the end.
+- repeat:
+    times: 10
+    commands:
+      - tapOn:
+          id: 'quiz-choice-.*'
+      - assertVisible:
+          id: 'quiz-feedback'
+      - tapOn:
+          id: 'quiz-next'
+
+- assertVisible:
+    id: 'quiz-results'
+- assertVisible:
+    id: 'quiz-results-score'
+- tapOn:
+    id: 'quiz-results-done'

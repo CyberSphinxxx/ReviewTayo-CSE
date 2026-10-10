@@ -1,0 +1,32 @@
+appId: com.reviewtayo.cse
+name: 03 — Sub-Professional shows Clerical Ability
+---
+- runFlow:
+    file: _onboard-subprofessional.yaml
+
+# Learn names the track's own subjects; Clerical Ability is examined by
+# Sub-Professional only, and Analytical Ability is not part of this track.
+- tapOn: 'Learn tab'
+- assertVisible:
+    id: 'screen-learn'
+- assertVisible:
+    id: 'learn-subject-clerical-ability'
+- assertNotVisible:
+    id: 'learn-subject-analytical-ability'
+
+# Practice offers the same subject as its own targeted mode.
+- tapOn: 'Practice tab'
+- assertVisible:
+    id: 'screen-practice'
+- tapOn:
+    id: 'practice-more-toggle'
+- tapOn:
+    id: 'practice-action-practice-by-subject'
+- assertVisible:
+    id: 'subject-practice-clerical-ability'
+- assertNotVisible:
+    id: 'subject-practice-analytical-ability'
+- tapOn:
+    id: 'subject-practice-clerical-ability'
+- assertVisible:
+    id: 'quiz-question'

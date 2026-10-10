@@ -1,0 +1,35 @@
+appId: com.reviewtayo.cse
+name: 04 — A checked answer, its explanation and the recovery it offers
+---
+- runFlow:
+    file: _onboard-professional.yaml
+
+- tapOn:
+    id: 'home-daily-question'
+- assertVisible:
+    id: 'quiz-question'
+- tapOn:
+    id: 'quiz-choice-.*'
+
+# Every answer gets the verdict and the explanation.
+- assertVisible:
+    id: 'quiz-feedback'
+- assertVisible:
+    id: 'quiz-feedback-headline'
+- assertVisible:
+    id: 'quiz-feedback-explanation'
+
+# A miss also offers the two recoveries. Which choice the question's own order
+# puts first is content, so both offers are conditional rather than assumed.
+- runFlow:
+    when:
+      visible:
+        id: 'quiz-try-similar'
+    commands:
+      - assertVisible:
+          id: 'quiz-review-concept'
+      - tapOn:
+          id: 'quiz-try-similar'
+      - assertVisible:
+          id: 'quiz-question'
+      - assertVisible: 'Another Like This'

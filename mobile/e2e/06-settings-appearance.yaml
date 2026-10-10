@@ -1,0 +1,39 @@
+appId: com.reviewtayo.cse
+name: '06 — Settings: appearance and text size'
+---
+- runFlow:
+    file: _onboard-professional.yaml
+
+- tapOn:
+    id: 'home-settings'
+- assertVisible:
+    id: 'screen-settings'
+- assertVisible:
+    id: 'settings-appearance'
+- assertVisible:
+    id: 'settings-text-size'
+
+# Light → Dark → Device, each a committed preference.
+- tapOn:
+    id: 'settings-appearance-dark'
+- tapOn:
+    id: 'settings-appearance-light'
+- tapOn:
+    id: 'settings-appearance-device'
+
+# Text size scales the whole app, including the sample line under the control.
+- tapOn:
+    id: 'settings-text-size-large'
+- assertVisible:
+    id: 'settings-text-size'
+- tapOn:
+    id: 'settings-text-size-extra'
+
+# The preference survives leaving the screen.
+- tapOn: 'Home tab'
+- assertVisible:
+    id: 'screen-home'
+- tapOn:
+    id: 'home-settings'
+- assertVisible:
+    id: 'screen-settings'

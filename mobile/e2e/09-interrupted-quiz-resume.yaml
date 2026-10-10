@@ -1,0 +1,38 @@
+appId: com.reviewtayo.cse
+name: 09 — An interrupted quiz resumes where it stopped
+---
+- runFlow:
+    file: _onboard-professional.yaml
+
+# Start a ten-question drill, answer one, and walk away through Close.
+- tapOn:
+    id: 'home-smart-drill'
+- assertVisible:
+    id: 'quiz-question'
+- tapOn:
+    id: 'quiz-choice-.*'
+- assertVisible:
+    id: 'quiz-feedback'
+- tapOn:
+    id: 'quiz-next'
+- assertVisible: 'Question 2 of .*'
+- tapOn: 'Close'
+- assertVisible:
+    id: 'screen-home'
+
+# The interruption survives a relaunch, and Home offers it back.
+- stopApp
+- launchApp:
+    clearState: false
+- assertVisible:
+    id: 'screen-home'
+- assertVisible:
+    id: 'home-resume'
+- assertVisible: '1 / 10'
+- tapOn:
+    id: 'home-resume-action'
+
+# The same session, at the same question, with the first answer kept.
+- assertVisible:
+    id: 'quiz-question'
+- assertVisible: 'Question 2 of .*'

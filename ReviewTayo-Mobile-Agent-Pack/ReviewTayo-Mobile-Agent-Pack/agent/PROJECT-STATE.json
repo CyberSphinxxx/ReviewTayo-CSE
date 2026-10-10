@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "phase": "17-release-readiness",
-  "currentTask": "Phase 17 — Release readiness: icons, splash, permissions, environment docs, development build, Android production build path, iOS-ready config, CI quality gates, release checklist, Play Store and App Store preparation docs, final Definition of Done review",
-  "lastCompletedTask": "phase-16-full-regression",
-  "nextAction": "Work the Phase 17 checklist row by row: verify icon/splash/permission config, document the environment and both build paths, set up CI quality gates, prepare store submission docs, and close with the Definition of Done review. Device-only or account-gated items stay in BLOCKERS.md/VISUAL-QA.md rather than being claimed",
+  "phase": "17-release-readiness-complete",
+  "currentTask": "None in the phase list. Phases 0–17 are complete; the remaining work is the external release pass mapped in agent/DEFINITION-OF-DONE-REVIEW.md",
+  "lastCompletedTask": "phase-17-release-readiness",
+  "nextAction": "External pass: install a development build on a device and run e2e/ plus the VISUAL-QA captures; provide the EAS project id and store accounts (B-EXT-3, B-EXT-5); provide live Google client IDs and a backend URL for the verify-only paths (B-EXT-1, B-EXT-2)",
   "lastSuccessfulBuild": "expo export --platform android (PASS)",
   "failingTests": [],
   "testSummary": {
@@ -51,7 +51,8 @@
     "13-auth-sync",
     "14-notifications",
     "15-hardening",
-    "16-full-regression"
+    "16-full-regression",
+    "17-release-readiness"
   ],
   "contentStats": {
     "cseQuestions": 88,
@@ -90,7 +91,10 @@
     "phase-15: build-chain dependency advisories (5 distinct, none reaching the bundle) are recorded in BLOCKERS.md; clearing them requires upstream releases the Expo SDK pins",
     "phase-16: every suite and E2E row is mapped to its suites in MASTER-CHECKLIST.md, and tests/app/release-journey.test.tsx adds the one continuous path (fresh install → onboarding → first answer; interrupted session across a close-and-reopen)",
     "phase-16: the only regression the phase found — Home's Daily Question served as a ten-question drill because the route's default count overrode the mode's own planner — is fixed in services/practice.ts (D-061) and covered by a service test and the journey test",
-    "phase-16: the visual QA row stays device-pending (captures, TalkBack, a delivered notification, measured frame times) and is tracked in VISUAL-QA.md, blocked by the missing Android SDK (B-EXT-3)"
+    "phase-16: the visual QA row stays device-pending (captures, TalkBack, a delivered notification, measured frame times) and is tracked in VISUAL-QA.md, blocked by the missing Android SDK (B-EXT-3)",
+    "phase-17: the ten Maestro device flows in e2e/ are authored and mirrored by CI journey suites but cannot be executed here (no Android SDK/emulator); running them is part of the device pass in VISUAL-QA.md",
+    "phase-17: the development build, the signed production AAB/APK and the iOS archive need signing credentials and store accounts (B-EXT-3, B-EXT-5); the profiles, paths and configuration are verified and documented in docs/release-checklist.md, docs/play-store.md and docs/app-store.md",
+    "phase-17: app.json still carries a placeholder extra.eas.projectId; the owner replaces it with the real EAS project before a cloud build (B-EXT-5)"
   ],
   "environment": {
     "node": "24.16.0",

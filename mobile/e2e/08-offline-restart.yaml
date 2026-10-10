@@ -1,0 +1,36 @@
+appId: com.reviewtayo.cse
+name: 08 — Offline practice survives an app restart
+---
+- runFlow:
+    file: _onboard-professional.yaml
+
+# This build's default transport is local-only, so "offline" is not a mode the
+# app has to be put into: nothing above ever touched a network. Answer one
+# question, then kill and relaunch the app rather than clearing its state.
+- tapOn:
+    id: 'home-daily-question'
+- assertVisible:
+    id: 'quiz-question'
+- tapOn:
+    id: 'quiz-choice-.*'
+- assertVisible:
+    id: 'quiz-feedback'
+- tapOn:
+    id: 'quiz-next'
+- assertVisible:
+    id: 'quiz-results'
+
+# Kill the app from the results screen; the launch after this is the test.
+- stopApp
+- launchApp:
+    clearState: false
+
+# The launch is a returning learner: straight to Home, with the day's work kept.
+- assertVisible:
+    id: 'screen-home'
+- tapOn:
+    id: 'home-progress'
+- assertVisible:
+    id: 'screen-progress'
+- assertVisible:
+    id: 'progress-score'

@@ -1,0 +1,75 @@
+appId: com.reviewtayo.cse
+name: 01 — Fresh install, onboarding, first practice
+---
+- launchApp:
+    clearState: true
+
+# Step 1 — account.
+- assertVisible:
+    id: 'onboarding-step-account'
+- tapOn:
+    id: 'onboarding-primary'
+
+# Step 2 — level.
+- assertVisible:
+    id: 'onboarding-step-level'
+- tapOn:
+    id: 'track-professional'
+- tapOn:
+    id: 'onboarding-primary'
+
+# Step 3 — starting point.
+- assertVisible:
+    id: 'onboarding-step-starting-point'
+- tapOn:
+    id: 'starting-point-beginner'
+- tapOn:
+    id: 'onboarding-primary'
+
+# Step 4 — study days (keep the defaults).
+- assertVisible:
+    id: 'onboarding-step-schedule'
+- tapOn:
+    id: 'onboarding-primary'
+
+# Step 5 — daily goal.
+- assertVisible:
+    id: 'onboarding-step-goal'
+- tapOn:
+    id: 'onboarding-primary'
+
+# Step 6 — plan preview.
+- assertVisible:
+    id: 'onboarding-step-plan'
+- assertVisible:
+    id: 'plan-card'
+- tapOn:
+    id: 'onboarding-primary'
+
+# Step 7 — appearance and reminders.
+- assertVisible:
+    id: 'onboarding-step-preferences'
+- tapOn:
+    id: 'onboarding-primary'
+
+# Step 8 — completion, into Home.
+- assertVisible:
+    id: 'onboarding-step-done'
+- tapOn:
+    id: 'onboarding-primary'
+- assertVisible:
+    id: 'screen-home'
+
+# First practice: the daily question, answered, scored.
+- tapOn:
+    id: 'home-daily-question'
+- assertVisible:
+    id: 'quiz-question'
+- tapOn:
+    id: 'quiz-choice-.*'
+- assertVisible:
+    id: 'quiz-feedback'
+- tapOn:
+    id: 'quiz-next'
+- assertVisible:
+    id: 'quiz-results'

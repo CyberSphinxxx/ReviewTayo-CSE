@@ -1,0 +1,57 @@
+appId: com.reviewtayo.cse
+name: 07 — Practice → Mock exam → result
+---
+- runFlow:
+    file: _onboard-professional.yaml
+
+- tapOn: 'Practice tab'
+- assertVisible:
+    id: 'screen-practice'
+- tapOn:
+    id: 'practice-more-toggle'
+- assertVisible:
+    id: 'practice-action-mock-exam'
+- tapOn:
+    id: 'practice-action-mock-exam'
+
+# Setup states the paper's facts, including the bank's honest shortfall.
+- assertVisible:
+    id: 'screen-mock'
+- assertVisible:
+    id: 'mock-setup'
+- assertVisible:
+    id: 'mock-fact-items'
+
+# Sit a short stretch of the paper, flag one item, then submit.
+- tapOn:
+    id: 'mock-start'
+- assertVisible:
+    id: 'mock-stem'
+- tapOn:
+    id: 'mock-choice-.*'
+- tapOn:
+    id: 'mock-flag'
+- tapOn:
+    id: 'mock-next'
+- tapOn:
+    id: 'mock-pause'
+- assertVisible:
+    id: 'mock-paused'
+- tapOn:
+    id: 'mock-resume'
+- tapOn:
+    id: 'mock-submit'
+- assertVisible:
+    id: 'mock-submit-summary'
+- tapOn:
+    id: 'mock-submit-confirm-action'
+
+# The result is a score, its sections and one honest next step.
+- assertVisible:
+    id: 'mock-result'
+- assertVisible:
+    id: 'mock-score'
+- assertVisible:
+    id: 'mock-sections'
+- assertVisible:
+    id: 'mock-recommendation'

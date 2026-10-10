@@ -1,18 +1,19 @@
 # Project State
 
-**Phase:** 16 — Full regression (complete) → starting Phase 17 — Release readiness
-**Current task:** Phase 17 — Release readiness: icons, splash, permissions, environment docs, a
-development build, the Android production build path, iOS-ready config, CI quality gates, the release
-checklist, Play Store and App Store preparation docs, and the final Definition of Done review.
-**Last completed task:** Phase 16 Full regression — every checklist row mapped to the suites that
-exist and recorded beside it, one new continuous journey suite (fresh install → onboarding → first
-answered question; interrupted session surviving a close-and-reopen), and the one regression it
-found fixed: Home's Daily Question was served as a ten-question drill because the route's default
-count overrode the mode's own one-question planner (D-061).
-**Next action:** Work the Phase 17 checklist row by row: verify the icon/splash/permission config
-honestly, document the environment and both build paths, set up the CI quality gates, prepare the
-store submission docs, and close with the Definition of Done review. Anything that needs a device or
-store account stays tracked in `BLOCKERS.md`/`VISUAL-QA.md` rather than being claimed.
+**Phase:** 17 — Release readiness (complete). Phases 0–17 are done; what remains is the external
+release pass (device, credentials, store accounts).
+**Current task:** None in the phase list. The Definition of Done review
+(`agent/DEFINITION-OF-DONE-REVIEW.md`) is the map of what is left: a device/emulator run of `e2e/`
+and the VISUAL-QA captures, live Google/API credentials, a signing key and store accounts
+(B-EXT-1…B-EXT-5).
+**Last completed task:** Phase 17 Release readiness — permissions audited from the resolver (legacy
+storage permissions blocked in the merged manifest), `eas.json` profiles and the CI quality gate
+added, the ten promised Maestro flows authored in `e2e/`, and the release / Play / App Store
+documents written from the implementation, closing with the row-by-row Definition of Done review.
+**Next action:** The external pass, in this order: install a development build on a device and run
+`e2e/` plus the VISUAL-QA captures; provide the EAS project id (B-EXT-5) and signing/store accounts
+(B-EXT-3); provide live Google client IDs and a backend URL for the verify-only paths (B-EXT-1/2).
+Nothing else is code.
 **Last successful build:** `npx expo export --platform android` → PASS (Hermes bundle)
 **Known failing tests:** None. `npx jest` → 723 passed / 723.
 **External blockers:** Live Google OAuth credentials and a production API endpoint (verify-only;
@@ -54,16 +55,17 @@ bundle) are recorded as a limitation, not fixed by force.
 - do not refactor the web app merely to share code.
 
 ## Decisions added this session
-D-061 a mode's size belongs to the mode, not to the route's default.
-Previous session: D-059 overlapping writes queue, a nested transaction is still an error · D-060 a
+D-062 the resolver is the permission audit, and every release row names its evidence.
+Previous session: D-061 a mode's size belongs to the mode, not to the route's default.
+Earlier session: D-059 overlapping writes queue, a nested transaction is still an error · D-060 a
 finished session owns no clock, and finishing is idempotent.
-Earlier session: D-057 permission is asked only at the point of value · D-058 the schedule is rebuilt
-whole, and a denied device is reported, not nagged.
-Two sessions ago: D-051 a guest is a device, not a missing account · D-052 sync is a drain, not a
+Two sessions ago: D-057 permission is asked only at the point of value · D-058 the schedule is
+rebuilt whole, and a denied device is reported, not nagged.
+Three sessions ago: D-051 a guest is a device, not a missing account · D-052 sync is a drain, not a
 daemon · D-053 an answer appends its sync event in the same transaction · D-054 each kind of change
 has its own merge policy, and settings are intents · D-055 the transport is the only thing that talks
 to a network · D-056 signing in does not depend on the backend.
-Three sessions ago: D-047 a mock counts through the same answer writer practice uses · D-048 a mock
+Four sessions ago: D-047 a mock counts through the same answer writer practice uses · D-048 a mock
 reveals nothing until it is submitted · D-049 the clock is a deadline and an expired paper is still a
 result · D-050 a paper is scored out of the items it holds, and unanswered counts wrong.
 Earlier session: D-043 the Study Score is a mark, not a forecast · D-044 Progress names the subject

@@ -18,6 +18,10 @@
     },
     "android": {
       "package": "com.reviewtayo.cse",
+      "blockedPermissions": [
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE"
+      ],
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": true,
       "adaptiveIcon": {
