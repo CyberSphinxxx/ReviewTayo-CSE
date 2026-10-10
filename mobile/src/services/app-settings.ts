@@ -55,6 +55,22 @@ export interface SaveSettingsOptions {
   readonly transaction?: WriteOptions['transaction'];
 }
 
+/**
+ * A strictly increasing instant.
+ *
+ * The settings row's `updatedAt` is both the merge clock (latest intent wins) and
+ * the sync event's idempotency key, so two changes inside the same millisecond —
+ * a switch and a preset tapped one after the other — must not share it. Without
+ * this, the second write kept the row but collided on the outbox key, leaving the
+ * change unsynced and the save reported as failed.
+ */
+export const nextSettingsInstant = (candidate: string, previous: string): string => {
+  const candidateMs = Date.parse(candidate);
+  const previousMs = Date.parse(previous);
+  if (!Number.isFinite(candidateMs) || !Number.isFinite(previousMs)) return candidate;
+  return candidateMs > previousMs ? candidate : new Date(previousMs + 1).toISOString();
+};
+
 export const saveAppSettings = async (
   repositories: Repositories,
   patch: AppSettingsPatch,
@@ -68,7 +84,7 @@ export const saveAppSettings = async (
     ...(patch.remindersEnabled === undefined ? {} : { remindersEnabled: patch.remindersEnabled }),
     ...(patch.reminderTime === undefined ? {} : { reminderTime: patch.reminderTime }),
     ...(patch.reminderTimezone === undefined ? {} : { reminderTimezone: patch.reminderTimezone }),
-    updatedAt: now.toISOString(),
+    updatedAt: nextSettingsInstant(now.toISOString(), current.updatedAt),
   };
   const options = transaction === undefined ? {} : { transaction };
   await repositories.settings.save(next, options);

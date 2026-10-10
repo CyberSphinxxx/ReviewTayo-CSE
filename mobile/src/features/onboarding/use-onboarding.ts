@@ -29,6 +29,11 @@ import type { ExamRuleConfig } from '@/domain/exams/types';
 import type { TextSizePreference, ThemePreference } from '@/domain/preferences';
 import { AppError, toAppError } from '@/domain/result';
 import { activeExam } from '@/services/exams';
+import {
+  createExpoNotificationScheduler,
+  syncStudyReminders,
+  type NotificationScheduler,
+} from '@/services/notifications';
 import { commitOnboarding, loadOnboardingContext } from '@/services/onboarding';
 import { useAppearance, type AppearanceState } from '@/store/AppearanceProvider';
 
@@ -48,6 +53,8 @@ export interface UseOnboardingOptions {
   /** Called after a successful commit; the screen decides where to go. */
   readonly onCommitted?: (startPractice: boolean) => void;
   readonly initialStep?: OnboardingStepId;
+  /** Test seam; defaults to the device's own notification scheduler. */
+  readonly scheduler?: NotificationScheduler;
 }
 
 export interface CustomGoalState {
@@ -98,6 +105,7 @@ export const useOnboarding = ({
   repositories,
   onCommitted,
   initialStep,
+  scheduler,
 }: UseOnboardingOptions): OnboardingModel => {
   const appearance = useAppearance();
   const [phase, setPhase] = useState<OnboardingPhase>('loading');
@@ -276,6 +284,15 @@ export const useOnboarding = ({
             themePreference: draft.themePreference,
             textSize: draft.textSize,
           });
+          // The plan just changed: reminders follow it in the same breath. Turning
+          // reminders on during onboarding is the point of value, so that is when
+          // permission is asked for — and the commit never fails because a
+          // notification could not be scheduled.
+          await syncStudyReminders({
+            repositories,
+            scheduler: scheduler ?? createExpoNotificationScheduler(),
+            requestPermission: draft.remindersEnabled,
+          });
           onCommitted?.(startPractice);
         } catch (cause) {
           setError(toAppError(cause, 'Could not save your plan.'));
@@ -283,7 +300,7 @@ export const useOnboarding = ({
         }
       })();
     },
-    [applyAppearance, draft, exam, issue, onCommitted, repositories],
+    [applyAppearance, draft, exam, issue, onCommitted, repositories, scheduler],
   );
 
   const retry = useCallback(() => {

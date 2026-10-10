@@ -11,12 +11,7 @@ import type { ExamRuleConfig } from '@/domain/exams/types';
 import type { OnboardingStepId } from '@/domain/onboarding';
 import type { TextSizePreference, ThemePreference } from '@/domain/preferences';
 import { toAppError, type AppError } from '@/domain/result';
-import {
-  deviceTimezone,
-  loadAppSettings,
-  saveAppSettings,
-  type AppSettingsPatch,
-} from '@/services/app-settings';
+import { loadAppSettings, saveAppSettings, type AppSettingsPatch } from '@/services/app-settings';
 import { activeExam } from '@/services/exams';
 import { useAppearance } from '@/store/AppearanceProvider';
 
@@ -42,7 +37,6 @@ export interface SettingsModel {
   readonly reload: () => void;
   readonly setTheme: (preference: ThemePreference) => void;
   readonly setTextSize: (textSize: TextSizePreference) => void;
-  readonly setReminders: (enabled: boolean) => void;
   readonly openOnboarding: (step?: OnboardingStepId) => void;
 }
 
@@ -111,17 +105,6 @@ export const useSettings = (repositories: Repositories): SettingsModel => {
     [appearance, persist],
   );
 
-  const setReminders = useCallback(
-    (remindersEnabled: boolean) => {
-      persist(
-        remindersEnabled
-          ? { remindersEnabled, reminderTimezone: deviceTimezone() }
-          : { remindersEnabled },
-      );
-    },
-    [persist],
-  );
-
   const openOnboarding = useCallback(
     (step?: OnboardingStepId) => {
       router.push({
@@ -145,7 +128,6 @@ export const useSettings = (repositories: Repositories): SettingsModel => {
     },
     setTheme,
     setTextSize,
-    setReminders,
     openOnboarding,
   };
 };

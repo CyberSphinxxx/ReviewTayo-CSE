@@ -120,5 +120,16 @@ Do not require pixel-perfect HTML matching. Require faithful design intent and n
   waiting queue, and with the sync notice visible — light and dark, 360×640 and 390×844, Standard and
   Extra Large. A device pass with live Google client IDs is also the only way to see the consent screen
   the learner actually meets.
-- Phases 5–12 captures are still pending a device/emulator pass; the settings Account section is real as
-  of Phase 13, and captures are collected as each phase lands.
+- Phase 14: the reminder section exists in both themes and its states are asserted from the rendered
+  tree and an injected scheduler — the toggle, the five time presets with `7:00 PM` selected, and the
+  status line saying what the device will actually do (`Reminds you Mon, Wed, Fri and Sat.`,
+  `Notifications are turned off for ReviewTayo in your device settings.`, `Choose your study days to
+  get a reminder.`). What automated tests cannot judge is exactly what this feature lives on: the OS
+  permission dialog as the learner meets it, a notification actually arriving on the locked phone at
+  the chosen time, and whether the denied path really is a quiet line rather than a nudge. Capture
+  Settings' Reminders section on, off, after a denial and with no study days chosen — light and dark,
+  360×640 and 390×844, Standard and Extra Large — plus the delivered notification itself on a real
+  device (permission sheet, the scheduled list under Android's notification settings, and one arrival
+  at 7:00 PM with the app closed).
+- Phases 5–14 captures are still pending a device/emulator pass; reminders are real as of Phase 14,
+  and captures are collected as each phase lands.

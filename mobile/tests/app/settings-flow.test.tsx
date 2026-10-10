@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import * as Notifications from 'expo-notifications';
 import * as SecureStore from 'expo-secure-store';
 import { fireEvent, renderRouter, screen, waitFor } from 'expo-router/testing-library';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -275,5 +276,131 @@ describe('settings account', () => {
 
     expect(screen.getByText('Ada Lovelace')).toBeOnTheScreen();
     expect(screen.getByTestId('settings-sign-out')).toBeOnTheScreen();
+  });
+});
+
+describe('settings reminders', () => {
+  let db: DatabasePort;
+  let repositories: Repositories;
+
+  const scheduleReminder = jest.mocked(Notifications.scheduleNotificationAsync);
+  const permission = jest.mocked(Notifications.getPermissionsAsync);
+  const requestPermission = jest.mocked(Notifications.requestPermissionsAsync);
+
+  beforeEach(async () => {
+    jest.clearAllMocks();
+    permission.mockResolvedValue({ status: 'undetermined', granted: false } as Awaited<
+      ReturnType<typeof Notifications.getPermissionsAsync>
+    >);
+    // A faithful device fake: granting the permission changes what the next read
+    // reports, which is exactly what the screen re-reads after the toggle.
+    requestPermission.mockImplementation(async () => {
+      const granted = { status: 'granted', granted: true } as Awaited<
+        ReturnType<typeof Notifications.requestPermissionsAsync>
+      >;
+      permission.mockResolvedValue(granted);
+      return granted;
+    });
+    scheduleReminder.mockResolvedValue('notification-id');
+
+    db = await openNodeDatabase();
+    await runMigrations(db);
+    repositories = createLocalRepositories(db);
+    await repositories.profile.save({
+      examId: 'cse',
+      trackId: 'professional',
+      startingPoint: 'reviewing',
+      examDate: null,
+      studyDays: ['Mon', 'Wed'],
+      sessionLength: 'regular',
+      dailyGoal: 10,
+      onboardingCompletedAt: COMPLETED_AT,
+      createdAt: COMPLETED_AT,
+      updatedAt: COMPLETED_AT,
+    });
+    await repositories.settings.save({
+      themePreference: 'light',
+      textSize: 'standard',
+      remindersEnabled: false,
+      reminderTime: '19:00',
+      reminderTimezone: null,
+      updatedAt: COMPLETED_AT,
+    });
+  });
+
+  it('says reminders are off, then schedules the learner’s own days when turned on', async () => {
+    await renderSettings(db);
+
+    expect(screen.getByTestId('settings-reminder-status')).toHaveTextContent('Reminders are off.');
+
+    await fireEvent(screen.getByTestId('settings-reminders'), 'valueChange', true);
+
+    await waitFor(() =>
+      expect(screen.getByTestId('settings-reminder-status')).toHaveTextContent(
+        'Reminds you Mon and Wed at 7:00 PM.',
+      ),
+    );
+    expect((await repositories.settings.get())?.remindersEnabled).toBe(true);
+    // Two study days, two weekly reminders — at the learner's own time.
+    expect(scheduleReminder).toHaveBeenCalledTimes(2);
+    expect(scheduleReminder).toHaveBeenCalledWith(
+      expect.objectContaining({
+        identifier: 'study-reminder-0',
+        trigger: expect.objectContaining({ weekday: 2, hour: 19, minute: 0 }),
+      }),
+    );
+    expect(scheduleReminder).toHaveBeenCalledWith(
+      expect.objectContaining({
+        identifier: 'study-reminder-2',
+        trigger: expect.objectContaining({ weekday: 4, hour: 19, minute: 0 }),
+      }),
+    );
+  });
+
+  it('moves the reminder when the time changes', async () => {
+    // Notifications are already allowed here, so the only thing under test is
+    // whether a changed time moves the schedule.
+    permission.mockResolvedValue({ status: 'granted', granted: true } as Awaited<
+      ReturnType<typeof Notifications.getPermissionsAsync>
+    >);
+
+    await renderSettings(db);
+    await fireEvent(screen.getByTestId('settings-reminders'), 'valueChange', true);
+    await waitFor(() =>
+      expect(screen.getByTestId('settings-reminder-status')).toHaveTextContent(
+        'Reminds you Mon and Wed at 7:00 PM.',
+      ),
+    );
+    scheduleReminder.mockClear();
+
+    await tap('settings-reminder-time-07:00');
+
+    await waitFor(() =>
+      expect(screen.getByTestId('settings-reminder-status')).toHaveTextContent(
+        'Reminds you Mon and Wed at 7:00 AM.',
+      ),
+    );
+    expect((await repositories.settings.get())?.reminderTime).toBe('07:00');
+    expect(scheduleReminder).toHaveBeenCalledTimes(2);
+    expect(scheduleReminder).toHaveBeenCalledWith(
+      expect.objectContaining({ trigger: expect.objectContaining({ hour: 7, minute: 0 }) }),
+    );
+  });
+
+  it('keeps the preference and reports a blocked device honestly', async () => {
+    permission.mockResolvedValue({ status: 'denied', granted: false } as Awaited<
+      ReturnType<typeof Notifications.getPermissionsAsync>
+    >);
+
+    await renderSettings(db);
+    await fireEvent(screen.getByTestId('settings-reminders'), 'valueChange', true);
+
+    await waitFor(() =>
+      expect(screen.getByTestId('settings-reminder-status')).toHaveTextContent(
+        'Notifications are turned off for ReviewTayo in your device settings.',
+      ),
+    );
+    expect((await repositories.settings.get())?.remindersEnabled).toBe(true);
+    expect(scheduleReminder).not.toHaveBeenCalled();
   });
 });

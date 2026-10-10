@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import * as Notifications from 'expo-notifications';
 import { fireEvent, renderRouter, screen, waitFor } from 'expo-router/testing-library';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
@@ -102,6 +103,9 @@ const tap = async (testID: string) => {
 };
 
 describe('onboarding flow', () => {
+  const scheduleReminder = jest.mocked(Notifications.scheduleNotificationAsync);
+  const requestPermission = jest.mocked(Notifications.requestPermissionsAsync);
+
   let db: DatabasePort;
   let repositories: Repositories;
 
@@ -184,6 +188,17 @@ describe('onboarding flow', () => {
       textSize: 'large',
       remindersEnabled: true,
     });
+
+    // Turning reminders on during onboarding is the point of value: permission is
+    // asked for there and then, and the plan's own study days and time are used.
+    expect(requestPermission).toHaveBeenCalled();
+    expect(scheduleReminder).toHaveBeenCalledTimes(3);
+    expect(scheduleReminder).toHaveBeenCalledWith(
+      expect.objectContaining({
+        identifier: 'study-reminder-0',
+        trigger: expect.objectContaining({ weekday: 2, hour: 19, minute: 0 }),
+      }),
+    );
 
     const active = await repositories.studyPlans.getActive('cse');
     expect(active).not.toBeNull();

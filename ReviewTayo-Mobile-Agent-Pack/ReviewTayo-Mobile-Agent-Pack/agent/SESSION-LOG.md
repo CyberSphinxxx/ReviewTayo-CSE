@@ -531,3 +531,54 @@ client IDs and the production API base URL/credentials (`agent/BLOCKERS.md`).
 ### Next session starts at
 Phase 14 — Notifications: the permission request, the reminder schedule on study days at the learner's
 chosen time, the denied-permission state, and rescheduling whenever the preference changes.
+
+## Session 13 — 2026-10-10 — Phase 14
+### Phase 14 — Notifications (complete)
+- `domain/notifications/` is the schedule as data: the time is parsed and printed (`7:00 PM`) rather
+  than trusted, five presets name the reasonable evenings, the plan's Monday-first study days are
+  mapped onto the API's Sunday-first weekday, and one `buildReminderPlan` decides — from study days,
+  time and daily goal — which weekly reminders exist and what they say. No plan means one of three
+  honest reasons (`off`, `needs-days`, `needs-time`), never a silent nothing.
+- `services/notifications.ts` is the device boundary: a `NotificationScheduler` interface (tests pass
+  a fake) with an `expo-notifications` adapter that maps permission, ensures the channel and schedules
+  weekly triggers, and `syncStudyReminders` — which reads the preference, asks permission only when the
+  enabling action asked it to, cancels *our* `study-reminder` handles and rebuilds every reminder from
+  the plan. It returns what happened (`scheduled | off | needs-days | needs-time | needs-permission |
+  denied | failed`) instead of throwing, so a screen can always say the true thing (D-057, D-058).
+- `features/settings/use-reminders.ts` is Settings' reminder model: reading is separate from writing
+  (`loadReminderState` never moves a reminder), the toggle is the preference and the device's
+  permission, and both the toggle and the time presets save the preference and rebuild the schedule in
+  one action. The status line under them is whatever the last sync actually did.
+- Onboarding now finishes the promise it makes: right after `commitOnboarding` commits study days and
+  the reminder toggle, it re-syncs the schedule (requesting permission only if the draft had reminders
+  on), so the first reminder exists before the learner ever opens Settings.
+- Tests: 47 suites / 699 tests — 17 domain cases (time, presets, weekday mapping, the plan, its prose
+  and its notes), 16 service cases against both a fake scheduler and the real expo adapter, 3 new
+  settings-screen cases (toggle schedules, time presets, the status line), the onboarding assertion
+  that permission is requested and three weekly notifications land at weekday 2/4/7 19:00, and a sync
+  case for two settings writes inside one millisecond.
+### Audit findings fixed this session
+- Two `saveAppSettings` calls in the same millisecond collided on the outbox idempotency key
+  (`settings:<updatedAt>`): the second row was kept but its event was rejected as a duplicate, so the
+  save reported failure and the change would never sync. `nextSettingsInstant` now makes `updatedAt`
+  strictly increasing per write — the merge clock and the sync key are the same value, so they must
+  both advance (test: `sync.test.ts` "queues two settings changes made in the same millisecond").
+- Reminders had lived inside `use-settings` as a stored boolean with a stale "scheduled in a later
+  update" line. They needed a permission lifecycle, not a preference, so they moved to their own model;
+  the old capture-only path in onboarding (Phase 6 intent) is replaced by a real schedule.
+- The outbox lists events by `(occurredAt, id)` and ids are opaque, so writes sharing an instant land
+  in an arbitrary order; the write-site test now gives each site its own instant, asserting the
+  production ordering rule instead of hoping a tie falls kindly.
+
+### Verification evidence
+| Command (from `mobile/`) | Result |
+|---|---|
+| `npx tsc --noEmit` | PASS |
+| `npx eslint .` | PASS — 0 errors, 0 warnings |
+| `npx prettier --check .` | PASS |
+| `npx jest` | PASS — 47 suites, 699 tests |
+| `npx expo export --platform android` | PASS — Hermes bundle emitted |
+
+### Next session starts at
+Phase 15 — Hardening: accessibility, large text, contrast, performance, SQLite index/query review,
+security, logging/privacy, dependencies, loading/error/empty/offline states, and memory/startup.

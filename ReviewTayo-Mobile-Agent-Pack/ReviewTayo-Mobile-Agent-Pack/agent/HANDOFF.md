@@ -1,20 +1,50 @@
 # Agent Handoff
 
 ## Current phase
-Phases 0–13 complete. Starting Phase 14 (Notifications).
+Phases 0–14 complete. Starting Phase 15 (Hardening).
 
 ## Current task
-Phase 14 — Notifications: the permission request, the reminder schedule on study days, the
-denied-permission state and rescheduling on preference changes.
+Phase 15 — Hardening: the accessibility, large-text, contrast, performance, SQLite index/query,
+security, logging/privacy, dependency, loading/error/empty/offline and memory/startup audits.
 
 ## Next exact action
-Replace the reminder intent captured in Phase 6 with real local notifications. `services/app-settings.ts`
-already stores `remindersEnabled`, `reminderTime` and `reminderTimezone`, and onboarding captures the
-learner's study days — so Phase 14 needs the permission request, a schedule built from those fields
-(`expo-notifications` is installed and already mocked in `tests/setup.ts`), the honest denied state
-(no nagging, no silent no-op), and a reschedule whenever the preference, the time or the plan changes.
-The identifier of the scheduled notification should be recorded so it can be cancelled and replaced
-rather than duplicated.
+Work `phases/15-*.md` one audit item at a time. Each item: read the current code and screens with that
+audit's question in mind, file real defects (a missing `accessibilityLabel` on a control, an
+unbounded list re-render, a query that scans without an index, a log line carrying a learner's answer),
+fix them with a test that fails before the fix, and re-run the full gate. Findings only a device can
+judge (TalkBack traversal, font scaling to 200%, measured frame times) go in `agent/VISUAL-QA.md` as
+capture items rather than being claimed. Do not add suppressions to make a lint rule pass — fix the
+cause (D-003's discipline still applies).
+
+## Files changed (Phase 14)
+- `/mobile/src/domain/notifications/**` — `schedule.ts`, the schedule as data: time parsing and the
+  `7:00 PM` formatting, the five presets, the Monday-first → API-weekday mapping, `buildReminderPlan`
+  (one weekly `StudyReminder` per study day, `REMINDER_KIND` tagged, the daily goal in the body) and
+  every honest note (`NO_STUDY_DAYS_NOTE`, `INVALID_TIME_NOTE`, `DENIED_NOTE`, `NEEDS_PERMISSION_NOTE`,
+  `FAILED_NOTE`, `OFF_NOTE`).
+- `/mobile/src/services/notifications.ts` — the `NotificationScheduler` interface with an
+  `expo-notifications` adapter (permission mapping, channel, weekly triggers, our-handles-only
+  listing), `syncStudyReminders` (ask permission only when the enabling action asked, cancel ours,
+  rebuild the whole plan, return `scheduled | off | needs-days | needs-time | needs-permission |
+  denied | failed` instead of throwing) and the read-only `loadReminderState`.
+- `/mobile/src/features/settings/use-reminders.ts` — Settings' reminder model: load on focus,
+  `setEnabled` / `setTime` each saving the preference and re-syncing in one action, with the scheduler
+  injectable so tests run off-device.
+- `/mobile/src/features/settings/use-settings.ts` and `/mobile/app/settings.tsx` — the reminder fields
+  left the generic settings model; Settings gained the `settings-reminder-time` presets, the
+  `settings-reminder-status` line and the real toggle wired to `use-reminders`.
+- `/mobile/src/features/onboarding/use-onboarding.ts` — right after `commitOnboarding`, the schedule
+  is synced (permission requested only when the draft had reminders on), so the first reminder exists
+  before Settings is ever opened.
+- `/mobile/src/services/app-settings.ts` — `nextSettingsInstant` keeps the settings row's `updatedAt`
+  strictly increasing, so two writes in the same millisecond cannot collide on the
+  `settings:<updatedAt>` outbox key (audit fix, tested in `tests/services/sync.test.ts`).
+- `/mobile/tests/setup.ts` — the expo-notifications mock gained
+  `cancelScheduledNotificationAsync`.
+- `/mobile/tests/domain/notifications.test.ts` (17), `/mobile/tests/services/notifications.test.ts`
+  (16), 3 new cases in `/mobile/tests/app/settings-flow.test.tsx`, the onboarding schedule assertion
+  in `/mobile/tests/app/onboarding-flow.test.tsx` and the same-millisecond case in
+  `/mobile/tests/services/sync.test.ts` — 37 new cases; suite at 47 / 699.
 
 ## Files changed (Phase 13)
 - `/mobile/src/domain/identity/**` — `identity.ts`, the guest/Google vocabulary: descriptions, initials,

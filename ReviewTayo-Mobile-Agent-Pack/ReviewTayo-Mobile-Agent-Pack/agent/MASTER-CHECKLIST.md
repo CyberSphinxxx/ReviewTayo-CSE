@@ -128,7 +128,8 @@ Status legend:
 - [x] text size. *(standard/large/extra with a live sample line; a legacy `extra-large` row is
   coerced rather than reset)*
 - [x] reminders. *(opt-in switch; enabling captures the device timezone and the default
-  19:00 reminder time. Scheduling is Phase 14.)*
+  19:00 reminder time. Scheduling itself landed in Phase 14 — the commit now syncs the real
+  weekly schedule and asks permission only when this switch was on.)*
 - [x] completion. *(summary badges, first activity, and the single atomic commit — profile,
   settings and plan in one transaction)*
 - [x] settings integration. *(`app/settings.tsx` grouped by Account / Study plan / Appearance /
@@ -438,13 +439,47 @@ Status legend:
   surviving a sync).)*
 
 ## Phase 14 — Notifications
-- [ ] local notification permission.
-- [ ] reminder schedule.
-- [ ] study-day schedule.
-- [ ] reminder time.
-- [ ] denied permission state.
-- [ ] rescheduling on preference changes.
-- [ ] tests.
+- [x] local notification permission. *(`services/notifications.ts` `syncStudyReminders({requestPermission})`
+  asks the device only from the action that actually turned reminders on — the toggle — and never on
+  a screen load; `loadReminderState` is deliberately read-only, so opening Settings cannot move a
+  reminder it did not have to move. The permission is mapped to `granted | denied | undetermined` and
+  anything not granted leaves `needs-permission` ("Turn reminders on to allow notifications") rather
+  than a scheduled no-op (D-057).)*
+- [x] reminder schedule. *(`domain/notifications/schedule.ts` `buildReminderPlan` turns the stored
+  settings + profile into one weekly `StudyReminder` per study day — `REMINDER_KIND` tagged, the
+  daily goal in the body, `formatReminderTime` printing "7:00 PM" — and `services/notifications.ts`
+  schedules each through `expo-notifications`' weekly trigger after `ensureChannel`, with
+  `expoWeekdayFor` mapping the plan's Monday-first indexes onto the API's 1=Sunday..7=Saturday. A
+  `null` plan (reminders off, no days, an unreadable time) cancels ours and says which of the three it
+  was instead of scheduling nothing silently.)*
+- [x] study-day schedule. *(`buildReminderPlan` reads `profile.studyDays` — the days onboarding chose
+  — so the device is reminded exactly on those days and never on the rest; zero days yields
+  `needs-days` with `NO_STUDY_DAYS_NOTE` ("Choose your study days to get a reminder") and cancels what
+  was scheduled before, rather than guessing a weekday. `describeReminderDays` writes the plan back as
+  prose ("Mon, Wed, Fri and Sat") so the learner can check it without reading indexes.)*
+- [x] reminder time. *(`parseReminderTime`/`formatReminderTime` validate the stored `HH:mm` — an
+  unreadable value is `needs-time` with `INVALID_TIME_NOTE`, never a crash — and
+  `REMINDER_TIME_PRESETS` (`07:00 12:00 17:00 19:00 21:00`) drive the `settings-reminder-time`
+  segmented control on Settings, which saves the preference and rebuilds the schedule in the same
+  action. The device timezone is recorded with the preference via `deviceTimezone()`.)*
+- [x] denied permission state. *(`messageFor` maps `denied` to `DENIED_NOTE` — "Notifications are
+  turned off for ReviewTayo in your device settings" — an honest line about the device's own state
+  rather than a nag or a silent failure; ours are cancelled so a revoked permission cannot leave stale
+  handles, and the status is returned as data from a function that cannot throw (D-058).)*
+- [x] rescheduling on preference changes. *(`syncStudyReminders` never patches: it cancels every
+  scheduled notification carrying `REMINDER_KIND` and rebuilds the whole plan, so a changed study day,
+  time or toggle cannot leave an old reminder behind — and `cancelOurReminders` touches only our
+  `kind`, leaving other apps' notifications alone. Settings' toggle and time presets go through
+  `use-reminders.apply`, and `use-onboarding` re-syncs right after `commitOnboarding` with permission
+  requested only when the draft had reminders on.)*
+- [x] tests. *(`tests/domain/notifications.test.ts` — 17 cases (time parsing/formatting, the presets,
+  the weekday mapping, the plan and its prose, every note constant); `tests/services/notifications.test.ts`
+  — 16 cases over a fake scheduler and the real expo adapter (permission asked only on the enabling
+  action, denied/undetermined/off outcomes, the rebuild cancelling only ours, the failure line, the
+  read-only state); `tests/app/settings-flow.test.tsx` — 3 reminder cases (toggle schedules, the time
+  presets, the status line); `tests/app/onboarding-flow.test.tsx` — asserts permission is requested and
+  three weekly notifications land at weekday 2/4/7, 19:00; `tests/services/sync.test.ts` — a same-
+  millisecond settings collision now queued as two events. Full gate: 47 suites / 699 tests.)*
 
 ## Phase 15 — Hardening
 - [ ] accessibility audit.

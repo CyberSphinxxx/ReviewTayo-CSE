@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
-  "phase": "14-notifications",
-  "currentTask": "Phase 14 — Notifications: the permission request, the reminder schedule on study days, the denied-permission state and rescheduling when the preference or the plan changes",
-  "lastCompletedTask": "phase-13-auth-sync",
-  "nextAction": "Implement real local notifications over expo-notifications: request permission honestly, schedule the day's reminder at the learner's own time on their study days, handle a denied permission without nagging, and reschedule on every preference change",
+  "phase": "15-hardening",
+  "currentTask": "Phase 15 — Hardening: accessibility, large text, contrast, performance, SQLite index/query review, security, logging/privacy, dependency, loading/error/empty/offline and memory/startup audits",
+  "lastCompletedTask": "phase-14-notifications",
+  "nextAction": "Work the Phase 15 audit list one item at a time: find real defects, fix them with tests, and record anything only a device can judge in VISUAL-QA.md",
   "lastSuccessfulBuild": "expo export --platform android (PASS)",
   "failingTests": [],
   "testSummary": {
-    "suites": 45,
-    "tests": 662,
-    "passed": 662,
+    "suites": 47,
+    "tests": 699,
+    "passed": 699,
     "failed": 0
   },
   "externalBlockers": [
@@ -44,7 +44,8 @@
     "10-review",
     "11-progress",
     "12-mock-exam",
-    "13-auth-sync"
+    "13-auth-sync",
+    "14-notifications"
   ],
   "contentStats": {
     "cseQuestions": 88,
@@ -57,7 +58,6 @@
     "phase-4: device-level offline E2E (no-network relaunch) is covered by file-backed restart tests; device pass tracked for Phase 16",
     "phase-5: physical-device keyboard/screen-reader pass tracked in VISUAL-QA.md; automated label and badge tests are green",
     "phase-6: the onboarding and settings screens are verified by integration tests over a real database; a device pass for the flow's motion and text-size scaling is tracked in VISUAL-QA.md",
-    "phase-6: reminders capture intent, time and timezone but are not scheduled until Phase 14",
     "phase-7: Home's light/dark fidelity is asserted against the theme tokens and the screen's rendered styles; device or emulator captures remain pending (no Android SDK in this environment), tracked in VISUAL-QA.md",
     "phase-7: resume-card dismissal is session-only until the mock phase defines what a dismissed session means (D-028)",
     "phase-8: Learn's light/dark fidelity is asserted against the theme tokens and the rendered styles; device or emulator captures of the reference pages remain pending (no Android SDK in this environment), tracked in VISUAL-QA.md",
@@ -74,7 +74,10 @@
     "phase-12: pause/resume and the deadline-derived clock are covered by service and domain tests; confirming the clock keeps honest time with the app backgrounded mid-paper is a device pass tracked in VISUAL-QA.md",
     "phase-13: Guest, the stored account and the sync queue are covered by service and integration tests and the settings screen renders both states; device captures of the account row, the signed-in row and the waiting queue are tracked in VISUAL-QA.md",
     "phase-13: live Google sign-in (client IDs) and a live backend exchange (base URL + credentials) are verified against fakes and the local-only transport; both remain external and are tracked in agent/BLOCKERS.md",
-    "phase-13: sync drains when the settings screen is opened; a background or app-state-driven drain is deliberately not built (no daemon), and can be added when a backend exists and real traffic suggests the cadence"
+    "phase-13: sync drains when the settings screen is opened; a background or app-state-driven drain is deliberately not built (no daemon), and can be added when a backend exists and real traffic suggests the cadence",
+    "phase-14: the permission request, the weekly schedule, the denied/planless states and the rebuild-on-change are covered by service and integration tests with an injected scheduler; the OS permission dialog and an actually delivered notification can only be judged on a device, tracked in VISUAL-QA.md",
+    "phase-14: reminders fire from expo-notifications' weekly triggers while the app is closed; Doze, battery-optimisation OEMs and an exact alarm firing at 7:00 PM are device-pass questions — the app never claims it woke the learner, only that the reminder is scheduled",
+    "phase-14: no remote push for v1 (architecture/NOTIFICATIONS.md) — a server can wake nothing, so sync remains a drain opened by the learner (D-052)"
   ],
   "environment": {
     "node": "24.16.0",

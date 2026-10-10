@@ -8,7 +8,7 @@ import { loadCsePack } from '@tests/utils/exam-fixtures';
 import { createMigratedDatabase } from '@tests/utils/database';
 import { importContentPack } from '@/data/local/content-import';
 import { submitAnswer } from '@/services/practice';
-import { saveAppSettings } from '@/services/app-settings';
+import { nextSettingsInstant, saveAppSettings } from '@/services/app-settings';
 import { removeSavedQuestion, saveQuestion } from '@/services/saved-questions';
 import { SYNC_STATE_KEYS, loadSyncOverview, syncNow } from '@/services/sync';
 
@@ -24,6 +24,9 @@ import { SYNC_STATE_KEYS, loadSyncOverview, syncNow } from '@/services/sync';
 
 const NOW = new Date(2026, 9, 10, 9, 0, 0);
 const LATER = new Date(2026, 9, 10, 10, 0, 0);
+// The outbox lists events by (occurredAt, id), and ids are opaque — writes that
+// share an instant land in an arbitrary order, so each write site gets its own.
+const BEFORE = new Date(NOW.getTime() - 1_000);
 const pack = loadCsePack();
 const exam = pack.exam;
 const TRACK = 'professional';
@@ -122,7 +125,11 @@ describe('sync worker', () => {
     const question = await seed();
     const questionId = question.id;
 
-    await saveAppSettings(repositories, { themePreference: 'dark' }, { now: NOW });
+    const settings = await saveAppSettings(
+      repositories,
+      { themePreference: 'dark' },
+      { now: BEFORE },
+    );
     await saveQuestion({ repositories, examId: exam.id, questionId, now: NOW });
     await removeSavedQuestion({ repositories, examId: exam.id, questionId, now: LATER });
 
@@ -132,9 +139,30 @@ describe('sync worker', () => {
       'saved-question.saved',
       'saved-question.removed',
     ]);
-    expect(events[0]?.idempotencyKey).toBe(`settings:${NOW.toISOString()}`);
+    expect(events[0]?.idempotencyKey).toBe(`settings:${settings.updatedAt}`);
     expect(events[1]?.idempotencyKey).toBe(`saved-question:${questionId}:${NOW.toISOString()}`);
     expect(events[2]?.idempotencyKey).toBe(`saved-question:${questionId}:${LATER.toISOString()}`);
+  });
+
+  it('queues two settings changes made in the same millisecond', async () => {
+    // The settings row's instant is both the merge clock and the event's key, so
+    // two changes inside one millisecond must still be two distinct intents —
+    // otherwise the second row is kept and its event is never queued.
+    const first = await saveAppSettings(repositories, { themePreference: 'dark' }, { now: NOW });
+    const second = await saveAppSettings(repositories, { textSize: 'large' }, { now: NOW });
+
+    expect(nextSettingsInstant(NOW.toISOString(), NOW.toISOString()) > NOW.toISOString()).toBe(
+      true,
+    );
+    expect(second.updatedAt > first.updatedAt).toBe(true);
+
+    const events = await repositories.outbox.listAll();
+    expect(events).toHaveLength(2);
+    expect(new Set(events.map((event) => event.idempotencyKey)).size).toBe(2);
+
+    const stored = await repositories.settings.get();
+    expect(stored).toMatchObject({ themePreference: 'dark', textSize: 'large' });
+    expect(stored?.updatedAt).toBe(second.updatedAt);
   });
 
   it('leaves the outbox untouched when no backend is configured', async () => {

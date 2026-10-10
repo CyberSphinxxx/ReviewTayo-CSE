@@ -1,18 +1,17 @@
 # Project State
 
-**Phase:** 13 — Auth/sync (complete) → starting Phase 14 — Notifications
-**Current task:** Phase 14 — Notifications (permission, the reminder schedule, the denied state,
-rescheduling on preference changes)
-**Last completed task:** Phase 13 Auth/sync — a guest is a device with its own id, Google sign-in sits
-behind a provider interface with the identity and tokens in the keystore, the backend contract is
-versioned and narrowed, and the outbox worker drains queued answer/settings/bookmark events with
-bounded backoff, idempotency keys and per-entity conflict policies while never blocking study.
-**Next action:** Implement real local notifications over `expo-notifications`: request permission
-honestly, schedule the day's reminder at the learner's own time on the days they chose, keep the
-denied-permission state quiet rather than nagging, and reschedule whenever the preference or the plan
-changes.
+**Phase:** 14 — Notifications (complete) → starting Phase 15 — Hardening
+**Current task:** Phase 15 — Hardening: accessibility, large text, contrast, performance, SQLite
+index/query review, security, logging/privacy, dependency, loading/error/empty/offline and
+memory/startup audits.
+**Last completed task:** Phase 14 Notifications — permission is asked only by the action that turns
+reminders on, the weekly schedule is rebuilt whole from study days and the chosen time on every
+change, only this app's handles are cancelled, and a denied or planless device gets an honest line
+instead of a nag or a silent no-op.
+**Next action:** Work the Phase 15 audit list one item at a time — find real defects (not nitpicks),
+fix them with tests, and record what could only be judged on a device in `VISUAL-QA.md`.
 **Last successful build:** `npx expo export --platform android` → PASS (Hermes bundle)
-**Known failing tests:** None. `npx jest` → 662 passed / 662.
+**Known failing tests:** None. `npx jest` → 699 passed / 699.
 **External blockers:** Live Google OAuth credentials and a production API endpoint (verify-only;
 everything else works without them).
 **Internal blockers:** None.
@@ -23,7 +22,7 @@ everything else works without them).
 | `npm run typecheck` | PASS |
 | `npm run lint` | PASS (0 errors, 0 warnings) |
 | `npm run format:check` | PASS |
-| `npm test` | PASS — 662 tests across 45 suites |
+| `npm test` | PASS — 699 tests across 47 suites |
 | `npx expo export --platform android` | PASS |
 
 ## Repository reality (Phase 0 audit)
@@ -51,14 +50,16 @@ everything else works without them).
 - do not refactor the web app merely to share code.
 
 ## Decisions added this session
-D-051 a guest is a device, not a missing account · D-052 sync is a drain, not a daemon · D-053 an
-answer appends its sync event in the same transaction · D-054 each kind of change has its own merge
-policy, and settings are intents · D-055 the transport is the only thing that talks to a network ·
-D-056 signing in does not depend on the backend.
-Previous session: D-047 a mock counts through the same answer writer practice uses · D-048 a mock
+D-057 permission is asked only at the point of value · D-058 the schedule is rebuilt whole, and a
+denied device is reported, not nagged.
+Previous session: D-051 a guest is a device, not a missing account · D-052 sync is a drain, not a
+daemon · D-053 an answer appends its sync event in the same transaction · D-054 each kind of change
+has its own merge policy, and settings are intents · D-055 the transport is the only thing that talks
+to a network · D-056 signing in does not depend on the backend.
+Earlier session: D-047 a mock counts through the same answer writer practice uses · D-048 a mock
 reveals nothing until it is submitted · D-049 the clock is a deadline and an expired paper is still a
 result · D-050 a paper is scored out of the items it holds, and unanswered counts wrong.
-Previous session: D-043 the Study Score is a mark, not a forecast · D-044 Progress names the subject
+Earlier session: D-043 the Study Score is a mark, not a forecast · D-044 Progress names the subject
 Practice would have offered · D-045 concept mastery is listed least mastered first, unanswered
 concepts included · D-046 the weekly goal is the learner's own, and only exists if they set one.
 Earlier: D-039 one review schedule, written by the domain · D-040 a flashcard does not credit

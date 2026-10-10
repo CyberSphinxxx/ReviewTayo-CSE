@@ -20,6 +20,7 @@ import {
 } from '@/domain/onboarding';
 import type { Repositories } from '@/data/repositories';
 import { useAccount } from '@/features/settings/use-account';
+import { useReminders } from '@/features/settings/use-reminders';
 import { useSettings } from '@/features/settings/use-settings';
 import { useLocalData } from '@/store/LocalDataProvider';
 import {
@@ -58,6 +59,7 @@ const SettingsContent = ({ repositories }: { readonly repositories: Repositories
   const router = useRouter();
   const model = useSettings(repositories);
   const account = useAccount(repositories);
+  const reminders = useReminders(repositories);
   const { exam, profile, settings, content } = model;
 
   const sectionHeading = (label: string) => (
@@ -269,13 +271,32 @@ const SettingsContent = ({ repositories }: { readonly repositories: Repositories
           </RTText>
         </View>
         <Switch
-          value={settings.remindersEnabled}
-          onValueChange={model.setReminders}
+          value={reminders.enabled}
+          onValueChange={reminders.setEnabled}
           accessibilityLabel="Study reminders"
           testID="settings-reminders"
           trackColor={{ false: theme.colors.border, true: theme.colors.primary }}
         />
       </View>
+      <RTSegmentedControl
+        label="Reminder time"
+        options={reminders.timeOptions.map((option) => ({
+          value: option.value,
+          label: option.label,
+        }))}
+        value={reminders.time}
+        onChange={reminders.setTime}
+        testID="settings-reminder-time"
+        style={{ marginTop: theme.spacing.md }}
+      />
+      <RTText
+        role="meta"
+        tone="secondary"
+        testID="settings-reminder-status"
+        style={{ marginTop: theme.spacing.sm }}
+      >
+        {reminders.message}
+      </RTText>
 
       {sectionHeading('Offline content')}
       <RTListGroup>

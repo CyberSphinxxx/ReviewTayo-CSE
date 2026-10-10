@@ -40,6 +40,7 @@ jest.mock('expo-notifications', () => ({
   requestPermissionsAsync: jest.fn(async () => ({ status: 'granted', granted: true })),
   setNotificationHandler: jest.fn(),
   scheduleNotificationAsync: jest.fn(async () => 'notification-id'),
+  cancelScheduledNotificationAsync: jest.fn(async () => undefined),
   cancelAllScheduledNotificationsAsync: jest.fn(async () => undefined),
   getAllScheduledNotificationsAsync: jest.fn(async () => []),
   setNotificationChannelAsync: jest.fn(async () => undefined),

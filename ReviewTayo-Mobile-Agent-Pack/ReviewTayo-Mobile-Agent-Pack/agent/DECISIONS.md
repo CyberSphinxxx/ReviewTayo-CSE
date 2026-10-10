@@ -357,3 +357,20 @@ is required to sign in. If a backend is reachable the token is exchanged for a s
 learner is told their progress syncs; if it is not, sign-in still succeeds, the account is stored in
 the keystore, and the note says sync will retry. A sign-in that failed because the server was down
 would be a lie about the learner's own account, and the outbox already knows how to wait.
+
+## D-057 — Permission is asked only at the point of value
+A notification permission dialog shown on a screen load, or on a first launch that has promised
+nothing, is a toll booth: the learner taps Allow to make a thing go away, and has spent the one ask
+before there is anything to allow. So permission is requested from exactly one action — the toggle
+that turns reminders on — where a denial costs only the line it was hoping for. Every other path is
+read-only: opening Settings reads the device's state and prints it (`needs-permission`, `denied`), and
+a sync that was not asked for never prompts.
+
+## D-058 — The schedule is rebuilt whole, and a denied device is reported, not nagged
+Every reminder change cancels the notifications this app scheduled (`kind === 'study-reminder'`, and
+nothing else) and rebuilds the plan from the stored preference and study days, rather than patching
+individual handles — a changed day, time or toggle then cannot leave an old reminder behind, and the
+device's list always equals what the screen says it is. A denied permission is a state with an honest
+line ("Notifications are turned off for ReviewTayo in your device settings"), not a second request or
+a silent no-op: the OS owns that decision, and the app's job is to say so plainly and keep working
+offline without it.
