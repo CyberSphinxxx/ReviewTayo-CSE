@@ -215,7 +215,7 @@ export const QuizResults = ({
           style={{ flex: 1 }}
         />
         <RTButton
-          label="Back to Practice"
+          label="Done"
           variant="subtle"
           onPress={onDone}
           testID="quiz-results-done"
@@ -223,7 +223,7 @@ export const QuizResults = ({
         />
       </View>
       <RTText role="meta" tone="secondary" testID="quiz-results-saved">
-        Everything you answered is saved on this device, and the misses are waiting in Review.
+        Everything you answered is saved on this device, and the misses are in your review queue.
       </RTText>
     </View>
   );

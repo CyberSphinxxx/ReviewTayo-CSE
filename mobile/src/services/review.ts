@@ -9,6 +9,7 @@ import {
   describeInterval,
   describeLapses,
   describeReviewedWhen,
+  describeUpcomingReview,
   nextReviewSchedule,
   revisitConcepts,
   type RevisitConcept,
@@ -71,6 +72,8 @@ export interface ReviewOverview extends ReviewQueue {
   readonly history: ReviewHistory;
   /** The duration line Home quotes for the same items. */
   readonly meta: string;
+  /** When nothing is due: what comes back next (`7 concepts come back tomorrow.`). */
+  readonly upcomingLine: string | null;
 }
 
 export const loadReviewOverview = async ({
@@ -99,6 +102,10 @@ export const loadReviewOverview = async ({
     }),
     history: buildReviewHistory({ exam, items, now }),
     meta: reviewDueSpec(queue.dueCount, exam.studyPolicy).meta,
+    upcomingLine: describeUpcomingReview(
+      items.map((item) => item.dueAt),
+      now,
+    ),
   };
 };
 

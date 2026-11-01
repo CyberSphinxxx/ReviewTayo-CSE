@@ -9,16 +9,16 @@
     "cognitiveSkill": "recall",
     "stem": "Under the 1987 Constitution, the Civil Service Commission is a:",
     "choices": [
-      { "id": "a", "text": "Department of the Executive branch" },
-      { "id": "b", "text": "Independent constitutional commission" },
+      { "id": "a", "text": "Independent constitutional commission" },
+      { "id": "b", "text": "Department of the Executive branch" },
       { "id": "c", "text": "Government-owned corporation" },
       { "id": "d", "text": "Body under the Judiciary" }
     ],
-    "correctChoiceId": "b",
+    "correctChoiceId": "a",
     "explanation": "Article IX of the 1987 Constitution establishes the Civil Service Commission, the Commission on Elections and the Commission on Audit as independent constitutional commissions.",
     "relatedQuestionGroupId": "cse-general-constitution-a",
     "status": "published",
-    "contentVersion": "1.0.0"
+    "contentVersion": "1.1.0"
   },
   {
     "id": "cse-general-constitution-02",
@@ -52,15 +52,15 @@
     "stem": "The Bill of Rights is found in which Article of the 1987 Constitution?",
     "choices": [
       { "id": "a", "text": "Article II" },
-      { "id": "b", "text": "Article III" },
-      { "id": "c", "text": "Article VI" },
+      { "id": "b", "text": "Article VI" },
+      { "id": "c", "text": "Article III" },
       { "id": "d", "text": "Article IX" }
     ],
-    "correctChoiceId": "b",
+    "correctChoiceId": "c",
     "explanation": "Article III is the Bill of Rights. Article II is the Declaration of Principles and State Policies, Article VI covers the Legislative Department and Article IX the Constitutional Commissions.",
     "relatedQuestionGroupId": "cse-general-constitution-b",
     "status": "published",
-    "contentVersion": "1.0.0"
+    "contentVersion": "1.1.0"
   },
   {
     "id": "cse-general-constitution-04",
@@ -73,15 +73,99 @@
     "stem": "What is the term of office of the President of the Philippines?",
     "choices": [
       { "id": "a", "text": "Four years" },
-      { "id": "b", "text": "Six years" },
-      { "id": "c", "text": "Three years" },
-      { "id": "d", "text": "Five years" }
+      { "id": "b", "text": "Three years" },
+      { "id": "c", "text": "Five years" },
+      { "id": "d", "text": "Six years" }
     ],
-    "correctChoiceId": "b",
+    "correctChoiceId": "d",
     "explanation": "Article VII sets a single six-year term for the President, who is not eligible for any re-election.",
     "relatedQuestionGroupId": "cse-general-constitution-b",
     "status": "published",
-    "contentVersion": "1.0.0"
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-general-constitution-05",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "general-information",
+    "conceptIds": ["philippine-constitution"],
+    "difficulty": "standard",
+    "cognitiveSkill": "recall",
+    "stem": "Under the 1987 Constitution, what is the minimum age requirement for a Senator?",
+    "choices": [
+      { "id": "a", "text": "35 years old" },
+      { "id": "b", "text": "40 years old" },
+      { "id": "c", "text": "25 years old" },
+      { "id": "d", "text": "30 years old" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "Article VI, Section 3 requires a Senator to be at least 35 years old on the day of the election. Forty is the requirement for President, and 25 for a member of the House.",
+    "relatedQuestionGroupId": "cse-general-constitution-c",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-general-constitution-06",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "general-information",
+    "conceptIds": ["philippine-constitution"],
+    "difficulty": "standard",
+    "cognitiveSkill": "recall",
+    "stem": "How many consecutive terms may a member of the House of Representatives serve?",
+    "choices": [
+      { "id": "a", "text": "Two" },
+      { "id": "b", "text": "Three" },
+      { "id": "c", "text": "One" },
+      { "id": "d", "text": "Four" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "Article VI, Section 7 sets a three-year term and bars serving more than three consecutive terms.",
+    "relatedQuestionGroupId": "cse-general-constitution-c",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-general-constitution-07",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "general-information",
+    "conceptIds": ["philippine-constitution"],
+    "difficulty": "standard",
+    "cognitiveSkill": "recall",
+    "stem": "Which Article of the 1987 Constitution establishes the constitutional commissions, including the Civil Service Commission?",
+    "choices": [
+      { "id": "a", "text": "Article VII" },
+      { "id": "b", "text": "Article XI" },
+      { "id": "c", "text": "Article IX" },
+      { "id": "d", "text": "Article XIII" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "Article IX covers the Constitutional Commissions: the Civil Service Commission (IX-B), the Commission on Elections (IX-C) and the Commission on Audit (IX-D).",
+    "relatedQuestionGroupId": "cse-general-constitution-d",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-general-constitution-08",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "general-information",
+    "conceptIds": ["philippine-constitution"],
+    "difficulty": "challenging",
+    "cognitiveSkill": "application",
+    "stem": "Under the 1987 Constitution, appointments in the civil service are made according to merit and fitness, determined as far as practicable by:",
+    "choices": [
+      { "id": "a", "text": "Seniority alone" },
+      { "id": "b", "text": "The recommendation of a legislator" },
+      { "id": "c", "text": "Political affiliation" },
+      { "id": "d", "text": "Competitive examination" }
+    ],
+    "correctChoiceId": "d",
+    "explanation": "Article IX-B, Section 2(2) provides that merit and fitness are to be determined, as far as practicable, by competitive examination — the reason the Career Service Examination exists.",
+    "relatedQuestionGroupId": "cse-general-constitution-d",
+    "status": "published",
+    "contentVersion": "1.1.0"
   },
 
   {
@@ -138,14 +222,14 @@
     "choices": [
       { "id": "a", "text": "Commitment to public interest" },
       { "id": "b", "text": "Political neutrality" },
-      { "id": "c", "text": "Responsiveness to the public" },
-      { "id": "d", "text": "Priority to personal connections" }
+      { "id": "c", "text": "Priority to personal connections" },
+      { "id": "d", "text": "Responsiveness to the public" }
     ],
-    "correctChoiceId": "d",
+    "correctChoiceId": "c",
     "explanation": "The eight norms of conduct are commitment to public interest, professionalism, justness and sincerity, political neutrality, responsiveness to the public, nationalism and patriotism, commitment to democracy, and simple living. Giving priority to personal connections is the opposite of these.",
     "relatedQuestionGroupId": "cse-general-conduct-b",
     "status": "published",
-    "contentVersion": "1.0.0"
+    "contentVersion": "1.1.0"
   },
   {
     "id": "cse-general-conduct-04",
@@ -157,16 +241,100 @@
     "cognitiveSkill": "application",
     "stem": "“Simple living” as a norm of conduct means that a public official should:",
     "choices": [
-      { "id": "a", "text": "Avoid extravagant or ostentatious display of wealth." },
-      { "id": "b", "text": "Refuse all forms of compensation for work." },
-      { "id": "c", "text": "Live outside the city where they work." },
-      { "id": "d", "text": "Never accept gifts from relatives." }
+      { "id": "a", "text": "Refuse all forms of compensation for work." },
+      { "id": "b", "text": "Live outside the city where they work." },
+      { "id": "c", "text": "Never accept gifts from relatives." },
+      { "id": "d", "text": "Avoid extravagant or ostentatious display of wealth." }
     ],
-    "correctChoiceId": "a",
+    "correctChoiceId": "d",
     "explanation": "Simple living requires public officials to live modestly, keep expenses within lawful income, and avoid lavish display that could raise doubts about how income was earned.",
     "relatedQuestionGroupId": "cse-general-conduct-b",
     "status": "published",
-    "contentVersion": "1.0.0"
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-general-conduct-05",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "general-information",
+    "conceptIds": ["code-of-conduct-and-ethics"],
+    "difficulty": "standard",
+    "cognitiveSkill": "recall",
+    "stem": "Under RA 6713, the Statement of Assets, Liabilities and Net Worth must be filed every year on or before:",
+    "choices": [
+      { "id": "a", "text": "April 30" },
+      { "id": "b", "text": "January 31" },
+      { "id": "c", "text": "June 30" },
+      { "id": "d", "text": "December 31" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "Section 8 of RA 6713 requires the SALN within 30 days of assuming office, on or before April 30 of every year, and within 30 days of leaving the service.",
+    "relatedQuestionGroupId": "cse-general-conduct-c",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-general-conduct-06",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "general-information",
+    "conceptIds": ["code-of-conduct-and-ethics"],
+    "difficulty": "challenging",
+    "cognitiveSkill": "recall",
+    "stem": "RA 6713 requires public officials and employees to respond to letters and requests from the public within how many working days from receipt?",
+    "choices": [
+      { "id": "a", "text": "5 working days" },
+      { "id": "b", "text": "15 working days" },
+      { "id": "c", "text": "30 working days" },
+      { "id": "d", "text": "60 working days" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "Section 5(a) of RA 6713 requires action on letters, telegrams and other communications within fifteen working days from receipt.",
+    "relatedQuestionGroupId": "cse-general-conduct-c",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-general-conduct-07",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "general-information",
+    "conceptIds": ["code-of-conduct-and-ethics"],
+    "difficulty": "standard",
+    "cognitiveSkill": "application",
+    "stem": "Under RA 6713, “professionalism” as a norm of conduct means that public officials and employees should:",
+    "choices": [
+      { "id": "a", "text": "Join at least one professional organisation" },
+      { "id": "b", "text": "Hold a professional licence" },
+      { "id": "c", "text": "Perform their duties with the highest degree of excellence, intelligence and skill" },
+      { "id": "d", "text": "Avoid unnecessary contact with the public" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "RA 6713 defines professionalism as performing and discharging duties with the highest degree of excellence, professionalism, intelligence and skill. A licence or membership is not what the norm requires.",
+    "relatedQuestionGroupId": "cse-general-conduct-d",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-general-conduct-08",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "general-information",
+    "conceptIds": ["code-of-conduct-and-ethics"],
+    "difficulty": "easy",
+    "cognitiveSkill": "recall",
+    "stem": "Which law is known as the Anti-Graft and Corrupt Practices Act?",
+    "choices": [
+      { "id": "a", "text": "Republic Act 6713" },
+      { "id": "b", "text": "Republic Act 9485" },
+      { "id": "c", "text": "Republic Act 9003" },
+      { "id": "d", "text": "Republic Act 3019" }
+    ],
+    "correctChoiceId": "d",
+    "explanation": "RA 3019 (1960) is the Anti-Graft and Corrupt Practices Act. RA 6713 is the Code of Conduct, RA 9485 the Anti-Red Tape Act and RA 9003 the solid waste law.",
+    "relatedQuestionGroupId": "cse-general-conduct-d",
+    "status": "published",
+    "contentVersion": "1.1.0"
   },
 
   {
@@ -200,16 +368,16 @@
     "cognitiveSkill": "recall",
     "stem": "Which body is mandated to investigate complaints of human rights violations involving civil and political rights?",
     "choices": [
-      { "id": "a", "text": "Commission on Human Rights" },
-      { "id": "b", "text": "Commission on Audit" },
+      { "id": "a", "text": "Commission on Audit" },
+      { "id": "b", "text": "Commission on Human Rights" },
       { "id": "c", "text": "Commission on Elections" },
       { "id": "d", "text": "Civil Service Commission" }
     ],
-    "correctChoiceId": "a",
+    "correctChoiceId": "b",
     "explanation": "Article XIII, Section 18 gives the Commission on Human Rights the power to investigate civil and political rights violations. The other three are constitutional commissions with different mandates.",
     "relatedQuestionGroupId": "cse-general-rights-a",
     "status": "published",
-    "contentVersion": "1.0.0"
+    "contentVersion": "1.1.0"
   },
   {
     "id": "cse-general-rights-03",
@@ -221,16 +389,16 @@
     "cognitiveSkill": "recall",
     "stem": "The due process clause of the Bill of Rights provides that:",
     "choices": [
-      { "id": "a", "text": "No person shall be deprived of life, liberty or property without due process of law." },
-      { "id": "b", "text": "Only citizens may be tried in Philippine courts." },
-      { "id": "c", "text": "All accused persons must be released before trial." },
+      { "id": "a", "text": "Only citizens may be tried in Philippine courts." },
+      { "id": "b", "text": "All accused persons must be released before trial." },
+      { "id": "c", "text": "No person shall be deprived of life, liberty or property without due process of law." },
       { "id": "d", "text": "Property may be taken at any time for public use." }
     ],
-    "correctChoiceId": "a",
+    "correctChoiceId": "c",
     "explanation": "Article III, Section 1 states the due process and equal protection guarantees, which protect all persons, not only citizens.",
     "relatedQuestionGroupId": "cse-general-rights-b",
     "status": "published",
-    "contentVersion": "1.0.0"
+    "contentVersion": "1.1.0"
   },
   {
     "id": "cse-general-rights-04",
@@ -242,16 +410,100 @@
     "cognitiveSkill": "recall",
     "stem": "The right to a speedy disposition of cases applies before:",
     "choices": [
-      { "id": "a", "text": "All judicial, quasi-judicial and administrative bodies" },
-      { "id": "b", "text": "The Supreme Court only" },
-      { "id": "c", "text": "Criminal courts only" },
-      { "id": "d", "text": "Election tribunals only" }
+      { "id": "a", "text": "The Supreme Court only" },
+      { "id": "b", "text": "Criminal courts only" },
+      { "id": "c", "text": "Election tribunals only" },
+      { "id": "d", "text": "All judicial, quasi-judicial and administrative bodies" }
     ],
-    "correctChoiceId": "a",
+    "correctChoiceId": "d",
     "explanation": "Article III, Section 16 guarantees speedy disposition of cases before all judicial, quasi-judicial and administrative bodies, so it is broader than the right to a speedy trial in criminal cases.",
     "relatedQuestionGroupId": "cse-general-rights-b",
     "status": "published",
-    "contentVersion": "1.0.0"
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-general-rights-05",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "general-information",
+    "conceptIds": ["peace-and-human-rights"],
+    "difficulty": "standard",
+    "cognitiveSkill": "recall",
+    "stem": "The Universal Declaration of Human Rights was adopted by the United Nations General Assembly in:",
+    "choices": [
+      { "id": "a", "text": "1948" },
+      { "id": "b", "text": "1945" },
+      { "id": "c", "text": "1966" },
+      { "id": "d", "text": "1986" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "The UDHR was adopted on 10 December 1948. The United Nations was founded in 1945, and the two international covenants on human rights followed in 1966.",
+    "relatedQuestionGroupId": "cse-general-rights-c",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-general-rights-06",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "general-information",
+    "conceptIds": ["peace-and-human-rights"],
+    "difficulty": "easy",
+    "cognitiveSkill": "recall",
+    "stem": "Human Rights Day is observed every year on:",
+    "choices": [
+      { "id": "a", "text": "June 12" },
+      { "id": "b", "text": "December 10" },
+      { "id": "c", "text": "August 21" },
+      { "id": "d", "text": "November 30" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "Human Rights Day marks the adoption of the Universal Declaration of Human Rights on 10 December 1948. June 12 is Independence Day.",
+    "relatedQuestionGroupId": "cse-general-rights-c",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-general-rights-07",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "general-information",
+    "conceptIds": ["peace-and-human-rights"],
+    "difficulty": "challenging",
+    "cognitiveSkill": "application",
+    "stem": "Under the 1987 Constitution, the death penalty:",
+    "choices": [
+      { "id": "a", "text": "Is mandatory for every heinous crime" },
+      { "id": "b", "text": "Is expressly allowed for all crimes" },
+      { "id": "c", "text": "Shall not be imposed unless Congress provides for it for compelling reasons involving heinous crimes" },
+      { "id": "d", "text": "May be imposed by order of the President" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "Article III, Section 19(1) prohibits the death penalty unless, for compelling reasons involving heinous crimes, Congress hereafter provides for it.",
+    "relatedQuestionGroupId": "cse-general-rights-d",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-general-rights-08",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "general-information",
+    "conceptIds": ["peace-and-human-rights"],
+    "difficulty": "standard",
+    "cognitiveSkill": "application",
+    "stem": "Which right protects a person from being compelled to be a witness against himself or herself?",
+    "choices": [
+      { "id": "a", "text": "The right to travel" },
+      { "id": "b", "text": "The right to information on matters of public concern" },
+      { "id": "c", "text": "The right of peaceful assembly" },
+      { "id": "d", "text": "The right against self-incrimination" }
+    ],
+    "correctChoiceId": "d",
+    "explanation": "Article III, Section 17 provides that no person shall be compelled to be a witness against himself — the right against self-incrimination.",
+    "relatedQuestionGroupId": "cse-general-rights-d",
+    "status": "published",
+    "contentVersion": "1.1.0"
   },
 
   {
@@ -285,16 +537,16 @@
     "cognitiveSkill": "recall",
     "stem": "Which agency is the primary government body mandated to protect the country's environment and natural resources?",
     "choices": [
-      { "id": "a", "text": "Department of Environment and Natural Resources" },
-      { "id": "b", "text": "Department of Agriculture" },
+      { "id": "a", "text": "Department of Agriculture" },
+      { "id": "b", "text": "Department of Environment and Natural Resources" },
       { "id": "c", "text": "Department of Public Works and Highways" },
       { "id": "d", "text": "Department of Energy" }
     ],
-    "correctChoiceId": "a",
+    "correctChoiceId": "b",
     "explanation": "The DENR is the primary agency responsible for the conservation, management and development of the country's environment and natural resources.",
     "relatedQuestionGroupId": "cse-general-environment-a",
     "status": "published",
-    "contentVersion": "1.0.0"
+    "contentVersion": "1.1.0"
   },
   {
     "id": "cse-general-environment-03",
@@ -306,16 +558,16 @@
     "cognitiveSkill": "recall",
     "stem": "Republic Act 9003 is known as the:",
     "choices": [
-      { "id": "a", "text": "Ecological Solid Waste Management Act" },
-      { "id": "b", "text": "Clean Air Act" },
-      { "id": "c", "text": "Clean Water Act" },
+      { "id": "a", "text": "Clean Air Act" },
+      { "id": "b", "text": "Clean Water Act" },
+      { "id": "c", "text": "Ecological Solid Waste Management Act" },
       { "id": "d", "text": "National Integrated Protected Areas System Act" }
     ],
-    "correctChoiceId": "a",
+    "correctChoiceId": "c",
     "explanation": "RA 9003 is the Ecological Solid Waste Management Act of 2000. The Clean Air Act is RA 8749, the Clean Water Act is RA 9275 and the protected areas law is RA 7586.",
     "relatedQuestionGroupId": "cse-general-environment-b",
     "status": "published",
-    "contentVersion": "1.0.0"
+    "contentVersion": "1.1.0"
   },
   {
     "id": "cse-general-environment-04",
@@ -327,15 +579,99 @@
     "cognitiveSkill": "application",
     "stem": "Which practice conserves the most water in a typical household?",
     "choices": [
-      { "id": "a", "text": "Repairing leaks and using a pail instead of a hose to wash a vehicle" },
-      { "id": "b", "text": "Running the tap while brushing teeth" },
-      { "id": "c", "text": "Washing one garment at a time in the machine" },
-      { "id": "d", "text": "Watering the lawn at noon" }
+      { "id": "a", "text": "Running the tap while brushing teeth" },
+      { "id": "b", "text": "Washing one garment at a time in the machine" },
+      { "id": "c", "text": "Watering the lawn at noon" },
+      { "id": "d", "text": "Repairing leaks and using a pail instead of a hose to wash a vehicle" }
     ],
-    "correctChoiceId": "a",
+    "correctChoiceId": "d",
     "explanation": "Fixing leaks stops continuous loss, and a pail uses far less water than a running hose. Watering at noon also wastes water through evaporation.",
     "relatedQuestionGroupId": "cse-general-environment-b",
     "status": "published",
-    "contentVersion": "1.0.0"
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-general-environment-05",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "general-information",
+    "conceptIds": ["environment-management"],
+    "difficulty": "standard",
+    "cognitiveSkill": "recall",
+    "stem": "Republic Act 8749 is known as the:",
+    "choices": [
+      { "id": "a", "text": "Philippine Clean Air Act of 1999" },
+      { "id": "b", "text": "Philippine Clean Water Act of 2004" },
+      { "id": "c", "text": "Ecological Solid Waste Management Act of 2000" },
+      { "id": "d", "text": "Climate Change Act of 2009" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "RA 8749 is the Philippine Clean Air Act of 1999. The Clean Water Act is RA 9275, the solid waste law RA 9003 and the Climate Change Act RA 9729.",
+    "relatedQuestionGroupId": "cse-general-environment-c",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-general-environment-06",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "general-information",
+    "conceptIds": ["environment-management"],
+    "difficulty": "standard",
+    "cognitiveSkill": "recall",
+    "stem": "Republic Act 9275 is known as the:",
+    "choices": [
+      { "id": "a", "text": "Philippine Clean Air Act of 1999" },
+      { "id": "b", "text": "Philippine Clean Water Act of 2004" },
+      { "id": "c", "text": "Philippine Fisheries Code of 1998" },
+      { "id": "d", "text": "National Integrated Protected Areas System Act" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "RA 9275 is the Philippine Clean Water Act of 2004, which governs water quality management across the country.",
+    "relatedQuestionGroupId": "cse-general-environment-c",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-general-environment-07",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "general-information",
+    "conceptIds": ["environment-management"],
+    "difficulty": "easy",
+    "cognitiveSkill": "application",
+    "stem": "Under RA 9003, waste must be segregated “at the source”. This means segregation should happen:",
+    "choices": [
+      { "id": "a", "text": "At the sanitary landfill" },
+      { "id": "b", "text": "At the recycling plant" },
+      { "id": "c", "text": "Where the waste is produced, such as homes and offices" },
+      { "id": "d", "text": "At the city or municipal hall" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "Segregation at source means sorting waste where it is generated — households, offices and establishments — before it is collected.",
+    "relatedQuestionGroupId": "cse-general-environment-d",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-general-environment-08",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "general-information",
+    "conceptIds": ["environment-management"],
+    "difficulty": "easy",
+    "cognitiveSkill": "recall",
+    "stem": "Which greenhouse gas contributes most to human-caused climate change?",
+    "choices": [
+      { "id": "a", "text": "Oxygen" },
+      { "id": "b", "text": "Nitrogen" },
+      { "id": "c", "text": "Hydrogen" },
+      { "id": "d", "text": "Carbon dioxide" }
+    ],
+    "correctChoiceId": "d",
+    "explanation": "Carbon dioxide from burning fossil fuels and clearing forests is the largest driver of human-caused warming. Oxygen and nitrogen are not greenhouse gases.",
+    "relatedQuestionGroupId": "cse-general-environment-d",
+    "status": "published",
+    "contentVersion": "1.1.0"
   }
 ]

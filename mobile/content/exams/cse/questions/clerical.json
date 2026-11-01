@@ -30,16 +30,16 @@
     "cognitiveSkill": "alphabetical-order",
     "stem": "Four records share the surname Reyes. When filing by surname first, which is filed first?",
     "choices": [
-      { "id": "a", "text": "Reyes, Ana" },
-      { "id": "b", "text": "Reyes, Ben" },
+      { "id": "a", "text": "Reyes, Ben" },
+      { "id": "b", "text": "Reyes, Ana" },
       { "id": "c", "text": "Reyes, Carlo" },
       { "id": "d", "text": "Reyes, Dan" }
     ],
-    "correctChoiceId": "a",
+    "correctChoiceId": "b",
     "explanation": "When surnames are identical, the given name decides the order. Ana comes before Ben, Carlo and Dan.",
     "relatedQuestionGroupId": "cse-clerical-file-a",
     "status": "published",
-    "contentVersion": "1.0.0"
+    "contentVersion": "1.1.0"
   },
   {
     "id": "cse-clerical-file-03",
@@ -53,14 +53,14 @@
     "choices": [
       { "id": "a", "text": "Bautista" },
       { "id": "b", "text": "Bautista-Santos" },
-      { "id": "c", "text": "Bauzon" },
-      { "id": "d", "text": "Bayani" }
+      { "id": "c", "text": "Bayani" },
+      { "id": "d", "text": "Bauzon" }
     ],
-    "correctChoiceId": "d",
+    "correctChoiceId": "c",
     "explanation": "All begin with “Ba”. The third letter decides: “u” comes before “y”, so the Bautista and Bauzon entries precede Bayani. Within the “Bau” group the fourth letter is “t” before “z”, and “Bautista” is shorter than “Bautista-Santos”, so Bayani is last.",
     "relatedQuestionGroupId": "cse-clerical-file-b",
     "status": "published",
-    "contentVersion": "1.0.0"
+    "contentVersion": "1.1.0"
   },
   {
     "id": "cse-clerical-file-04",
@@ -74,14 +74,140 @@
     "choices": [
       { "id": "a", "text": "Cruz, Jose" },
       { "id": "b", "text": "Cruz, Maria" },
-      { "id": "c", "text": "Dizon, Ana" },
-      { "id": "d", "text": "Cruz, Pedro" }
+      { "id": "c", "text": "Cruz, Pedro" },
+      { "id": "d", "text": "Dizon, Ana" }
     ],
-    "correctChoiceId": "c",
+    "correctChoiceId": "d",
     "explanation": "All names beginning with “Cruz” must be filed together. “Dizon, Ana” interrupts them and belongs after the Cruz entries.",
     "relatedQuestionGroupId": "cse-clerical-file-b",
     "status": "published",
-    "contentVersion": "1.0.0"
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-clerical-file-05",
+    "examId": "cse",
+    "trackIds": ["subprofessional"],
+    "subjectId": "clerical-ability",
+    "conceptIds": ["alphabetizing-and-filing"],
+    "difficulty": "easy",
+    "cognitiveSkill": "alphabetical-order",
+    "stem": "Which name should be filed first?",
+    "choices": [
+      { "id": "a", "text": "Sanchez" },
+      { "id": "b", "text": "Santos" },
+      { "id": "c", "text": "Santiago" },
+      { "id": "d", "text": "Santillan" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "All four begin with “San”. The fourth letter decides it: c comes before t, so Sanchez is filed first.",
+    "relatedQuestionGroupId": "cse-clerical-file-c",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-clerical-file-06",
+    "examId": "cse",
+    "trackIds": ["subprofessional"],
+    "subjectId": "clerical-ability",
+    "conceptIds": ["alphabetizing-and-filing"],
+    "difficulty": "standard",
+    "cognitiveSkill": "alphabetical-order",
+    "stem": "Which name would be filed last?",
+    "choices": [
+      { "id": "a", "text": "Villanueva" },
+      { "id": "b", "text": "Villareal" },
+      { "id": "c", "text": "Villamor" },
+      { "id": "d", "text": "Villafuerte" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "After “Villa”, compare the next letter: f (Villafuerte), m (Villamor), n (Villanueva), r (Villareal). Villareal comes last.",
+    "relatedQuestionGroupId": "cse-clerical-file-c",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-clerical-file-07",
+    "examId": "cse",
+    "trackIds": ["subprofessional"],
+    "subjectId": "clerical-ability",
+    "conceptIds": ["alphabetizing-and-filing"],
+    "difficulty": "challenging",
+    "cognitiveSkill": "alphabetical-order",
+    "stem": "Which name should be filed first?",
+    "choices": [
+      { "id": "a", "text": "Garcia, Maria L." },
+      { "id": "b", "text": "Garcia, Mariano" },
+      { "id": "c", "text": "Garcia, Maria" },
+      { "id": "d", "text": "Garcia, Mariz" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "The rule is “nothing comes before something”: “Garcia, Maria” with no middle initial is filed before “Garcia, Maria L.”, and both come before the longer given names Mariano and Mariz.",
+    "relatedQuestionGroupId": "cse-clerical-file-c",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-clerical-file-08",
+    "examId": "cse",
+    "trackIds": ["subprofessional"],
+    "subjectId": "clerical-ability",
+    "conceptIds": ["alphabetizing-and-filing"],
+    "difficulty": "standard",
+    "cognitiveSkill": "ordering",
+    "stem": "In what position would “Ramos, Elena” be filed among these records? — Ramirez, Jose · Ramos, Ana · Ramos, Elena · Rama, Pedro",
+    "choices": [
+      { "id": "a", "text": "3rd" },
+      { "id": "b", "text": "2nd" },
+      { "id": "c", "text": "1st" },
+      { "id": "d", "text": "4th" }
+    ],
+    "correctChoiceId": "d",
+    "explanation": "Filed by surname: Rama, then Ramirez, then the two Ramoses. Between them, Ana comes before Elena, so Ramos, Elena is 4th.",
+    "relatedQuestionGroupId": "cse-clerical-file-d",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-clerical-file-09",
+    "examId": "cse",
+    "trackIds": ["subprofessional"],
+    "subjectId": "clerical-ability",
+    "conceptIds": ["alphabetizing-and-filing"],
+    "difficulty": "standard",
+    "cognitiveSkill": "ordering",
+    "stem": "Which list is in correct filing order?",
+    "choices": [
+      { "id": "a", "text": "Lopez · Lorenzo · Lozada · Luna" },
+      { "id": "b", "text": "Lorenzo · Lopez · Lozada · Luna" },
+      { "id": "c", "text": "Lopez · Lozada · Lorenzo · Luna" },
+      { "id": "d", "text": "Luna · Lopez · Lorenzo · Lozada" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "Compare letter by letter: Lop- before Lor- before Loz-, and all the Lo- names come before Lu-.",
+    "relatedQuestionGroupId": "cse-clerical-file-d",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-clerical-file-10",
+    "examId": "cse",
+    "trackIds": ["subprofessional"],
+    "subjectId": "clerical-ability",
+    "conceptIds": ["alphabetizing-and-filing"],
+    "difficulty": "standard",
+    "cognitiveSkill": "ordering",
+    "stem": "Which name should be filed second? — Mendoza · Medina · Mercado · Melendez",
+    "choices": [
+      { "id": "a", "text": "Medina" },
+      { "id": "b", "text": "Melendez" },
+      { "id": "c", "text": "Mendoza" },
+      { "id": "d", "text": "Mercado" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "The third letter decides: d (Medina), l (Melendez), n (Mendoza), r (Mercado). Melendez is second.",
+    "relatedQuestionGroupId": "cse-clerical-file-d",
+    "status": "published",
+    "contentVersion": "1.1.0"
   },
 
   {
@@ -95,15 +221,15 @@
     "stem": "Which word is spelled correctly?",
     "choices": [
       { "id": "a", "text": "recieve" },
-      { "id": "b", "text": "receive" },
-      { "id": "c", "text": "receve" },
+      { "id": "b", "text": "receve" },
+      { "id": "c", "text": "receive" },
       { "id": "d", "text": "receeve" }
     ],
-    "correctChoiceId": "b",
+    "correctChoiceId": "c",
     "explanation": "Use the rule “i before e except after c”: receive is spelled with “ei” because it follows “c”.",
     "relatedQuestionGroupId": "cse-clerical-spelling-a",
     "status": "published",
-    "contentVersion": "1.0.0"
+    "contentVersion": "1.1.0"
   },
   {
     "id": "cse-clerical-spelling-02",
@@ -116,15 +242,15 @@
     "stem": "Which word is spelled correctly?",
     "choices": [
       { "id": "a", "text": "accomodate" },
-      { "id": "b", "text": "accommodate" },
-      { "id": "c", "text": "acommodate" },
-      { "id": "d", "text": "accommadate" }
+      { "id": "b", "text": "acommodate" },
+      { "id": "c", "text": "accommadate" },
+      { "id": "d", "text": "accommodate" }
     ],
-    "correctChoiceId": "b",
+    "correctChoiceId": "d",
     "explanation": "Accommodate has double “c” and double “m”. Remembering “two c’s, two m’s” settles it.",
     "relatedQuestionGroupId": "cse-clerical-spelling-a",
     "status": "published",
-    "contentVersion": "1.0.0"
+    "contentVersion": "1.1.0"
   },
   {
     "id": "cse-clerical-spelling-03",
@@ -168,6 +294,132 @@
     "status": "published",
     "contentVersion": "1.0.0"
   },
+  {
+    "id": "cse-clerical-spelling-05",
+    "examId": "cse",
+    "trackIds": ["subprofessional"],
+    "subjectId": "clerical-ability",
+    "conceptIds": ["spelling-and-word-usage"],
+    "difficulty": "standard",
+    "cognitiveSkill": "spelling",
+    "stem": "Which word is spelled correctly?",
+    "choices": [
+      { "id": "a", "text": "occurence" },
+      { "id": "b", "text": "ocurrence" },
+      { "id": "c", "text": "occurrence" },
+      { "id": "d", "text": "occurrance" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "“Occurrence” has a double c, a double r and ends in -ence.",
+    "relatedQuestionGroupId": "cse-clerical-spelling-c",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-clerical-spelling-06",
+    "examId": "cse",
+    "trackIds": ["subprofessional"],
+    "subjectId": "clerical-ability",
+    "conceptIds": ["spelling-and-word-usage"],
+    "difficulty": "easy",
+    "cognitiveSkill": "spelling",
+    "stem": "Which word is spelled correctly?",
+    "choices": [
+      { "id": "a", "text": "neccessary" },
+      { "id": "b", "text": "necesary" },
+      { "id": "c", "text": "neccesary" },
+      { "id": "d", "text": "necessary" }
+    ],
+    "correctChoiceId": "d",
+    "explanation": "“Necessary” has one c and a double s — a common memory aid is “one collar, two sleeves”.",
+    "relatedQuestionGroupId": "cse-clerical-spelling-c",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-clerical-spelling-07",
+    "examId": "cse",
+    "trackIds": ["subprofessional"],
+    "subjectId": "clerical-ability",
+    "conceptIds": ["spelling-and-word-usage"],
+    "difficulty": "standard",
+    "cognitiveSkill": "spelling",
+    "stem": "Which word is spelled correctly?",
+    "choices": [
+      { "id": "a", "text": "maintenance" },
+      { "id": "b", "text": "maintainance" },
+      { "id": "c", "text": "maintenence" },
+      { "id": "d", "text": "mantainance" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "Although the verb is “maintain”, the noun drops the i: “maintenance”.",
+    "relatedQuestionGroupId": "cse-clerical-spelling-c",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-clerical-spelling-08",
+    "examId": "cse",
+    "trackIds": ["subprofessional"],
+    "subjectId": "clerical-ability",
+    "conceptIds": ["spelling-and-word-usage"],
+    "difficulty": "challenging",
+    "cognitiveSkill": "spelling",
+    "stem": "Which word is spelled correctly?",
+    "choices": [
+      { "id": "a", "text": "priviledge" },
+      { "id": "b", "text": "privilege" },
+      { "id": "c", "text": "privelege" },
+      { "id": "d", "text": "privilage" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "“Privilege” has no d, and its vowels run i-i-e: priv-i-lege.",
+    "relatedQuestionGroupId": "cse-clerical-spelling-d",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-clerical-spelling-09",
+    "examId": "cse",
+    "trackIds": ["subprofessional"],
+    "subjectId": "clerical-ability",
+    "conceptIds": ["spelling-and-word-usage"],
+    "difficulty": "standard",
+    "cognitiveSkill": "word-usage",
+    "stem": "Which sentence uses the correct words?",
+    "choices": [
+      { "id": "a", "text": "Please return the form to the principle’s office." },
+      { "id": "b", "text": "Please return the from to the principal’s office." },
+      { "id": "c", "text": "Please return the form to the principal’s office." },
+      { "id": "d", "text": "Please returned the form to the principal’s office." }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "“Principal” is the head of a school; “principle” is a rule or belief. The other two sentences contain a typo (“from”) and a wrong verb form (“returned”).",
+    "relatedQuestionGroupId": "cse-clerical-spelling-d",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-clerical-spelling-10",
+    "examId": "cse",
+    "trackIds": ["subprofessional"],
+    "subjectId": "clerical-ability",
+    "conceptIds": ["spelling-and-word-usage"],
+    "difficulty": "easy",
+    "cognitiveSkill": "word-usage",
+    "stem": "Which sentence uses the correct word?",
+    "choices": [
+      { "id": "a", "text": "The employees brought there own laptops." },
+      { "id": "b", "text": "The employees brought they’re own laptops." },
+      { "id": "c", "text": "The employees brought theirs own laptops." },
+      { "id": "d", "text": "The employees brought their own laptops." }
+    ],
+    "correctChoiceId": "d",
+    "explanation": "“Their” is the possessive. “There” is a place, “they’re” means “they are”, and “theirs” stands alone without a noun after it.",
+    "relatedQuestionGroupId": "cse-clerical-spelling-d",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
 
   {
     "id": "cse-clerical-check-01",
@@ -179,16 +431,16 @@
     "cognitiveSkill": "accuracy",
     "stem": "Which pair of reference numbers is NOT identical?",
     "choices": [
-      { "id": "a", "text": "8-2451 and 8-2451" },
-      { "id": "b", "text": "39-7210 and 39-7120" },
+      { "id": "a", "text": "39-7210 and 39-7120" },
+      { "id": "b", "text": "8-2451 and 8-2451" },
       { "id": "c", "text": "502-118 and 502-118" },
       { "id": "d", "text": "61-0407 and 61-0407" }
     ],
-    "correctChoiceId": "b",
+    "correctChoiceId": "a",
     "explanation": "In pair B the last four digits differ: 7210 versus 7120 — the second and third digits are swapped.",
     "relatedQuestionGroupId": "cse-clerical-check-a",
     "status": "published",
-    "contentVersion": "1.0.0"
+    "contentVersion": "1.1.0"
   },
   {
     "id": "cse-clerical-check-02",
@@ -201,15 +453,15 @@
     "stem": "Which code is different from the other three?",
     "choices": [
       { "id": "a", "text": "NCR-0091" },
-      { "id": "b", "text": "NCR-0091" },
-      { "id": "c", "text": "NCR-0910" },
+      { "id": "b", "text": "NCR-0910" },
+      { "id": "c", "text": "NCR-0091" },
       { "id": "d", "text": "NCR-0091" }
     ],
-    "correctChoiceId": "c",
+    "correctChoiceId": "b",
     "explanation": "Three entries read NCR-0091. Only NCR-0910 has a different digit arrangement.",
     "relatedQuestionGroupId": "cse-clerical-check-a",
     "status": "published",
-    "contentVersion": "1.0.0"
+    "contentVersion": "1.1.0"
   },
   {
     "id": "cse-clerical-check-03",
@@ -222,15 +474,15 @@
     "stem": "How many times does the digit 7 appear in the number 77,407?",
     "choices": [
       { "id": "a", "text": "2" },
-      { "id": "b", "text": "3" },
-      { "id": "c", "text": "4" },
+      { "id": "b", "text": "4" },
+      { "id": "c", "text": "3" },
       { "id": "d", "text": "1" }
     ],
-    "correctChoiceId": "b",
+    "correctChoiceId": "c",
     "explanation": "The digits are 7, 7, 4, 0, 7 — three of them are 7.",
     "relatedQuestionGroupId": "cse-clerical-check-b",
     "status": "published",
-    "contentVersion": "1.0.0"
+    "contentVersion": "1.1.0"
   },
   {
     "id": "cse-clerical-check-04",
@@ -243,15 +495,141 @@
     "stem": "1,204 + 3,096 + 700 = ?",
     "choices": [
       { "id": "a", "text": "4,900" },
-      { "id": "b", "text": "5,000" },
-      { "id": "c", "text": "5,100" },
-      { "id": "d", "text": "4,000" }
+      { "id": "b", "text": "5,100" },
+      { "id": "c", "text": "4,000" },
+      { "id": "d", "text": "5,000" }
     ],
-    "correctChoiceId": "b",
+    "correctChoiceId": "d",
     "explanation": "1,204 + 3,096 = 4,300, then adding 700 gives 5,000.",
     "relatedQuestionGroupId": "cse-clerical-check-b",
     "status": "published",
-    "contentVersion": "1.0.0"
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-clerical-check-05",
+    "examId": "cse",
+    "trackIds": ["subprofessional"],
+    "subjectId": "clerical-ability",
+    "conceptIds": ["clerical-checking"],
+    "difficulty": "easy",
+    "cognitiveSkill": "accuracy",
+    "stem": "Which pair of numbers is NOT identical?",
+    "choices": [
+      { "id": "a", "text": "7716-2085 and 7716-2058" },
+      { "id": "b", "text": "5821-0439 and 5821-0439" },
+      { "id": "c", "text": "3390-4417 and 3390-4417" },
+      { "id": "d", "text": "6024-8813 and 6024-8813" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "Compare digit by digit: in 7716-2085 and 7716-2058 the last two digits are swapped. The other three pairs match exactly.",
+    "relatedQuestionGroupId": "cse-clerical-check-c",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-clerical-check-06",
+    "examId": "cse",
+    "trackIds": ["subprofessional"],
+    "subjectId": "clerical-ability",
+    "conceptIds": ["clerical-checking"],
+    "difficulty": "standard",
+    "cognitiveSkill": "accuracy",
+    "stem": "Which pair of names is NOT identical?",
+    "choices": [
+      { "id": "a", "text": "Ma. Theresa Q. Villanueva — Ma. Theresa Q. Villanueva" },
+      { "id": "b", "text": "Rodolfo T. Macaraeg — Rodolfo T. Macareag" },
+      { "id": "c", "text": "Josefina R. Dimaculangan — Josefina R. Dimaculangan" },
+      { "id": "d", "text": "Liza P. Concepcion — Liza P. Concepcion" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "“Macaraeg” and “Macareag” swap the a and e near the end. Checking long names syllable by syllable catches this kind of transposition.",
+    "relatedQuestionGroupId": "cse-clerical-check-c",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-clerical-check-07",
+    "examId": "cse",
+    "trackIds": ["subprofessional"],
+    "subjectId": "clerical-ability",
+    "conceptIds": ["clerical-checking"],
+    "difficulty": "standard",
+    "cognitiveSkill": "accuracy",
+    "stem": "Which address is exactly the same as “1452 Rizal Avenue, Barangay 7, Quezon City”?",
+    "choices": [
+      { "id": "a", "text": "1425 Rizal Avenue, Barangay 7, Quezon City" },
+      { "id": "b", "text": "1452 Rizal Avenue, Barangay 1, Quezon City" },
+      { "id": "c", "text": "1452 Rizal Avenue, Barangay 7, Quezon City" },
+      { "id": "d", "text": "1452 Rizal Street, Barangay 7, Quezon City" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "Check each part in turn: the house number (1425 swaps two digits), the street type (Street, not Avenue) and the barangay number (1, not 7).",
+    "relatedQuestionGroupId": "cse-clerical-check-c",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-clerical-check-08",
+    "examId": "cse",
+    "trackIds": ["subprofessional"],
+    "subjectId": "clerical-ability",
+    "conceptIds": ["clerical-checking"],
+    "difficulty": "standard",
+    "cognitiveSkill": "counting",
+    "stem": "How many times does the letter E (capital or small) appear in “Department of Environment”?",
+    "choices": [
+      { "id": "a", "text": "3" },
+      { "id": "b", "text": "5" },
+      { "id": "c", "text": "2" },
+      { "id": "d", "text": "4" }
+    ],
+    "correctChoiceId": "d",
+    "explanation": "Department has two (dEpartmEnt) and Environment has two (EnvironmEnt): 4 in all. “of” has none.",
+    "relatedQuestionGroupId": "cse-clerical-check-d",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-clerical-check-09",
+    "examId": "cse",
+    "trackIds": ["subprofessional"],
+    "subjectId": "clerical-ability",
+    "conceptIds": ["clerical-checking"],
+    "difficulty": "challenging",
+    "cognitiveSkill": "accuracy",
+    "stem": "How many of these pairs are exactly alike? — PH-2026-0815 / PH-2026-0815 · BIR-55-10872 / BIR-55-10872 · SSS-0341-77 / SSS-0314-77 · LTO-9X-4402 / LTO-9X-4402",
+    "choices": [
+      { "id": "a", "text": "3" },
+      { "id": "b", "text": "4" },
+      { "id": "c", "text": "2" },
+      { "id": "d", "text": "1" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "Only the SSS pair differs (0341 against 0314). The other three pairs are identical, so 3 are alike.",
+    "relatedQuestionGroupId": "cse-clerical-check-d",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-clerical-check-10",
+    "examId": "cse",
+    "trackIds": ["subprofessional"],
+    "subjectId": "clerical-ability",
+    "conceptIds": ["clerical-checking"],
+    "difficulty": "challenging",
+    "cognitiveSkill": "accuracy",
+    "stem": "Which pair of addresses is NOT identical?",
+    "choices": [
+      { "id": "a", "text": "Brgy. San Isidro, Tarlac — Brgy. San Isidro, Tarlac" },
+      { "id": "b", "text": "Sitio Malinis, Tagum City — Sitio Malinis, Tagum, City" },
+      { "id": "c", "text": "Purok 3, Sta. Rosa, Laguna — Purok 3, Sta. Rosa, Laguna" },
+      { "id": "d", "text": "Zone 5, Bacolod City — Zone 5, Bacolod City" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "The Tagum pair differs only in punctuation: the second copy has an extra comma (“Tagum, City”). Punctuation counts when checking records.",
+    "relatedQuestionGroupId": "cse-clerical-check-d",
+    "status": "published",
+    "contentVersion": "1.1.0"
   },
 
   {
@@ -265,15 +643,15 @@
     "stem": "A ledger shows a beginning balance of ₱5,000, receipts of ₱2,300 and disbursements of ₱1,800. What is the ending balance?",
     "choices": [
       { "id": "a", "text": "₱4,500" },
-      { "id": "b", "text": "₱5,500" },
-      { "id": "c", "text": "₱9,100" },
+      { "id": "b", "text": "₱9,100" },
+      { "id": "c", "text": "₱5,500" },
       { "id": "d", "text": "₱5,300" }
     ],
-    "correctChoiceId": "b",
+    "correctChoiceId": "c",
     "explanation": "Ending balance = beginning + receipts − disbursements = 5,000 + 2,300 − 1,800 = ₱5,500.",
     "relatedQuestionGroupId": "cse-clerical-record-a",
     "status": "published",
-    "contentVersion": "1.0.0"
+    "contentVersion": "1.1.0"
   },
   {
     "id": "cse-clerical-record-02",
@@ -286,15 +664,15 @@
     "stem": "A record book holds 48 entries per page. If 25 pages are completely filled and the last page has 12 entries, how many entries are there in all?",
     "choices": [
       { "id": "a", "text": "1,200" },
-      { "id": "b", "text": "1,212" },
-      { "id": "c", "text": "1,188" },
-      { "id": "d", "text": "1,250" }
+      { "id": "b", "text": "1,188" },
+      { "id": "c", "text": "1,250" },
+      { "id": "d", "text": "1,212" }
     ],
-    "correctChoiceId": "b",
+    "correctChoiceId": "d",
     "explanation": "25 × 48 = 1,200, plus the 12 entries on the last page gives 1,212.",
     "relatedQuestionGroupId": "cse-clerical-record-a",
     "status": "published",
-    "contentVersion": "1.0.0"
+    "contentVersion": "1.1.0"
   },
   {
     "id": "cse-clerical-record-03",
@@ -327,15 +705,141 @@
     "cognitiveSkill": "computation",
     "stem": "A filing cabinet has 6 drawers with 85 folders in each drawer. If 137 folders are removed, how many folders remain?",
     "choices": [
-      { "id": "a", "text": "373" },
-      { "id": "b", "text": "480" },
+      { "id": "a", "text": "480" },
+      { "id": "b", "text": "373" },
       { "id": "c", "text": "400" },
       { "id": "d", "text": "347" }
     ],
-    "correctChoiceId": "a",
+    "correctChoiceId": "b",
     "explanation": "6 × 85 = 510 folders in all. Removing 137 leaves 510 − 137 = 373.",
     "relatedQuestionGroupId": "cse-clerical-record-b",
     "status": "published",
-    "contentVersion": "1.0.0"
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-clerical-record-05",
+    "examId": "cse",
+    "trackIds": ["subprofessional"],
+    "subjectId": "clerical-ability",
+    "conceptIds": ["record-keeping"],
+    "difficulty": "standard",
+    "cognitiveSkill": "computation",
+    "stem": "A ₱5,000 petty cash fund has paid out vouchers of ₱1,250, ₱875 and ₱1,430. How much cash should remain in the fund?",
+    "choices": [
+      { "id": "a", "text": "₱1,545" },
+      { "id": "b", "text": "₱1,355" },
+      { "id": "c", "text": "₱1,445" },
+      { "id": "d", "text": "₱3,555" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "The vouchers total ₱1,250 + ₱875 + ₱1,430 = ₱3,555, so ₱5,000 − ₱3,555 = ₱1,445 should remain.",
+    "relatedQuestionGroupId": "cse-clerical-record-c",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-clerical-record-06",
+    "examId": "cse",
+    "trackIds": ["subprofessional"],
+    "subjectId": "clerical-ability",
+    "conceptIds": ["record-keeping"],
+    "difficulty": "standard",
+    "cognitiveSkill": "computation",
+    "stem": "An office receives 35 documents a day for 5 days and releases 142 of them. How many documents are still pending?",
+    "choices": [
+      { "id": "a", "text": "43" },
+      { "id": "b", "text": "23" },
+      { "id": "c", "text": "177" },
+      { "id": "d", "text": "33" }
+    ],
+    "correctChoiceId": "d",
+    "explanation": "It received 35 × 5 = 175 documents. With 142 released, 175 − 142 = 33 are pending.",
+    "relatedQuestionGroupId": "cse-clerical-record-c",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-clerical-record-07",
+    "examId": "cse",
+    "trackIds": ["subprofessional"],
+    "subjectId": "clerical-ability",
+    "conceptIds": ["record-keeping"],
+    "difficulty": "challenging",
+    "cognitiveSkill": "counting",
+    "stem": "Items are numbered consecutively from 1,001 to 1,250. How many items are there?",
+    "choices": [
+      { "id": "a", "text": "250" },
+      { "id": "b", "text": "249" },
+      { "id": "c", "text": "251" },
+      { "id": "d", "text": "1,250" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "When both ends are included, count = last − first + 1 = 1,250 − 1,001 + 1 = 250. Forgetting the +1 gives 249.",
+    "relatedQuestionGroupId": "cse-clerical-record-c",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-clerical-record-08",
+    "examId": "cse",
+    "trackIds": ["subprofessional"],
+    "subjectId": "clerical-ability",
+    "conceptIds": ["record-keeping"],
+    "difficulty": "standard",
+    "cognitiveSkill": "time",
+    "stem": "A logbook shows time-in at 8:50 AM and time-out at 5:20 PM, with a one-hour lunch break. How long did the employee work?",
+    "choices": [
+      { "id": "a", "text": "8 hours 30 minutes" },
+      { "id": "b", "text": "7 hours 30 minutes" },
+      { "id": "c", "text": "7 hours 50 minutes" },
+      { "id": "d", "text": "8 hours" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "From 8:50 AM to 5:20 PM is 8 hours 30 minutes. Taking away the one-hour break leaves 7 hours 30 minutes.",
+    "relatedQuestionGroupId": "cse-clerical-record-d",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-clerical-record-09",
+    "examId": "cse",
+    "trackIds": ["subprofessional"],
+    "subjectId": "clerical-ability",
+    "conceptIds": ["record-keeping"],
+    "difficulty": "standard",
+    "cognitiveSkill": "time",
+    "stem": "A form is logged every 15 minutes, with the first one at 8:00 AM. At what time is the 9th form logged?",
+    "choices": [
+      { "id": "a", "text": "10:15 AM" },
+      { "id": "b", "text": "9:45 AM" },
+      { "id": "c", "text": "10:00 AM" },
+      { "id": "d", "text": "10:30 AM" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "The 9th form comes 8 intervals after the first: 8 × 15 = 120 minutes after 8:00 AM, which is 10:00 AM.",
+    "relatedQuestionGroupId": "cse-clerical-record-d",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-clerical-record-10",
+    "examId": "cse",
+    "trackIds": ["subprofessional"],
+    "subjectId": "clerical-ability",
+    "conceptIds": ["record-keeping"],
+    "difficulty": "easy",
+    "cognitiveSkill": "computation",
+    "stem": "Daily collections for one week: Mon ₱1,250 · Tue ₱980 · Wed ₱1,430 · Thu ₱1,100 · Fri ₱1,640. What is the total?",
+    "choices": [
+      { "id": "a", "text": "₱6,300" },
+      { "id": "b", "text": "₱6,500" },
+      { "id": "c", "text": "₱6,040" },
+      { "id": "d", "text": "₱6,400" }
+    ],
+    "correctChoiceId": "d",
+    "explanation": "1,250 + 980 + 1,430 + 1,100 + 1,640 = ₱6,400.",
+    "relatedQuestionGroupId": "cse-clerical-record-d",
+    "status": "published",
+    "contentVersion": "1.1.0"
   }
 ]

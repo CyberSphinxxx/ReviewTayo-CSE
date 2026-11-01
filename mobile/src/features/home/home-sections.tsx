@@ -57,7 +57,7 @@ export const HomeHero = ({
           alignItems: 'center',
           justifyContent: 'center',
           borderRadius: theme.radius.pill,
-          backgroundColor: theme.colors.navHomeRing,
+          backgroundColor: theme.colors.heroChip,
           opacity: pressed ? 0.75 : 1,
         })}
       >
@@ -67,7 +67,7 @@ export const HomeHero = ({
       <View
         style={{
           alignSelf: 'flex-start',
-          backgroundColor: theme.colors.navHomeRing,
+          backgroundColor: theme.colors.heroChip,
           borderRadius: theme.radius.pill,
           paddingVertical: theme.spacing.xs + 2,
           paddingHorizontal: theme.spacing.md,

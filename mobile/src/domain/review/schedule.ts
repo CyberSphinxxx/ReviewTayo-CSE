@@ -111,6 +111,29 @@ export const nextReviewSchedule = ({
   };
 };
 
+/**
+ * What comes back next, for a queue with nothing due right now.
+ *
+ * A miss is scheduled by the exam's own `againIntervalDays`, so straight after a
+ * session the queue is often full but not yet due. Saying only "nothing is due" there
+ * reads as if the misses were lost; naming the day they return keeps the promise the
+ * results screen made. `null` when nothing is scheduled at all.
+ */
+export const describeUpcomingReview = (dueAts: readonly string[], now: Date): string | null => {
+  const nowIso = now.toISOString();
+  const days = dueAts
+    .filter((dueAt) => !isDueAt(dueAt, nowIso))
+    .map((dueAt) => Math.max(0, daysUntilDue(dueAt, now)));
+  if (days.length === 0) return null;
+
+  const nextDay = Math.min(...days);
+  const count = days.filter((day) => day === nextDay).length;
+  const subject = `${count} ${count === 1 ? 'concept comes' : 'concepts come'} back`;
+  if (nextDay <= 0) return `${subject} later today.`;
+  if (nextDay === 1) return `${subject} tomorrow.`;
+  return `${subject} in ${nextDay} days.`;
+};
+
 /** Whether a stored due date has arrived, compared as timestamps rather than days. */
 export const isDueAt = (dueAtIso: string, nowIso: string): boolean => dueAtIso <= nowIso;
 

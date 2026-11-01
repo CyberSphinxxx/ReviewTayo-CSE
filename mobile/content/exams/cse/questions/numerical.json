@@ -9,16 +9,16 @@
     "cognitiveSkill": "computation",
     "stem": "24 + 6 × 3 = ?",
     "choices": [
-      { "id": "a", "text": "42" },
-      { "id": "b", "text": "90" },
-      { "id": "c", "text": "54" },
+      { "id": "a", "text": "90" },
+      { "id": "b", "text": "54" },
+      { "id": "c", "text": "42" },
       { "id": "d", "text": "30" }
     ],
-    "correctChoiceId": "a",
+    "correctChoiceId": "c",
     "explanation": "Multiply before adding: 6 × 3 = 18, then 24 + 18 = 42. Adding first gives the trap answer 90.",
     "relatedQuestionGroupId": "cse-numeral-ops-a",
     "status": "published",
-    "contentVersion": "1.0.0"
+    "contentVersion": "1.1.0"
   },
   {
     "id": "cse-numeral-ops-02",
@@ -30,16 +30,16 @@
     "cognitiveSkill": "computation",
     "stem": "240 ÷ 6 − 5 × 4 = ?",
     "choices": [
-      { "id": "a", "text": "20" },
-      { "id": "b", "text": "140" },
-      { "id": "c", "text": "60" },
-      { "id": "d", "text": "10" }
+      { "id": "a", "text": "140" },
+      { "id": "b", "text": "60" },
+      { "id": "c", "text": "10" },
+      { "id": "d", "text": "20" }
     ],
-    "correctChoiceId": "a",
+    "correctChoiceId": "d",
     "explanation": "Division and multiplication come first: 240 ÷ 6 = 40 and 5 × 4 = 20, so 40 − 20 = 20.",
     "relatedQuestionGroupId": "cse-numeral-ops-a",
     "status": "published",
-    "contentVersion": "1.0.0"
+    "contentVersion": "1.1.0"
   },
   {
     "id": "cse-numeral-ops-03",
@@ -72,16 +72,121 @@
     "cognitiveSkill": "computation",
     "stem": "(36 + 12) ÷ (7 − 3) = ?",
     "choices": [
-      { "id": "a", "text": "12" },
-      { "id": "b", "text": "48" },
+      { "id": "a", "text": "48" },
+      { "id": "b", "text": "12" },
       { "id": "c", "text": "3" },
       { "id": "d", "text": "16" }
     ],
-    "correctChoiceId": "a",
+    "correctChoiceId": "b",
     "explanation": "36 + 12 = 48 and 7 − 3 = 4, so 48 ÷ 4 = 12.",
     "relatedQuestionGroupId": "cse-numeral-ops-b",
     "status": "published",
-    "contentVersion": "1.0.0"
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-numeral-ops-05",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "numerical-ability",
+    "conceptIds": ["basic-operations"],
+    "difficulty": "easy",
+    "cognitiveSkill": "computation",
+    "stem": "48 ÷ 4 + 3 × 5 = ?",
+    "choices": [
+      { "id": "a", "text": "75" },
+      { "id": "b", "text": "30" },
+      { "id": "c", "text": "27" },
+      { "id": "d", "text": "21" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "Follow the order of operations: brackets, then exponents, then multiplication and division from left to right, then addition and subtraction. 48 ÷ 4 + 3 × 5 = 27.",
+    "relatedQuestionGroupId": "cse-numeral-ops-c",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-numeral-ops-06",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "numerical-ability",
+    "conceptIds": ["basic-operations"],
+    "difficulty": "standard",
+    "cognitiveSkill": "computation",
+    "stem": "(15 + 9) × 2 − 18 ÷ 3 = ?",
+    "choices": [
+      { "id": "a", "text": "10" },
+      { "id": "b", "text": "36" },
+      { "id": "c", "text": "48" },
+      { "id": "d", "text": "42" }
+    ],
+    "correctChoiceId": "d",
+    "explanation": "Follow the order of operations: brackets, then exponents, then multiplication and division from left to right, then addition and subtraction. (15 + 9) × 2 − 18 ÷ 3 = 42.",
+    "relatedQuestionGroupId": "cse-numeral-ops-c",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-numeral-ops-07",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "numerical-ability",
+    "conceptIds": ["basic-operations"],
+    "difficulty": "easy",
+    "cognitiveSkill": "computation",
+    "stem": "7 × 8 − 64 ÷ 8 = ?",
+    "choices": [
+      { "id": "a", "text": "48" },
+      { "id": "b", "text": "-1" },
+      { "id": "c", "text": "6" },
+      { "id": "d", "text": "64" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "Follow the order of operations: brackets, then exponents, then multiplication and division from left to right, then addition and subtraction. 7 × 8 − 64 ÷ 8 = 48.",
+    "relatedQuestionGroupId": "cse-numeral-ops-c",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-numeral-ops-08",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "numerical-ability",
+    "conceptIds": ["basic-operations"],
+    "difficulty": "standard",
+    "cognitiveSkill": "computation",
+    "stem": "100 − 4 × (6 + 9) = ?",
+    "choices": [
+      { "id": "a", "text": "1,440" },
+      { "id": "b", "text": "40" },
+      { "id": "c", "text": "85" },
+      { "id": "d", "text": "31" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "Follow the order of operations: brackets, then exponents, then multiplication and division from left to right, then addition and subtraction. 100 − 4 × (6 + 9) = 40.",
+    "relatedQuestionGroupId": "cse-numeral-ops-d",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-numeral-ops-09",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "numerical-ability",
+    "conceptIds": ["basic-operations"],
+    "difficulty": "standard",
+    "cognitiveSkill": "computation",
+    "stem": "3² + 4 × 5 = ?",
+    "choices": [
+      { "id": "a", "text": "65" },
+      { "id": "b", "text": "26" },
+      { "id": "c", "text": "29" },
+      { "id": "d", "text": "49" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "Follow the order of operations: brackets, then exponents, then multiplication and division from left to right, then addition and subtraction. 3² + 4 × 5 = 29.",
+    "relatedQuestionGroupId": "cse-numeral-ops-d",
+    "status": "published",
+    "contentVersion": "1.1.0"
   },
 
   {
@@ -95,15 +200,15 @@
     "stem": "Which decimal is equal to 3/4?",
     "choices": [
       { "id": "a", "text": "0.34" },
-      { "id": "b", "text": "0.75" },
-      { "id": "c", "text": "0.43" },
-      { "id": "d", "text": "1.33" }
+      { "id": "b", "text": "0.43" },
+      { "id": "c", "text": "1.33" },
+      { "id": "d", "text": "0.75" }
     ],
-    "correctChoiceId": "b",
+    "correctChoiceId": "d",
     "explanation": "Divide the numerator by the denominator: 3 ÷ 4 = 0.75.",
     "relatedQuestionGroupId": "cse-numeral-frac-a",
     "status": "published",
-    "contentVersion": "1.0.0"
+    "contentVersion": "1.1.0"
   },
   {
     "id": "cse-numeral-frac-02",
@@ -136,16 +241,16 @@
     "cognitiveSkill": "computation",
     "stem": "1/2 + 1/3 + 1/6 = ?",
     "choices": [
-      { "id": "a", "text": "1" },
-      { "id": "b", "text": "3/11" },
+      { "id": "a", "text": "3/11" },
+      { "id": "b", "text": "1" },
       { "id": "c", "text": "5/6" },
       { "id": "d", "text": "1 1/6" }
     ],
-    "correctChoiceId": "a",
+    "correctChoiceId": "b",
     "explanation": "Using sixths: 3/6 + 2/6 + 1/6 = 6/6 = 1.",
     "relatedQuestionGroupId": "cse-numeral-frac-b",
     "status": "published",
-    "contentVersion": "1.0.0"
+    "contentVersion": "1.1.0"
   },
   {
     "id": "cse-numeral-frac-04",
@@ -168,6 +273,111 @@
     "status": "published",
     "contentVersion": "1.0.0"
   },
+  {
+    "id": "cse-numeral-frac-05",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "numerical-ability",
+    "conceptIds": ["fractions-and-decimals"],
+    "difficulty": "easy",
+    "cognitiveSkill": "computation",
+    "stem": "2/5 + 3/10 = ?",
+    "choices": [
+      { "id": "a", "text": "5/15" },
+      { "id": "b", "text": "1/2" },
+      { "id": "c", "text": "3/5" },
+      { "id": "d", "text": "7/10" }
+    ],
+    "correctChoiceId": "d",
+    "explanation": "Rewrite with a common denominator of 10: 4/10 + 3/10 = 7/10. Adding the numerators and denominators separately (5/15) is the classic mistake.",
+    "relatedQuestionGroupId": "cse-numeral-frac-c",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-numeral-frac-06",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "numerical-ability",
+    "conceptIds": ["fractions-and-decimals"],
+    "difficulty": "standard",
+    "cognitiveSkill": "conversion",
+    "stem": "Express 0.625 as a fraction in lowest terms.",
+    "choices": [
+      { "id": "a", "text": "5/8" },
+      { "id": "b", "text": "6/25" },
+      { "id": "c", "text": "5/6" },
+      { "id": "d", "text": "3/8" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "0.625 = 625/1000. Dividing both by 125 gives 5/8.",
+    "relatedQuestionGroupId": "cse-numeral-frac-c",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-numeral-frac-07",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "numerical-ability",
+    "conceptIds": ["fractions-and-decimals"],
+    "difficulty": "easy",
+    "cognitiveSkill": "computation",
+    "stem": "3/4 × 2/3 = ?",
+    "choices": [
+      { "id": "a", "text": "5/7" },
+      { "id": "b", "text": "1/2" },
+      { "id": "c", "text": "6/7" },
+      { "id": "d", "text": "9/8" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "Multiply the numerators and the denominators: (3 × 2)/(4 × 3) = 6/12 = 1/2.",
+    "relatedQuestionGroupId": "cse-numeral-frac-c",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-numeral-frac-08",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "numerical-ability",
+    "conceptIds": ["fractions-and-decimals"],
+    "difficulty": "standard",
+    "cognitiveSkill": "computation",
+    "stem": "1 1/2 ÷ 3/4 = ?",
+    "choices": [
+      { "id": "a", "text": "1 1/8" },
+      { "id": "b", "text": "3/8" },
+      { "id": "c", "text": "2" },
+      { "id": "d", "text": "2/3" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "Write 1 1/2 as 3/2, then multiply by the reciprocal of the divisor: 3/2 × 4/3 = 12/6 = 2. Multiplying instead of dividing gives 1 1/8.",
+    "relatedQuestionGroupId": "cse-numeral-frac-d",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-numeral-frac-09",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "numerical-ability",
+    "conceptIds": ["fractions-and-decimals"],
+    "difficulty": "challenging",
+    "cognitiveSkill": "comparison",
+    "stem": "Which value is the smallest?",
+    "choices": [
+      { "id": "a", "text": "0.45" },
+      { "id": "b", "text": "4/9" },
+      { "id": "c", "text": "0.405" },
+      { "id": "d", "text": "2/5" }
+    ],
+    "correctChoiceId": "d",
+    "explanation": "Convert everything to decimals: 0.45, 4/9 ≈ 0.444, 0.405 and 2/5 = 0.400. The smallest is 2/5.",
+    "relatedQuestionGroupId": "cse-numeral-frac-d",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
 
   {
     "id": "cse-numeral-pct-01",
@@ -179,16 +389,16 @@
     "cognitiveSkill": "computation",
     "stem": "What is 15% of 240?",
     "choices": [
-      { "id": "a", "text": "24" },
-      { "id": "b", "text": "30" },
-      { "id": "c", "text": "36" },
+      { "id": "a", "text": "36" },
+      { "id": "b", "text": "24" },
+      { "id": "c", "text": "30" },
       { "id": "d", "text": "40" }
     ],
-    "correctChoiceId": "c",
+    "correctChoiceId": "a",
     "explanation": "10% of 240 is 24 and 5% is 12, so 15% is 24 + 12 = 36.",
     "relatedQuestionGroupId": "cse-numeral-pct-a",
     "status": "published",
-    "contentVersion": "1.0.0"
+    "contentVersion": "1.1.0"
   },
   {
     "id": "cse-numeral-pct-02",
@@ -222,15 +432,15 @@
     "stem": "45 is what percent of 180?",
     "choices": [
       { "id": "a", "text": "20%" },
-      { "id": "b", "text": "25%" },
-      { "id": "c", "text": "40%" },
+      { "id": "b", "text": "40%" },
+      { "id": "c", "text": "25%" },
       { "id": "d", "text": "45%" }
     ],
-    "correctChoiceId": "b",
+    "correctChoiceId": "c",
     "explanation": "Divide the part by the whole: 45 ÷ 180 = 0.25, which is 25%.",
     "relatedQuestionGroupId": "cse-numeral-pct-b",
     "status": "published",
-    "contentVersion": "1.0.0"
+    "contentVersion": "1.1.0"
   },
   {
     "id": "cse-numeral-pct-04",
@@ -243,15 +453,120 @@
     "stem": "A fare rises from ₱250 to ₱300. What is the percent increase?",
     "choices": [
       { "id": "a", "text": "16.7%" },
-      { "id": "b", "text": "20%" },
-      { "id": "c", "text": "25%" },
-      { "id": "d", "text": "50%" }
+      { "id": "b", "text": "25%" },
+      { "id": "c", "text": "50%" },
+      { "id": "d", "text": "20%" }
     ],
-    "correctChoiceId": "b",
+    "correctChoiceId": "d",
     "explanation": "Percent increase compares the change with the original: (300 − 250) ÷ 250 = 50 ÷ 250 = 0.20, or 20%.",
     "relatedQuestionGroupId": "cse-numeral-pct-b",
     "status": "published",
-    "contentVersion": "1.0.0"
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-numeral-pct-05",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "numerical-ability",
+    "conceptIds": ["percentages"],
+    "difficulty": "easy",
+    "cognitiveSkill": "computation",
+    "stem": "What is 12.5% of 640?",
+    "choices": [
+      { "id": "a", "text": "80" },
+      { "id": "b", "text": "64" },
+      { "id": "c", "text": "72" },
+      { "id": "d", "text": "125" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "12.5% is 1/8, and 640 ÷ 8 = 80.",
+    "relatedQuestionGroupId": "cse-numeral-pct-c",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-numeral-pct-06",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "numerical-ability",
+    "conceptIds": ["percentages"],
+    "difficulty": "standard",
+    "cognitiveSkill": "application",
+    "stem": "A monthly salary of ₱18,000 is increased by 8%. What is the new salary?",
+    "choices": [
+      { "id": "a", "text": "₱18,800" },
+      { "id": "b", "text": "₱19,440" },
+      { "id": "c", "text": "₱19,800" },
+      { "id": "d", "text": "₱19,240" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "8% of ₱18,000 is ₱1,440, so the new salary is ₱18,000 + ₱1,440 = ₱19,440.",
+    "relatedQuestionGroupId": "cse-numeral-pct-c",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-numeral-pct-07",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "numerical-ability",
+    "conceptIds": ["percentages"],
+    "difficulty": "standard",
+    "cognitiveSkill": "computation",
+    "stem": "36 is 60% of what number?",
+    "choices": [
+      { "id": "a", "text": "21.6" },
+      { "id": "b", "text": "96" },
+      { "id": "c", "text": "60" },
+      { "id": "d", "text": "54" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "If 60% of a number is 36, the number is 36 ÷ 0.60 = 60. Taking 60% of 36 (21.6) answers a different question.",
+    "relatedQuestionGroupId": "cse-numeral-pct-c",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-numeral-pct-08",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "numerical-ability",
+    "conceptIds": ["percentages"],
+    "difficulty": "standard",
+    "cognitiveSkill": "application",
+    "stem": "A price drops from ₱1,200 to ₱900. What is the percent decrease?",
+    "choices": [
+      { "id": "a", "text": "33.3%" },
+      { "id": "b", "text": "30%" },
+      { "id": "c", "text": "20%" },
+      { "id": "d", "text": "25%" }
+    ],
+    "correctChoiceId": "d",
+    "explanation": "Percent change is measured from the original value: (1,200 − 900) ÷ 1,200 = 300 ÷ 1,200 = 25%. Dividing by 900 gives the wrong 33.3%.",
+    "relatedQuestionGroupId": "cse-numeral-pct-d",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-numeral-pct-09",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "numerical-ability",
+    "conceptIds": ["percentages"],
+    "difficulty": "challenging",
+    "cognitiveSkill": "algebraic-reasoning",
+    "stem": "After a 10% discount, a bag costs ₱1,350. What was the original price?",
+    "choices": [
+      { "id": "a", "text": "₱1,500" },
+      { "id": "b", "text": "₱1,485" },
+      { "id": "c", "text": "₱1,440" },
+      { "id": "d", "text": "₱1,600" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "The sale price is 90% of the original, so the original is ₱1,350 ÷ 0.90 = ₱1,500. Adding 10% of ₱1,350 back (₱1,485) uses the wrong base.",
+    "relatedQuestionGroupId": "cse-numeral-pct-d",
+    "status": "published",
+    "contentVersion": "1.1.0"
   },
 
   {
@@ -264,16 +579,16 @@
     "cognitiveSkill": "application",
     "stem": "Two numbers are in the ratio 3 : 5. If the first number is 21, what is the second?",
     "choices": [
-      { "id": "a", "text": "35" },
-      { "id": "b", "text": "28" },
+      { "id": "a", "text": "28" },
+      { "id": "b", "text": "35" },
       { "id": "c", "text": "42" },
       { "id": "d", "text": "30" }
     ],
-    "correctChoiceId": "a",
+    "correctChoiceId": "b",
     "explanation": "21 ÷ 3 = 7, so each ratio unit is 7. The second number is 5 × 7 = 35.",
     "relatedQuestionGroupId": "cse-numeral-ratio-a",
     "status": "published",
-    "contentVersion": "1.0.0"
+    "contentVersion": "1.1.0"
   },
   {
     "id": "cse-numeral-ratio-02",
@@ -307,15 +622,15 @@
     "stem": "Six workers can finish a job in 10 days. Working at the same rate, how long will four workers take?",
     "choices": [
       { "id": "a", "text": "12 days" },
-      { "id": "b", "text": "15 days" },
-      { "id": "c", "text": "18 days" },
-      { "id": "d", "text": "6.7 days" }
+      { "id": "b", "text": "18 days" },
+      { "id": "c", "text": "6.7 days" },
+      { "id": "d", "text": "15 days" }
     ],
-    "correctChoiceId": "b",
+    "correctChoiceId": "d",
     "explanation": "The job takes 6 × 10 = 60 worker-days. With four workers that is 60 ÷ 4 = 15 days. Fewer workers means more time, so the answer must exceed 10 days.",
     "relatedQuestionGroupId": "cse-numeral-ratio-b",
     "status": "published",
-    "contentVersion": "1.0.0"
+    "contentVersion": "1.1.0"
   },
   {
     "id": "cse-numeral-ratio-04",
@@ -327,16 +642,121 @@
     "cognitiveSkill": "application",
     "stem": "On a map, 1 cm represents 2.5 km. What distance does 4 cm represent?",
     "choices": [
-      { "id": "a", "text": "8 km" },
-      { "id": "b", "text": "10 km" },
+      { "id": "a", "text": "10 km" },
+      { "id": "b", "text": "8 km" },
       { "id": "c", "text": "6.5 km" },
       { "id": "d", "text": "1.6 km" }
     ],
-    "correctChoiceId": "b",
+    "correctChoiceId": "a",
     "explanation": "Scale the proportion: 4 × 2.5 km = 10 km.",
     "relatedQuestionGroupId": "cse-numeral-ratio-b",
     "status": "published",
-    "contentVersion": "1.0.0"
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-numeral-ratio-05",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "numerical-ability",
+    "conceptIds": ["ratio-and-proportion"],
+    "difficulty": "easy",
+    "cognitiveSkill": "proportion",
+    "stem": "If 5 kilograms of rice cost ₱260, how much do 8 kilograms cost?",
+    "choices": [
+      { "id": "a", "text": "₱390" },
+      { "id": "b", "text": "₱416" },
+      { "id": "c", "text": "₱432" },
+      { "id": "d", "text": "₱400" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "One kilogram costs ₱260 ÷ 5 = ₱52, so 8 kilograms cost 8 × ₱52 = ₱416.",
+    "relatedQuestionGroupId": "cse-numeral-ratio-c",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-numeral-ratio-06",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "numerical-ability",
+    "conceptIds": ["ratio-and-proportion"],
+    "difficulty": "standard",
+    "cognitiveSkill": "proportion",
+    "stem": "The ratio of boys to girls in a class is 4 : 5. If there are 36 students, how many are girls?",
+    "choices": [
+      { "id": "a", "text": "16" },
+      { "id": "b", "text": "18" },
+      { "id": "c", "text": "20" },
+      { "id": "d", "text": "25" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "There are 4 + 5 = 9 parts, so each part is 36 ÷ 9 = 4 students. Girls make up 5 parts: 5 × 4 = 20.",
+    "relatedQuestionGroupId": "cse-numeral-ratio-c",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-numeral-ratio-07",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "numerical-ability",
+    "conceptIds": ["ratio-and-proportion"],
+    "difficulty": "standard",
+    "cognitiveSkill": "proportion",
+    "stem": "A car travels 180 km on 12 litres of fuel. How many litres does it need for 300 km?",
+    "choices": [
+      { "id": "a", "text": "18 litres" },
+      { "id": "b", "text": "24 litres" },
+      { "id": "c", "text": "25 litres" },
+      { "id": "d", "text": "20 litres" }
+    ],
+    "correctChoiceId": "d",
+    "explanation": "The car uses 12 ÷ 180 = 1/15 of a litre per kilometre, so 300 km needs 300 ÷ 15 = 20 litres.",
+    "relatedQuestionGroupId": "cse-numeral-ratio-c",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-numeral-ratio-08",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "numerical-ability",
+    "conceptIds": ["ratio-and-proportion"],
+    "difficulty": "standard",
+    "cognitiveSkill": "inverse-proportion",
+    "stem": "Eight workers can build a wall in 9 days. At the same rate, how many days would 12 workers take?",
+    "choices": [
+      { "id": "a", "text": "6 days" },
+      { "id": "b", "text": "13.5 days" },
+      { "id": "c", "text": "8 days" },
+      { "id": "d", "text": "4.5 days" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "The job is 8 × 9 = 72 worker-days. Twelve workers need 72 ÷ 12 = 6 days. More workers means fewer days, so the answer must be below 9.",
+    "relatedQuestionGroupId": "cse-numeral-ratio-d",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-numeral-ratio-09",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "numerical-ability",
+    "conceptIds": ["ratio-and-proportion"],
+    "difficulty": "easy",
+    "cognitiveSkill": "simplification",
+    "stem": "Simplify the ratio 45 : 60.",
+    "choices": [
+      { "id": "a", "text": "4 : 3" },
+      { "id": "b", "text": "3 : 4" },
+      { "id": "c", "text": "9 : 12" },
+      { "id": "d", "text": "5 : 6" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "Divide both terms by their greatest common factor, 15: 45 ÷ 15 = 3 and 60 ÷ 15 = 4. 9 : 12 is equivalent but not in lowest terms.",
+    "relatedQuestionGroupId": "cse-numeral-ratio-d",
+    "status": "published",
+    "contentVersion": "1.1.0"
   },
 
   {
@@ -350,15 +770,15 @@
     "stem": "A shirt costs ₱450 and a pair of pants costs ₱1,150. How much do two shirts and one pair of pants cost?",
     "choices": [
       { "id": "a", "text": "₱1,600" },
-      { "id": "b", "text": "₱2,050" },
-      { "id": "c", "text": "₱2,500" },
+      { "id": "b", "text": "₱2,500" },
+      { "id": "c", "text": "₱2,050" },
       { "id": "d", "text": "₱1,750" }
     ],
-    "correctChoiceId": "b",
+    "correctChoiceId": "c",
     "explanation": "Two shirts cost 2 × ₱450 = ₱900. Adding the pants: ₱900 + ₱1,150 = ₱2,050.",
     "relatedQuestionGroupId": "cse-numeral-word-a",
     "status": "published",
-    "contentVersion": "1.0.0"
+    "contentVersion": "1.1.0"
   },
   {
     "id": "cse-numeral-word-02",
@@ -370,16 +790,16 @@
     "cognitiveSkill": "algebraic-reasoning",
     "stem": "Ana is three times as old as Ben. In six years, Ana will be twice as old as Ben. How old is Ben now?",
     "choices": [
-      { "id": "a", "text": "6" },
-      { "id": "b", "text": "9" },
-      { "id": "c", "text": "12" },
-      { "id": "d", "text": "18" }
+      { "id": "a", "text": "9" },
+      { "id": "b", "text": "12" },
+      { "id": "c", "text": "18" },
+      { "id": "d", "text": "6" }
     ],
-    "correctChoiceId": "a",
+    "correctChoiceId": "d",
     "explanation": "Let Ben be b, so Ana is 3b. In six years 3b + 6 = 2(b + 6), which gives 3b + 6 = 2b + 12, so b = 6. Checking: Ana is 18 now, and in six years 24 = 2 × 12.",
     "relatedQuestionGroupId": "cse-numeral-word-a",
     "status": "published",
-    "contentVersion": "1.0.0"
+    "contentVersion": "1.1.0"
   },
   {
     "id": "cse-numeral-word-03",
@@ -391,16 +811,16 @@
     "cognitiveSkill": "rate-reasoning",
     "stem": "A tank is filled at 5 litres per minute while a drain empties it at 2 litres per minute. How long will it take to fill 180 litres?",
     "choices": [
-      { "id": "a", "text": "36 minutes" },
-      { "id": "b", "text": "60 minutes" },
+      { "id": "a", "text": "60 minutes" },
+      { "id": "b", "text": "36 minutes" },
       { "id": "c", "text": "90 minutes" },
       { "id": "d", "text": "26 minutes" }
     ],
-    "correctChoiceId": "b",
+    "correctChoiceId": "a",
     "explanation": "The net fill rate is 5 − 2 = 3 litres per minute, so 180 ÷ 3 = 60 minutes.",
     "relatedQuestionGroupId": "cse-numeral-word-b",
     "status": "published",
-    "contentVersion": "1.0.0"
+    "contentVersion": "1.1.0"
   },
   {
     "id": "cse-numeral-word-04",
@@ -422,5 +842,110 @@
     "relatedQuestionGroupId": "cse-numeral-word-b",
     "status": "published",
     "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-numeral-word-05",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "numerical-ability",
+    "conceptIds": ["word-problems"],
+    "difficulty": "standard",
+    "cognitiveSkill": "application",
+    "stem": "Pedro bought 3 notebooks at ₱45 each and 2 pens at ₱18 each. He paid with a ₱500 bill. How much change did he receive?",
+    "choices": [
+      { "id": "a", "text": "₱319" },
+      { "id": "b", "text": "₱339" },
+      { "id": "c", "text": "₱329" },
+      { "id": "d", "text": "₱437" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "The notebooks cost 3 × ₱45 = ₱135 and the pens 2 × ₱18 = ₱36, a total of ₱171. The change is ₱500 − ₱171 = ₱329.",
+    "relatedQuestionGroupId": "cse-numeral-word-c",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-numeral-word-06",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "numerical-ability",
+    "conceptIds": ["word-problems"],
+    "difficulty": "standard",
+    "cognitiveSkill": "algebraic-reasoning",
+    "stem": "The sum of two consecutive even numbers is 86. What is the larger number?",
+    "choices": [
+      { "id": "a", "text": "42" },
+      { "id": "b", "text": "43" },
+      { "id": "c", "text": "46" },
+      { "id": "d", "text": "44" }
+    ],
+    "correctChoiceId": "d",
+    "explanation": "Let the numbers be n and n + 2: 2n + 2 = 86, so n = 42 and the larger number is 44.",
+    "relatedQuestionGroupId": "cse-numeral-word-c",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-numeral-word-07",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "numerical-ability",
+    "conceptIds": ["word-problems"],
+    "difficulty": "standard",
+    "cognitiveSkill": "time",
+    "stem": "A bus leaves at 7:45 AM and arrives at 1:20 PM the same day. How long is the trip?",
+    "choices": [
+      { "id": "a", "text": "5 hours 35 minutes" },
+      { "id": "b", "text": "6 hours 35 minutes" },
+      { "id": "c", "text": "5 hours 25 minutes" },
+      { "id": "d", "text": "6 hours 25 minutes" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "From 7:45 AM to 12:45 PM is 5 hours, and from 12:45 PM to 1:20 PM is 35 minutes: 5 hours 35 minutes in all.",
+    "relatedQuestionGroupId": "cse-numeral-word-c",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-numeral-word-08",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "numerical-ability",
+    "conceptIds": ["word-problems"],
+    "difficulty": "easy",
+    "cognitiveSkill": "rate-reasoning",
+    "stem": "A clerk encodes 120 records in 3 hours. At this rate, how many records can she encode in a 7.5-hour shift?",
+    "choices": [
+      { "id": "a", "text": "280" },
+      { "id": "b", "text": "300" },
+      { "id": "c", "text": "320" },
+      { "id": "d", "text": "360" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "Her rate is 120 ÷ 3 = 40 records per hour, so 7.5 hours give 40 × 7.5 = 300 records.",
+    "relatedQuestionGroupId": "cse-numeral-word-d",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-numeral-word-09",
+    "examId": "cse",
+    "trackIds": ["professional", "subprofessional"],
+    "subjectId": "numerical-ability",
+    "conceptIds": ["word-problems"],
+    "difficulty": "standard",
+    "cognitiveSkill": "averages",
+    "stem": "The average of four numbers is 25. Three of them are 18, 22 and 30. What is the fourth number?",
+    "choices": [
+      { "id": "a", "text": "25" },
+      { "id": "b", "text": "28" },
+      { "id": "c", "text": "30" },
+      { "id": "d", "text": "35" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "Four numbers averaging 25 add up to 4 × 25 = 100. The three known numbers add up to 70, so the fourth is 100 − 70 = 30.",
+    "relatedQuestionGroupId": "cse-numeral-word-d",
+    "status": "published",
+    "contentVersion": "1.1.0"
   }
 ]

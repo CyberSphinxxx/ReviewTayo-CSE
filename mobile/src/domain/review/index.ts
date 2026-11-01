@@ -35,6 +35,7 @@ export {
   RELEASE_GOT_IT,
   daysUntilDue,
   describeDueAt,
+  describeUpcomingReview,
   describeInterval,
   gotItIntervalDays,
   isDueAt,

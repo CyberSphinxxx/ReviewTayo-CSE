@@ -6,7 +6,8 @@ release pass (device, credentials, store accounts).
 (`agent/DEFINITION-OF-DONE-REVIEW.md`) is the map of what is left: a device/emulator run of `e2e/`
 and the VISUAL-QA captures, live Google/API credentials, a signing key and store accounts
 (B-EXT-1…B-EXT-5).
-**Last completed task:** Phase 17 Release readiness — permissions audited from the resolver (legacy
+**Last completed task:** Session 17 — headless QA of every journey (web build, light and dark),
+six UI defects fixed, content pack 1.1.0 (212 questions, balanced key). Before that: Phase 17 Release readiness — permissions audited from the resolver (legacy
 storage permissions blocked in the merged manifest), `eas.json` profiles and the CI quality gate
 added, the ten promised Maestro flows authored in `e2e/`, and the release / Play / App Store
 documents written from the implementation, closing with the row-by-row Definition of Done review.
@@ -15,7 +16,7 @@ documents written from the implementation, closing with the row-by-row Definitio
 (B-EXT-3); provide live Google client IDs and a backend URL for the verify-only paths (B-EXT-1/2).
 Nothing else is code.
 **Last successful build:** `npx expo export --platform android` → PASS (Hermes bundle)
-**Known failing tests:** None. `npx jest` → 723 passed / 723.
+**Known failing tests:** None. `npx jest` → 724 passed / 724.
 **External blockers:** Live Google OAuth credentials and a production API endpoint (verify-only;
 everything else works without them). Build-chain dependency advisories (5 distinct, none in the app
 bundle) are recorded as a limitation, not fixed by force.
@@ -27,7 +28,8 @@ bundle) are recorded as a limitation, not fixed by force.
 | `npm run typecheck` | PASS |
 | `npm run lint` | PASS (0 errors, 0 warnings) |
 | `npm run format:check` | PASS |
-| `npm test` | PASS — 723 tests across 49 suites |
+| `npm test` | PASS — 724 tests across 49 suites |
+| `npm run smoke:web` | PASS — 22 screens walked headless, 0 issues |
 | `npx expo export --platform android` | PASS |
 
 ## Repository reality (Phase 0 audit)
@@ -55,7 +57,10 @@ bundle) are recorded as a limitation, not fixed by force.
 - do not refactor the web app merely to share code.
 
 ## Decisions added this session
-D-062 the resolver is the permission audit, and every release row names its evidence.
+D-063 the web build is a QA surface · D-064 a promise on one screen is kept by the next · D-065 a
+session returns to where it was opened · D-066 the bank fills both blueprints, and the key does not
+favour a letter.
+Previous session: D-062 the resolver is the permission audit, and every release row names its evidence.
 Previous session: D-061 a mode's size belongs to the mode, not to the route's default.
 Earlier session: D-059 overlapping writes queue, a nested transaction is still an error · D-060 a
 finished session owns no clock, and finishing is idempotent.
@@ -97,8 +102,7 @@ D-012 route placement · D-013 exam phase derived. ADRs: 001 integration, 002 da
 003 contract-first sync.
 
 ## Content note
-88 authored CSE questions across 22 concepts (4 per concept, every concept covered in both
-tracks that examine it). Expanding the bank is a content task tracked in HANDOFF.md; nothing in
-the engine depends on the current volume. One consequence is now visible on Progress: mastery's
-evidence floor is five answers, so with four questions per concept a concept can reach `Strong` but
-not `Mastered` — the ladder is correct and simply waiting for more questions per concept.
+Content 1.1.0: 212 authored CSE questions across 22 concepts (8–12 per concept). Both mock
+blueprints are served in full (Professional 170, Sub-Professional 165) and every concept clears
+mastery's five-answer evidence floor. The answer key is balanced across a–d (D-066). Further growth
+is a content task; the engine does not depend on volume.

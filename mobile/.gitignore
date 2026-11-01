@@ -39,3 +39,6 @@ yarn-error.*
 # generated native folders
 /ios
 /android
+
+# Headless web smoke output (scripts/web-smoke.cjs)
+web-smoke-*/

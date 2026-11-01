@@ -308,7 +308,10 @@ describe('buildMockSessionPlan', () => {
 
     expect(professional.allocation.requestedTotal).toBe(170);
     expect(subProfessional.allocation.requestedTotal).toBe(165);
-    expect(professional.allocation.shortfall).toBe(true);
+    expect(professional.allocation.shortfall).toBe(false);
+    expect(subProfessional.allocation.shortfall).toBe(false);
+    expect(professional.plan.questions).toHaveLength(170);
+    expect(subProfessional.plan.questions).toHaveLength(165);
   });
 
   it('never repeats a question within the mock', () => {

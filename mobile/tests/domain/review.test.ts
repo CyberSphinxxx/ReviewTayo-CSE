@@ -3,6 +3,7 @@ import {
   buildReviewHistory,
   describeDeckCompletion,
   describeDueAt,
+  describeUpcomingReview,
   describeHistoryLine,
   describeInterval,
   describeLapses,
@@ -135,6 +136,20 @@ describe('review scheduling', () => {
     expect(due(at(12))).toBe('Due in 4 days');
     expect(due(at(15))).toBe('Due in a week');
     expect(due(at(29))).toBe('Due in 3 weeks');
+  });
+
+  it('names what comes back next when nothing is due yet', () => {
+    const upcoming = (...dates: Date[]) =>
+      describeUpcomingReview(
+        dates.map((date) => date.toISOString()),
+        NOW,
+      );
+    expect(upcoming()).toBeNull();
+    // Already due items are the deck's business, not the caught-up line's.
+    expect(upcoming(at(1))).toBeNull();
+    expect(upcoming(at(9), at(9, 20), at(12))).toBe('2 concepts come back tomorrow.');
+    expect(upcoming(at(12))).toBe('1 concept comes back in 4 days.');
+    expect(upcoming(at(8, 23))).toBe('1 concept comes back later today.');
   });
 
   it('describes an interval the same way it describes a due date', () => {

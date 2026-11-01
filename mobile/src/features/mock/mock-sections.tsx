@@ -237,7 +237,7 @@ export const MockRunnerView = ({
           Clock paused
         </RTText>
         <RTText role="body" tone="secondary">
-          {model.progressLine} · {describeRemainingLabel(model.remaining)} left on the paper.
+          {model.progressLine} · {formatClock(model.remaining)} left on the paper.
         </RTText>
         <RTButton
           label="Resume the paper"
@@ -253,22 +253,31 @@ export const MockRunnerView = ({
 
   return (
     <View style={{ gap: theme.spacing.md }}>
+      {/*
+        Progress and clock get a row of their own: sharing one with the two actions
+        squeezed them into a sliver on a phone and broke words mid-line.
+      */}
       <View
         style={{
           flexDirection: 'row',
-          alignItems: 'center',
+          alignItems: 'baseline',
           justifyContent: 'space-between',
           gap: theme.spacing.md,
         }}
       >
-        <View style={{ flex: 1, minWidth: 0 }}>
-          <RTText role="meta" tone="secondary" testID="mock-progress">
-            {`Question ${model.index + 1} of ${model.total} · ${model.progressLine}`}
-          </RTText>
-          <RTText role="meta" tone={model.isLowOnTime ? 'danger' : 'accent'} testID="mock-clock">
-            {describeRemainingLabel(model.remaining)}
-          </RTText>
-        </View>
+        <RTText
+          role="meta"
+          tone="secondary"
+          testID="mock-progress"
+          style={{ flex: 1, minWidth: 0 }}
+        >
+          {`Question ${model.index + 1} of ${model.total} · ${model.progressLine}`}
+        </RTText>
+        <RTText role="meta" tone={model.isLowOnTime ? 'danger' : 'accent'} testID="mock-clock">
+          {describeRemainingLabel(model.remaining)}
+        </RTText>
+      </View>
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: theme.spacing.sm }}>
         <RTButton
           label={model.currentItem?.flagged === true ? 'Marked' : 'Mark for review'}
           variant="subtle"

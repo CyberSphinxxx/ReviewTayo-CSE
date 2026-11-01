@@ -49,6 +49,7 @@ export const smartDrillSpec = (dailyGoal: number, policy: SessionPolicy): Sessio
 export const reviewDueSpec = (dueCount: number, policy: SessionPolicy): SessionSpec => {
   const waiting = Math.max(0, Math.round(dueCount));
   const count = Math.min(waiting, Math.max(1, policy.review.dailyDueLimit));
+  if (count === 0) return { count: 0, minutes: 0, meta: 'Nothing due' };
   return spec(count, Math.max(1, Math.ceil(count * MINUTES_PER_REVIEW_ITEM)), 'items');
 };
 

@@ -201,7 +201,12 @@ const QuizContent = ({
           total={model.total}
           recommendation={model.recommendation}
           onRecommended={goRecommended}
-          onDone={() => router.replace('/(tabs)/practice')}
+          // Back to wherever the session was opened — Home's Daily Question returns to
+          // Home, a Practice mode to Practice — and only a cold deep link lands on Practice.
+          onDone={() => {
+            if (router.canGoBack()) router.back();
+            else router.replace('/(tabs)/practice');
+          }}
           onAgain={again}
         />
       </RTScreenShell>

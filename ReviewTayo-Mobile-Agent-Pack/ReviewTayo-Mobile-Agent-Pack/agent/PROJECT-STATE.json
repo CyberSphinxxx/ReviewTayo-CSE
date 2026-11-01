@@ -2,14 +2,14 @@
   "schemaVersion": 1,
   "phase": "17-release-readiness-complete",
   "currentTask": "None in the phase list. Phases 0–17 are complete; the remaining work is the external release pass mapped in agent/DEFINITION-OF-DONE-REVIEW.md",
-  "lastCompletedTask": "phase-17-release-readiness",
-  "nextAction": "External pass: install a development build on a device and run e2e/ plus the VISUAL-QA captures; provide the EAS project id and store accounts (B-EXT-3, B-EXT-5); provide live Google client IDs and a backend URL for the verify-only paths (B-EXT-1, B-EXT-2)",
+  "lastCompletedTask": "session-17-headless-qa-and-content-1.1.0",
+  "nextAction": "Run e2e/ on a device or emulator (the headless web walk in scripts/web-smoke.cjs passes but cannot exercise SecureStore, notifications or native fonts); then the external pass: EAS project id and store accounts (B-EXT-3, B-EXT-5), live Google client IDs and a backend URL (B-EXT-1, B-EXT-2)",
   "lastSuccessfulBuild": "expo export --platform android (PASS)",
   "failingTests": [],
   "testSummary": {
     "suites": 49,
-    "tests": 723,
-    "passed": 723,
+    "tests": 724,
+    "passed": 724,
     "failed": 0
   },
   "externalBlockers": [
@@ -107,7 +107,10 @@
     "javaPresent": true
   },
   "decisions": {
-    "platforms": ["android", "ios"],
+    "platforms": [
+      "android",
+      "ios"
+    ],
     "primaryQaPlatform": "android",
     "mobilePath": "/mobile",
     "framework": "Expo React Native TypeScript",

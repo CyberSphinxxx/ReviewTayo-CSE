@@ -10,15 +10,15 @@
     "stem": "What number comes next? 2, 4, 8, 16, ______",
     "choices": [
       { "id": "a", "text": "24" },
-      { "id": "b", "text": "32" },
-      { "id": "c", "text": "20" },
-      { "id": "d", "text": "18" }
+      { "id": "b", "text": "20" },
+      { "id": "c", "text": "18" },
+      { "id": "d", "text": "32" }
     ],
-    "correctChoiceId": "b",
+    "correctChoiceId": "d",
     "explanation": "Each term doubles the previous one, so 16 × 2 = 32.",
     "relatedQuestionGroupId": "cse-analytical-series-a",
     "status": "published",
-    "contentVersion": "1.0.0"
+    "contentVersion": "1.1.0"
   },
   {
     "id": "cse-analytical-series-02",
@@ -30,16 +30,16 @@
     "cognitiveSkill": "pattern-recognition",
     "stem": "What number comes next? 3, 7, 11, 15, ______",
     "choices": [
-      { "id": "a", "text": "18" },
-      { "id": "b", "text": "19" },
+      { "id": "a", "text": "19" },
+      { "id": "b", "text": "18" },
       { "id": "c", "text": "20" },
       { "id": "d", "text": "23" }
     ],
-    "correctChoiceId": "b",
+    "correctChoiceId": "a",
     "explanation": "The difference between consecutive terms is a constant 4, so 15 + 4 = 19.",
     "relatedQuestionGroupId": "cse-analytical-series-a",
     "status": "published",
-    "contentVersion": "1.0.0"
+    "contentVersion": "1.1.0"
   },
   {
     "id": "cse-analytical-series-03",
@@ -52,15 +52,15 @@
     "stem": "What number comes next? 1, 4, 9, 16, ______",
     "choices": [
       { "id": "a", "text": "20" },
-      { "id": "b", "text": "24" },
-      { "id": "c", "text": "25" },
+      { "id": "b", "text": "25" },
+      { "id": "c", "text": "24" },
       { "id": "d", "text": "32" }
     ],
-    "correctChoiceId": "c",
+    "correctChoiceId": "b",
     "explanation": "These are perfect squares: 1², 2², 3², 4², so the next term is 5² = 25. The differences (3, 5, 7) confirm it.",
     "relatedQuestionGroupId": "cse-analytical-series-b",
     "status": "published",
-    "contentVersion": "1.0.0"
+    "contentVersion": "1.1.0"
   },
   {
     "id": "cse-analytical-series-04",
@@ -83,6 +83,174 @@
     "status": "published",
     "contentVersion": "1.0.0"
   },
+  {
+    "id": "cse-analytical-series-05",
+    "examId": "cse",
+    "trackIds": ["professional"],
+    "subjectId": "analytical-ability",
+    "conceptIds": ["number-series"],
+    "difficulty": "easy",
+    "cognitiveSkill": "pattern-recognition",
+    "stem": "What comes next? 5, 10, 20, 40, ______",
+    "choices": [
+      { "id": "a", "text": "60" },
+      { "id": "b", "text": "45" },
+      { "id": "c", "text": "75" },
+      { "id": "d", "text": "80" }
+    ],
+    "correctChoiceId": "d",
+    "explanation": "Each term is double the one before: 40 × 2 = 80.",
+    "relatedQuestionGroupId": "cse-analytical-series-c",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-analytical-series-06",
+    "examId": "cse",
+    "trackIds": ["professional"],
+    "subjectId": "analytical-ability",
+    "conceptIds": ["number-series"],
+    "difficulty": "easy",
+    "cognitiveSkill": "pattern-recognition",
+    "stem": "What comes next? 81, 27, 9, 3, ______",
+    "choices": [
+      { "id": "a", "text": "1" },
+      { "id": "b", "text": "0" },
+      { "id": "c", "text": "2" },
+      { "id": "d", "text": "3" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "Each term is one third of the one before: 3 ÷ 3 = 1.",
+    "relatedQuestionGroupId": "cse-analytical-series-c",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-analytical-series-07",
+    "examId": "cse",
+    "trackIds": ["professional"],
+    "subjectId": "analytical-ability",
+    "conceptIds": ["number-series"],
+    "difficulty": "standard",
+    "cognitiveSkill": "pattern-recognition",
+    "stem": "What comes next? 2, 5, 11, 23, ______",
+    "choices": [
+      { "id": "a", "text": "46" },
+      { "id": "b", "text": "47" },
+      { "id": "c", "text": "35" },
+      { "id": "d", "text": "45" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "Each term is double the previous term plus one: 23 × 2 + 1 = 47.",
+    "relatedQuestionGroupId": "cse-analytical-series-c",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-analytical-series-08",
+    "examId": "cse",
+    "trackIds": ["professional"],
+    "subjectId": "analytical-ability",
+    "conceptIds": ["number-series"],
+    "difficulty": "standard",
+    "cognitiveSkill": "pattern-recognition",
+    "stem": "What comes next? 1, 1, 2, 3, 5, 8, ______",
+    "choices": [
+      { "id": "a", "text": "11" },
+      { "id": "b", "text": "12" },
+      { "id": "c", "text": "13" },
+      { "id": "d", "text": "16" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "Each term is the sum of the two before it: 5 + 8 = 13.",
+    "relatedQuestionGroupId": "cse-analytical-series-d",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-analytical-series-09",
+    "examId": "cse",
+    "trackIds": ["professional"],
+    "subjectId": "analytical-ability",
+    "conceptIds": ["number-series"],
+    "difficulty": "standard",
+    "cognitiveSkill": "pattern-recognition",
+    "stem": "What comes next? 100, 95, 85, 70, ______",
+    "choices": [
+      { "id": "a", "text": "55" },
+      { "id": "b", "text": "60" },
+      { "id": "c", "text": "45" },
+      { "id": "d", "text": "50" }
+    ],
+    "correctChoiceId": "d",
+    "explanation": "The differences grow by 5 each time: −5, −10, −15, then −20, so 70 − 20 = 50.",
+    "relatedQuestionGroupId": "cse-analytical-series-d",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-analytical-series-10",
+    "examId": "cse",
+    "trackIds": ["professional"],
+    "subjectId": "analytical-ability",
+    "conceptIds": ["number-series"],
+    "difficulty": "challenging",
+    "cognitiveSkill": "pattern-recognition",
+    "stem": "What comes next? 3, 6, 18, 72, ______",
+    "choices": [
+      { "id": "a", "text": "360" },
+      { "id": "b", "text": "144" },
+      { "id": "c", "text": "288" },
+      { "id": "d", "text": "216" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "The multipliers rise by one each time: ×2, ×3, ×4, then ×5, so 72 × 5 = 360.",
+    "relatedQuestionGroupId": "cse-analytical-series-d",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-analytical-series-11",
+    "examId": "cse",
+    "trackIds": ["professional"],
+    "subjectId": "analytical-ability",
+    "conceptIds": ["number-series"],
+    "difficulty": "standard",
+    "cognitiveSkill": "pattern-recognition",
+    "stem": "What comes next? 2, 3, 5, 7, 11, ______",
+    "choices": [
+      { "id": "a", "text": "12" },
+      { "id": "b", "text": "13" },
+      { "id": "c", "text": "15" },
+      { "id": "d", "text": "14" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "These are the prime numbers in order; the next prime after 11 is 13.",
+    "relatedQuestionGroupId": "cse-analytical-series-e",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-analytical-series-12",
+    "examId": "cse",
+    "trackIds": ["professional"],
+    "subjectId": "analytical-ability",
+    "conceptIds": ["number-series"],
+    "difficulty": "challenging",
+    "cognitiveSkill": "pattern-recognition",
+    "stem": "What letter comes next? A, C, F, J, ______",
+    "choices": [
+      { "id": "a", "text": "N" },
+      { "id": "b", "text": "M" },
+      { "id": "c", "text": "O" },
+      { "id": "d", "text": "P" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "The gaps between letters grow by one: +2, +3, +4, then +5. Five letters after J is O.",
+    "relatedQuestionGroupId": "cse-analytical-series-e",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
 
   {
     "id": "cse-analytical-logic-01",
@@ -94,16 +262,16 @@
     "cognitiveSkill": "deduction",
     "stem": "All clerks in the office are licensed. All licensed staff have completed training. Therefore:",
     "choices": [
-      { "id": "a", "text": "All clerks in the office have completed training." },
-      { "id": "b", "text": "Some clerks have not completed training." },
-      { "id": "c", "text": "Only clerks have completed training." },
-      { "id": "d", "text": "No licensed staff are clerks." }
+      { "id": "a", "text": "Some clerks have not completed training." },
+      { "id": "b", "text": "Only clerks have completed training." },
+      { "id": "c", "text": "No licensed staff are clerks." },
+      { "id": "d", "text": "All clerks in the office have completed training." }
     ],
-    "correctChoiceId": "a",
+    "correctChoiceId": "d",
     "explanation": "Chaining the two universal statements gives: clerks → licensed → trained. So every clerk has completed training.",
     "relatedQuestionGroupId": "cse-analytical-logic-a",
     "status": "published",
-    "contentVersion": "1.0.0"
+    "contentVersion": "1.1.0"
   },
   {
     "id": "cse-analytical-logic-02",
@@ -115,16 +283,16 @@
     "cognitiveSkill": "deduction",
     "stem": "No member of the committee was absent. Maria is a member of the committee. Therefore:",
     "choices": [
-      { "id": "a", "text": "Maria was absent." },
-      { "id": "b", "text": "Maria was not absent." },
+      { "id": "a", "text": "Maria was not absent." },
+      { "id": "b", "text": "Maria was absent." },
       { "id": "c", "text": "Maria is not a member of the committee." },
       { "id": "d", "text": "Some members were absent." }
     ],
-    "correctChoiceId": "b",
+    "correctChoiceId": "a",
     "explanation": "If no member was absent, then every member — Maria included — was present.",
     "relatedQuestionGroupId": "cse-analytical-logic-a",
     "status": "published",
-    "contentVersion": "1.0.0"
+    "contentVersion": "1.1.0"
   },
   {
     "id": "cse-analytical-logic-03",
@@ -137,15 +305,15 @@
     "stem": "Rina is taller than Ana. Ana is taller than Joy. Who is the shortest?",
     "choices": [
       { "id": "a", "text": "Rina" },
-      { "id": "b", "text": "Ana" },
-      { "id": "c", "text": "Joy" },
+      { "id": "b", "text": "Joy" },
+      { "id": "c", "text": "Ana" },
       { "id": "d", "text": "Cannot be determined" }
     ],
-    "correctChoiceId": "c",
+    "correctChoiceId": "b",
     "explanation": "Ordering from tallest: Rina, Ana, Joy. Joy is the shortest.",
     "relatedQuestionGroupId": "cse-analytical-logic-b",
     "status": "published",
-    "contentVersion": "1.0.0"
+    "contentVersion": "1.1.0"
   },
   {
     "id": "cse-analytical-logic-04",
@@ -167,6 +335,153 @@
     "relatedQuestionGroupId": "cse-analytical-logic-b",
     "status": "published",
     "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-analytical-logic-05",
+    "examId": "cse",
+    "trackIds": ["professional"],
+    "subjectId": "analytical-ability",
+    "conceptIds": ["logical-deduction"],
+    "difficulty": "standard",
+    "cognitiveSkill": "deduction",
+    "stem": "If it rains, the outdoor seminar is cancelled. The outdoor seminar was not cancelled. Therefore:",
+    "choices": [
+      { "id": "a", "text": "It rained." },
+      { "id": "b", "text": "The seminar was moved indoors." },
+      { "id": "c", "text": "The seminar was cancelled for another reason." },
+      { "id": "d", "text": "It did not rain." }
+    ],
+    "correctChoiceId": "d",
+    "explanation": "Rain would have guaranteed a cancellation. Since there was no cancellation, it cannot have rained (denying the consequent).",
+    "relatedQuestionGroupId": "cse-analytical-logic-c",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-analytical-logic-06",
+    "examId": "cse",
+    "trackIds": ["professional"],
+    "subjectId": "analytical-ability",
+    "conceptIds": ["logical-deduction"],
+    "difficulty": "challenging",
+    "cognitiveSkill": "deduction",
+    "stem": "All auditors are accountants. Some accountants are lawyers. Which conclusion follows?",
+    "choices": [
+      { "id": "a", "text": "No conclusion about auditors being lawyers can be drawn." },
+      { "id": "b", "text": "Some auditors are lawyers." },
+      { "id": "c", "text": "All lawyers are accountants." },
+      { "id": "d", "text": "No auditor is a lawyer." }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "The lawyers may be among the accountants who are not auditors. The premises allow it either way, so nothing follows about auditors and lawyers.",
+    "relatedQuestionGroupId": "cse-analytical-logic-c",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-analytical-logic-07",
+    "examId": "cse",
+    "trackIds": ["professional"],
+    "subjectId": "analytical-ability",
+    "conceptIds": ["logical-deduction"],
+    "difficulty": "standard",
+    "cognitiveSkill": "deduction",
+    "stem": "If all P are Q, and no Q is R, which statement must be true?",
+    "choices": [
+      { "id": "a", "text": "Some P are R." },
+      { "id": "b", "text": "No P is R." },
+      { "id": "c", "text": "All R are P." },
+      { "id": "d", "text": "Some Q are not P." }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "Every P is inside Q, and Q shares nothing with R, so no P can be R. “Some Q are not P” may be true, but it is not guaranteed.",
+    "relatedQuestionGroupId": "cse-analytical-logic-c",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-analytical-logic-08",
+    "examId": "cse",
+    "trackIds": ["professional"],
+    "subjectId": "analytical-ability",
+    "conceptIds": ["logical-deduction"],
+    "difficulty": "challenging",
+    "cognitiveSkill": "ordering",
+    "stem": "Five files are stacked. File E is on top. File C is directly below File E. File A is at the bottom. File B is directly above File D. Which file is in the middle?",
+    "choices": [
+      { "id": "a", "text": "File C" },
+      { "id": "b", "text": "File D" },
+      { "id": "c", "text": "File B" },
+      { "id": "d", "text": "File A" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "From the top: E (1st), C (2nd) and A (5th) are fixed. B must sit directly above D in the two places left, so B is 3rd — the middle — and D is 4th.",
+    "relatedQuestionGroupId": "cse-analytical-logic-d",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-analytical-logic-09",
+    "examId": "cse",
+    "trackIds": ["professional"],
+    "subjectId": "analytical-ability",
+    "conceptIds": ["logical-deduction"],
+    "difficulty": "standard",
+    "cognitiveSkill": "deduction",
+    "stem": "Ana, Ben and Carlo each hold one post: chairperson, secretary or treasurer. Ana is not the secretary. Carlo is the treasurer. Who is the secretary?",
+    "choices": [
+      { "id": "a", "text": "Ana" },
+      { "id": "b", "text": "Carlo" },
+      { "id": "c", "text": "Ben" },
+      { "id": "d", "text": "Cannot be determined" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "Carlo is the treasurer, so Ana and Ben share the other two posts. Ana is not the secretary, so Ana is the chairperson and Ben is the secretary.",
+    "relatedQuestionGroupId": "cse-analytical-logic-d",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-analytical-logic-10",
+    "examId": "cse",
+    "trackIds": ["professional"],
+    "subjectId": "analytical-ability",
+    "conceptIds": ["logical-deduction"],
+    "difficulty": "standard",
+    "cognitiveSkill": "counting",
+    "stem": "In a row of 7 chairs, Rosa sits in the 3rd chair from the left. What is her position from the right?",
+    "choices": [
+      { "id": "a", "text": "5th" },
+      { "id": "b", "text": "4th" },
+      { "id": "c", "text": "3rd" },
+      { "id": "d", "text": "6th" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "Position from the right = total − position from the left + 1 = 7 − 3 + 1 = 5th.",
+    "relatedQuestionGroupId": "cse-analytical-logic-d",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-analytical-logic-11",
+    "examId": "cse",
+    "trackIds": ["professional"],
+    "subjectId": "analytical-ability",
+    "conceptIds": ["logical-deduction"],
+    "difficulty": "standard",
+    "cognitiveSkill": "counting",
+    "stem": "Today is Wednesday. What day of the week will it be 45 days from today?",
+    "choices": [
+      { "id": "a", "text": "Friday" },
+      { "id": "b", "text": "Saturday" },
+      { "id": "c", "text": "Sunday" },
+      { "id": "d", "text": "Thursday" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "Every 7 days the weekday repeats. 45 = 6 × 7 + 3, so the answer is 3 days after Wednesday: Saturday.",
+    "relatedQuestionGroupId": "cse-analytical-logic-d",
+    "status": "published",
+    "contentVersion": "1.1.0"
   },
 
   {
@@ -201,15 +516,15 @@
     "stem": "Enrolment by office — Accounting: 120, HR: 80, Operations: 150, IT: 50. What percentage of the total is IT?",
     "choices": [
       { "id": "a", "text": "10%" },
-      { "id": "b", "text": "12.5%" },
-      { "id": "c", "text": "15%" },
-      { "id": "d", "text": "20%" }
+      { "id": "b", "text": "15%" },
+      { "id": "c", "text": "20%" },
+      { "id": "d", "text": "12.5%" }
     ],
-    "correctChoiceId": "b",
+    "correctChoiceId": "d",
     "explanation": "The total is 120 + 80 + 150 + 50 = 400, so IT is 50 ÷ 400 = 0.125, or 12.5%.",
     "relatedQuestionGroupId": "cse-analytical-data-a",
     "status": "published",
-    "contentVersion": "1.0.0"
+    "contentVersion": "1.1.0"
   },
   {
     "id": "cse-analytical-data-03",
@@ -221,16 +536,16 @@
     "cognitiveSkill": "data-reading",
     "stem": "Sales were ₱80,000 in January, ₱100,000 in February and ₱90,000 in March. What is the percent change from January to March?",
     "choices": [
-      { "id": "a", "text": "10% increase" },
-      { "id": "b", "text": "12.5% increase" },
+      { "id": "a", "text": "12.5% increase" },
+      { "id": "b", "text": "10% increase" },
       { "id": "c", "text": "12.5% decrease" },
       { "id": "d", "text": "10% decrease" }
     ],
-    "correctChoiceId": "b",
+    "correctChoiceId": "a",
     "explanation": "Compare March with January, not February: (90,000 − 80,000) ÷ 80,000 = 0.125, which is a 12.5% increase. February is a distractor.",
     "relatedQuestionGroupId": "cse-analytical-data-b",
     "status": "published",
-    "contentVersion": "1.0.0"
+    "contentVersion": "1.1.0"
   },
   {
     "id": "cse-analytical-data-04",
@@ -253,6 +568,153 @@
     "status": "published",
     "contentVersion": "1.0.0"
   },
+  {
+    "id": "cse-analytical-data-05",
+    "examId": "cse",
+    "trackIds": ["professional"],
+    "subjectId": "analytical-ability",
+    "conceptIds": ["data-interpretation"],
+    "difficulty": "easy",
+    "cognitiveSkill": "data-reading",
+    "stem": "Office-supply spending — Q1: ₱24,000 · Q2: ₱18,000 · Q3: ₱30,000 · Q4: ₱28,000. What was the total spending for the year?",
+    "choices": [
+      { "id": "a", "text": "₱90,000" },
+      { "id": "b", "text": "₱110,000" },
+      { "id": "c", "text": "₱100,000" },
+      { "id": "d", "text": "₱98,000" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "Add the four quarters: 24,000 + 18,000 + 30,000 + 28,000 = ₱100,000.",
+    "relatedQuestionGroupId": "cse-analytical-data-c",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-analytical-data-06",
+    "examId": "cse",
+    "trackIds": ["professional"],
+    "subjectId": "analytical-ability",
+    "conceptIds": ["data-interpretation"],
+    "difficulty": "easy",
+    "cognitiveSkill": "data-reading",
+    "stem": "Office-supply spending — Q1: ₱24,000 · Q2: ₱18,000 · Q3: ₱30,000 · Q4: ₱28,000. In which quarter was spending lowest?",
+    "choices": [
+      { "id": "a", "text": "Q1" },
+      { "id": "b", "text": "Q3" },
+      { "id": "c", "text": "Q4" },
+      { "id": "d", "text": "Q2" }
+    ],
+    "correctChoiceId": "d",
+    "explanation": "Q2, at ₱18,000, is the smallest of the four figures.",
+    "relatedQuestionGroupId": "cse-analytical-data-c",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-analytical-data-07",
+    "examId": "cse",
+    "trackIds": ["professional"],
+    "subjectId": "analytical-ability",
+    "conceptIds": ["data-interpretation"],
+    "difficulty": "standard",
+    "cognitiveSkill": "computation",
+    "stem": "Office-supply spending — Q1: ₱24,000 · Q2: ₱18,000 · Q3: ₱30,000 · Q4: ₱28,000. What percent of the year’s spending happened in Q3?",
+    "choices": [
+      { "id": "a", "text": "30%" },
+      { "id": "b", "text": "25%" },
+      { "id": "c", "text": "33%" },
+      { "id": "d", "text": "28%" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "Q3 spending ÷ annual total = ₱30,000 ÷ ₱100,000 = 30%.",
+    "relatedQuestionGroupId": "cse-analytical-data-c",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-analytical-data-08",
+    "examId": "cse",
+    "trackIds": ["professional"],
+    "subjectId": "analytical-ability",
+    "conceptIds": ["data-interpretation"],
+    "difficulty": "standard",
+    "cognitiveSkill": "comparison",
+    "stem": "Examinees and passers by region — Region A: 450 examinees, 135 passed · Region B: 600 examinees, 150 passed · Region C: 300 examinees, 105 passed. Which region had the highest passing rate?",
+    "choices": [
+      { "id": "a", "text": "Region B" },
+      { "id": "b", "text": "Region C" },
+      { "id": "c", "text": "Region A" },
+      { "id": "d", "text": "Regions A and C were tied" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "Passing rates: A = 135 ÷ 450 = 30%, B = 150 ÷ 600 = 25%, C = 105 ÷ 300 = 35%. Region B had the most passers but the lowest rate.",
+    "relatedQuestionGroupId": "cse-analytical-data-d",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-analytical-data-09",
+    "examId": "cse",
+    "trackIds": ["professional"],
+    "subjectId": "analytical-ability",
+    "conceptIds": ["data-interpretation"],
+    "difficulty": "challenging",
+    "cognitiveSkill": "computation",
+    "stem": "Examinees and passers by region — Region A: 450 examinees, 135 passed · Region B: 600 examinees, 150 passed · Region C: 300 examinees, 105 passed. What was the overall passing rate across the three regions, to one decimal place?",
+    "choices": [
+      { "id": "a", "text": "30.0%" },
+      { "id": "b", "text": "26.0%" },
+      { "id": "c", "text": "28.9%" },
+      { "id": "d", "text": "31.3%" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "Total passers ÷ total examinees = (135 + 150 + 105) ÷ (450 + 600 + 300) = 390 ÷ 1,350 ≈ 28.9%. Averaging the three regional rates (30.0%) ignores their different sizes.",
+    "relatedQuestionGroupId": "cse-analytical-data-d",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-analytical-data-10",
+    "examId": "cse",
+    "trackIds": ["professional"],
+    "subjectId": "analytical-ability",
+    "conceptIds": ["data-interpretation"],
+    "difficulty": "easy",
+    "cognitiveSkill": "data-reading",
+    "stem": "Examinees and passers by region — Region A: 450 examinees, 135 passed · Region B: 600 examinees, 150 passed · Region C: 300 examinees, 105 passed. How many examinees from Region B did not pass?",
+    "choices": [
+      { "id": "a", "text": "150" },
+      { "id": "b", "text": "600" },
+      { "id": "c", "text": "465" },
+      { "id": "d", "text": "450" }
+    ],
+    "correctChoiceId": "d",
+    "explanation": "Region B had 600 examinees and 150 passers, so 600 − 150 = 450 did not pass.",
+    "relatedQuestionGroupId": "cse-analytical-data-d",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-analytical-data-11",
+    "examId": "cse",
+    "trackIds": ["professional"],
+    "subjectId": "analytical-ability",
+    "conceptIds": ["data-interpretation"],
+    "difficulty": "standard",
+    "cognitiveSkill": "comparison",
+    "stem": "Examinees and passers by region — Region A: 450 examinees, 135 passed · Region B: 600 examinees, 150 passed · Region C: 300 examinees, 105 passed. By how many percentage points did Region C’s passing rate exceed Region B’s?",
+    "choices": [
+      { "id": "a", "text": "10" },
+      { "id": "b", "text": "45" },
+      { "id": "c", "text": "15" },
+      { "id": "d", "text": "5" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "Region C passed 35% and Region B 25%; the difference is 35 − 25 = 10 percentage points.",
+    "relatedQuestionGroupId": "cse-analytical-data-d",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
 
   {
     "id": "cse-analytical-assumption-01",
@@ -264,16 +726,16 @@
     "cognitiveSkill": "assumption",
     "stem": "Proposal: “Adding two lanes to the highway will reduce traffic congestion.” Which statement is an assumption the proposal depends on?",
     "choices": [
-      { "id": "a", "text": "Traffic volume will not grow faster than the added road capacity." },
-      { "id": "b", "text": "The highway is the only road in the city." },
+      { "id": "a", "text": "The highway is the only road in the city." },
+      { "id": "b", "text": "Traffic volume will not grow faster than the added road capacity." },
       { "id": "c", "text": "Drivers prefer to travel at night." },
       { "id": "d", "text": "Public transport will be abolished." }
     ],
-    "correctChoiceId": "a",
+    "correctChoiceId": "b",
     "explanation": "The proposal only works if extra capacity is not immediately swallowed by extra traffic. The other options are far stronger than the argument requires.",
     "relatedQuestionGroupId": "cse-analytical-assumption-a",
     "status": "published",
-    "contentVersion": "1.0.0"
+    "contentVersion": "1.1.0"
   },
   {
     "id": "cse-analytical-assumption-02",
@@ -286,15 +748,15 @@
     "stem": "All successful applicants passed the written examination. Rico did not pass the written examination. Therefore:",
     "choices": [
       { "id": "a", "text": "Rico is a successful applicant." },
-      { "id": "b", "text": "Rico is not a successful applicant." },
-      { "id": "c", "text": "Rico applied late." },
+      { "id": "b", "text": "Rico applied late." },
+      { "id": "c", "text": "Rico is not a successful applicant." },
       { "id": "d", "text": "No one passed the examination." }
     ],
-    "correctChoiceId": "b",
+    "correctChoiceId": "c",
     "explanation": "Failing the examination excludes Rico from the group of successful applicants.",
     "relatedQuestionGroupId": "cse-analytical-assumption-a",
     "status": "published",
-    "contentVersion": "1.0.0"
+    "contentVersion": "1.1.0"
   },
   {
     "id": "cse-analytical-assumption-03",
@@ -306,16 +768,16 @@
     "cognitiveSkill": "weaken-argument",
     "stem": "Argument: “Our store should open an hour earlier, because nearby competitor stores that open earlier report 15% more morning sales.” Which finding would most weaken this argument?",
     "choices": [
-      { "id": "a", "text": "The competitors' extra morning customers are commuters who pass only that location." },
-      { "id": "b", "text": "Our store sells the same products as the competitors." },
-      { "id": "c", "text": "Our store has more employees than the competitors." },
-      { "id": "d", "text": "The competitors also run evening promotions." }
+      { "id": "a", "text": "Our store sells the same products as the competitors." },
+      { "id": "b", "text": "Our store has more employees than the competitors." },
+      { "id": "c", "text": "The competitors also run evening promotions." },
+      { "id": "d", "text": "The competitors' extra morning customers are commuters who pass only that location." }
     ],
-    "correctChoiceId": "a",
+    "correctChoiceId": "d",
     "explanation": "If the extra sales come from traffic that our location never sees, then opening earlier would not reproduce those sales — the comparison is not transferable.",
     "relatedQuestionGroupId": "cse-analytical-assumption-b",
     "status": "published",
-    "contentVersion": "1.0.0"
+    "contentVersion": "1.1.0"
   },
   {
     "id": "cse-analytical-assumption-04",
@@ -337,5 +799,152 @@
     "relatedQuestionGroupId": "cse-analytical-assumption-b",
     "status": "published",
     "contentVersion": "1.0.0"
+  },
+  {
+    "id": "cse-analytical-assumption-05",
+    "examId": "cse",
+    "trackIds": ["professional"],
+    "subjectId": "analytical-ability",
+    "conceptIds": ["assumptions-and-conclusions"],
+    "difficulty": "challenging",
+    "cognitiveSkill": "deduction",
+    "stem": "“Employees who attend the training will receive a certificate.” Leo received a certificate. Which conclusion is valid?",
+    "choices": [
+      { "id": "a", "text": "Leo attended the training." },
+      { "id": "b", "text": "Leo may or may not have attended the training." },
+      { "id": "c", "text": "Leo did not attend the training." },
+      { "id": "d", "text": "Only Leo received a certificate." }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "The statement says attending leads to a certificate; it does not say a certificate can come only from attending. Concluding that Leo attended is the fallacy of affirming the consequent.",
+    "relatedQuestionGroupId": "cse-analytical-assumption-c",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-analytical-assumption-06",
+    "examId": "cse",
+    "trackIds": ["professional"],
+    "subjectId": "analytical-ability",
+    "conceptIds": ["assumptions-and-conclusions"],
+    "difficulty": "standard",
+    "cognitiveSkill": "assumption",
+    "stem": "A memo says: “To reduce paper use, all reports must now be submitted by email.” Which is an assumption behind the memo?",
+    "choices": [
+      { "id": "a", "text": "Email is free for every employee." },
+      { "id": "b", "text": "All employees prefer paper reports." },
+      { "id": "c", "text": "Reports were previously submitted largely on paper." },
+      { "id": "d", "text": "Paper prices will rise next year." }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "Switching to email can only reduce paper use if reports were being printed before. The memo depends on that, and on none of the other statements.",
+    "relatedQuestionGroupId": "cse-analytical-assumption-c",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-analytical-assumption-07",
+    "examId": "cse",
+    "trackIds": ["professional"],
+    "subjectId": "analytical-ability",
+    "conceptIds": ["assumptions-and-conclusions"],
+    "difficulty": "standard",
+    "cognitiveSkill": "weaken-argument",
+    "stem": "“Our office’s output fell last month, so the new flexible-hours policy must be hurting productivity.” Which, if true, most WEAKENS the argument?",
+    "choices": [
+      { "id": "a", "text": "Other offices also adopted flexible hours." },
+      { "id": "b", "text": "Employees like the flexible-hours policy." },
+      { "id": "c", "text": "Output was high the month before." },
+      { "id": "d", "text": "A third of the staff were on approved leave last month." }
+    ],
+    "correctChoiceId": "d",
+    "explanation": "Staff on leave is another explanation for the drop in output, so the policy need not be the cause. Liking the policy says nothing about its effect.",
+    "relatedQuestionGroupId": "cse-analytical-assumption-c",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-analytical-assumption-08",
+    "examId": "cse",
+    "trackIds": ["professional"],
+    "subjectId": "analytical-ability",
+    "conceptIds": ["assumptions-and-conclusions"],
+    "difficulty": "challenging",
+    "cognitiveSkill": "strengthen-argument",
+    "stem": "Which finding, if true, most STRENGTHENS the claim that a new text-reminder system reduced missed appointments at a clinic?",
+    "choices": [
+      { "id": "a", "text": "Missed appointments fell only among patients who received the texts." },
+      { "id": "b", "text": "The clinic hired more doctors that month." },
+      { "id": "c", "text": "Patients said they liked receiving texts." },
+      { "id": "d", "text": "Other clinics also had fewer missed appointments." }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "A drop limited to the patients who got texts ties the improvement to the texts. A drop everywhere, or new doctors, would point to some other cause.",
+    "relatedQuestionGroupId": "cse-analytical-assumption-d",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-analytical-assumption-09",
+    "examId": "cse",
+    "trackIds": ["professional"],
+    "subjectId": "analytical-ability",
+    "conceptIds": ["assumptions-and-conclusions"],
+    "difficulty": "standard",
+    "cognitiveSkill": "deduction",
+    "stem": "“Only registered voters may sign the petition.” Which statement must be true?",
+    "choices": [
+      { "id": "a", "text": "Every registered voter signed the petition." },
+      { "id": "b", "text": "Anyone who validly signed the petition is a registered voter." },
+      { "id": "c", "text": "Unregistered residents may sign if they live nearby." },
+      { "id": "d", "text": "Most registered voters support the petition." }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "“Only registered voters may sign” means being registered is required for a valid signature. It does not mean every registered voter signed.",
+    "relatedQuestionGroupId": "cse-analytical-assumption-d",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-analytical-assumption-10",
+    "examId": "cse",
+    "trackIds": ["professional"],
+    "subjectId": "analytical-ability",
+    "conceptIds": ["assumptions-and-conclusions"],
+    "difficulty": "standard",
+    "cognitiveSkill": "assumption",
+    "stem": "“Since the new road opened, travel time to the city has dropped, so the road caused the improvement.” What must the argument assume?",
+    "choices": [
+      { "id": "a", "text": "The road was expensive to build." },
+      { "id": "b", "text": "Everyone now uses the new road." },
+      { "id": "c", "text": "No other change in the same period reduced travel time." },
+      { "id": "d", "text": "Travel time will keep falling." }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "The argument credits the road alone, which holds only if nothing else — fewer vehicles, a new schedule — explains the faster trips.",
+    "relatedQuestionGroupId": "cse-analytical-assumption-d",
+    "status": "published",
+    "contentVersion": "1.1.0"
+  },
+  {
+    "id": "cse-analytical-assumption-11",
+    "examId": "cse",
+    "trackIds": ["professional"],
+    "subjectId": "analytical-ability",
+    "conceptIds": ["assumptions-and-conclusions"],
+    "difficulty": "easy",
+    "cognitiveSkill": "deduction",
+    "stem": "Some interns are paid. All paid staff receive a payslip. Which statement must be true?",
+    "choices": [
+      { "id": "a", "text": "All interns receive a payslip." },
+      { "id": "b", "text": "No intern receives a payslip." },
+      { "id": "c", "text": "Everyone who receives a payslip is an intern." },
+      { "id": "d", "text": "Some interns receive a payslip." }
+    ],
+    "correctChoiceId": "d",
+    "explanation": "The paid interns are paid staff, and all paid staff receive a payslip, so at least some interns receive one. Nothing is known about the unpaid interns.",
+    "relatedQuestionGroupId": "cse-analytical-assumption-c",
+    "status": "published",
+    "contentVersion": "1.1.0"
   }
 ]

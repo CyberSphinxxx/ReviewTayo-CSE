@@ -132,7 +132,7 @@ describe('settings flow', () => {
     expect(screen.getByText('Mon · Wed')).toBeOnTheScreen();
     expect(screen.getByText('10 questions')).toBeOnTheScreen();
     expect(screen.getByText('Regular')).toBeOnTheScreen();
-    expect(screen.getByText(/Content 1\.0\.0/)).toBeOnTheScreen();
+    expect(screen.getByText(/Content 1\.1\.0/)).toBeOnTheScreen();
 
     await tap('settings-appearance-dark');
     await tap('settings-text-size-large');

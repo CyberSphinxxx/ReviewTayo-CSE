@@ -206,7 +206,7 @@ describe('session sizing', () => {
     expect(reviewDueSpec(4, policy()).count).toBe(4);
     expect(reviewDueSpec(limit + 25, policy()).count).toBe(limit);
     expect(reviewDueSpec(4, policy()).meta).toBe('4 items · ~2 min');
-    expect(reviewDueSpec(0, policy()).meta).toBe('0 items · 1 minute');
+    expect(reviewDueSpec(0, policy()).meta).toBe('Nothing due');
   });
 
   it('takes the daily question duration from the exam config', () => {

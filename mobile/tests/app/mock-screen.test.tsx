@@ -108,7 +108,7 @@ const startPaper = async (): Promise<void> => {
 };
 
 describe('Mock exam screen', () => {
-  it('states the paper’s facts, including what the bank cannot serve', async () => {
+  it('states the paper’s facts, and no shortfall once the bank fills the paper', async () => {
     const { db } = await seed();
     await renderMock(db);
 
@@ -117,9 +117,7 @@ describe('Mock exam screen', () => {
     expect(screen.getByTestId('mock-fact-duration')).toHaveTextContent('3h 10m', { exact: false });
     expect(screen.getByTestId('mock-fact-sections')).toHaveTextContent('4', { exact: false });
     expect(screen.getByTestId('mock-section-verbal-ability')).toHaveTextContent('Verbal Ability');
-    expect(screen.getByTestId('mock-shortfall')).toHaveTextContent('72 of the 170', {
-      exact: false,
-    });
+    expect(screen.queryByTestId('mock-shortfall')).toBeNull();
     expect(screen.getByTestId('mock-pause-note')).toHaveTextContent('pause', { exact: false });
   });
 
@@ -129,7 +127,7 @@ describe('Mock exam screen', () => {
     await startPaper();
 
     expect(screen.getByTestId('mock-stem')).toBeOnTheScreen();
-    expect(screen.getByTestId('mock-progress')).toHaveTextContent('Question 1 of 72', {
+    expect(screen.getByTestId('mock-progress')).toHaveTextContent('Question 1 of 170', {
       exact: false,
     });
     expect(screen.getByTestId('mock-clock')).toHaveTextContent('left', { exact: false });
@@ -138,7 +136,7 @@ describe('Mock exam screen', () => {
 
     const stored = await repositories.mock.findResumable(exam.id);
     expect(stored?.status).toBe('in-progress');
-    expect(stored?.totalItems).toBe(72);
+    expect(stored?.totalItems).toBe(170);
   });
 
   it('records the answer and the mark, and lets the answer change', async () => {
@@ -164,7 +162,7 @@ describe('Mock exam screen', () => {
       expect(stored?.flagged).toBe(true);
     });
     expect(screen.getByTestId('mock-flag')).toHaveTextContent('Marked');
-    expect(screen.getByTestId('mock-progress')).toHaveTextContent('1 of 72 answered', {
+    expect(screen.getByTestId('mock-progress')).toHaveTextContent('1 of 170 answered', {
       exact: false,
     });
   });
@@ -175,19 +173,19 @@ describe('Mock exam screen', () => {
     await startPaper();
 
     await fireEvent.press(screen.getByTestId('mock-next'));
-    expect(screen.getByTestId('mock-progress')).toHaveTextContent('Question 2 of 72', {
+    expect(screen.getByTestId('mock-progress')).toHaveTextContent('Question 2 of 170', {
       exact: false,
     });
 
     await fireEvent.press(screen.getByTestId('mock-previous'));
-    expect(screen.getByTestId('mock-progress')).toHaveTextContent('Question 1 of 72', {
+    expect(screen.getByTestId('mock-progress')).toHaveTextContent('Question 1 of 170', {
       exact: false,
     });
 
     await fireEvent.press(screen.getByTestId('mock-grid-toggle'));
     expect(await screen.findByTestId('mock-grid')).toBeOnTheScreen();
     await fireEvent.press(screen.getByTestId('mock-grid-cell-5'));
-    expect(screen.getByTestId('mock-progress')).toHaveTextContent('Question 5 of 72', {
+    expect(screen.getByTestId('mock-progress')).toHaveTextContent('Question 5 of 170', {
       exact: false,
     });
     expect(screen.queryByTestId('mock-grid')).toBeNull();
@@ -223,24 +221,27 @@ describe('Mock exam screen', () => {
 
     await fireEvent.press(screen.getByTestId('mock-submit'));
     expect(await screen.findByTestId('mock-submit-confirm')).toBeOnTheScreen();
-    expect(screen.getByTestId('mock-submit-summary')).toHaveTextContent('71 items are unanswered', {
-      exact: false,
-    });
+    expect(screen.getByTestId('mock-submit-summary')).toHaveTextContent(
+      '169 items are unanswered',
+      {
+        exact: false,
+      },
+    );
 
     await fireEvent.press(screen.getByTestId('mock-submit-confirm-action'));
 
     await screen.findByTestId('mock-result');
     expect(screen.getByTestId('mock-score')).toHaveTextContent('1');
-    expect(screen.getByTestId('mock-score-caption')).toHaveTextContent('1 of 72 items', {
+    expect(screen.getByTestId('mock-score-caption')).toHaveTextContent('1 of 170 items', {
       exact: false,
     });
     expect(screen.getByTestId('mock-passing')).toHaveTextContent('Passing mark 80%', {
       exact: false,
     });
-    expect(screen.getByTestId('mock-skipped')).toHaveTextContent('71 skipped');
+    expect(screen.getByTestId('mock-skipped')).toHaveTextContent('169 skipped');
     expect(screen.getByTestId('mock-breakdown')).toBeOnTheScreen();
     expect(screen.getByTestId('mock-subject-verbal-ability')).toBeOnTheScreen();
-    // One answered item out of 72 is not a measurement, and the result says so.
+    // One answered item out of 170 is not a measurement, and the result says so.
     expect(screen.getByTestId('mock-recommendation-title')).toHaveTextContent(
       'Sit a full simulation',
     );
@@ -311,7 +312,7 @@ describe('Mock exam screen', () => {
     await screen.findByTestId('screen-home');
     expect(await screen.findByTestId('home-resume')).toBeOnTheScreen();
     expect(screen.getByText('Continue mock exam')).toBeOnTheScreen();
-    expect(screen.getByTestId('home-resume-progress')).toHaveTextContent('2 / 72');
+    expect(screen.getByTestId('home-resume-progress')).toHaveTextContent('2 / 170');
 
     const reopened = await repositories.mock.findResumable(exam.id);
     expect(reopened?.id).toBe(session?.id);
@@ -330,7 +331,7 @@ describe('Mock exam screen', () => {
     await fireEvent.press(screen.getByTestId('mock-recommendation-action'));
 
     await screen.findByTestId('mock-stem');
-    expect(screen.getByTestId('mock-progress')).toHaveTextContent('Question 1 of 72', {
+    expect(screen.getByTestId('mock-progress')).toHaveTextContent('Question 1 of 170', {
       exact: false,
     });
   });

@@ -135,7 +135,7 @@ export const recommendNext = ({
       title: 'That set needs another pass',
       description: `${missedConcepts} ${
         missedConcepts === 1 ? 'concept is' : 'concepts are'
-      } waiting in Review.`,
+      } in your review queue.`,
       label: 'Go to Review',
     };
   }

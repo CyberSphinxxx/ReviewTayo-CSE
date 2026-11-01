@@ -120,7 +120,8 @@ describe('formatClock', () => {
 
 describe('planAllocation', () => {
   it('reports a shortfall when the content bank cannot fill the blueprint', () => {
-    const plan = planAllocation(exam, 'professional', countAvailable);
+    // A thin bank: ten questions per subject cannot fill any 170-item paper.
+    const plan = planAllocation(exam, 'professional', () => 10);
 
     expect(plan.requestedTotal).toBe(170);
     expect(plan.plannedTotal).toBeLessThan(170);

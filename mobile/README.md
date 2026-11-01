@@ -38,6 +38,19 @@ npm run prebuild:ios
 `npx expo export --platform android` compiles the whole module graph into a Hermes bundle and is
 the fastest way to prove the app still builds without a device.
 
+## Headless web smoke run
+
+Where no Android emulator is available, the main journeys can be driven in headless Chromium
+against the web build (needs Playwright with Chromium installed):
+
+```bash
+npm run smoke:web            # export to dist/, then screenshot every screen to web-smoke-light/
+node scripts/web-smoke.cjs dist dark
+```
+
+The web build exists for this check and for quick design review; the shipped targets are Android
+and iOS, and `e2e/` (Maestro) remains the device-level pass.
+
 ## Environment
 
 Copy `.env.example` to `.env.local`. Only `EXPO_PUBLIC_*` values reach the bundle, and never put a

@@ -24,7 +24,8 @@
     "verify": "npm run format:check && npm run lint && npm run typecheck && npm run test",
     "prebuild:android": "expo prebuild --platform android --no-install",
     "prebuild:ios": "expo prebuild --platform ios --no-install",
-    "config:dump": "expo config --type public"
+    "config:dump": "expo config --type public",
+    "smoke:web": "expo export --platform web --output-dir dist && node scripts/web-smoke.cjs dist"
   },
   "dependencies": {
     "expo": "~57.0.26",

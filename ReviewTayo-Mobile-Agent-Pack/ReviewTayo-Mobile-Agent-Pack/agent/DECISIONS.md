@@ -414,3 +414,36 @@ and plugin defaults that remain (SecureStore's Face ID string, notifications' `a
 documented as inert instead of quietly unexplained. The same rule runs through the release
 documents: every row carries its evidence or names its external blocker, because a checklist tick
 with nothing behind it is a claim, not a check.
+
+## D-063 — The web build is a QA surface, not a shipped target
+No Android SDK or KVM was reachable, so the journeys were driven in headless Chromium against
+`expo export --platform web`. That needed two real fixes: `metro.config.js` registers `.wasm` as an
+asset (expo-sqlite's web worker) and sends the COOP/COEP headers its `SharedArrayBuffer` needs, and
+`ExpoDatabase.transaction` uses `withTransactionAsync` on web, where exclusive transactions do not
+exist — safe because the transaction gate already serializes every top-level write. The web target is
+kept working because it is the fastest honest look at every screen (`scripts/web-smoke.cjs`), but
+Android and iOS remain the products and Maestro remains the device check.
+
+## D-064 — A promise on one screen is kept by the next
+The results screen said misses were "waiting in Review", and Review then said "You're caught up"
+— both true, because a miss is due after `againIntervalDays`, and together they read as lost work.
+The schedule is right and stays; the copy changes on both ends. Results now say the concepts are in
+the review queue, and Review's caught-up state names what comes back next
+(`describeUpcomingReview`: "7 concepts come back tomorrow."). Home's Review Due row says
+"Nothing due" instead of "0 items · 1 minute".
+
+## D-065 — A session returns to where it was opened
+The quiz results' Done button replaced the stack with Practice, so a Daily Question opened from Home
+ended on Practice. Done now goes back when there is history and lands on Practice only from a cold
+deep link; the label is "Done" because the destination depends on the origin.
+
+## D-066 — The bank fills both blueprints, and the key does not favour a letter
+Content 1.1.0 grows the CSE pack from 88 to 212 questions: Verbal 50, Numerical 45, Analytical 45,
+Clerical 40 and General Information 32, so the Professional (170) and Sub-Professional (165) mocks
+are served in full and every concept has at least eight questions — past mastery's five-answer
+evidence floor. Arithmetic, number-series, data, filing, checking and record-keeping items were
+generated with their keys asserted in code; verbal and General Information items were written by
+hand against the 1987 Constitution, RA 6713 and the named environmental laws. The old key was 48% "b"
+and 2% "d", so always guessing B nearly passed a quiz; positions are now balanced (53/53/54/52)
+by reordering choices, with "Cannot be determined"-style options kept last. Every reordered or new
+question carries `contentVersion: 1.1.0`, and the manifest bump makes existing installs re-import.

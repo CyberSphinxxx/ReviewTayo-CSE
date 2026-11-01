@@ -49,7 +49,7 @@ const localDay = (date: Date): string => {
 };
 
 describe('Mock exam service', () => {
-  it('describes the paper before it starts, shortfall and all', async () => {
+  it('describes the paper before it starts, and serves all of it from the bank', async () => {
     const { repositories } = await seed();
     const setup = await loadMockSetup({ repositories, exam, trackId: TRACK });
 
@@ -65,11 +65,11 @@ describe('Mock exam service', () => {
       'general-information',
     ]);
     expect(setup.sections.every((section) => section.subjectName.length > 0)).toBe(true);
-    // The bank cannot fill a 170-item paper yet, and the setup says so rather than
-    // pretending the simulation is complete.
-    expect(setup.allocation.shortfall).toBe(true);
-    expect(setup.shortfallNote).toContain('72 of the 170');
-    expect(setup.totalAvailable).toBe(72);
+    // Content 1.1.0 fills both blueprints, so the setup has no shortfall to confess.
+    // The shortfall wording itself is covered against a thin bank in the domain suites.
+    expect(setup.allocation.shortfall).toBe(false);
+    expect(setup.shortfallNote).toBeNull();
+    expect(setup.totalAvailable).toBe(172);
   });
 
   it('starts a paper with every item stored and the exam’s own deadline', async () => {
@@ -78,13 +78,13 @@ describe('Mock exam service', () => {
     const state = await start(repositories, now);
 
     expect(state.session.status).toBe('in-progress');
-    expect(state.items).toHaveLength(72);
-    expect(state.paper).toHaveLength(72);
-    expect(state.session.totalItems).toBe(72);
+    expect(state.items).toHaveLength(170);
+    expect(state.paper).toHaveLength(170);
+    expect(state.session.totalItems).toBe(170);
     expect(state.remainingSeconds).toBe(190 * 60);
     expect(state.expired).toBe(false);
     expect(state.index).toBe(0);
-    expect(state.progressLine).toBe('0 of 72 answered');
+    expect(state.progressLine).toBe('0 of 170 answered');
     expect(state.items.every((item) => item.chosenChoiceId === null)).toBe(true);
     // Nothing is written as an answer yet: a paper nobody sat changes nothing.
     expect(await repositories.answers.countAnswered(exam.id)).toBe(0);
@@ -114,7 +114,7 @@ describe('Mock exam service', () => {
     expect(open?.items[0]?.chosenChoiceId).toBe(question.correctChoiceId);
     expect(open?.items[0]?.isCorrect).toBe(true);
     expect(open?.items[0]?.flagged).toBe(true);
-    expect(open?.progressLine).toBe('1 of 72 answered');
+    expect(open?.progressLine).toBe('1 of 170 answered');
     expect((await repositories.mock.getById(state.session.id))?.answeredCount).toBe(1);
     // Mastery, the review queue, the day's activity and the streak wait for submission.
     expect(await repositories.mastery.listByExam(exam.id)).toHaveLength(0);
@@ -144,7 +144,7 @@ describe('Mock exam service', () => {
 
     const open = await loadMockSession({ repositories, exam });
     expect(open?.items[0]?.isCorrect).toBe(true);
-    expect(open?.progressLine).toBe('1 of 72 answered');
+    expect(open?.progressLine).toBe('1 of 170 answered');
     expect((await repositories.mock.getById(state.session.id))?.correctCount).toBe(1);
   });
 
@@ -187,7 +187,7 @@ describe('Mock exam service', () => {
 
     expect(open?.expired).toBe(true);
     expect(open?.remainingSeconds).toBe(0);
-    expect(open?.items).toHaveLength(72);
+    expect(open?.items).toHaveLength(170);
   });
 
   it('submits through the answer writer, which is what makes a mock count', async () => {
@@ -219,11 +219,11 @@ describe('Mock exam service', () => {
       now,
     });
 
-    expect(result.total).toBe(72);
+    expect(result.total).toBe(170);
     expect(result.answered).toBe(2);
     expect(result.correct).toBe(1);
     expect(result.scorePercent).toBe(1);
-    expect(result.skipped).toBe(70);
+    expect(result.skipped).toBe(168);
     expect(result.subjects).toHaveLength(4);
 
     const stored = await repositories.mock.getById(state.session.id);
@@ -290,7 +290,7 @@ describe('Mock exam service', () => {
     await submitMock({ repositories, exam, sessionId: state.session.id, dailyGoal: 10 });
     const result = await loadMockResult({ repositories, exam, sessionId: state.session.id });
 
-    expect(result?.total).toBe(72);
+    expect(result?.total).toBe(170);
     expect(result?.expired).toBe(false);
     expect(result?.recommendation.kind).toBe('retake');
   });

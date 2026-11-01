@@ -5,7 +5,6 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { RTStateView } from '@/components';
 import type { Repositories } from '@/data/repositories';
 import {
-  CAUGHT_UP_DESCRIPTION,
   ReviewCaughtUp,
   ReviewHeader,
   ReviewRows,
@@ -96,7 +95,7 @@ const ReviewContent = ({ repositories }: { readonly repositories: Repositories }
       <ReviewHeader eyebrow={model.eyebrow} title={model.title} topInset={insets.top} />
 
       {model.caughtUp ? (
-        <ReviewCaughtUp description={CAUGHT_UP_DESCRIPTION} />
+        <ReviewCaughtUp description={model.caughtUpDescription} />
       ) : (
         <ReviewSummary
           count={overview.deck.count}

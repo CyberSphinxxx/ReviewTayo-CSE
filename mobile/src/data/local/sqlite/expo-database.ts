@@ -1,4 +1,5 @@
 import * as SQLite from 'expo-sqlite';
+import { Platform } from 'react-native';
 
 import { createLogger } from '@/services/logging/logger';
 import { asStorageError, createTransactionGate } from '@/data/local/database-port';
@@ -73,9 +74,18 @@ class ExpoDatabase extends ExpoTransaction implements DatabasePort {
       let failure: unknown;
 
       try {
-        await this.database.withExclusiveTransactionAsync(async (txn) => {
-          result = await work(new ExpoTransaction(txn));
-        });
+        if (Platform.OS === 'web') {
+          // expo-sqlite's web worker has no exclusive transactions. The gate above
+          // already serializes every top-level write on this connection, so a
+          // plain transaction on the shared handle keeps the same atomicity.
+          await this.database.withTransactionAsync(async () => {
+            result = await work(new ExpoTransaction(this.database));
+          });
+        } else {
+          await this.database.withExclusiveTransactionAsync(async (txn) => {
+            result = await work(new ExpoTransaction(txn));
+          });
+        }
       } catch (error) {
         failure = error;
       }

@@ -32,6 +32,8 @@ export interface ReviewModel {
   readonly overview: ReviewOverview | null;
   /** True when nothing is due; the screen shows the caught-up state instead. */
   readonly caughtUp: boolean;
+  /** The caught-up line, naming what comes back next when anything is scheduled. */
+  readonly caughtUpDescription: string;
   /** `12 concepts this week`, or that nothing has been reviewed yet. */
   readonly historyLine: string;
   readonly reload: () => void;
@@ -85,6 +87,10 @@ export const useReview = (repositories: Repositories): ReviewModel => {
     title: REVIEW_TITLE,
     overview,
     caughtUp: overview !== null && overview.dueCount === 0,
+    caughtUpDescription:
+      overview?.upcomingLine == null
+        ? CAUGHT_UP_DESCRIPTION
+        : `Nothing is due right now. ${overview.upcomingLine}`,
     historyLine: loaded?.historyLine ?? describeHistoryLine(0),
     reload: () => {
       setStatus('loading');

@@ -361,7 +361,7 @@ describe('Home', () => {
     expect(screen.getByTestId('home-streak-line')).toHaveTextContent(
       'One question today starts a streak.',
     );
-    expect(screen.getByText('0 items · 1 minute')).toBeOnTheScreen();
+    expect(screen.getByText('Nothing due')).toBeOnTheScreen();
   });
 
   it('keeps yesterday\u2019s streak standing before today\u2019s first question', async () => {

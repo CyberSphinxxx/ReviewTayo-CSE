@@ -489,7 +489,7 @@ describe('Question screen', () => {
       { exact: false },
     );
     expect(screen.getByTestId('quiz-results-recommendation')).toHaveTextContent(
-      'concepts are waiting in Review',
+      'concepts are in your review queue',
       { exact: false },
     );
     const next = screen.getByTestId('quiz-results-recommended');

@@ -10,12 +10,31 @@ None in the phase list. The remaining work is the external release pass:
 - live Google client IDs and a backend URL for the verify-only paths (B-EXT-1, B-EXT-2).
 
 ## Next exact action
+Session 17 walked every journey headless and fixed what it found (SESSION-LOG, D-063…D-066). The
+remaining gap is a native run: install a development build on a device/emulator and run `e2e/`.
+Earlier note, still valid:
 Read `agent/DEFINITION-OF-DONE-REVIEW.md` — it is the map: every row is either verified with its
 evidence or marked with the blocker that owns it. Start the device pass with
 `mobile/e2e/README.md` (install Maestro, run flow 01, then the rest), taking the VISUAL-QA captures
 as each flow passes; the flows already encode the journeys, so no exploration is needed before the
 first run. Do not re-tick anything in the review from memory: re-run the gate (`npm run verify` plus
 `npx expo export --platform android`) before claiming a row still holds.
+
+## Files changed (Session 17 — headless QA, content 1.1.0)
+- `/mobile/metro.config.js` (new) — wasm asset + COOP/COEP headers so the web build runs (D-063).
+- `/mobile/src/data/local/sqlite/expo-database.ts` — `withTransactionAsync` on web.
+- `/mobile/src/features/mock/mock-sections.tsx` — header split into progress/clock row and actions
+  row; paused line no longer says "left left".
+- `/mobile/app/(tabs)/_layout.tsx` — tab bar height fits the 30 px pills and labels above the inset.
+- `/mobile/src/theme/theme.ts`, `/mobile/src/features/home/home-sections.tsx` — `heroChip` token.
+- `/mobile/src/domain/review/schedule.ts` (`describeUpcomingReview`), `/mobile/src/services/review.ts`
+  (`upcomingLine`), `/mobile/src/features/review/use-review.ts`, `/mobile/app/(tabs)/review.tsx`,
+  `/mobile/src/domain/practice/feedback.ts`, `/mobile/src/features/quiz/quiz-sections.tsx`,
+  `/mobile/src/domain/sessions/sizing.ts` — D-064 copy.
+- `/mobile/app/quiz.tsx` — Done goes back to the origin (D-065).
+- `/mobile/content/exams/cse/questions/*.json`, `manifest.json` — content 1.1.0 (D-066).
+- `/mobile/scripts/web-smoke.cjs` (new), `package.json` `smoke:web`, README section, `.gitignore`.
+- Tests updated for the full bank and the new copy; new `describeUpcomingReview` case. 49 / 724.
 
 ## Files changed (Phase 17)
 - `/mobile/app.json` — the permission audit's fix: `android.blockedPermissions` removes the legacy

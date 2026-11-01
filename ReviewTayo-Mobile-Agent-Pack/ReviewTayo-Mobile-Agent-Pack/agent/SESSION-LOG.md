@@ -758,3 +758,29 @@ phase found three real gaps.
 Nothing left in the phase list: Phases 0–17 are complete. What remains is the external pass — a
 device/emulator run of `e2e/` and the VISUAL-QA captures, live Google/API credentials, and a
 signing key plus store accounts (B-EXT-1…B-EXT-5). The Definition of Done review is the map of it.
+
+## Session 17 — 2026-10-30 — External pass, headless
+**Goal:** find what is lacking by running the app, then fix it.
+### What happened
+- No Android SDK host or KVM was reachable from the build environment, so the app was run as a web
+  build in headless Chromium at 390×844 and every journey was walked in light and dark (D-063). That
+  took two fixes before the app would even open: the missing `metro.config.js` (wasm asset, COOP/COEP)
+  and a web-safe transaction in `expo-database.ts`.
+- Defects the walk found, all fixed: the mock paper's header squeezed "Question 1 of 72 · 0 of 72
+  answered" into a sliver beside its two buttons and broke words mid-line (header split into two
+  rows); the paused paper read "3:09:57 left left on the paper"; tab labels were clipped because the
+  30 px icon pills overflowed the default 49 px bar (bar height now fits pill + label above the
+  inset); the light-theme hero pill and settings button were white on rose, under 2:1 (new
+  `heroChip` token); Review contradicted the results screen (D-064); quiz Done ended on Practice even
+  from Home (D-065).
+- Content: 88 → 212 questions, both mocks served in full, answer key rebalanced (D-066).
+- `scripts/web-smoke.cjs` + `npm run smoke:web` keep the headless walk repeatable.
+### Verification evidence
+| Command (from `mobile/`) | Result |
+|---|---|
+| `npm run verify` | PASS — format, lint, typecheck; 49 suites, 724 tests |
+| `npx expo export --platform web` | PASS |
+| `node scripts/web-smoke.cjs dist light` | PASS — 22 screens, 0 issues |
+### Next session starts at
+A device/emulator run of `e2e/` (the web walk does not exercise SecureStore, notifications or
+native fonts), then the external blockers B-EXT-1…B-EXT-5 as before.

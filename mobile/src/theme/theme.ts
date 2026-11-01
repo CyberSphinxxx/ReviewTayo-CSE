@@ -79,6 +79,8 @@ export interface ThemeColors {
   readonly navHomeBackground: string;
   readonly navHomeContent: string;
   readonly navHomeRing: string;
+  /** Chips and icon buttons sitting on the maroon Home hero, behind inverse text. */
+  readonly heroChip: string;
 
   readonly scrim: string;
   readonly shadow: string;
@@ -148,6 +150,8 @@ const buildLightColors = (palette: Palette): ThemeColors => ({
   navHomeBackground: palette.maroon,
   navHomeContent: '#FFFFFF',
   navHomeRing: palette.rose,
+  // Rose behind white text measured under 2:1; a white veil keeps the maroon reading through.
+  heroChip: 'rgba(255, 255, 255, 0.18)',
 
   scrim: 'rgba(34, 18, 25, 0.45)',
   shadow: 'rgba(90, 15, 35, 0.18)',
@@ -208,6 +212,7 @@ const buildDarkColors = (palette: Palette): ThemeColors => ({
   navHomeBackground: palette.maroon,
   navHomeContent: '#FFFFFF',
   navHomeRing: 'rgba(242, 169, 184, 0.35)',
+  heroChip: 'rgba(255, 255, 255, 0.14)',
 
   scrim: 'rgba(9, 4, 6, 0.62)',
   shadow: 'rgba(0, 0, 0, 0.45)',

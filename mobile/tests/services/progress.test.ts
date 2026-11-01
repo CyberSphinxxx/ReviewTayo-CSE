@@ -189,7 +189,10 @@ describe('Progress service', () => {
     const { repositories, questions } = await seed();
     const subject = questionsFor(questions, 'analytical-ability');
     const firstConcept = subject[0]?.conceptIds[0];
-    const sameConcept = subject.filter((question) => question.conceptIds[0] === firstConcept);
+    // Four answers: perfect accuracy, one short of the evidence floor.
+    const sameConcept = subject
+      .filter((question) => question.conceptIds[0] === firstConcept)
+      .slice(0, 4);
     for (const question of sameConcept) {
       await answer(repositories, question, true);
     }
